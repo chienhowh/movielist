@@ -1,3 +1,4 @@
+import { MovieDetailComponent } from './movie-list/homepage/movie-detail/movie-detail.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -19,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SharedModule
   ],
   providers: [],
+  entryComponents:[MovieDetailComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

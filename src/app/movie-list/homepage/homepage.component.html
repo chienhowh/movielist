@@ -1,12 +1,18 @@
-<h1>I'm home</h1>
-<mat-carousel>
-  <mat-carousel-slide
-    [image]="'https://picsum.photos/200/300?random=1'"
-  ></mat-carousel-slide>
-  <mat-carousel-slide
-    [image]="'https://picsum.photos/200/300?random=2'"
-  ></mat-carousel-slide>
-  <mat-carousel-slide
-    [image]="'https://picsum.photos/200/300?random=11'"
-  ></mat-carousel-slide>
-</mat-carousel>
+<div class="container-xl">
+  <section class="search-box">
+    <div class="title">
+      <h2>Welcome.</h2>
+      <h3>Millions of movies, TV shows and people to discover. Explore now.</h3>
+    </div>
+    <div class="search text-center">
+
+        <input matInput placeholder="Search movie here" />
+      <button mat-raised-button color="primary">Search</button>
+    </div>
+  </section>
+  <!-- Movie List Start -->
+  <app-carousel [searchTitle]="'Latest'"></app-carousel>
+  <app-carousel [searchTitle]="'Hottest'"></app-carousel>
+  <app-carousel [searchTitle]="'Latest'"></app-carousel>
+  <app-carousel [searchTitle]="'Latest'"></app-carousel>
+</div>

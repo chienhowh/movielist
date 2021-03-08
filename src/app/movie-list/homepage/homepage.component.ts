@@ -8,15 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class HomepageComponent implements OnInit {
 
   slides = [
-    {'image':'https://picsum.photos/id/237/200/300'},
-    {'image':'https://picsum.photos/id/111/200/300'},
-    {'image':'https://picsum.photos/id/237/200/300'},
-    {'image':'https://picsum.photos/id/237/200/300'},
-    {'image':'https://picsum.photos/id/981/200/300'},
+    { 'image': 'https://picsum.photos/id/237/200/300' },
+    { 'image': 'https://picsum.photos/id/111/200/300' },
+    { 'image': 'https://picsum.photos/id/237/200/300' },
+    { 'image': 'https://picsum.photos/id/237/200/300' },
+    { 'image': 'https://picsum.photos/id/981/200/300' },
   ]
   constructor() { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit() { }
 
 }
