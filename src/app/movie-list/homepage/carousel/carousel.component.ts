@@ -1,7 +1,12 @@
-import { MovieDetail } from './../classes/movie-detail.class';
-import { MovieDetailComponent } from './../movie-detail/movie-detail.component';
+import { MovieRequestService } from './../../../core/services/movie-request.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { API } from '../../consts/global-constants.const';
+import { IMovieInfo, IResponse } from '../../../core/interfaces/movie.interface';
+import { MovieDetailComponent } from '../movie-detail/movie-detail.component';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-carousel',
@@ -13,30 +18,30 @@ export class CarouselComponent implements OnInit {
    * 此表單標題
    */
   @Input() searchTitle;
+  @Input() searchApi: string;
 
-  movieList: MovieDetail[] = [
-    { img: 'https://picsum.photos/500/400?random=11', id: 123456, title: 'Avengers', rate: '83%' },
-    { img: 'https://picsum.photos/500/400?random=13', id: 123456, title: 'White Tiger', rate: '90%' },
-    { img: 'https://picsum.photos/500/400?random=16', id: 123456, title: 'Fast and Furious', rate: '75%' },
-    { img: 'https://picsum.photos/500/400?random=14', id: 123456, title: 'Avengers', rate: '83%' },
-    { img: 'https://picsum.photos/500/400?random=15', id: 123456, title: 'Avengers', rate: '83%' },
+  movieList$: Observable<IMovieInfo[]> = this.movieRequestService.request(API.GET, API.UPCOMING)
+    .pipe(map(res => [...res.results]))
 
-  ]
+    ;
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private movieRequestService: MovieRequestService
   ) { }
 
   ngOnInit(): void {
+
   }
+
 
   /**
    * 跳出顯示電影詳情視窗
    */
-  onWatchDetail(id: number) {
+  onWatchDetail(info) {
     const dialogRef = this.dialog.open(MovieDetailComponent, {
-      width: '500px', data: { id }
+      width: '500px', data: { info }
     })
 
-    dialogRef.afterClosed().subscribe(res => console.log('thi diaglo was ' + res))
+    dialogRef.afterClosed().subscribe(res => console.log('this diaglo was closed' + res))
   }
 }

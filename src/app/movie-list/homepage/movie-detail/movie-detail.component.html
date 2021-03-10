@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Avengers{{ data.id }}</h2>
+<h2 mat-dialog-title>{{data.info.title}}</h2>
 <mat-dialog-content>
   <div class="row">
     <div class="col-md-6 col-12">
@@ -16,17 +16,26 @@
         <mat-divider></mat-divider>
         <mat-list-item>
           <h4 matLine>Released</h4>
-          <p matLine class="demo-2">2021-03-03</p>
+          <p matLine class="demo-2">{{data.info.release_date}}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <h4 matLine>Popularity:</h4>
+          <p matLine class="demo-2">74.047</p>
+        </mat-list-item>
+        <mat-list-item>
+          <h4 matLine>Rating:</h4>
+          <p matLine class="demo-2">7.2</p>
+        </mat-list-item>
+        <mat-list-item>
+          <h4 matLine>Runtime:</h4>
+          <p matLine class="demo-2">121min</p>
         </mat-list-item>
       </mat-list>
     </div>
   </div>
   <div class="row">
     <div>Overview</div>
-    Following the events of Captain America: Civil War, Peter Parker, with the
-    help of his mentor Tony Stark, tries to balance his life as an ordinary high
-    school student in Queens, New York City, with fighting crime as his
-    superhero alter ego Spider-Man as a new threat, the Vulture, emerges.
+    {{data.info.overview}}
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
