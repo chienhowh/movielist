@@ -1,6 +1,7 @@
 <h1>{{ searchTitle }}</h1>
 <carousel
   [height]="300"
+  [cellWidth]="150"
   [cellsToScroll]="3"
   *ngIf="movieList$ | async as movieList; else Loading"
 >
@@ -9,9 +10,13 @@
     *ngFor="let movie of movieList"
     (click)="onWatchDetail(movie)"
   >
-    <img [src]="'https://picsum.photos/200/300?random=11'" alt="" />
-    <div class="rate">{{ movie.vote_average }}</div>
-    <h3>{{ movie.title }}</h3>
+    <div class="img-box">
+      <img src="{{API_POSTER.GET_POSTER+movie.poster_path}}" alt="" />
+    </div>
+    <div class="info-box">
+      <div class="rate">{{ movie.vote_average }}</div>
+      <h3>{{ movie.title }}</h3>
+    </div>
   </div>
 </carousel>
 <ng-template #Loading>Loading</ng-template>

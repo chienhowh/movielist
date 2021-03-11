@@ -1,3 +1,4 @@
+import { SanitizeURLPipe } from './../../core/pipes/sanitize-url.pipe';
 import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -11,7 +12,8 @@ import { MovieDetailComponent } from './movie-detail/movie-detail.component';
   declarations: [
     HomepageComponent,
     CarouselComponent,
-    MovieDetailComponent
+    MovieDetailComponent,
+    SanitizeURLPipe
   ],
   imports: [
     CommonModule,

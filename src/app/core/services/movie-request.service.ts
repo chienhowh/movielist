@@ -19,4 +19,8 @@ export class MovieRequestService {
     }
     return this.http.get(environment.DEFAULT_IP + url + API.KEY);
   }
+
+  requestPoster(posterPath: string, width = '150') {
+    return this.http.get(`${API.GET_POSTER}/w${width}/${posterPath}`)
+  }
 }
