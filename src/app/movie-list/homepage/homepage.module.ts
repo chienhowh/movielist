@@ -1,3 +1,4 @@
+import { GenrePipe } from './../../core/pipes/genre.pipe';
 import { SanitizeURLPipe } from './../../core/pipes/sanitize-url.pipe';
 import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,8 @@ import { MovieDetailComponent } from './movie-detail/movie-detail.component';
     HomepageComponent,
     CarouselComponent,
     MovieDetailComponent,
-    SanitizeURLPipe
+    SanitizeURLPipe,
+    GenrePipe
   ],
   imports: [
     CommonModule,

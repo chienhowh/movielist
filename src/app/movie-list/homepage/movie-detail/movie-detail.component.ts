@@ -1,3 +1,4 @@
+import { API_POSTER } from './../../consts/global-constants.const';
 import { IMovieInfo } from './../../../core/interfaces/movie.interface';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -8,6 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./movie-detail.component.scss']
 })
 export class MovieDetailComponent implements OnInit {
+  API_POSTER = API_POSTER;
 
   constructor(
     public dialogRef: MatDialogRef<MovieDetailComponent>,
@@ -15,9 +17,9 @@ export class MovieDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data)
+    console.log(this.data);
   }
   closeDialog() {
-    this.dialogRef.close('sushi')
+    this.dialogRef.close('sushi');
   }
 }

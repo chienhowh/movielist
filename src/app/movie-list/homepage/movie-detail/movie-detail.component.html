@@ -1,9 +1,9 @@
-<h2 mat-dialog-title>{{data.info.title}}</h2>
+<h2 mat-dialog-title>{{ data.info.title }}</h2>
 <mat-dialog-content>
   <div class="row">
     <div class="col-md-6 col-12">
       <div class="img-box">
-        <img src="https://picsum.photos/200/300?random=1" alt="" />
+        <img src="{{ API_POSTER.GET_POSTER + data.info.poster_path }}" alt="" />
       </div>
     </div>
     <div class="col-md-6 col-12">
@@ -11,20 +11,16 @@
         <h3 matSubheader>A quest to save her world.</h3>
         <mat-list-item>
           <h4 matLine>Genre</h4>
-          <p matLine class="demo-2">aaaa</p>
+          <p matLine class="demo-2">{{ data.info.genre_ids | genre }}</p>
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>
           <h4 matLine>Released</h4>
-          <p matLine class="demo-2">{{data.info.release_date}}</p>
-        </mat-list-item>
-        <mat-list-item>
-          <h4 matLine>Popularity:</h4>
-          <p matLine class="demo-2">74.047</p>
+          <p matLine class="demo-2">{{ data.info.release_date }}</p>
         </mat-list-item>
         <mat-list-item>
           <h4 matLine>Rating:</h4>
-          <p matLine class="demo-2">7.2</p>
+          <p matLine class="demo-2">{{ data.info.vote_average }}</p>
         </mat-list-item>
         <mat-list-item>
           <h4 matLine>Runtime:</h4>
@@ -35,7 +31,7 @@
   </div>
   <div class="row">
     <div>Overview</div>
-    {{data.info.overview}}
+    {{ data.info.overview }}
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
