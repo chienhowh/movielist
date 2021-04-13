@@ -13,11 +13,15 @@ export class MovieRequestService {
     private http: HttpClient
   ) { }
 
+  /**
+   *
+   * @param querys 搜索條件
+   */
   request(method: string, url: string, params?: any): Observable<any> {
     if (method === API.POST) {
       return;
     }
-    return this.http.get(environment.DEFAULT_IP + url + API.KEY);
+      return this.http.get(environment.DEFAULT_IP + url + API.KEY,{params});
   }
 
   requestPoster(posterPath: string, width = '200'): Observable<any> {

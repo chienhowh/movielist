@@ -6,13 +6,13 @@
     </div>
     <div class="search text-center">
 
-        <input matInput placeholder="Search movie here" />
-      <button mat-raised-button color="primary">Search</button>
+        <input matInput placeholder="Search movie here" [(ngModel)]="searchText"/>
+      <button mat-raised-button color="primary" (click)="searchMovie()">Search</button>
     </div>
   </section>
   <!-- Movie List Start -->
-  <app-carousel searchTitle="Latest" [searchApi]="'UPCOMING'"></app-carousel>
-  <app-carousel [searchTitle]="'Hottest'"></app-carousel>
-  <app-carousel [searchTitle]="'Latest'"></app-carousel>
-  <app-carousel [searchTitle]="'Latest'"></app-carousel>
+  <app-carousel [searchTitle]="'Latest'" [searchApi]="'now_playing'"></app-carousel>
+  <app-carousel [searchTitle]="'Hottest'" [searchApi]="'top_rated'"></app-carousel>
+  <app-carousel [searchTitle]="'Popular'" [searchApi]="'popular'"></app-carousel>
+  <app-carousel [searchTitle]="'Upcoming'" [searchApi]="'upcoming'"></app-carousel>
 </div>

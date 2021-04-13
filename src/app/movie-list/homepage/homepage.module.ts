@@ -7,6 +7,8 @@ import { HomepageComponent } from './homepage.component';
 import { HomepageRoutingModule} from './homepage-routing.module';
 import { CarouselComponent } from './carousel/carousel.component';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
+import {SearchResultComponent} from './search-result/search-result.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,13 +16,15 @@ import { MovieDetailComponent } from './movie-detail/movie-detail.component';
     HomepageComponent,
     CarouselComponent,
     MovieDetailComponent,
+    SearchResultComponent,
     SanitizeURLPipe,
     GenrePipe
   ],
   imports: [
     CommonModule,
     HomepageRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class HomepageModule { }

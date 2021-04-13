@@ -21,17 +21,15 @@ export class CarouselComponent implements OnInit {
   @Input() searchTitle;
   @Input() searchApi: string;
   API_POSTER = API_POSTER;
-  movieList$: Observable<IMovieInfo[]> = this.movieRequestService.request(API.GET, API.UPCOMING)
-    .pipe(map(res => [...res.results]))
-
-    ;
+  movieList$: Observable<IMovieInfo[]>;
   constructor(
     public dialog: MatDialog,
     private movieRequestService: MovieRequestService,
-    public sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
+    this.movieList$ = this.movieRequestService.request(API.GET, `/movie/${this.searchApi}`)
+      .pipe(map(res => [...res.results]))
   }
 
   /**
