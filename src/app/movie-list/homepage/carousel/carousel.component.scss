@@ -1,8 +1,22 @@
-
-carousel{
-z-index: 3;
+carousel {
+  z-index: 3;
 }
 
-.img-box{
+.img-box {
   width: 150px;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+.rate-box {
+  position: absolute;
+  top: -20px;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.rate{
+  color: white;
 }

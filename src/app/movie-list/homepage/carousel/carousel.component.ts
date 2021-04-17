@@ -6,7 +6,7 @@ import { IMovieInfo, IResponse } from '../../../core/interfaces/movie.interface'
 import { MovieDetailComponent } from '../movie-detail/movie-detail.component';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { DomSanitizer } from '@angular/platform-browser';
+
 
 
 @Component({

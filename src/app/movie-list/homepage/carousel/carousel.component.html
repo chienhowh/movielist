@@ -13,8 +13,10 @@
     <div class="img-box">
       <img src="{{API_POSTER.GET_POSTER+movie.poster_path}}" alt="" />
     </div>
-    <div class="info-box">
+    <div class="info-box position-relative">
+      <div class="rate-box">
       <div class="rate">{{ movie.vote_average }}</div>
+      </div>
       <h3>{{ movie.title }}</h3>
     </div>
   </div>

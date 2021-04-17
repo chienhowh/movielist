@@ -17,11 +17,15 @@ export class MovieRequestService {
    *
    * @param querys 搜索條件
    */
-  request(method: string, url: string, params?: any): Observable<any> {
+  request(method: string, url: string, sendData?: any): Observable<any> {
+    // 修改語言
+    // let params = { language: 'zh-TW' };
+    const params = { ...sendData };
     if (method === API.POST) {
       return;
     }
-      return this.http.get(environment.DEFAULT_IP + url + API.KEY,{params});
+
+    return this.http.get(environment.DEFAULT_IP + url + API.KEY, { params });
   }
 
   requestPoster(posterPath: string, width = '200'): Observable<any> {

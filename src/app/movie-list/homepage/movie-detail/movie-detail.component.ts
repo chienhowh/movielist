@@ -22,4 +22,8 @@ export class MovieDetailComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close('sushi');
   }
+
+  addList(){
+    alert('add to list');
+  }
 }

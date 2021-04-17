@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MovieRequestService } from 'src/app/core/services/movie-request.service';
 import { API } from '../consts/global-constants.const';
 
@@ -11,7 +12,8 @@ import { API } from '../consts/global-constants.const';
 export class HomepageComponent implements OnInit {
   searchText = 'av';
   constructor(
-    private movieRequestService: MovieRequestService
+    private movieRequestService: MovieRequestService,
+    private router: Router
   ) { }
   ngOnInit(): void {
     this.getGenreList();
@@ -26,9 +28,6 @@ export class HomepageComponent implements OnInit {
   }
 
   searchMovie() {
-    const sendData = {query:this.searchText}
-    this.movieRequestService.request(API.GET, API.SEARCH_KEYWORD,sendData).subscribe(
-      res => console.log(res)
-    )
+    this.router.navigate(['home', 'search'], { state: { query: this.searchText } });
   }
 }
