@@ -16,9 +16,14 @@ export interface IMovieInfo {
 }
 
 export interface IResponse {
-  dates: { maximum: string, minimum: string };
   page: number;
-  results: IMovieInfo[];
+  results: IMovieInfo[] | IKeyword[];
   total_pages: number;
   total_results: number;
+  dates?: { maximum: string, minimum: string };
+}
+
+export interface IKeyword {
+  name: string;
+  id: number;
 }

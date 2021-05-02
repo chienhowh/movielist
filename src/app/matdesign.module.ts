@@ -7,6 +7,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   exports: [
@@ -16,7 +17,8 @@ import { MatListModule } from '@angular/material/list';
     MatButtonModule,
     MatFormFieldModule,
     MatDialogModule,
-    MatListModule
+    MatListModule,
+    MatPaginatorModule
   ]
 })
 

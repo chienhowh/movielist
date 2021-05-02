@@ -29,7 +29,7 @@ export class CarouselComponent implements OnInit {
 
   ngOnInit(): void {
     this.movieList$ = this.movieRequestService.request(API.GET, `/movie/${this.searchApi}`)
-      .pipe(map(res => [...res.results]))
+      .pipe(map(res => [...res.results]));
   }
 
   /**

@@ -1,4 +1,5 @@
-<h2 mat-dialog-title class="mobile-center">{{ data.info.title }}</h2>
+<ng-container *ngIf="displayList"></ng-container>
+<h6 mat-dialog-title class="mobile-center font-weight-bold">{{ displayList.title }}</h6>
 <mat-dialog-content>
   <div class="row">
     <div class="col-md-6 col-12">
@@ -10,7 +11,7 @@
       <mat-list>
         <mat-list-item>
           <h4 matLine>Genre:</h4>
-          <p matLine class="demo-2">{{ data.info.genre_ids | genre }}</p>
+          <p matLine class="demo-2 genre">{{ data.info.genre_ids | genre }}</p>
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>
@@ -25,7 +26,7 @@
         <mat-divider></mat-divider>
         <mat-list-item>
           <h4 matLine>Runtime:</h4>
-          <p matLine class="demo-2">121min</p>
+          <p matLine class="demo-2">{{displayList.runtime}}min</p>
         </mat-list-item>
       </mat-list>
     </div>

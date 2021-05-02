@@ -1,0 +1,36 @@
+@import '../../../custom-design.scss';
+.circle-bg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 3.8;
+}
+
+.circle {
+  fill: $color-white;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.circular-chart.orange .circle {
+  stroke: $color-orange;
+}
+
+.circular-chart.green .circle {
+  stroke: $color-green;
+}
+
+.circular-chart.red .circle {
+  stroke: $color-red;
+}
+
+.percentage {
+  fill: $color-gray;
+  text-anchor: middle;
+}

@@ -1,3 +1,4 @@
+import { TextEllipsisPipe } from './../../core/pipes/text-ellipsis.pipe';
 import { GenrePipe } from './../../core/pipes/genre.pipe';
 import { SanitizeURLPipe } from './../../core/pipes/sanitize-url.pipe';
 import { SharedModule } from './../../shared/shared.module';
@@ -18,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     MovieDetailComponent,
     SearchResultComponent,
     SanitizeURLPipe,
-    GenrePipe
+    GenrePipe,
+    TextEllipsisPipe
   ],
   imports: [
     CommonModule,

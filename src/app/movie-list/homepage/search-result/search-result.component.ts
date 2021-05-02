@@ -1,20 +1,27 @@
+import { API_POSTER } from './../../consts/global-constants.const';
+import { IMovieInfo, IResponse, IKeyword } from './../../../core/interfaces/movie.interface';
 
 import { MovieRequestService } from './../../../core/services/movie-request.service';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { API } from '../../consts/global-constants.const';
 import { Page } from '../../../model/page';
+
+
 
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss']
 })
-export class SearchResultComponent implements OnInit {
+export class SearchResultComponent implements OnInit, AfterViewInit {
+  // 搜尋字串
   query: string;
-  movieList: any[];
-  displayList: [];
+  // 海報網址
+  API_POSTER = API_POSTER;
+  displayList: IMovieInfo[] = [];
   page = new Page();
+
   constructor(
     private router: Router,
     private movieRequestService: MovieRequestService
@@ -22,19 +29,33 @@ export class SearchResultComponent implements OnInit {
 
   ngOnInit(): void {
     this.query = history.state.query;
-    this.searchMovie();
+    this.searchQuery();
+  }
+  ngAfterViewInit(): void {
   }
 
-  searchMovie() {
-    const sendData = { query: this.query, page: this.page.paging };
+  /**
+   * 針對字串搜尋符合電影列表
+   */
+  searchQuery() {
+    const sendData = { query: 'avenger', page: this.page.paging };
     this.movieRequestService.request(API.GET, API.SEARCH_KEYWORD, sendData).subscribe(
-      (res) => {
-        this.movieList = [...res.results];
-        console.log(res);
-        this.movieList.forEach(movie => {
-          this.movieRequestService.request(API.GET, `${API.MOVIE}/${movie.id}`).subscribe(detail => console.log(detail));
+      (res: IResponse) => {
+        const details = res.results;
+        this.page.total_results = res.total_results;
+        details.forEach(movie => {
+          this.searchMovieById(movie);
         });
       }
+    );
+  }
+
+  searchMovieById(movie: IKeyword) {
+    this.movieRequestService.request(API.GET, `${API.MOVIE}/${movie.id}`, { language: 'en-US' }).subscribe(
+      detail => {
+        this.displayList.push(detail);
+      },
+      err => console.log('err:', err)
     );
   }
 
@@ -44,6 +65,8 @@ export class SearchResultComponent implements OnInit {
     } else {
       this.page.paging++;
     }
-    this.searchMovie();
+    // this.searchQuery();
   }
+
+
 }

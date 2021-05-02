@@ -12,7 +12,8 @@ export const enum API {
   POPULAR = '/movie/popular',
   UPCOMING = '/movie/upcoming',
   TOP_RATED = '/movie/top_rated',
-  NOW_PLAYING = '/movie/now_playing'
+  NOW_PLAYING = '/movie/now_playing',
+  GET_BY_ID = '/movie'
 }
 
 export enum API_POSTER {
