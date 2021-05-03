@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     SharedModule,
     HttpClientModule,
+
   ],
   providers: [],
   entryComponents: [MovieDetailComponent],

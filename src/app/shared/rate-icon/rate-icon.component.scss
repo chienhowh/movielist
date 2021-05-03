@@ -1,4 +1,7 @@
 @import '../../../custom-design.scss';
+
+$stroke-color: "green" $color-green,"red" $color-red, "orange" $color-orange;
+
 .circle-bg {
   fill: none;
   stroke: #eee;
@@ -18,16 +21,10 @@
   }
 }
 
-.circular-chart.orange .circle {
-  stroke: $color-orange;
-}
-
-.circular-chart.green .circle {
-  stroke: $color-green;
-}
-
-.circular-chart.red .circle {
-  stroke: $color-red;
+@each $stroke, $color in $stroke-color {
+  .circular-chart.#{$stroke} .circle{
+    stroke:$color;
+  }
 }
 
 .percentage {

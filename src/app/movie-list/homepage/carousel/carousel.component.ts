@@ -21,7 +21,7 @@ export class CarouselComponent implements OnInit {
   @Input() searchTitle;
   @Input() searchApi: string;
   API_POSTER = API_POSTER;
-  movieList$: Observable<IMovieInfo[]>;
+  movieList$: Observable<any[]>;
   constructor(
     public dialog: MatDialog,
     private movieRequestService: MovieRequestService,

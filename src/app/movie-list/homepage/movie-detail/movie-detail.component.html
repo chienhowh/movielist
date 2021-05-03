@@ -1,42 +1,53 @@
-<ng-container *ngIf="displayList"></ng-container>
-<h6 mat-dialog-title class="mobile-center font-weight-bold">{{ displayList.title }}</h6>
-<mat-dialog-content>
-  <div class="row">
-    <div class="col-md-6 col-12">
-      <div class="img-box mobile-center">
-        <img src="{{ API_POSTER.GET_POSTER + data.info.poster_path }}" alt="" />
+<ng-container *ngIf="displayList">
+  <h6 mat-dialog-title class="mobile-center font-weight-bold">
+    {{ displayList.title }}
+  </h6>
+  <mat-dialog-content>
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <div class="img-box mobile-center">
+          <img
+            src="{{ API_POSTER.GET_POSTER + data.info.poster_path }}"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <mat-list>
+          <mat-list-item>
+            <h4 matLine>Genre:</h4>
+            <p matLine class="demo-2 genre">
+              {{ getMovieGenres(displayList.genres) }}
+            </p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Released:</h4>
+            <p matLine class="demo-2">{{ displayList.release_date }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Rating:</h4>
+            <p matLine class="demo-2">{{ displayList.vote_average }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Runtime:</h4>
+            <p matLine class="demo-2">{{ displayList.runtime }}min</p>
+          </mat-list-item>
+        </mat-list>
       </div>
     </div>
-    <div class="col-md-6 col-12">
-      <mat-list>
-        <mat-list-item>
-          <h4 matLine>Genre:</h4>
-          <p matLine class="demo-2 genre">{{ data.info.genre_ids | genre }}</p>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          <h4 matLine>Released:</h4>
-          <p matLine class="demo-2">{{ data.info.release_date }}</p>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          <h4 matLine>Rating:</h4>
-          <p matLine class="demo-2">{{ data.info.vote_average }}</p>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          <h4 matLine>Runtime:</h4>
-          <p matLine class="demo-2">{{displayList.runtime}}min</p>
-        </mat-list-item>
-      </mat-list>
+    <div class="row">
+      <div class="col-12"><h6>Overview</h6></div>
+      <div class="col-12">{{ displayList.overview }}</div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-12">Overview</div>
-    <div class="col-12">{{ data.info.overview }}</div>
-  </div>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-raised-button color="primary">View Trailer</button>
-  <button mat-raised-button color="primary" (click)="addList()">+Watch List</button>
-</mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="addList(movieId)">
+      <fa-icon [icon]="['fas', 'heart']" *ngIf="isInList"></fa-icon>
+      <fa-icon [icon]="['far', 'heart']" *ngIf="!isInList"></fa-icon>
+      AddList
+    </button>
+  </mat-dialog-actions>
+</ng-container>

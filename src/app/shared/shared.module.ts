@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatdesignModule } from '../matdesign.module';
 import { RateIconComponent } from './rate-icon/rate-icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -14,7 +15,8 @@ import { RateIconComponent } from './rate-icon/rate-icon.component';
   ],
   exports: [
     MatdesignModule,
-    RateIconComponent
+    RateIconComponent,
+    FontAwesomeModule
   ]
 })
 export class SharedModule { }
