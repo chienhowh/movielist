@@ -34,10 +34,11 @@ export class CarouselComponent implements OnInit {
 
   /**
    * 跳出顯示電影詳情視窗
+   * 資料不完全所以movieDetail要再用id call一次
    */
   onWatchDetail(info): void {
     const dialogRef = this.dialog.open(MovieDetailComponent, {
-      width: '500px', data: { info }
+      width: '500px', data: { info, callAgain: true }
     });
 
     dialogRef.afterClosed().subscribe(res => console.log('this diaglo was closed' + res));

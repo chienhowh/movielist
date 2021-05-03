@@ -6,6 +6,8 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { API } from '../../consts/global-constants.const';
 import { Page } from '../../../model/page';
+import { MatDialog } from '@angular/material/dialog';
+import { MovieDetailComponent } from '../movie-detail/movie-detail.component';
 
 
 
@@ -23,6 +25,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
   page = new Page();
 
   constructor(
+    public dialog: MatDialog,
     private router: Router,
     private movieRequestService: MovieRequestService
   ) { }
@@ -38,7 +41,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
    * 針對字串搜尋符合電影列表
    */
   searchQuery() {
-    const sendData = { query: 'avenger', page: this.page.paging };
+    const sendData = { query: 'a', page: this.page.paging };
     this.movieRequestService.request(API.GET, API.SEARCH_KEYWORD, sendData).subscribe(
       (res: IResponse) => {
         const details = res.results;
@@ -68,5 +71,14 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
     // this.searchQuery();
   }
 
-
+  /**
+   * 跳出顯示電影詳情視窗
+   *
+   */
+  onWatchDetail(info: IMovieInfo): void {
+    const dialogRef = this.dialog.open(MovieDetailComponent, {
+      width: '500px', data: { info, callAgain: false }
+    });
+    dialogRef.afterClosed().subscribe(res => console.log('this diaglo was closed' + res));
+  }
 }

@@ -15,20 +15,28 @@ import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
 export class MovieDetailComponent implements OnInit {
   API_POSTER = API_POSTER;
   movieId: number;
-  displayList:IMovieInfo;
+  displayList: IMovieInfo;
+  // 取得資料是否完全，不完全則callAgain true
+  callAgain: boolean;
   isInList = true;
 
   constructor(
     public dialogRef: MatDialogRef<MovieDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { info: IMovieInfo },
+    @Inject(MAT_DIALOG_DATA) public data: { info: IMovieInfo, callAgain: boolean },
     private detailService: DetailService,
-    private library: FaIconLibrary
+    private library: FaIconLibrary,
   ) { }
 
   ngOnInit(): void {
     this.library.addIcons(farHeart, fasHeart);
     this.movieId = this.data.info.id;
-    this.getDetailById(this.movieId);
+    this.callAgain = this.data.callAgain;
+    if (this.callAgain) {
+      this.getDetailById(this.movieId);
+    } else {
+      this.displayList = this.data.info;
+    }
+    this.addList(this.movieId);
   }
 
   getDetailById(id: number) {
@@ -43,9 +51,8 @@ export class MovieDetailComponent implements OnInit {
     this.dialogRef.close('sushi');
   }
 
-  addList() {
-    alert('add to list');
-    this.isInList = !this.isInList;
+  addList(id: number) {
+    this.isInList = this.detailService.addtoList(id);
   }
 
   getMovieGenres(genres: [{ id: number, name: string }]) {

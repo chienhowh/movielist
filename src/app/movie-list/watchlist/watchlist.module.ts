@@ -1,3 +1,4 @@
+import { SharedModule } from './../../shared/shared.module';
 import { WatchlistComponent } from './watchlist.component';
 
 import { NgModule } from '@angular/core';
@@ -13,7 +14,8 @@ import {WatchlistRoutingModule} from './watchlist-routing.module'
   ],
   imports: [
     CommonModule,
-    WatchlistRoutingModule
+    WatchlistRoutingModule,
+    SharedModule
   ]
 })
 export class WatchlistModule { }
