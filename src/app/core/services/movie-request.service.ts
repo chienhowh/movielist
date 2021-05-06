@@ -25,6 +25,17 @@ export class MovieRequestService {
     }
     return this.http.get(environment.DEFAULT_IP + url + API.KEY, { params }).pipe(catchError(this.handleError));
   }
+  /**
+   * call database
+   * @param querys 搜索條件
+   */
+  dbRequest(method: string, url: string, sendData?: any): Observable<any> {
+    const params = { ...sendData };
+    if (method === API.POST) {
+      return;
+    }
+    return this.http.get(environment.DB_IP + url + API.KEY, { params }).pipe(catchError(this.handleError));
+  }
 
   requestPoster(posterPath: string, width = '200'): Observable<any> {
     return this.http.get(`${API_POSTER.GET_POSTER}/w${width}/${posterPath}`);

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  DEFAULT_IP: 'https://api.themoviedb.org/3'
+  DEFAULT_IP: 'https://api.themoviedb.org/3',
+  DB_IP: 'http://localhost:3000'
 };
 
 /*

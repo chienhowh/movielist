@@ -2,7 +2,7 @@ export const enum API {
   POST = 'post',
   GET = 'get',
   KEY = '?api_key=bc0a486e34f46f2e1df814d9d7d35008',
-
+  /** TMDB start */
   MOVIE = '/movie',
   // 關鍵字搜尋
   SEARCH_KEYWORD = '/search/keyword',
@@ -13,7 +13,10 @@ export const enum API {
   UPCOMING = '/movie/upcoming',
   TOP_RATED = '/movie/top_rated',
   NOW_PLAYING = '/movie/now_playing',
-  GET_BY_ID = '/movie'
+  GET_BY_ID = '/movie',
+
+  /** DB start */
+  WATCHLIST = '/watchlist'
 }
 
 export enum API_POSTER {

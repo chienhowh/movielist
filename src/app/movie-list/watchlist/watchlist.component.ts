@@ -1,6 +1,6 @@
-import { Observable } from 'rxjs';
-import { API_POSTER } from './../consts/global-constants.const';
 import { DetailService } from './../homepage/shared/detail.service';
+import { WatchlistService } from './watchlist.service';
+import { API_POSTER } from './../consts/global-constants.const';
 import { Component, OnInit } from '@angular/core';
 import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
 
@@ -12,20 +12,29 @@ import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
 })
 export class WatchlistComponent implements OnInit {
   API_POSTER = API_POSTER;
+  /** 電影詳細資料列表 */
   displayList: IMovieInfo[] = [];
+  /** 待播清單號碼 */
+  watchList = [];
 
-  watchLists: [] = JSON.parse(sessionStorage.getItem('watchlist'));
   constructor(
+    private watchlistService: WatchlistService,
     private detailService: DetailService
   ) { }
 
   ngOnInit() {
-    this.watchLists.map(list => this.getDetailById(list));
+    this.getWatchList();
+    // this.watchLists.map(list => this.getDetailById(list));
   }
 
 
 
-
+  getWatchList() {
+    this.watchlistService.getWatchLists().subscribe(res => {
+      this.watchList = res;
+      this.watchList.map(list => this.getDetailById(list.id))
+    })
+  }
   getDetailById(id: number) {
     this.detailService.getMovieDetail(id).subscribe(res => {
       this.displayList.push(res);
