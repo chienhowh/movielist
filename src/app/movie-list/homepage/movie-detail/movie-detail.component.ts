@@ -52,11 +52,14 @@ export class MovieDetailComponent implements OnInit {
     const { title, id } = detail;
     const sendData = { id, title };
     if (this.isInList) {
+      this.detailService.removeList(id).subscribe((res) => {
+        console.log(res);
 
+        if (res.errors) { console.log('error'); return; }
+        this.isInList = false;
+      });
     } else {
       // 不在list，我們新增
-      console.log('post ' + id);
-
       this.detailService.addtoList(sendData).subscribe((res) => {
         if (res.errors) { console.log('error'); return; }
         this.isInList = true;

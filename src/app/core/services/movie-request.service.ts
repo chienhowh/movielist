@@ -36,8 +36,6 @@ export class MovieRequestService {
       case API.GET:
         return this.http.get(sendUrl, { params }).pipe(catchError(this.handleError));
       case API.POST:
-        console.log(params);
-
         return this.http.post(sendUrl,  params ).pipe(catchError(this.handleError));
 
       case API.PATCH:
