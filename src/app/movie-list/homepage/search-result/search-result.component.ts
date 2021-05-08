@@ -8,6 +8,7 @@ import { API } from '../../consts/global-constants.const';
 import { Page } from '../../../model/page';
 import { MatDialog } from '@angular/material/dialog';
 import { MovieDetailComponent } from '../movie-detail/movie-detail.component';
+import { PageEvent } from '@angular/material/paginator';
 
 
 
@@ -23,7 +24,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
   API_POSTER = API_POSTER;
   displayList: IMovieInfo[] = [];
   page = new Page();
-
+  pageEvent: PageEvent;
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -46,6 +47,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
       (res: IResponse) => {
         const details = res.results;
         this.page.total_results = res.total_results;
+        this.displayList = [];
         details.forEach(movie => {
           this.searchMovieById(movie);
         });
@@ -53,6 +55,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
     );
   }
 
+  /**
+   * 用ID 摳詳細資訊
+   */
   searchMovieById(movie: IKeyword) {
     this.movieRequestService.request(API.GET, `${API.MOVIE}/${movie.id}`, { language: 'en-US' }).subscribe(
       detail => {
@@ -62,13 +67,10 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
     );
   }
 
-  changePage(action: string) {
-    if (action === 'previous') {
-      this.page.paging--;
-    } else {
-      this.page.paging++;
-    }
-    // this.searchQuery();
+  changePage(pageEvent: PageEvent) {
+    this.page.paging = pageEvent.pageIndex;
+    this.searchQuery();
+    window.scrollTo({ top: 0 }); // 回到上層
   }
 
   /**

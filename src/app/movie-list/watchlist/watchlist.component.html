@@ -1,22 +1,31 @@
 <div class="container-xl">
-<mat-tab-group>
-  <!-- Unwatched Start -->
-  <mat-tab label="Unwatched">
-    <div class="row">
+  <mat-tab-group>
+    <!-- Unwatched Start -->
+    <mat-tab label="Unwatched">
+      <div class="row">
+        <ng-container *ngFor="let item of displayList">
+          <div class="col col-xl-3">
+            <div class="img-box mobile-center">
+              <img
+                src="{{ API_POSTER.GET_POSTER + item.poster_path }}"
+                alt=""
+              />
+            </div>
+            <div>{{ item.title }}</div>
+          </div>
+        </ng-container>
+      </div>
+    </mat-tab>
+    <!-- Watched Start -->
+    <mat-tab label="Watched">
       <ng-container *ngFor="let item of displayList">
         <div class="col col-xl-3">
           <div class="img-box mobile-center">
-            <img
-              src="{{ API_POSTER.GET_POSTER + item.poster_path }}"
-              alt=""
-            />
+            <img src="{{ API_POSTER.GET_POSTER + item.poster_path }}" alt="" />
           </div>
           <div>{{ item.title }}</div>
         </div>
       </ng-container>
-    </div>
-  </mat-tab>
-  <!-- Watched Start -->
-  <mat-tab label="Watched"> Content 2 </mat-tab>
-</mat-tab-group>
+    </mat-tab>
+  </mat-tab-group>
 </div>
