@@ -44,7 +44,7 @@
     </div>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-raised-button color="primary" (click)="addList(movieId)">
+    <button mat-raised-button color="primary" (click)="addList(displayList)">
       <fa-icon [icon]="['fas', 'heart']" *ngIf="isInList"></fa-icon>
       <fa-icon [icon]="['far', 'heart']" *ngIf="!isInList"></fa-icon>
       AddList
