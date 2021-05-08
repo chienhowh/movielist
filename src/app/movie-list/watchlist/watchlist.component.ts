@@ -1,9 +1,11 @@
+import { CommentComponent } from './comment/comment.component';
 import { DetailService } from './../homepage/shared/detail.service';
 import { WatchlistService } from './watchlist.service';
 import { API_POSTER } from './../consts/global-constants.const';
 import { Component, OnInit } from '@angular/core';
 import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
-
+import { IWatchedMovie } from './shared/watchlist';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-watchlist',
@@ -15,11 +17,13 @@ export class WatchlistComponent implements OnInit {
   /** 電影詳細資料列表 */
   displayList: IMovieInfo[] = [];
   /** 待播清單號碼 */
-  watchList = [];
+  unWatchedList: IWatchedMovie[] = [];
+  watchedList: IWatchedMovie[] = [];
 
   constructor(
     private watchlistService: WatchlistService,
-    private detailService: DetailService
+    private detailService: DetailService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -30,14 +34,35 @@ export class WatchlistComponent implements OnInit {
 
 
   getWatchList() {
-    this.watchlistService.getWatchLists().subscribe(res => {
-      this.watchList = res;
-      this.watchList.map(list => this.getDetailById(list.id))
-    })
+    this.refreshList();
+    this.watchlistService.getWatchLists().subscribe((res: IWatchedMovie[]) => {
+      res.map(movie => {
+        if (movie.beenWatched) { this.watchedList.push(movie); }
+        else { this.unWatchedList.push(movie); }
+      });
+    });
   }
   getDetailById(id: number) {
-    this.detailService.getMovieDetail(id).subscribe(res => {
-      this.displayList.push(res);
+    // this.detailService.getMovieDetail(id).subscribe(res => {
+    // });
+    console.log('get detail');
+
+  }
+
+  writeComment(movie:IWatchedMovie): void {
+    const dialogRef = this.dialog.open(CommentComponent, {
+      width: '500px', data: { movie }
     });
+
+    dialogRef.afterClosed().subscribe(res => console.log('this diaglo was closed' + res));
+  }
+
+  removeList(id: number) {
+    this.detailService.removeList(id).subscribe(() => this.getWatchList());
+  }
+
+  refreshList() {
+    this.watchedList = [];
+    this.unWatchedList = [];
   }
 }

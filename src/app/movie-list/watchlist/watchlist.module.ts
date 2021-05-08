@@ -3,14 +3,16 @@ import { WatchlistComponent } from './watchlist.component';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {WatchlistRoutingModule} from './watchlist-routing.module'
+import {WatchlistRoutingModule} from './watchlist-routing.module';
+import { CommentComponent } from './comment/comment.component'
 
 
 
 
 @NgModule({
   declarations: [
-    WatchlistComponent
+    WatchlistComponent,
+    CommentComponent
   ],
   imports: [
     CommonModule,

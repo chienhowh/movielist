@@ -2,30 +2,25 @@
   <mat-tab-group>
     <!-- Unwatched Start -->
     <mat-tab label="Unwatched">
-      <div class="row">
-        <ng-container *ngFor="let item of displayList">
-          <div class="col col-xl-3">
-            <div class="img-box mobile-center">
-              <img
-                src="{{ API_POSTER.GET_POSTER + item.poster_path }}"
-                alt=""
-              />
-            </div>
-            <div>{{ item.title }}</div>
-          </div>
+      <ul>
+        <ng-container *ngFor="let item of unWatchedList">
+          <li class="title" (click)="writeComment(item)">
+            {{ item.title }}
+            <span class="close" (click)="removeList(item.id)">x</span>
+          </li>
         </ng-container>
-      </div>
+      </ul>
     </mat-tab>
     <!-- Watched Start -->
-    <mat-tab label="Watched">
-      <ng-container *ngFor="let item of displayList">
-        <div class="col col-xl-3">
-          <div class="img-box mobile-center">
-            <img src="{{ API_POSTER.GET_POSTER + item.poster_path }}" alt="" />
-          </div>
-          <div>{{ item.title }}</div>
-        </div>
-      </ng-container>
+    <mat-tab label="Watched"
+      ><ul>
+        <ng-container *ngFor="let item of watchedList">
+          <li class="title" (click)="getDetailById(item.id)">
+            <div>{{ item.title }}</div>
+            <span class="close">x</span>
+          </li>
+        </ng-container>
+      </ul>
     </mat-tab>
   </mat-tab-group>
 </div>

@@ -1,3 +1,13 @@
-.img-box{
-  width: 100%;
+.title {
+  position: relative;
+}
+.title:hover {
+  background-color: aquamarine;
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0px 12px;
 }

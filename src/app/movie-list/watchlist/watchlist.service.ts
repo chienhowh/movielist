@@ -12,6 +12,6 @@ export class WatchlistService {
   ) { }
 
   getWatchLists() {
-   return this.requestService.dbRequest(API.GET, API.WATCHLIST)
+   return this.requestService.dbRequest(API.GET, API.WATCHLIST);
   }
 }
