@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { MovieRequestService } from './../../../core/services/movie-request.service';
 import { Injectable } from '@angular/core';
 import { API } from '../../consts/global-constants.const';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,13 @@ export class DetailService {
    */
   addtoList(movie): Observable<any> {
     return this.requestService.dbRequest(API.POST, API.WATCHLIST, movie);
+  }
+
+  /**
+   * click icon to remove movie from list
+   */
+  removeList(id: number): Observable<any> {
+    return this.requestService.dbRequest(API.DELETE, API.WATCHLIST + '/' + id);
   }
 
   /**

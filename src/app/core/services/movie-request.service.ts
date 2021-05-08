@@ -1,5 +1,5 @@
 import { environment } from './../../../environments/environment';
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { API, API_POSTER } from '../../movie-list/consts/global-constants.const';
@@ -31,10 +31,20 @@ export class MovieRequestService {
    */
   dbRequest(method: string, url: string, sendData?: any): Observable<any> {
     const params = { ...sendData };
-    if (method === API.POST) {
-      return;
+    const sendUrl = environment.DB_IP + url;
+    switch (method) {
+      case API.GET:
+        return this.http.get(sendUrl, { params }).pipe(catchError(this.handleError));
+      case API.POST:
+        console.log(params);
+
+        return this.http.post(sendUrl,  params ).pipe(catchError(this.handleError));
+
+      case API.PATCH:
+        return this.http.patch(sendUrl, { params }).pipe(catchError(this.handleError));
+      case API.DELETE:
+        return this.http.delete(sendUrl, { params }).pipe(catchError(this.handleError));
     }
-    return this.http.get(environment.DB_IP + url + API.KEY, { params }).pipe(catchError(this.handleError));
   }
 
   requestPoster(posterPath: string, width = '200'): Observable<any> {
@@ -55,6 +65,15 @@ export class MovieRequestService {
     }
     // return an observable with a user-facing error message
     return throwError('Something bad happened; please try again later.');
+  }
+
+
+  private getHTTPHeaders(): HttpHeaders {
+    const result = new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    });
+    return result;
   }
 }
 

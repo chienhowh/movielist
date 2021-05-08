@@ -51,9 +51,20 @@ export class MovieDetailComponent implements OnInit {
   addList(detail: IMovieInfo) {
     const { title, id } = detail;
     const sendData = { id, title };
-    const result = this.detailService.addtoList(sendData).subscribe();
-    if (!result) { this.isInList = false; }
+    if (this.isInList) {
+
+    } else {
+      // 不在list，我們新增
+      console.log('post ' + id);
+
+      this.detailService.addtoList(sendData).subscribe((res) => {
+        if (res.errors) { console.log('error'); return; }
+        this.isInList = true;
+      });
+    }
   }
+
+
 
   /** 看電影是否已在清單裡 */
   searchInList(id: number) {
