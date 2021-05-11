@@ -73,8 +73,7 @@ export class MovieDetailComponent implements OnInit {
   searchInList(id: number) {
     this.detailService.readList(id).subscribe(res => {
       // 回空值，代表不在名單
-      res ? this.isInList = true : this.isInList = false;
-      console.log(res, this.isInList);
+      this.isInList = res ? true : false;
     });
   }
 

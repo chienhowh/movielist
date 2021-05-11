@@ -11,7 +11,10 @@ export class WatchlistService {
     private requestService: MovieRequestService
   ) { }
 
+  /** 取得ＤＢ所有電影 */
   getWatchLists() {
    return this.requestService.dbRequest(API.GET, API.WATCHLIST);
   }
+
+
 }

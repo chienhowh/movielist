@@ -35,9 +35,15 @@ export class DetailService {
   }
 
   /**
-   * 從DB拿電影
+   * 從DB拿單筆電影
    */
   readList(id: number): Observable<any> {
     return this.requestService.dbRequest(API.GET, API.WATCHLIST + '/' + id);
+  }
+  /**
+   * 修改電影內容
+   */
+  patchMovie(id: number, patchData): Observable<any> {
+    return this.requestService.dbRequest(API.PATCH, API.WATCHLIST + '/' + id, patchData);
   }
 }

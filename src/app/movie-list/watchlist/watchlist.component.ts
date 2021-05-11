@@ -49,7 +49,7 @@ export class WatchlistComponent implements OnInit {
 
   }
 
-  writeComment(movie:IWatchedMovie): void {
+  writeComment(movie: IWatchedMovie): void {
     const dialogRef = this.dialog.open(CommentComponent, {
       width: '500px', data: { movie }
     });
@@ -57,7 +57,8 @@ export class WatchlistComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => console.log('this diaglo was closed' + res));
   }
 
-  removeList(id: number) {
+  removeList(id: number, event: Event) {
+    event.stopPropagation();
     this.detailService.removeList(id).subscribe(() => this.getWatchList());
   }
 

@@ -42,7 +42,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
    * 針對字串搜尋符合電影列表
    */
   searchQuery() {
-    const sendData = { query: 'a', page: this.page.paging };
+    const sendData = { query: this.query, page: this.page.paging };
+    console.log(this.query);
+
     this.movieRequestService.request(API.GET, API.SEARCH_KEYWORD, sendData).subscribe(
       (res: IResponse) => {
         const details = res.results;

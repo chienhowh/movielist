@@ -31,15 +31,16 @@ export class MovieRequestService {
    */
   dbRequest(method: string, url: string, sendData?: any): Observable<any> {
     const params = { ...sendData };
+    console.log(params);
+
     const sendUrl = environment.DB_IP + url;
     switch (method) {
       case API.GET:
         return this.http.get(sendUrl, { params }).pipe(catchError(this.handleError));
       case API.POST:
         return this.http.post(sendUrl,  params ).pipe(catchError(this.handleError));
-
       case API.PATCH:
-        return this.http.patch(sendUrl, { params }).pipe(catchError(this.handleError));
+        return this.http.patch(sendUrl,  params ).pipe(catchError(this.handleError));
       case API.DELETE:
         return this.http.delete(sendUrl, { params }).pipe(catchError(this.handleError));
     }

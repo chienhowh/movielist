@@ -1,1 +1,22 @@
-<p>comment works!</p>
+<h4>{{ movie.title }}</h4>
+<form [formGroup]="movieForm">
+  <mat-form-field appearance="fill">
+    <input matInput [matDatepicker]="picker" formControlName="date"/>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="true">aaa</mat-error>
+  </mat-form-field>
+  <!-- 評論區 -->
+  <mat-form-field appearance="fill">
+    <mat-label>Leave a comment</mat-label>
+    <textarea matInput placeholder="Ex. It makes me feel..." formControlName="comment"></textarea>
+    <mat-error *ngIf="movieForm.invalid">bbb</mat-error>
+  </mat-form-field>
+</form>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="patchMovie(movie.id)">
+    submit
+  </button>
+  <button mat-raised-button mat-dialog-close color="accent">exit</button>
+</mat-dialog-actions>
