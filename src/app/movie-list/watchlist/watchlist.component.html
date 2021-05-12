@@ -6,7 +6,7 @@
         <ng-container *ngFor="let item of unWatchedList">
           <li class="title" (click)="writeComment(item)">
             {{ item.title }}
-            <span class="close" (click)="removeList(item.id,$event)">x</span>
+            <span class="close" (click)="removeList(item.id, $event)">x</span>
           </li>
         </ng-container>
       </ul>
@@ -17,7 +17,7 @@
         <ng-container *ngFor="let item of watchedList">
           <li class="title" (click)="getDetailById(item.id)">
             <div>{{ item.title }}</div>
-            <span class="close">x</span>
+            <span class="close" (click)="removeList(item.id, $event)">x</span>
           </li>
         </ng-container>
       </ul>

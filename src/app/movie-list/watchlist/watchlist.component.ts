@@ -1,3 +1,4 @@
+import { WatchedMovieComponent } from './watched-movie/watched-movie.component';
 import { CommentComponent } from './comment/comment.component';
 import { DetailService } from './../homepage/shared/detail.service';
 import { WatchlistService } from './watchlist.service';
@@ -28,7 +29,6 @@ export class WatchlistComponent implements OnInit {
 
   ngOnInit() {
     this.getWatchList();
-    // this.watchLists.map(list => this.getDetailById(list));
   }
 
 
@@ -42,11 +42,14 @@ export class WatchlistComponent implements OnInit {
       });
     });
   }
-  getDetailById(id: number) {
-    // this.detailService.getMovieDetail(id).subscribe(res => {
-    // });
-    console.log('get detail');
 
+  /** 查心得 */
+  getDetailById(id: number) {
+    const dialogRef = this.dialog.open(WatchedMovieComponent, {
+      width: '500px', data: { id }
+    });
+
+    dialogRef.afterClosed().subscribe(res => console.log('this diaglo was closed' + res));
   }
 
   writeComment(movie: IWatchedMovie): void {
@@ -54,8 +57,11 @@ export class WatchlistComponent implements OnInit {
       width: '500px', data: { movie }
     });
 
-    dialogRef.afterClosed().subscribe(res => console.log('this diaglo was closed' + res));
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) { this.getWatchList(); }
+    });
   }
+
 
   removeList(id: number, event: Event) {
     event.stopPropagation();

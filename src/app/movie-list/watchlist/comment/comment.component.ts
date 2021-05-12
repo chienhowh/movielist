@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CommentComponent implements OnInit {
   movieForm: FormGroup = this.fb.group({
-    date: [new Date(), Validators.required],
+    watchedDate: [new Date(), Validators.required],
     comment: ['', Validators.required]
   });
   movie: IWatchedMovie;
@@ -37,6 +37,8 @@ export class CommentComponent implements OnInit {
     }
     if (this.movieForm.invalid) { return; }
     const value = this.movieForm.value;
-    this.detailService.patchMovie(id, { beenWatched: true, ...value }).subscribe(()=>this.dialogRef.close());
+    this.detailService.patchMovie(id, { beenWatched: true, ...value }).subscribe(res =>
+      this.dialogRef.close(res)
+    );
   }
 }

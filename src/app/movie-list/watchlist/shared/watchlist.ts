@@ -3,4 +3,5 @@ export interface IWatchedMovie {
   id: number;
   beenWatched: boolean;
   comment: string;
+  watchedDate: Date;
 }
