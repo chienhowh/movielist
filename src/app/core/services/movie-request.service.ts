@@ -19,7 +19,7 @@ export class MovieRequestService {
    * @param querys 搜索條件
    */
   request(method: string, url: string, sendData?: any): Observable<any> {
-    const params = { ...sendData };
+    const params = { ...sendData, language: 'zh-TW' };
     if (method === API.POST) {
       return;
     }
@@ -38,9 +38,9 @@ export class MovieRequestService {
       case API.GET:
         return this.http.get(sendUrl, { params }).pipe(catchError(this.handleError));
       case API.POST:
-        return this.http.post(sendUrl,  params ).pipe(catchError(this.handleError));
+        return this.http.post(sendUrl, params).pipe(catchError(this.handleError));
       case API.PATCH:
-        return this.http.patch(sendUrl,  params ).pipe(catchError(this.handleError));
+        return this.http.patch(sendUrl, params).pipe(catchError(this.handleError));
       case API.DELETE:
         return this.http.delete(sendUrl, { params }).pipe(catchError(this.handleError));
     }

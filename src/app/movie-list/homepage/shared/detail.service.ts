@@ -20,6 +20,8 @@ export class DetailService {
     return this.requestService.request(API.GET, `${API.GET_BY_ID}/${id}`);
   }
 
+
+  // DB start
   /**
    * 加入後端待播清單
    */

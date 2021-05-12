@@ -45,7 +45,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
     const sendData = { query: this.query, page: this.page.paging };
     console.log(this.query);
 
-    this.movieRequestService.request(API.GET, API.SEARCH_KEYWORD, sendData).subscribe(
+    this.movieRequestService.request(API.GET, API.SEARCH_MOVIE, sendData).subscribe(
       (res: IResponse) => {
         const details = res.results;
         this.page.total_results = res.total_results;
@@ -84,5 +84,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
       width: '500px', data: { info, callAgain: false }
     });
     dialogRef.afterClosed().subscribe(res => console.log('this diaglo was closed' + res));
+  }
+
+  imgError(event) {
+    event.target.src = 'assets/not-found.jpeg';
   }
 }

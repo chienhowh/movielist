@@ -7,7 +7,7 @@ export const enum API {
   /** TMDB start */
   MOVIE = '/movie',
   // 關鍵字搜尋
-  SEARCH_KEYWORD = '/search/keyword',
+  SEARCH_MOVIE = '/search/movie',
   // 所有類型列表
   GENRE_LIST = '/genre/movie/list',
 
