@@ -4,7 +4,7 @@
       <div class="col-4">
         <div class="img-box mx-auto">
           <img
-            (error)="imgError($event);"
+            (error)="imgError($event)"
             src="{{ API_POSTER.GET_POSTER + movie.poster_path }}"
             alt=""
           />
@@ -14,7 +14,7 @@
         <h5>{{ movie.title }}</h5>
         <p class="mb-2">{{ movie.release_date }}</p>
         <div #overview class="overview">
-          {{ movie.overview | textEllipsis: 280 }}
+          {{ movie.overview ? movie.overview : "尚無介紹" }}
         </div>
       </div>
     </div>

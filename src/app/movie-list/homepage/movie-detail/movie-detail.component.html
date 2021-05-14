@@ -40,7 +40,9 @@
     </div>
     <div class="row">
       <div class="col-12"><h6>Overview</h6></div>
-      <div class="col-12">{{ displayList.overview }}</div>
+      <div class="col-12">
+        {{ displayList.overview ? displayList.overview : "尚無介紹" }}
+      </div>
     </div>
   </mat-dialog-content>
   <mat-dialog-actions>

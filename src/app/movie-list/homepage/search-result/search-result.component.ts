@@ -33,6 +33,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.query = history.state.query;
+    if (!this.query) { this.router.navigateByUrl('/'); }
     this.searchQuery();
   }
   ngAfterViewInit(): void {
@@ -88,5 +89,6 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
   imgError(event) {
     event.target.src = 'assets/not-found.jpeg';
+    event.target.style.height = '180px';
   }
 }

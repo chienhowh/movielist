@@ -22,3 +22,9 @@ img {
   height: 200px; // has to same as .card-box height
 }
 
+.overview{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
