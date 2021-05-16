@@ -10,7 +10,7 @@ import { API } from '../consts/global-constants.const';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
-  searchText = 'av';
+  searchText = '';
   constructor(
     private movieRequestService: MovieRequestService,
     private router: Router
@@ -28,6 +28,7 @@ export class HomepageComponent implements OnInit {
   }
 
   searchMovie() {
+    if (!this.searchText) { return; }
     this.router.navigate(['home', 'search'], { state: { query: this.searchText } });
   }
 }

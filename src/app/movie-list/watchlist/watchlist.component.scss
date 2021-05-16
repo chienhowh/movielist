@@ -1,8 +1,11 @@
+@import "../../../custom-design.scss";
+
 .title {
+  padding: 4px 12px;
   position: relative;
 }
 .title:hover {
-  background-color: aquamarine;
+  background-color: $secondary-color;
 }
 
 .close {

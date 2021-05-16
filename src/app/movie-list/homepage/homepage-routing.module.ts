@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
-  { path: 'search', component: SearchResultComponent, canActivate: [SearchResultGuard] }
+  { path: 'search', component: SearchResultComponent }
 ];
 
 @NgModule({

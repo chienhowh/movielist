@@ -21,8 +21,9 @@
   </div>
 </ng-container>
 <mat-paginator
+class="test"
   [length]="page.total_results"
-  [pageIndex]="page.paging"
+  [pageIndex]="page.paging - 1"
   [pageSize]="20"
   (page)="changePage($event)"
 >

@@ -1,5 +1,6 @@
-.header {
-  padding: 0 40px;
+@import "../custom-design.scss";
+.nav-bar {
+  background-color: $secondary-color;
 }
 
 .drop-down li {
@@ -12,7 +13,11 @@ footer {
   color: #fff;
 }
 
-.foot-nav{
+.foot-nav {
   justify-content: space-evenly;
   padding: 30px;
+}
+
+li > a {
+  color: black;
 }
