@@ -1,4 +1,18 @@
+carousel {
+  z-index: 3;
+}
 
-carousel{
-z-index: 3;
+.img-box {
+  width: 150px;
+}
+
+img{
+  border-radius: 8px;
+}
+
+.rate-box {
+  position: absolute;
+  top: -20px;
+  width: 36px;
+  height: 36px;
 }

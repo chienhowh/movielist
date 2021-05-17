@@ -1,0 +1,16 @@
+@import "../../../custom-design.scss";
+
+.title {
+  padding: 4px 12px;
+  position: relative;
+}
+.title:hover {
+  background-color: $secondary-color;
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0px 12px;
+}

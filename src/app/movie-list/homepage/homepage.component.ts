@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MovieRequestService } from 'src/app/core/services/movie-request.service';
+import { API } from '../consts/global-constants.const';
+
 
 @Component({
   selector: 'app-homepage',
@@ -6,15 +10,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
+  searchText = '';
+  constructor(
+    private movieRequestService: MovieRequestService,
+    private router: Router
+  ) { }
+  ngOnInit(): void {
+    this.getGenreList();
+  }
 
-  slides = [
-    { 'image': 'https://picsum.photos/id/237/200/300' },
-    { 'image': 'https://picsum.photos/id/111/200/300' },
-    { 'image': 'https://picsum.photos/id/237/200/300' },
-    { 'image': 'https://picsum.photos/id/237/200/300' },
-    { 'image': 'https://picsum.photos/id/981/200/300' },
-  ]
-  constructor() { }
-  ngOnInit() { }
 
+
+  getGenreList(): void {
+    this.movieRequestService.request(API.GET, API.GENRE_LIST).subscribe(res => {
+      sessionStorage.setItem('genres', JSON.stringify([...res.genres]));
+    });
+  }
+
+  searchMovie() {
+    if (!this.searchText) { return; }
+    this.router.navigate(['home', 'search'], { state: { query: this.searchText } });
+  }
 }

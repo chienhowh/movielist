@@ -1,7 +1,7 @@
 export interface IMovieInfo {
   adult: boolean;
   backdrop_path: string;
-  genre_ids: number[];
+  genres: { id: number, name: string }[];
   id: number;
   original_language: string;
   original_title: string;
@@ -13,12 +13,18 @@ export interface IMovieInfo {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  runtime: number;
 }
 
 export interface IResponse {
-  dates: { maximum: string, minimum: string };
   page: number;
-  results: IMovieInfo[];
+  results: IMovieInfo[] | IKeyword[];
   total_pages: number;
   total_results: number;
+  dates?: { maximum: string, minimum: string };
+}
+
+export interface IKeyword {
+  name: string;
+  id: number;
 }

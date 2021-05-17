@@ -1,11 +1,12 @@
 import { MovieRequestService } from './../../../core/services/movie-request.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { API } from '../../consts/global-constants.const';
+import { API, API_POSTER } from '../../consts/global-constants.const';
 import { IMovieInfo, IResponse } from '../../../core/interfaces/movie.interface';
 import { MovieDetailComponent } from '../movie-detail/movie-detail.component';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+
 
 
 @Component({
@@ -19,29 +20,27 @@ export class CarouselComponent implements OnInit {
    */
   @Input() searchTitle;
   @Input() searchApi: string;
-
-  movieList$: Observable<IMovieInfo[]> = this.movieRequestService.request(API.GET, API.UPCOMING)
-    .pipe(map(res => [...res.results]))
-
-    ;
+  API_POSTER = API_POSTER;
+  movieList$: Observable<any[]>;
   constructor(
     public dialog: MatDialog,
-    private movieRequestService: MovieRequestService
+    private movieRequestService: MovieRequestService,
   ) { }
 
   ngOnInit(): void {
-
+    this.movieList$ = this.movieRequestService.request(API.GET, `/movie/${this.searchApi}`)
+      .pipe(map(res => [...res.results]));
   }
-
 
   /**
    * 跳出顯示電影詳情視窗
+   * 資料不完全所以movieDetail要再用id call一次
    */
-  onWatchDetail(info) {
+  onWatchDetail(info): void {
     const dialogRef = this.dialog.open(MovieDetailComponent, {
-      width: '500px', data: { info }
-    })
+      width: '500px', data: { info, callAgain: true }
+    });
 
-    dialogRef.afterClosed().subscribe(res => console.log('this diaglo was closed' + res))
+    dialogRef.afterClosed().subscribe(res => console.log('this diaglo was closed' + res));
   }
 }

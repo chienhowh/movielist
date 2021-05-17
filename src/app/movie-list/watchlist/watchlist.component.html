@@ -1,1 +1,26 @@
-<h1>I'm watchlist</h1>
+<div class="container-xl">
+  <mat-tab-group>
+    <!-- Unwatched Start -->
+    <mat-tab label="Unwatched">
+      <ul>
+        <ng-container *ngFor="let item of unWatchedList">
+          <li class="title" (click)="writeComment(item)">
+            {{ item.title }}
+            <span class="close" (click)="removeList(item.id, $event)">x</span>
+          </li>
+        </ng-container>
+      </ul>
+    </mat-tab>
+    <!-- Watched Start -->
+    <mat-tab label="Watched"
+      ><ul>
+        <ng-container *ngFor="let item of watchedList">
+          <li class="title" (click)="getDetailById(item.id)">
+            <div>{{ item.title }}</div>
+            <span class="close" (click)="removeList(item.id, $event)">x</span>
+          </li>
+        </ng-container>
+      </ul>
+    </mat-tab>
+  </mat-tab-group>
+</div>

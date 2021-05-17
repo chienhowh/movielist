@@ -1,45 +1,55 @@
-<h2 mat-dialog-title>{{data.info.title}}</h2>
-<mat-dialog-content>
-  <div class="row">
-    <div class="col-md-6 col-12">
-      <div class="img-box">
-        <img src="https://picsum.photos/200/300?random=1" alt="" />
+<ng-container *ngIf="displayList">
+  <h6 mat-dialog-title class="mobile-center font-weight-bold">
+    {{ displayList.title }}
+  </h6>
+  <mat-dialog-content>
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <div class="img-box mobile-center">
+          <img
+            src="{{ API_POSTER.GET_POSTER + displayList.poster_path }}"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <mat-list>
+          <mat-list-item>
+            <h4 matLine>Genre:</h4>
+            <p matLine class="demo-2 genre">
+              {{ getMovieGenres(displayList.genres) }}
+            </p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Released:</h4>
+            <p matLine class="demo-2">{{ displayList.release_date }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Rating:</h4>
+            <p matLine class="demo-2">{{ displayList.vote_average }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <h4 matLine>Runtime:</h4>
+            <p matLine class="demo-2">{{ displayList.runtime }}min</p>
+          </mat-list-item>
+        </mat-list>
       </div>
     </div>
-    <div class="col-md-6 col-12">
-      <mat-list>
-        <h3 matSubheader>A quest to save her world.</h3>
-        <mat-list-item>
-          <h4 matLine>Genre</h4>
-          <p matLine class="demo-2">aaaa</p>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          <h4 matLine>Released</h4>
-          <p matLine class="demo-2">{{data.info.release_date}}</p>
-        </mat-list-item>
-        <mat-list-item>
-          <h4 matLine>Popularity:</h4>
-          <p matLine class="demo-2">74.047</p>
-        </mat-list-item>
-        <mat-list-item>
-          <h4 matLine>Rating:</h4>
-          <p matLine class="demo-2">7.2</p>
-        </mat-list-item>
-        <mat-list-item>
-          <h4 matLine>Runtime:</h4>
-          <p matLine class="demo-2">121min</p>
-        </mat-list-item>
-      </mat-list>
+    <div class="row">
+      <div class="col-12"><h6>Overview</h6></div>
+      <div class="col-12">
+        {{ displayList.overview ? displayList.overview : "尚無介紹" }}
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div>Overview</div>
-    {{data.info.overview}}
-  </div>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-raised-button color="primary">View in IMDB</button>
-  <button mat-raised-button color="primary">View Trailer</button>
-  <button mat-raised-button color="primary">Add to fav</button>
-</mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="addList(displayList)">
+      <fa-icon [icon]="['fas', 'heart']" *ngIf="isInList"></fa-icon>
+      <fa-icon [icon]="['far', 'heart']" *ngIf="!isInList"></fa-icon>
+      AddList
+    </button>
+  </mat-dialog-actions>
+</ng-container>

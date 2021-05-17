@@ -1,11 +1,31 @@
+@import "../../../custom-design.scss";
 
 .search-box {
-  // background-image: url('https://picsum.photos/800/300?random=1');
-  background-color: azure;
-  background-size: cover;
+  background-color: $primary-color;
 }
 
 .title {
   padding: 30px 40px;
 }
 
+.search {
+  padding: 0 30px 40px;
+  width: 100%;
+  position: relative;
+}
+
+.input {
+  height: 36px;
+  width: 100%;
+  border-radius: 36px;
+  border: none;
+  padding: 0 20px;
+  margin: 0;
+}
+
+.search-btn {
+  position: absolute;
+  top: 0;
+  right: 30px;
+  border-radius: 36px;
+}

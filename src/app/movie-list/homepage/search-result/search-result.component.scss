@@ -1,0 +1,31 @@
+@import "../../../../custom-design.scss";
+
+.card-box {
+  width: 80%;
+  margin: 16px auto;
+  height: 200px;
+  border:1px solid $color-dark;
+  border-radius: 8px;
+}
+
+
+
+img {
+  height: 200px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.overview-box {
+  display: flex;
+  flex-direction: column;
+  height: 200px; // has to same as .card-box height
+}
+
+.overview{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
