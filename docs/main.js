@@ -81,7 +81,7 @@ class AppComponent {
     }
 }
 AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(); };
-AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 47, vars: 0, consts: [[1, "nav-bar"], [1, "header", "d-flex", "align-items-center"], [1, "d-flex", "list-box"], ["href", "/home", 1, "px-3"], ["src", "/assets/cinema.png", "alt", "", "height", "48"], [1, "d-flex", "m-0", "align-items-center", "drop-down"], ["href", "/home"], ["routerLink", "/watchlist"], [1, "d-flex", "foot-nav"], ["src", "https://picsum.photos/150/225?random=2", "alt", ""]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
+AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 47, vars: 0, consts: [[1, "nav-bar"], [1, "header", "d-flex", "align-items-center"], [1, "d-flex", "list-box"], ["routerLink", "/home'", 1, "px-3"], ["src", "assets/cinema.png", "alt", "", "height", "48"], [1, "d-flex", "m-0", "align-items-center", "drop-down"], ["routerLink", "/home"], ["routerLink", "/watchlist"], [1, "d-flex", "foot-nav"], ["src", "https://picsum.photos/150/225?random=2", "alt", ""]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "nav", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
