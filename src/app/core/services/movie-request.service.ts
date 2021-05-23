@@ -72,6 +72,7 @@ export class MovieRequestService {
     const result = new HttpHeaders({
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      origin: 'https://chienhowh.github.io/'
     });
     return result;
   }
