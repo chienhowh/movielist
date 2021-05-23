@@ -305,18 +305,19 @@ class MovieRequestService {
      * @param querys 搜索條件
      */
     dbRequest(method, url, sendData) {
+        const headers = this.getHTTPHeaders();
         const params = Object.assign({}, sendData);
-        console.log(params);
+        console.log(params, headers);
         const sendUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_0__["environment"].DB_IP + url;
         switch (method) {
             case "get" /* GET */:
-                return this.http.get(sendUrl, { params }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+                return this.http.get(sendUrl, { params, headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
             case "post" /* POST */:
-                return this.http.post(sendUrl, params).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+                return this.http.post(sendUrl, params, { headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
             case "patch" /* PATCH */:
-                return this.http.patch(sendUrl, params).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+                return this.http.patch(sendUrl, params, { headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
             case "delete" /* DELETE */:
-                return this.http.delete(sendUrl, { params }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+                return this.http.delete(sendUrl, { params, headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
         }
     }
     requestPoster(posterPath, width = '200') {
