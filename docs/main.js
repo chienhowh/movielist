@@ -326,8 +326,7 @@ class MovieRequestService {
     getHTTPHeaders() {
         const result = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
             Accept: 'application/json',
-            'Content-Type': 'application/json',
-            origin: 'https://chienhowh.github.io/'
+            'Content-Type': 'application/json'
         });
         return result;
     }
