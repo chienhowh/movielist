@@ -868,7 +868,8 @@ __webpack_require__.r(__webpack_exports__);
 const environment = {
     production: false,
     DEFAULT_IP: 'https://api.themoviedb.org/3',
-    DB_IP: 'http://172.104.115.99'
+    DB_IP: 'https://movieback.duckdns.org'
+    // DB_IP: 'localhost:80'
 };
 /*
  * For easier debugging in development mode, you can import the following file
