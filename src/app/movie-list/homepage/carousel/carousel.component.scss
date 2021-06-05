@@ -11,12 +11,12 @@
 //   border-radius: 8px;
 // }
 
-// .rate-box {
-//   position: absolute;
-//   top: -20px;
-//   width: 36px;
-//   height: 36px;
-// }
+.rate-box {
+  position: absolute;
+  top: -20px;
+  width: 36px;
+  height: 36px;
+}
 
 //swiper start
 .swiper-container {
@@ -47,6 +47,15 @@
 .swiper-slide img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 200px;
+  object-fit: contain;
+}
+
+.swiper-button-next::after {
+  font-size: 24px;
+  color: white;
+}
+.swiper-button-prev::after {
+  font-size: 24px;
+  color: white;
 }

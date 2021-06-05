@@ -23,14 +23,11 @@
 </carousel> -->
 <ng-template #Loading>Loading</ng-template>
 <swiper
-  [slidesPerView]="3"
-  [spaceBetween]="30"
-  [slidesPerGroup]="3"
+  [slidesPerView]="imgNumber"
+  [spaceBetween]="4"
+  [slidesPerGroup]="imgNumber"
   [loop]="true"
   [loopFillGroupWithBlank]="true"
-  [pagination]="{
-    clickable: true
-  }"
   [navigation]="true"
   class="mySwiper"
   *ngIf="movieList$ | async as movieList; else Loading"
@@ -41,9 +38,9 @@
         <img src="{{ API_POSTER.GET_POSTER + movie.poster_path }}" alt="" />
       </div>
       <div class="info-box position-relative">
-        <!-- <div class="rate-box">
-        <app-rate-icon [rate]="movie.vote_average"></app-rate-icon>
-      </div> -->
+        <div class="rate-box">
+          <app-rate-icon [rate]="movie.vote_average"></app-rate-icon>
+        </div>
         <h6 class="pt-3 font-weight-bold">{{ movie.title }}</h6>
       </div>
     </div>

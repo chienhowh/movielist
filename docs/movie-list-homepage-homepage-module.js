@@ -14013,6 +14013,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_services_movie_request_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../../../core/services/movie-request.service */ "./src/app/core/services/movie-request.service.ts");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 /* harmony import */ var swiper_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! swiper/angular */ "./node_modules/swiper/angular/fesm2015/swiper_angular.js");
+/* harmony import */ var _shared_rate_icon_rate_icon_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../shared/rate-icon/rate-icon.component */ "./src/app/shared/rate-icon/rate-icon.component.ts");
+
 
 
 
@@ -14034,8 +14036,11 @@ function CarouselComponent_swiper_4_1_ng_template_0_Template(rf, ctx) { if (rf &
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "img", 7);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 8);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "h6", 9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "app-rate-icon", 10);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "h6", 11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -14045,19 +14050,21 @@ function CarouselComponent_swiper_4_1_ng_template_0_Template(rf, ctx) { if (rf &
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("src", ctx_r6.API_POSTER.GET_POSTER + movie_r5.poster_path, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeUrl"]);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("rate", movie_r5.vote_average);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](movie_r5.title);
 } }
 function CarouselComponent_swiper_4_1_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, CarouselComponent_swiper_4_1_ng_template_0_Template, 6, 2, "ng-template", 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, CarouselComponent_swiper_4_1_ng_template_0_Template, 8, 3, "ng-template", 4);
 } }
-const _c0 = function () { return { clickable: true }; };
 function CarouselComponent_swiper_4_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "swiper", 2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, CarouselComponent_swiper_4_1_Template, 1, 0, undefined, 3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const movieList_r3 = ctx.ngIf;
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("slidesPerView", 3)("spaceBetween", 30)("slidesPerGroup", 3)("loop", true)("loopFillGroupWithBlank", true)("pagination", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](8, _c0))("navigation", true);
+    const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("slidesPerView", ctx_r2.imgNumber)("spaceBetween", 4)("slidesPerGroup", ctx_r2.imgNumber)("loop", true)("loopFillGroupWithBlank", true)("navigation", true);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", movieList_r3);
 } }
@@ -14072,6 +14079,13 @@ class CarouselComponent {
         this.movieList$ = this.movieRequestService.request("get" /* GET */, `/movie/${this.searchApi}`)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(res => [...res.results]));
     }
+    get imgNumber() {
+        const width = window.innerWidth;
+        if (width >= 768) {
+            return 7;
+        }
+        return 3;
+    }
     /**
      * 跳出顯示電影詳情視窗
      * 資料不完全所以movieDetail要再用id call一次
@@ -14084,12 +14098,12 @@ class CarouselComponent {
     }
 }
 CarouselComponent.ɵfac = function CarouselComponent_Factory(t) { return new (t || CarouselComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_core_services_movie_request_service__WEBPACK_IMPORTED_MODULE_6__["MovieRequestService"])); };
-CarouselComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CarouselComponent, selectors: [["app-carousel"]], inputs: { searchTitle: "searchTitle", searchApi: "searchApi" }, decls: 6, vars: 5, consts: [["Loading", ""], ["class", "mySwiper", 3, "slidesPerView", "spaceBetween", "slidesPerGroup", "loop", "loopFillGroupWithBlank", "pagination", "navigation", 4, "ngIf", "ngIfElse"], [1, "mySwiper", 3, "slidesPerView", "spaceBetween", "slidesPerGroup", "loop", "loopFillGroupWithBlank", "pagination", "navigation"], [4, "ngFor", "ngForOf"], ["swiperSlide", ""], [1, "carousel-cell", 3, "click"], [1, "img-box"], ["alt", "", 3, "src"], [1, "info-box", "position-relative"], [1, "pt-3", "font-weight-bold"]], template: function CarouselComponent_Template(rf, ctx) { if (rf & 1) {
+CarouselComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CarouselComponent, selectors: [["app-carousel"]], inputs: { searchTitle: "searchTitle", searchApi: "searchApi" }, decls: 6, vars: 5, consts: [["Loading", ""], ["class", "mySwiper", 3, "slidesPerView", "spaceBetween", "slidesPerGroup", "loop", "loopFillGroupWithBlank", "navigation", 4, "ngIf", "ngIfElse"], [1, "mySwiper", 3, "slidesPerView", "spaceBetween", "slidesPerGroup", "loop", "loopFillGroupWithBlank", "navigation"], [4, "ngFor", "ngForOf"], ["swiperSlide", ""], [1, "carousel-cell", 3, "click"], [1, "img-box"], ["alt", "", 3, "src"], [1, "info-box", "position-relative"], [1, "rate-box"], [3, "rate"], [1, "pt-3", "font-weight-bold"]], template: function CarouselComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h1");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, CarouselComponent_ng_template_2_Template, 1, 0, "ng-template", null, 0, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, CarouselComponent_swiper_4_Template, 2, 9, "swiper", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, CarouselComponent_swiper_4_Template, 2, 7, "swiper", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](5, "async");
     } if (rf & 2) {
         const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](3);
@@ -14097,13 +14111,14 @@ CarouselComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.searchTitle);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](5, 3, ctx.movieList$))("ngIfElse", _r0);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], swiper_angular__WEBPACK_IMPORTED_MODULE_8__["SwiperComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgForOf"], swiper_angular__WEBPACK_IMPORTED_MODULE_8__["SwiperSlideDirective"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_7__["AsyncPipe"]], styles: [".swiper-container[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n}\n\n.swiper-slide[_ngcontent-%COMP%] {\n  text-align: center;\n  font-size: 18px;\n  background: #fff;\n  \n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.swiper-slide[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  display: block;\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW92aWUtbGlzdC9ob21lcGFnZS9jYXJvdXNlbC9jYXJvdXNlbC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFxQkE7RUFDRSxXQUFBO0VBQ0EsWUFBQTtBQXBCRjs7QUF1QkE7RUFDRSxrQkFBQTtFQUNBLGVBQUE7RUFDQSxnQkFBQTtFQUVBLGlDQUFBO0VBSUEsYUFBQTtFQUlBLHVCQUFBO0VBSUEsbUJBQUE7QUFyQkY7O0FBd0JBO0VBQ0UsY0FBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsaUJBQUE7QUFyQkYiLCJmaWxlIjoic3JjL2FwcC9tb3ZpZS1saXN0L2hvbWVwYWdlL2Nhcm91c2VsL2Nhcm91c2VsLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gY2Fyb3VzZWwge1xuLy8gICB6LWluZGV4OiAzO1xuLy8gfVxuXG4vLyAuaW1nLWJveCB7XG4vLyAgIHdpZHRoOiAxNTBweDtcbi8vICAgaGVpZ2h0OiAyMjVweDtcbi8vIH1cblxuLy8gaW1ne1xuLy8gICBib3JkZXItcmFkaXVzOiA4cHg7XG4vLyB9XG5cbi8vIC5yYXRlLWJveCB7XG4vLyAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbi8vICAgdG9wOiAtMjBweDtcbi8vICAgd2lkdGg6IDM2cHg7XG4vLyAgIGhlaWdodDogMzZweDtcbi8vIH1cblxuLy9zd2lwZXIgc3RhcnRcbi5zd2lwZXItY29udGFpbmVyIHtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbn1cblxuLnN3aXBlci1zbGlkZSB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1zaXplOiAxOHB4O1xuICBiYWNrZ3JvdW5kOiAjZmZmO1xuXG4gIC8qIENlbnRlciBzbGlkZSB0ZXh0IHZlcnRpY2FsbHkgKi9cbiAgZGlzcGxheTogLXdlYmtpdC1ib3g7XG4gIGRpc3BsYXk6IC1tcy1mbGV4Ym94O1xuICBkaXNwbGF5OiAtd2Via2l0LWZsZXg7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIC13ZWJraXQtYm94LXBhY2s6IGNlbnRlcjtcbiAgLW1zLWZsZXgtcGFjazogY2VudGVyO1xuICAtd2Via2l0LWp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgLXdlYmtpdC1ib3gtYWxpZ246IGNlbnRlcjtcbiAgLW1zLWZsZXgtYWxpZ246IGNlbnRlcjtcbiAgLXdlYmtpdC1hbGlnbi1pdGVtczogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4uc3dpcGVyLXNsaWRlIGltZyB7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBvYmplY3QtZml0OiBjb3Zlcjtcbn1cbiJdfQ== */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], swiper_angular__WEBPACK_IMPORTED_MODULE_8__["SwiperComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgForOf"], swiper_angular__WEBPACK_IMPORTED_MODULE_8__["SwiperSlideDirective"], _shared_rate_icon_rate_icon_component__WEBPACK_IMPORTED_MODULE_9__["RateIconComponent"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_7__["AsyncPipe"]], styles: [".rate-box {\n  position: absolute;\n  top: -20px;\n  width: 36px;\n  height: 36px;\n}\n\n.swiper-container {\n  width: 100%;\n  height: 100%;\n}\n\n.swiper-slide {\n  text-align: center;\n  font-size: 18px;\n  background: #fff;\n  /* Center slide text vertically */\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.swiper-slide img {\n  display: block;\n  width: 100%;\n  height: 200px;\n  object-fit: contain;\n}\n\n.swiper-button-next::after {\n  font-size: 24px;\n  color: white;\n}\n\n.swiper-button-prev::after {\n  font-size: 24px;\n  color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW92aWUtbGlzdC9ob21lcGFnZS9jYXJvdXNlbC9jYXJvdXNlbC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFhQTtFQUNFLGtCQUFBO0VBQ0EsVUFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0FBWkY7O0FBZ0JBO0VBQ0UsV0FBQTtFQUNBLFlBQUE7QUFiRjs7QUFnQkE7RUFDRSxrQkFBQTtFQUNBLGVBQUE7RUFDQSxnQkFBQTtFQUVBLGlDQUFBO0VBSUEsYUFBQTtFQUlBLHVCQUFBO0VBSUEsbUJBQUE7QUFkRjs7QUFpQkE7RUFDRSxjQUFBO0VBQ0EsV0FBQTtFQUNBLGFBQUE7RUFDQSxtQkFBQTtBQWRGOztBQWlCQTtFQUNFLGVBQUE7RUFDQSxZQUFBO0FBZEY7O0FBZ0JBO0VBQ0UsZUFBQTtFQUNBLFlBQUE7QUFiRiIsImZpbGUiOiJzcmMvYXBwL21vdmllLWxpc3QvaG9tZXBhZ2UvY2Fyb3VzZWwvY2Fyb3VzZWwuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvLyBjYXJvdXNlbCB7XG4vLyAgIHotaW5kZXg6IDM7XG4vLyB9XG5cbi8vIC5pbWctYm94IHtcbi8vICAgd2lkdGg6IDE1MHB4O1xuLy8gICBoZWlnaHQ6IDIyNXB4O1xuLy8gfVxuXG4vLyBpbWd7XG4vLyAgIGJvcmRlci1yYWRpdXM6IDhweDtcbi8vIH1cblxuLnJhdGUtYm94IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IC0yMHB4O1xuICB3aWR0aDogMzZweDtcbiAgaGVpZ2h0OiAzNnB4O1xufVxuXG4vL3N3aXBlciBzdGFydFxuLnN3aXBlci1jb250YWluZXIge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG4uc3dpcGVyLXNsaWRlIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBmb250LXNpemU6IDE4cHg7XG4gIGJhY2tncm91bmQ6ICNmZmY7XG5cbiAgLyogQ2VudGVyIHNsaWRlIHRleHQgdmVydGljYWxseSAqL1xuICBkaXNwbGF5OiAtd2Via2l0LWJveDtcbiAgZGlzcGxheTogLW1zLWZsZXhib3g7XG4gIGRpc3BsYXk6IC13ZWJraXQtZmxleDtcbiAgZGlzcGxheTogZmxleDtcbiAgLXdlYmtpdC1ib3gtcGFjazogY2VudGVyO1xuICAtbXMtZmxleC1wYWNrOiBjZW50ZXI7XG4gIC13ZWJraXQtanVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAtd2Via2l0LWJveC1hbGlnbjogY2VudGVyO1xuICAtbXMtZmxleC1hbGlnbjogY2VudGVyO1xuICAtd2Via2l0LWFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG59XG5cbi5zd2lwZXItc2xpZGUgaW1nIHtcbiAgZGlzcGxheTogYmxvY2s7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDIwMHB4O1xuICBvYmplY3QtZml0OiBjb250YWluO1xufVxuXG4uc3dpcGVyLWJ1dHRvbi1uZXh0OjphZnRlciB7XG4gIGZvbnQtc2l6ZTogMjRweDtcbiAgY29sb3I6IHdoaXRlO1xufVxuLnN3aXBlci1idXR0b24tcHJldjo6YWZ0ZXIge1xuICBmb250LXNpemU6IDI0cHg7XG4gIGNvbG9yOiB3aGl0ZTtcbn1cbiJdfQ== */"], encapsulation: 2 });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](CarouselComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
                 selector: 'app-carousel',
                 templateUrl: './carousel.component.html',
-                styleUrls: ['./carousel.component.scss']
+                styleUrls: ['./carousel.component.scss'],
+                encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewEncapsulation"].None
             }]
     }], function () { return [{ type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"] }, { type: _core_services_movie_request_service__WEBPACK_IMPORTED_MODULE_6__["MovieRequestService"] }]; }, { searchTitle: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
@@ -14207,7 +14222,7 @@ class HomepageComponent {
     }
 }
 HomepageComponent.ɵfac = function HomepageComponent_Factory(t) { return new (t || HomepageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_core_services_movie_request_service__WEBPACK_IMPORTED_MODULE_1__["MovieRequestService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
-HomepageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: HomepageComponent, selectors: [["app-homepage"]], decls: 12, vars: 3, consts: [[1, "container-xl"], [1, "search-box"], [1, "title"], [1, "search"], ["matInput", "", "placeholder", "Search for a movie...", 1, "mr-1", "input", 3, "ngModel", "ngModelChange"], ["mat-raised-button", "", "color", "primary", 1, "search-btn", 3, "click"], [3, "searchTitle", "searchApi"]], template: function HomepageComponent_Template(rf, ctx) { if (rf & 1) {
+HomepageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: HomepageComponent, selectors: [["app-homepage"]], decls: 15, vars: 9, consts: [[1, "container-xl"], [1, "search-box"], [1, "title"], [1, "search"], ["matInput", "", "placeholder", "Search for a movie...", 1, "mr-1", "input", 3, "ngModel", "ngModelChange"], ["mat-raised-button", "", "color", "primary", 1, "search-btn", 3, "click"], [3, "searchTitle", "searchApi"]], template: function HomepageComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "section", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
@@ -14229,12 +14244,21 @@ HomepageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](11, "app-carousel", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](12, "app-carousel", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](13, "app-carousel", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](14, "app-carousel", 6);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](8);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.searchText);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("searchTitle", "Latest")("searchApi", "now_playing");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("searchTitle", "Hottest")("searchApi", "top_rated");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("searchTitle", "Popular")("searchApi", "popular");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("searchTitle", "Upcoming")("searchApi", "upcoming");
     } }, directives: [_angular_material_input__WEBPACK_IMPORTED_MODULE_3__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgModel"], _angular_material_button__WEBPACK_IMPORTED_MODULE_5__["MatButton"], _carousel_carousel_component__WEBPACK_IMPORTED_MODULE_6__["CarouselComponent"]], styles: ["@charset \"UTF-8\";\n\n.search-box[_ngcontent-%COMP%] {\n  background-color: #d7d0c8;\n}\n.title[_ngcontent-%COMP%] {\n  padding: 30px 40px;\n}\n.search[_ngcontent-%COMP%] {\n  padding: 0 30px 40px;\n  width: 100%;\n  position: relative;\n}\n.input[_ngcontent-%COMP%] {\n  height: 36px;\n  width: 100%;\n  border-radius: 36px;\n  border: none;\n  padding: 0 20px;\n  margin: 0;\n  background-color: white;\n}\n.search-btn[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0;\n  right: 30px;\n  border-radius: 36px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW92aWUtbGlzdC9ob21lcGFnZS9ob21lcGFnZS5jb21wb25lbnQuc2NzcyIsInNyYy9jdXN0b20tZGVzaWduLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZ0JBQWdCO0FDQWhCLGFBQUE7QURHQTtFQUNFLHlCQ0djO0FESGhCO0FBR0E7RUFDRSxrQkFBQTtBQUFGO0FBR0E7RUFDRSxvQkFBQTtFQUNBLFdBQUE7RUFDQSxrQkFBQTtBQUFGO0FBR0E7RUFDRSxZQUFBO0VBQ0EsV0FBQTtFQUNBLG1CQUFBO0VBQ0EsWUFBQTtFQUNBLGVBQUE7RUFDQSxTQUFBO0VBQ0EsdUJBQUE7QUFBRjtBQUdBO0VBQ0Usa0JBQUE7RUFDQSxNQUFBO0VBQ0EsV0FBQTtFQUNBLG1CQUFBO0FBQUYiLCJmaWxlIjoic3JjL2FwcC9tb3ZpZS1saXN0L2hvbWVwYWdlL2hvbWVwYWdlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCBcIi4uLy4uLy4uL2N1c3RvbS1kZXNpZ24uc2Nzc1wiO1xuXG5cbi5zZWFyY2gtYm94IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogJHByaW1hcnktY29sb3I7XG59XG5cbi50aXRsZSB7XG4gIHBhZGRpbmc6IDMwcHggNDBweDtcbn1cblxuLnNlYXJjaCB7XG4gIHBhZGRpbmc6IDAgMzBweCA0MHB4O1xuICB3aWR0aDogMTAwJTtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuXG4uaW5wdXQge1xuICBoZWlnaHQ6IDM2cHg7XG4gIHdpZHRoOiAxMDAlO1xuICBib3JkZXItcmFkaXVzOiAzNnB4O1xuICBib3JkZXI6IG5vbmU7XG4gIHBhZGRpbmc6IDAgMjBweDtcbiAgbWFyZ2luOiAwO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbn1cblxuLnNlYXJjaC1idG4ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMDtcbiAgcmlnaHQ6IDMwcHg7XG4gIGJvcmRlci1yYWRpdXM6IDM2cHg7XG59XG5cblxuIiwiLyoqIOWfuuekjuWKn+iDveiJsuioreWumiAqL1xuJGNvbG9yLXdoaXRlOiAjZmZmO1xuJGNvbG9yLWRhcms6IHJnYmEoMCwgMCwgMCwgMC44KTtcbiRjb2xvci1vcmFuZ2U6ICNmZjlmMDA7XG4kY29sb3ItZ3JlZW46ICM0Y2M3OTA7XG4kY29sb3ItcmVkOiAjZWUxMTExO1xuLy8g5Li76KaB6ImyXG4kcHJpbWFyeS1jb2xvcjogI2Q3ZDBjODtcbi8vIOS4u+imgeiJsuiuiuW9olxuJHByaW1hcnktdmFyaWFudC1jb2xvcjogIzk1YTc4ZDtcbi8vIOasoeimgeiJslxuJHNlY29uZGFyeS1jb2xvcjogI2M4YzZhZjtcbi8vIOasoeimgeiJsuiuiuW9olxuJHNlY29uZGFyeS12YXJpYW50LWNvbG9yOiAjYmQ4OTdlO1xuLy8g56ys5LiJ6ImyXG4kdGhpcmQtY29sb3I6ICNlNDU3MmU7XG4vLyDnrKzkuInoibLororlvaJcbiR0aGlyZC12YXJpYW50LWNvbG9yOiAjZWVkN2VkO1xuXG4vLyDmt7rngbBcbiRjb2xvci1saWdodC1ncmF5OiAjZjdmN2Y3O1xuJGNvbG9yLWdyYXk6ICM2NjY7XG4iXX0= */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](HomepageComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
