@@ -218,7 +218,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector
             _shared_shared_module__WEBPACK_IMPORTED_MODULE_1__["SharedModule"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormsModule"],
-            _angular_forms__WEBPACK_IMPORTED_MODULE_8__["ReactiveFormsModule"]
+            _angular_forms__WEBPACK_IMPORTED_MODULE_8__["ReactiveFormsModule"],
         ]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
         _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
@@ -240,7 +240,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector
                     _shared_shared_module__WEBPACK_IMPORTED_MODULE_1__["SharedModule"],
                     _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"],
                     _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormsModule"],
-                    _angular_forms__WEBPACK_IMPORTED_MODULE_8__["ReactiveFormsModule"]
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_8__["ReactiveFormsModule"],
                 ],
                 providers: [],
                 entryComponents: [_movie_list_homepage_movie_detail_movie_detail_component__WEBPACK_IMPORTED_MODULE_0__["MovieDetailComponent"]],
@@ -908,6 +908,15 @@ if (_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].produc
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["enableProdMode"])();
 }
 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["platformBrowser"]().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_2__["AppModule"])
+    .then((ref) => {
+    // Ensure Angular destroys itself on hot reloads.
+    if (window['ngRef']) {
+        window['ngRef'].destroy();
+    }
+    // papas fritas para todos
+    window['ngRef'] = ref;
+    // Otherwise, log the boot error
+})
     .catch(err => console.error(err));
 
 

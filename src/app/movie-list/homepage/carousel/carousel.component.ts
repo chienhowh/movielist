@@ -6,7 +6,8 @@ import { IMovieInfo, IResponse } from '../../../core/interfaces/movie.interface'
 import { MovieDetailComponent } from '../movie-detail/movie-detail.component';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-
+import SwiperCore, { Pagination, Navigation } from 'swiper/core';
+SwiperCore.use([Pagination, Navigation]);
 
 
 @Component({

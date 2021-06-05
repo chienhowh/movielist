@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { MovieRequestService } from 'src/app/core/services/movie-request.service';
 import { API } from '../consts/global-constants.const';
@@ -7,7 +7,7 @@ import { API } from '../consts/global-constants.const';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.scss']
+  styleUrls: ['./homepage.component.scss'],
 })
 export class HomepageComponent implements OnInit {
   searchText = '';
@@ -30,5 +30,12 @@ export class HomepageComponent implements OnInit {
   searchMovie() {
     if (!this.searchText) { return; }
     this.router.navigate(['home', 'search'], { state: { query: this.searchText } });
+  }
+
+  onSwiper(swiper) {
+    console.log(swiper);
+  }
+  onSlideChange() {
+    console.log('slide change');
   }
 }

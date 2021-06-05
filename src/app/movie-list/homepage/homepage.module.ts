@@ -10,6 +10,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 import {SearchResultComponent} from './search-result/search-result.component';
 import { FormsModule } from '@angular/forms';
+import { SwiperModule } from 'swiper/angular';
 
 
 @NgModule({
@@ -26,7 +27,9 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     HomepageRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    SwiperModule
+
   ]
 })
 export class HomepageModule { }

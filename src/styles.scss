@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./custom-design.scss";
+@import '~swiper/swiper-bundle';
+@import "~swiper/swiper";
+@import "~swiper/components/pagination/pagination";
+@import "~swiper/components/navigation/navigation";
 html,
 body {
   height: 100%;
