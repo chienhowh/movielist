@@ -1,30 +1,37 @@
-<ng-container *ngFor="let movie of displayList">
-  <div class="card-box" (click)="onWatchDetail(movie)">
-    <div class="row no-gutters">
-      <div class="col-4">
-        <div class="img-box mx-auto">
-          <img
-            (error)="imgError($event)"
-            src="{{ API_POSTER.GET_POSTER + movie.poster_path }}"
-            alt=""
-          />
+<div *ngIf="displayList.length !== 0; else noData">
+  <ng-container *ngFor="let movie of displayList">
+    <div class="card-box" (click)="onWatchDetail(movie)">
+      <div class="row no-gutters">
+        <div class="col-4">
+          <div class="img-box mx-auto">
+            <img
+              (error)="imgError($event)"
+              src="{{ API_POSTER.GET_POSTER + movie.poster_path }}"
+              alt=""
+            />
+          </div>
         </div>
-      </div>
-      <div class="col-8 overview-box p-2">
-        <h5>{{ movie.title }}</h5>
-        <p class="mb-2">{{ movie.release_date }}</p>
-        <div #overview class="overview">
-          {{ movie.overview ? movie.overview : "尚無介紹" }}
+        <div class="col-8 overview-box p-2">
+          <h5>{{ movie.title }}</h5>
+          <p class="mb-2">{{ movie.release_date }}</p>
+          <div #overview class="overview">
+            {{ movie.overview ? movie.overview : "尚無介紹" }}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</ng-container>
-<mat-paginator
-class="test"
-  [length]="page.total_results"
-  [pageIndex]="page.paging - 1"
-  [pageSize]="20"
-  (page)="changePage($event)"
->
-</mat-paginator>
+  </ng-container>
+  <mat-paginator
+    class="test"
+    [length]="page.total_results"
+    [pageIndex]="page.paging - 1"
+    [pageSize]="20"
+    (page)="changePage($event)"
+  >
+  </mat-paginator>
+</div>
+
+<!-- no data -->
+<ng-template #noData>
+  <div class="text-center py-3">查無資料</div>
+</ng-template>

@@ -1,4 +1,10 @@
 @import "../custom-design.scss";
+.web-box{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .nav-bar {
   background-color: $secondary-color;
 }
@@ -7,8 +13,8 @@
   padding-right: 16px;
 }
 
-footer {
-  margin-top: 30px;
+.footer {
+  margin-top: auto;
   background-color: #555;
   color: #fff;
 }
@@ -19,5 +25,5 @@ footer {
 }
 
 li > a {
-  color: black;
+  color: white;
 }
