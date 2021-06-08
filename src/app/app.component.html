@@ -1,11 +1,21 @@
 <div class="web-box">
   <nav class="nav-bar">
     <div class="header d-flex align-items-center">
-      <div class="d-flex list-box">
-        <a routerLink="/home'" class="px-3"
+      <div class="d-flex">
+        <div class="mobile" [matMenuTriggerFor]="menu">
+          <fa-icon [icon]="faBars"></fa-icon>
+
+          <mat-menu #menu="matMenu">
+            <ul class="menu">
+              <li><a routerLink="/home">Home</a></li>
+              <li><a routerLink="/watchlist">Watchlist</a></li>
+            </ul>
+          </mat-menu>
+        </div>
+        <a routerLink="/home" class="px-3"
           ><img src="assets/cinema.png" alt="" height="48"
         /></a>
-        <ul class="d-flex m-0 align-items-center drop-down">
+        <ul class="d-flex m-0 align-items-center laptop">
           <li><a routerLink="/home">Home</a></li>
           <li><a routerLink="/watchlist">Watchlist</a></li>
         </ul>
@@ -20,24 +30,24 @@
       </div>
       <div class="row col">
         <div class="col">
-          <h5>THE BASICS</h5>
+          <h5>關於我們</h5>
           <ul>
-            <li><a>About movieList</a></li>
-            <li><a>Contact us</a></li>
+            <li><a>關於電影清單</a></li>
+            <li><a>聯絡我們</a></li>
           </ul>
         </div>
         <div class="col">
-          <h5>GET INVOLVED</h5>
+          <h5>參與我們</h5>
           <ul>
-            <li><a>About movieList</a></li>
-            <li><a>Contact us</a></li>
+            <li><a>貢獻指南</a></li>
+            <li><a>新增電影</a></li>
           </ul>
         </div>
         <div class="col">
-          <h5>COMMUNITY</h5>
+          <h5>社群</h5>
           <ul>
-            <li><a>About movieList</a></li>
-            <li><a>Contact us</a></li>
+            <li><a>指南</a></li>
+            <li><a>討論</a></li>
           </ul>
         </div>
       </div>
