@@ -8,9 +8,16 @@
 
 .nav-bar {
   background-color: $secondary-color;
+  a {
+    text-decoration: none;
+  }
 }
 
-.menu{
+.header {
+  padding: 10px;
+}
+
+.menu {
   margin: 0;
   padding: 0 8px;
 }
@@ -23,6 +30,15 @@
   padding-right: 16px;
 }
 
+.symbol {
+  padding: 0 10px;
+  background-color: white;
+  border-radius: 16px;
+  span{
+    font-weight: bold;
+  }
+}
+
 @media screen and (max-width: 576px) {
   .mobile {
     display: flex;
@@ -32,8 +48,13 @@
   .laptop {
     display: none !important;
   }
+  .symbol{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
 }
-
 
 .footer {
   margin-top: auto;
@@ -50,6 +71,6 @@ li > a {
   color: white;
 }
 
-h5{
+h5 {
   white-space: pre;
 }

@@ -1,25 +1,27 @@
 <div class="web-box">
-  <nav class="nav-bar">
+  <nav class="nav-bar position-relative">
     <div class="header d-flex align-items-center">
-      <div class="d-flex">
-        <div class="mobile" [matMenuTriggerFor]="menu">
-          <fa-icon [icon]="faBars"></fa-icon>
-
-          <mat-menu #menu="matMenu">
-            <ul class="menu">
-              <li><a routerLink="/home">Home</a></li>
-              <li><a routerLink="/watchlist">Watchlist</a></li>
-            </ul>
-          </mat-menu>
-        </div>
-        <a routerLink="/home" class="px-3"
-          ><img src="assets/cinema.png" alt="" height="48"
-        /></a>
-        <ul class="d-flex m-0 align-items-center laptop">
-          <li><a routerLink="/home">Home</a></li>
-          <li><a routerLink="/watchlist">Watchlist</a></li>
-        </ul>
+      <div class="mobile" [matMenuTriggerFor]="menu">
+        <fa-icon [icon]="faBars"></fa-icon>
+        <mat-menu #menu="matMenu">
+          <ul class="menu">
+            <li><a routerLink="/home">Home</a></li>
+            <li><a routerLink="/watchlist">Watchlist</a></li>
+          </ul>
+        </mat-menu>
       </div>
+      <a routerLink="/home" class="px-3">
+        <div class="symbol">
+          <img src="assets/movie.png" alt="" height="30" /><span
+            style="color: red"
+            >D </span
+          ><span style="color: blue">B</span>
+        </div>
+      </a>
+      <ul class="d-flex m-0 align-items-center laptop">
+        <li><a routerLink="/home">Home</a></li>
+        <li><a routerLink="/watchlist">Watchlist</a></li>
+      </ul>
     </div>
   </nav>
   <router-outlet></router-outlet>
@@ -53,4 +55,11 @@
       </div>
     </nav>
   </footer>
+</div>
+<div>
+  Icons made by
+  <a href="https://www.flaticon.com/authors/iconixar" title="iconixar"
+    >iconixar</a
+  >
+  from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
 </div>
