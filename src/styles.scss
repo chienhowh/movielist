@@ -4,6 +4,8 @@
 @import "~swiper/swiper";
 @import "~swiper/components/pagination/pagination";
 @import "~swiper/components/navigation/navigation";
+@import './themes/custom-theme.scss';
+
 html,
 body {
   height: 100%;
@@ -26,7 +28,7 @@ ul {
 
 /* dialog start */
 .mat-dialog-container {
-  background-color: $primary-color;
+  background-color: $secondary-color;
   .mat-dialog-title {
     text-align: center;
     margin: 0;

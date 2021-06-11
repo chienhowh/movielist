@@ -1,0 +1,40 @@
+@import "~@angular/material/theming";// 引進主題功能
+@include mat-core(); //引進元件基本樣式
+
+$brown-palette: (
+  50: #ffeac8,
+  100: #f0ccaa,
+  200: #d5ad89,
+  300: #b88f65,
+  400: #b88f65,
+  500: #b88f65,
+  600: #b88f65,
+  700: #a27649,
+  800:#8c5f2e,
+  900: #8c5f2e,
+  // ... continues to 900
+  contrast:
+    (
+      50: rgba(black, 0.87),
+      100: rgba(black, 0.87),
+      200: rgba(black, 0.87),
+      300: white,
+      400: white,
+      500: white,
+      600: white,
+      700: white,
+      800: white,
+      900: white,
+      // ... continues to 900
+    ),
+);
+
+// 設定顏色
+$custom-primary: mat-palette($brown-palette);// mat-palette像是map-get
+$custom-accent: mat-palette($mat-green);
+$custom-warn: mat-palette($mat-brown);
+
+/* 建立深色主題 */
+$custom-theme: mat-dark-theme($custom-primary, $custom-accent, $custom-warn);
+
+@include angular-material-theme($custom-theme);
