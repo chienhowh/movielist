@@ -1,22 +1,25 @@
-<h4>{{ movie.title }}</h4>
+<h4 class="mb-3">{{ movie.title }}</h4>
 <form [formGroup]="movieForm">
-  <mat-form-field appearance="fill">
-    <input matInput [matDatepicker]="picker" formControlName="watchedDate"/>
+  <mat-form-field appearance="standard" [color]="'primary'">
+    <input matInput [matDatepicker]="picker" formControlName="watchedDate" />
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    <mat-error *ngIf="true">aaa</mat-error>
+    <mat-datepicker #picker [color]="'test'"></mat-datepicker>
   </mat-form-field>
   <!-- 評論區 -->
-  <mat-form-field appearance="fill">
-    <mat-label>Leave a comment</mat-label>
-    <textarea matInput placeholder="Ex. It makes me feel..." formControlName="comment"></textarea>
-    <mat-error *ngIf="movieForm.invalid">bbb</mat-error>
+  <mat-form-field appearance="standard" [color]="'primary'">
+    <mat-label style="color: #b88e65">Leave a comment</mat-label>
+    <textarea
+      matInput
+      placeholder="Ex. It makes me feel..."
+      formControlName="comment"
+    ></textarea>
+    <!-- <mat-error *ngIf="movieForm.invalid">bbb</mat-error> -->
   </mat-form-field>
 </form>
 
 <mat-dialog-actions>
   <button mat-raised-button color="primary" (click)="patchMovie(movie.id)">
-    submit
+    儲存
   </button>
-  <button mat-raised-button mat-dialog-close color="accent">exit</button>
+  <button mat-raised-button mat-dialog-close color="warn">離開</button>
 </mat-dialog-actions>

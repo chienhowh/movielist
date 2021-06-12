@@ -4,7 +4,7 @@
 @import "~swiper/swiper";
 @import "~swiper/components/pagination/pagination";
 @import "~swiper/components/navigation/navigation";
-@import './themes/custom-theme.scss';
+@import "./themes/custom-theme.scss";
 
 html,
 body {
@@ -29,6 +29,7 @@ ul {
 /* dialog start */
 .mat-dialog-container {
   background-color: $secondary-color;
+  color: $color-dark;
   .mat-dialog-title {
     text-align: center;
     margin: 0;
@@ -43,4 +44,19 @@ mat-paginator .mat-paginator-container {
 // menubar start
 .mat-menu-content {
   background-color: red;
+}
+
+// mat-list start
+.mat-list-base .mat-list-item {
+  color: $color-dark;
+}
+
+// mat-label
+.mat-tab-label {
+  color: $color-dark;
+}
+
+// 改日曆
+.mat-form-field-suffix .mat-icon-button {
+  color: $primary-color;
 }

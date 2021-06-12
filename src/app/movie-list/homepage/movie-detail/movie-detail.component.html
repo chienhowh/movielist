@@ -47,9 +47,14 @@
   </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-raised-button color="primary" (click)="addList(displayList)">
-      <fa-icon [icon]="['fas', 'heart']" *ngIf="isInList"></fa-icon>
-      <fa-icon [icon]="['far', 'heart']" *ngIf="!isInList"></fa-icon>
-      AddList
+      <ng-container *ngIf="isInList; else notInList">
+        <fa-icon [icon]="['fas', 'heart']"></fa-icon>
+        移出清單
+      </ng-container>
+      <ng-template #notInList>
+        <fa-icon [icon]="['far', 'heart']"></fa-icon>
+        加入清單
+      </ng-template>
     </button>
   </mat-dialog-actions>
 </ng-container>

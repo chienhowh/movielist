@@ -1,21 +1,14 @@
-// carousel {
-//   z-index: 3;
-// }
-
-// .img-box {
-//   width: 150px;
-//   height: 225px;
-// }
-
-// img{
-//   border-radius: 8px;
-// }
-
 .rate-box {
   position: absolute;
   top: -20px;
   width: 36px;
   height: 36px;
+}
+
+.release-date {
+  font-size: 1rem;
+  color: rgba($color: #000000, $alpha: 0.6);
+  padding: 0;
 }
 
 //swiper start
@@ -25,7 +18,6 @@
 }
 
 .swiper-slide {
-  text-align: center;
   font-size: 18px;
   background: #fff;
 
@@ -48,7 +40,7 @@
   display: block;
   width: 100%;
   height: 200px;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .swiper-button-next::after {
@@ -58,4 +50,11 @@
 .swiper-button-prev::after {
   font-size: 24px;
   color: white;
+}
+
+@media screen and(max-width:576px) {
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    display: none;
+  }
 }

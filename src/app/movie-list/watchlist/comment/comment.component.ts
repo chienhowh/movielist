@@ -29,8 +29,8 @@ export class CommentComponent implements OnInit {
 
   patchMovie(id: number) {
     const formControls = this.movieForm.controls;
-    for (let i in formControls) {
-      if (i) {
+    for (const i in formControls) {
+      if (formControls.hasOwnProperty(i)) {
         formControls[i].markAsDirty;
         formControls[i].updateValueAndValidity;
       }
