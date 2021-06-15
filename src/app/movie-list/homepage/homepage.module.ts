@@ -29,7 +29,6 @@ import { SwiperModule } from 'swiper/angular';
     SharedModule,
     FormsModule,
     SwiperModule
-
   ]
 })
 export class HomepageModule { }
