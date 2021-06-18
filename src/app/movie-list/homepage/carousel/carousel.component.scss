@@ -1,3 +1,7 @@
+h1{
+  font-size: 1.6rem;
+}
+
 .rate-box {
   position: absolute;
   top: -20px;
@@ -41,6 +45,7 @@
   width: 100%;
   height: 200px;
   object-fit: cover;
+  border-radius: 10px;
 }
 
 .swiper-button-next::after {

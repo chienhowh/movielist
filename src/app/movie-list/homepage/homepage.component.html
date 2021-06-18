@@ -1,5 +1,5 @@
 <div class="container-xl">
-  <section class="search-box">
+  <section class="search-box mb-2">
     <div class="title">
       <!-- <h2>Welcome.</h2> -->
       <h3>上百萬部電影在等你探索，立即瀏覽吧！</h3>
@@ -23,17 +23,16 @@
   </section>
   <!-- Movie List Start -->
   <app-carousel
-    [searchTitle]="'Latest'"
+    [searchTitle]="'現正熱映'"
     [searchApi]="'now_playing'"
   ></app-carousel>
-
   <app-carousel
-    [searchTitle]="'Hottest'"
-    [searchApi]="'top_rated'"
+    [searchTitle]="'熱門精選'"
+    [searchApi]="'popular'"
   ></app-carousel>
   <app-carousel
-    [searchTitle]="'Popular'"
-    [searchApi]="'popular'"
+    [searchTitle]="'評價最高'"
+    [searchApi]="'top_rated'"
   ></app-carousel>
   <!-- <app-carousel
     [searchTitle]="'Upcoming'"

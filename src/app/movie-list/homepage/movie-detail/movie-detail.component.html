@@ -15,31 +15,31 @@
       <div class="col-md-6 col-12">
         <mat-list>
           <mat-list-item>
-            <h4 matLine>Genre:</h4>
+            <h4 matLine>類型:</h4>
             <p matLine class="demo-2 genre">
               {{ getMovieGenres(displayList.genres) }}
             </p>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>
-            <h4 matLine>Released:</h4>
+            <h4 matLine>上映日期:</h4>
             <p matLine class="demo-2">{{ displayList.release_date }}</p>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>
-            <h4 matLine>Rating:</h4>
+            <h4 matLine>評分:</h4>
             <p matLine class="demo-2">{{ displayList.vote_average }}</p>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>
-            <h4 matLine>Runtime:</h4>
-            <p matLine class="demo-2">{{ displayList.runtime }}min</p>
+            <h4 matLine>片長:</h4>
+            <p matLine class="demo-2">{{ displayList.runtime }}分</p>
           </mat-list-item>
         </mat-list>
       </div>
     </div>
     <div class="row">
-      <div class="col-12 my-2"><h6>Overview</h6></div>
+      <div class="col-12 my-2"><h6>電影介紹</h6></div>
       <div class="col-12">
         {{ displayList.overview ? displayList.overview : "尚無介紹" }}
       </div>
