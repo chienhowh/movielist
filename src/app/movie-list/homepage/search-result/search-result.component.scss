@@ -1,31 +1,47 @@
 @import "../../../../custom-design.scss";
-
-.card-box {
-  width: 80%;
-  margin: 16px auto;
-  height: 200px;
-  border:1px solid $color-dark;
-  border-radius: 8px;
+.list-box {
+  justify-content: space-evenly;
 }
 
+.card-box {
+  overflow: hidden;
+  margin: 16px;
+  height: 200px;
+  border: 1px solid $color-dark;
+  border-radius: 12px;
+}
 
+.img-box {
+  padding: 0 15px 0 0;
+  max-width: 150px;
+}
 
 img {
   height: 200px;
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .overview-box {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   height: 200px; // has to same as .card-box height
 }
 
-.overview{
+.overview {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 2;
 }
 
+.page-link {
+  color: $primary-color;
+  cursor: pointer;
+}
+
+.page-link.current-page {
+  border: 1px solid black;
+  z-index: 99;
+}

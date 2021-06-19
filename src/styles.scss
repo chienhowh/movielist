@@ -49,7 +49,11 @@ mat-paginator .mat-paginator-container {
 // mat-list start
 .mat-list-base .mat-list-item {
   color: $color-dark;
+  &.no-padding .mat-list-item-content{
+    padding: 0;
+  }
 }
+
 
 // mat-label
 .mat-tab-label {
@@ -60,3 +64,4 @@ mat-paginator .mat-paginator-container {
 .mat-form-field-suffix .mat-icon-button {
   color: $primary-color;
 }
+

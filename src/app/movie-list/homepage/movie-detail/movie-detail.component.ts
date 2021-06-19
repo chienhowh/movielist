@@ -20,6 +20,13 @@ export class MovieDetailComponent implements OnInit {
   callAgain: boolean;
   isInList = false;
 
+  listMap = [
+    { header: '類型', key: 'genres' },
+    { header: '上映日期', key: 'release_date' },
+    { header: '評分', key: 'vote_average' },
+    { header: '片長', key: 'runtime' },
+  ];
+
   constructor(
     public dialogRef: MatDialogRef<MovieDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { info: IMovieInfo, callAgain: boolean },

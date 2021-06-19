@@ -19,7 +19,10 @@
 
 .menu {
   margin: 0;
-  padding: 0 8px;
+  padding: 0;
+  li{
+    padding: 4px 8px;
+  }
 }
 
 .mobile {
