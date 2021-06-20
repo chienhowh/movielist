@@ -6,27 +6,29 @@
 .card-box {
   overflow: hidden;
   margin: 16px;
-  height: 200px;
-  border: 1px solid $color-dark;
+  height: 140px;
+  border: 1px solid #aaa;
   border-radius: 12px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
 }
 
 .img-box {
-  padding: 0 15px 0 0;
-  max-width: 150px;
+  padding: 0;
+  width: 93px;
+  min-width: 93px;
 }
 
 img {
-  height: 200px;
+  height: 140px;
   width: 100%;
   object-fit: cover;
 }
 
 .overview-box {
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
-  height: 200px; // has to same as .card-box height
 }
 
 .overview {

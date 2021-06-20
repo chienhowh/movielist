@@ -2,7 +2,7 @@
 
 .search-box {
   background-color: $secondary-color;
-  background-image: linear-gradient(to right, $secondary-color, rgba(255, 255, 255, 0)),
+  background-image: linear-gradient(to right, $secondary-color, rgba(255, 255, 255, 0.2)),
     url("https://image.tmdb.org/t/p/w500/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg");
   background-repeat: no-repeat;
   background-position: center, right;

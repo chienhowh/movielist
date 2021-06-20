@@ -1,5 +1,5 @@
 import { MovieRequestService } from './../../../core/services/movie-request.service';
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { API, API_POSTER } from '../../consts/global-constants.const';
 import { IMovieInfo, IResponse } from '../../../core/interfaces/movie.interface';
@@ -22,24 +22,35 @@ export class CarouselComponent implements OnInit {
    */
   @Input() searchTitle;
   @Input() searchApi: string;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.countImgNumber();
+  }
+
   API_POSTER = API_POSTER;
   movieList$: Observable<any[]>;
+  imgNumber: number;
   constructor(
     public dialog: MatDialog,
     private movieRequestService: MovieRequestService,
   ) { }
 
   ngOnInit(): void {
+    this.countImgNumber();
     this.movieList$ = this.movieRequestService.request(API.GET, `/movie/${this.searchApi}`)
       .pipe(map(res => [...res.results]));
+    console.log(this.imgNumber);
+
   }
 
-  public get imgNumber():number {
+  countImgNumber() {
     const width = window.innerWidth;
-    if (width >= 768) {
-      return 7;
+    if (width >= 1200) {
+      this.imgNumber = Math.floor((width - 74) / 140); // 扣掉兩邊跟圖片之間padding
+    } else {
+      this.imgNumber = Math.floor((width - 14) / 140);
     }
-    return 3;
   }
 
   /**

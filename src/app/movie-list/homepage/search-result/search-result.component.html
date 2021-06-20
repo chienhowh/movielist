@@ -1,18 +1,18 @@
 <ng-container *ngIf="displayList.length !== 0; else noData">
-  <div class="row list-box">
+  <div class="row list-box no-gutters">
     <ng-container *ngFor="let movie of displayList">
       <div class="card-box col-10 col-sm-5" (click)="onWatchDetail(movie)">
-        <div class="row">
-          <div class="col-4 img-box">
+        <div class="d-flex">
+          <div class="img-box">
             <img
               (error)="imgError($event)"
               src="{{ API_POSTER.GET_POSTER + movie.poster_path }}"
               alt=""
             />
           </div>
-          <div class="col-8 overview-box p-2">
+          <div class="overview-box p-3">
             <h5>{{ movie.title }}</h5>
-            <p class="mb-2">{{ movie.release_date }}</p>
+            <p class="mb-2 fc-light">{{ movie.release_date }}</p>
             <div #overview class="overview">
               {{ movie.overview ? movie.overview : "尚無介紹" }}
             </div>

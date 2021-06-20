@@ -24,7 +24,7 @@
 <ng-template #Loading>Loading</ng-template>
 <swiper
   [slidesPerView]="imgNumber"
-  [spaceBetween]="8"
+  [spaceBetween]="16"
   [slidesPerGroup]="imgNumber"
   [loop]="true"
   [loopFillGroupWithBlank]="true"
@@ -42,7 +42,7 @@
           <app-rate-icon [rate]="movie.vote_average"></app-rate-icon>
         </div>
         <h6 class="pt-3 font-weight-bold mb-0">{{ movie.title }}</h6>
-        <p class="release-date">{{movie.release_date}}</p>
+        <p class="fc-light">{{movie.release_date}}</p>
       </div>
     </div>
   </ng-template>

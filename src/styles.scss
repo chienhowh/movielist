@@ -19,6 +19,9 @@ ul {
   padding: 0px;
 }
 
+p{
+  margin: 0;
+}
 /* mobile view start */
 .mobile-center {
   @media (max-width: 767px) {
@@ -65,3 +68,7 @@ mat-paginator .mat-paginator-container {
   color: $primary-color;
 }
 
+// font color
+.fc-light{
+  color: rgba($color: #000000, $alpha: 0.6);
+}
