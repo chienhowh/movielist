@@ -5,8 +5,8 @@
         <fa-icon [icon]="faBars"></fa-icon>
         <mat-menu #menu="matMenu">
           <ul class="menu">
-            <li><a routerLink="/home">Home</a></li>
-            <li><a routerLink="/watchlist">Watchlist</a></li>
+            <li><a routerLink="/home">首頁</a></li>
+            <li><a routerLink="/watchlist">觀賞清單</a></li>
           </ul>
         </mat-menu>
       </div>
@@ -24,10 +24,13 @@
       </ul>
     </div>
   </nav>
+  <!-- body start -->
   <router-outlet></router-outlet>
+  <!-- body end -->
+  <!-- footer start -->
   <footer class="footer">
-    <nav class="row foot-nav">
-      <div class="col col-sm-4 text-center">
+    <nav class="row foot-nav no-gutters">
+      <div class="col col-sm-4 text-center mr-3">
         <img src="https://picsum.photos/150/225?random=2" alt="" />
       </div>
       <div class="row col">

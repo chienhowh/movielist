@@ -12,40 +12,37 @@
           />
         </div>
       </div>
-      <div class="col-md-6 col-12">
-        <mat-list>
-          <mat-list-item>
-            <h4 matLine>類型:</h4>
-            <p matLine class="demo-2 genre">
-              {{ getMovieGenres(displayList.genres) }}
-            </p>
-          </mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item>
-            <h4 matLine>上映日期:</h4>
-            <p matLine class="demo-2">{{ displayList.release_date }}</p>
-          </mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item>
-            <h4 matLine>評分:</h4>
-            <p matLine class="demo-2">{{ displayList.vote_average }}</p>
-          </mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item>
-            <h4 matLine>片長:</h4>
-            <p matLine class="demo-2">{{ displayList.runtime }}分</p>
-          </mat-list-item>
-        </mat-list>
+      <div class="col-md-6 col-12 pt-3">
+        <div class="list-box">
+          <div class="header">類型:</div>
+          <div class="content">{{ getMovieGenres(displayList.genres) }}</div>
+        </div>
+        <hr />
+        <div class="list-box">
+          <div class="header">上映日期:</div>
+          <div class="content">{{ displayList.release_date }}</div>
+        </div>
+        <hr />
+        <div class="list-box">
+          <div class="header">評分:</div>
+          <div class="content">{{ displayList.vote_average }}</div>
+        </div>
+        <hr />
+        <div class="list-box">
+          <div class="header">片長:</div>
+          <div class="content">{{ displayList.runtime }}分</div>
+        </div>
+        <hr />
       </div>
     </div>
     <div class="row">
-      <div class="col-12 my-2"><h6>電影介紹</h6></div>
+      <div class="col-12 my-2">電影介紹:</div>
       <div class="col-12">
         {{ displayList.overview ? displayList.overview : "尚無介紹" }}
       </div>
     </div>
   </mat-dialog-content>
-  <mat-dialog-actions>
+  <mat-dialog-actions class="py-3">
     <button mat-raised-button color="primary" (click)="addList(displayList)">
       <ng-container *ngIf="isInList; else notInList">
         <fa-icon [icon]="['fas', 'heart']"></fa-icon>

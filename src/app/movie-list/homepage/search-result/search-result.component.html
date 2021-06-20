@@ -1,19 +1,18 @@
-<div *ngIf="displayList.length !== 0; else noData">
+<ng-container *ngIf="displayList.length !== 0; else noData">
+  <div class="row list-box no-gutters">
     <ng-container *ngFor="let movie of displayList">
-      <div class="card-box" (click)="onWatchDetail(movie)" >
-        <div class="row no-gutters">
-          <div class="col-4">
-            <div class="img-box mx-auto">
-              <img
-                (error)="imgError($event)"
-                src="{{ API_POSTER.GET_POSTER + movie.poster_path }}"
-                alt=""
-              />
-            </div>
+      <div class="card-box col-10 col-sm-5" (click)="onWatchDetail(movie)">
+        <div class="d-flex">
+          <div class="img-box">
+            <img
+              (error)="imgError($event)"
+              src="{{ API_POSTER.GET_POSTER + movie.poster_path }}"
+              alt=""
+            />
           </div>
-          <div class="col-8 overview-box p-2">
+          <div class="overview-box p-3">
             <h5>{{ movie.title }}</h5>
-            <p class="mb-2">{{ movie.release_date }}</p>
+            <p class="mb-2 fc-light">{{ movie.release_date }}</p>
             <div #overview class="overview">
               {{ movie.overview ? movie.overview : "尚無介紹" }}
             </div>
@@ -21,15 +20,59 @@
         </div>
       </div>
     </ng-container>
-  <mat-paginator
-    class="test"
+  </div>
+  <!-- <mat-paginator
+    class=""
     [length]="page.total_results"
-    [pageIndex]="page.paging - 1"
     [pageSize]="20"
     (page)="changePage($event)"
   >
-  </mat-paginator>
-</div>
+  </mat-paginator> -->
+  <nav>
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="page.pageIndex === 1">
+        <a
+          class="page-link"
+          aria-label="Previous"
+          (click)="changePage(page.pageIndex - 1)"
+        >
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <ng-container *ngFor="let paginate of showPaginator">
+        <li
+          class="page-item"
+          *ngIf="paginate.pageIndex === 'dot'; else pageIndex"
+        >
+          <a class="page-link"> ... </a>
+        </li>
+        <ng-template #pageIndex>
+          <li class="page-item">
+            <a
+              class="page-link"
+              [class.current-page]="paginate.pageIndex === page.pageIndex"
+              (click)="changePage(paginate.pageIndex)"
+            >
+              {{ paginate.pageIndex }}
+            </a>
+          </li>
+        </ng-template>
+      </ng-container>
+      <li
+        class="page-item"
+        [class.disabled]="page.pageIndex === page.totalPages"
+      >
+        <a
+          class="page-link"
+          aria-label="Next"
+          (click)="changePage(page.pageIndex + 1)"
+        >
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</ng-container>
 
 <!-- no data -->
 <ng-template #noData>

@@ -1,4 +1,19 @@
-
-.genre{
+.genre {
   white-space: normal;
+}
+
+.divider {
+  border-top: 1px solid black;
+  display: block;
+}
+
+
+.list-box {
+  display: flex;
+  .header{
+    min-width: 40px;
+  }
+  .content {
+    padding-left: 8px;
+  }
 }

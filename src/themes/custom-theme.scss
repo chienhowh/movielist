@@ -1,4 +1,5 @@
 @import "~@angular/material/theming";// 引進主題功能
+@import "../custom-design.scss";
 @include mat-core(); //引進元件基本樣式
 
 $primary-palette: (
@@ -7,7 +8,32 @@ $primary-palette: (
   200: #d5ad89,
   300: #b88f65,
   400: #b88f65,
-  500: #b88f65,
+  500: $primary-color,
+  600: #b88f65,
+  700: #a27649,
+  800:#8c5f2e,
+  900: #8c5f2e,
+  contrast:
+    (
+      50: rgba(black, 0.87),
+      100: rgba(black, 0.87),
+      200: rgba(black, 0.87),
+      300: white,
+      400: white,
+      500: white,
+      600: red,
+      700: white,
+      800: white,
+      900: white,
+    ),
+);
+$warn-palette: (
+  50: #ffeac8,
+  100: #f0ccaa,
+  200: #d5ad89,
+  300: #b88f65,
+  400: #b88f65,
+  500: #65b88e,
   600: #b88f65,
   700: #a27649,
   800:#8c5f2e,
@@ -30,7 +56,7 @@ $primary-palette: (
 // 設定顏色
 $custom-primary: mat-palette($primary-palette);// mat-palette像是map-get
 $custom-accent: mat-palette($mat-blue);
-$custom-warn: mat-palette($mat-pink);
+$custom-warn: mat-palette($warn-palette);
 
 /* 建立深色主題 */
 $custom-theme: mat-dark-theme($custom-primary, $custom-accent, $custom-warn);
