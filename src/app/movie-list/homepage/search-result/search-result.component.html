@@ -20,6 +20,9 @@
         </div>
       </div>
     </ng-container>
+    <ng-container *ngIf="displayList.length % 2 === 1">
+      <div class="card-box col-10 col-sm-5" style="opacity: 0;"></div>
+    </ng-container>
   </div>
   <!-- <mat-paginator
     class=""
