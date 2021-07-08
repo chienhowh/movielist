@@ -1,3 +1,4 @@
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { WatchedMovieComponent } from './watched-movie/watched-movie.component';
 import { CommentComponent } from './comment/comment.component';
 import { DetailService } from './../homepage/shared/detail.service';
@@ -21,10 +22,13 @@ export class WatchlistComponent implements OnInit {
   unWatchedList: IWatchedMovie[] = [];
   watchedList: IWatchedMovie[] = [];
 
+
+
   constructor(
     private watchlistService: WatchlistService,
     private detailService: DetailService,
     public dialog: MatDialog,
+    private modalService: NzModalService
   ) { }
 
   ngOnInit() {
@@ -53,13 +57,16 @@ export class WatchlistComponent implements OnInit {
   }
 
   writeComment(movie: IWatchedMovie): void {
-    const dialogRef = this.dialog.open(CommentComponent, {
-      width: '500px', data: { movie }
-    });
+    this.modalService.create({
+      nzContent: CommentComponent,
+      nzComponentParams: { movie },
+      nzFooter: null,
+      nzBodyStyle: { padding: '24px' },
+    })
 
-    dialogRef.afterClosed().subscribe(res => {
-      if (res) { this.getWatchList(); }
-    });
+    // dialogRef.afterClosed().subscribe(res => {
+    //   if (res) { this.getWatchList(); }
+    // });
   }
 
 

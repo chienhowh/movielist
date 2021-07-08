@@ -30,7 +30,7 @@ export class DetailService {
   }
 
   /**
-   * click icon to remove movie from list
+   * remove movie from list
    */
   removeList(id: number): Observable<any> {
     return this.requestService.dbRequest(API.DELETE, API.WATCHLIST + '/' + id);
@@ -44,6 +44,8 @@ export class DetailService {
   }
   /**
    * 修改電影內容
+   * @id 電影編號
+   * @patchData 資料
    */
   patchMovie(id: number, patchData): Observable<any> {
     return this.requestService.dbRequest(API.PATCH, API.WATCHLIST + '/' + id, patchData);

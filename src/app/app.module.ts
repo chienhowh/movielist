@@ -8,7 +8,11 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NZ_I18N, zh_TW } from 'ng-zorro-antd/i18n';
 
+import { registerLocaleData } from '@angular/common';
+import zh from '@angular/common/locales/zh';
+registerLocaleData(zh);
 @NgModule({
   declarations: [
     AppComponent
@@ -22,8 +26,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: zh_TW }],
   entryComponents: [MovieDetailComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

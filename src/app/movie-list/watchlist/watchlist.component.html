@@ -1,7 +1,6 @@
-<div class="container-xl">
-  <mat-tab-group>
-    <!-- Unwatched Start -->
-    <mat-tab label="尚未觀看">
+<div class="card-container">
+  <nz-tabset nzType="card">
+    <nz-tab [nzTitle]="'尚未觀看'">
       <ul>
         <ng-container *ngFor="let item of unWatchedList">
           <li class="title" (click)="writeComment(item)">
@@ -10,10 +9,9 @@
           </li>
         </ng-container>
       </ul>
-    </mat-tab>
-    <!-- Watched Start -->
-    <mat-tab label="已觀看"
-      ><ul>
+    </nz-tab>
+    <nz-tab [nzTitle]="'已經觀看'">
+      <ul>
         <ng-container *ngFor="let item of watchedList">
           <li class="title" (click)="getDetailById(item.id)">
             <div>{{ item.title }}</div>
@@ -21,6 +19,6 @@
           </li>
         </ng-container>
       </ul>
-    </mat-tab>
-  </mat-tab-group>
+    </nz-tab>
+  </nz-tabset>
 </div>

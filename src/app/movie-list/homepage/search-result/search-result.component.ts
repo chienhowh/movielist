@@ -1,3 +1,4 @@
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { API_POSTER } from './../../consts/global-constants.const';
 import { IMovieInfo, IResponse, IKeyword } from './../../../core/interfaces/movie.interface';
 
@@ -27,7 +28,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
   paginator = [];
   showPaginator = [];
   constructor(
-    public dialog: MatDialog,
+    private modalService: NzModalService,
     private router: Router,
     private movieRequestService: MovieRequestService
   ) { }
@@ -120,10 +121,14 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
    *
    */
   onWatchDetail(info: IMovieInfo): void {
-    const dialogRef = this.dialog.open(MovieDetailComponent, {
-      width: '500px', data: { info, callAgain: false }
+    this.modalService.create({
+      nzContent: MovieDetailComponent,
+      nzComponentParams: {
+        info, callAgain: false
+      },
+      nzFooter: null,
+      nzBodyStyle: { padding: '24px' },
     });
-    dialogRef.afterClosed().subscribe(res => console.log('this diaglo was closed' + res));
   }
 
   imgError(event) {

@@ -1,3 +1,4 @@
+import { NzModalRef } from 'ng-zorro-antd/modal';
 import { DetailService } from './../../homepage/shared/detail.service';
 import { IWatchedMovie } from './../shared/watchlist';
 import { Component, Inject, Input, OnInit } from '@angular/core';
@@ -11,34 +12,38 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnInit {
-  movieForm: FormGroup = this.fb.group({
-    watchedDate: [new Date(), Validators.required],
+  @Input() movie: IWatchedMovie;
+  validateForm: FormGroup = this.fb.group({
+    watchedDate: ['', Validators.required],
     comment: ['', Validators.required]
   });
-  movie: IWatchedMovie;
+
   constructor(
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<CommentComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { movie: IWatchedMovie },
-    private detailService: DetailService
+    private detailService: DetailService,
+    public modalRef: NzModalRef
   ) { }
 
   ngOnInit(): void {
-    this.movie = this.data.movie;
   }
 
-  patchMovie(id: number) {
-    const formControls = this.movieForm.controls;
+  /**
+   * 更新電影狀態
+   * @id
+   * @returns
+   */
+   submitForm() {
+    const formControls = this.validateForm.controls;
     for (const i in formControls) {
       if (formControls.hasOwnProperty(i)) {
         formControls[i].markAsDirty;
         formControls[i].updateValueAndValidity;
       }
     }
-    if (this.movieForm.invalid) { return; }
-    const value = this.movieForm.value;
-    this.detailService.patchMovie(id, { beenWatched: true, ...value }).subscribe(res =>
-      this.dialogRef.close(res)
+    if (this.validateForm.invalid) { return; }
+    const value = this.validateForm.value;
+    this.detailService.patchMovie(this.movie.id, { beenWatched: true, ...value }).subscribe(() =>
+        this.modalRef.triggerOk()
     );
   }
 }
