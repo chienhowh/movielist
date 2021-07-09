@@ -1,19 +1,23 @@
-<h4 class="">{{ movie.title }}</h4>
-<form nz-form [nzLayout]="'vertical'" [formGroup]="validateForm">
+<h4 class="text-center">{{ movie.title }}</h4>
+<form nz-form class="form" [formGroup]="validateForm">
   <nz-form-item>
-    <nz-form-label nzRequired>觀影日期</nz-form-label>
-    <nz-form-control nzErrorTip="請選擇觀看日期!">
+    <nz-form-label [nzSpan]="6" nzRequired>觀影日期</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="請選擇觀看日期!">
       <nz-date-picker formControlName="watchedDate"></nz-date-picker>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label nzRequired>觀影心得</nz-form-label>
-    <nz-form-control nzErrorTip="寫些心得吧!">
+    <nz-form-label [nzSpan]="6" nzRequired>觀影心得</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="寫些心得吧!">
       <textarea rows="4" nz-input formControlName="comment"></textarea>
     </nz-form-control>
   </nz-form-item>
 </form>
-<div class="btn-groups">
-  <button nz-button nzType="primary" (click)="submitForm()">確認</button>
-  <button nz-button nzType="primary" nzDanger (click)="modalRef.close()">取消</button>
+<div class="text-center">
+  <button nz-button nzType="primary" class="mr-3" (click)="submitForm()">
+    確認
+  </button>
+  <button nz-button nzType="primary" nzDanger (click)="modalRef.close()">
+    取消
+  </button>
 </div>

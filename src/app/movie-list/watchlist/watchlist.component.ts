@@ -4,7 +4,7 @@ import { CommentComponent } from './comment/comment.component';
 import { DetailService } from './../homepage/shared/detail.service';
 import { API_POSTER } from './../consts/global-constants.const';
 import { Component, OnInit } from '@angular/core';
-import { IWatchedMovie } from './shared/watchlist';
+import { IWatchedMovie, WATCHLIST_TYPE } from './shared/watchlist';
 
 @Component({
   selector: 'app-watchlist',
@@ -23,8 +23,8 @@ export class WatchlistComponent implements OnInit {
 
 
   tabList = [
-    { title: '尚未觀看', list: 'unWatchedList' },
-    { title: '已經觀看', list: 'watchedList' }
+    { title: '尚未觀看', list: 'unWatchedList', type: WATCHLIST_TYPE.NEW },
+    { title: '已經觀看', list: 'watchedList', type: WATCHLIST_TYPE.READ }
   ]
 
   constructor(

@@ -4,7 +4,7 @@
       <nz-tab [nzTitle]="tab.title">
         <ul>
           <ng-container *ngFor="let item of displayList[tab.list]">
-            <li class="title" (click)="onPositiveClick(item, 'new')">
+            <li class="title" (click)="onPositiveClick(item, tab.type)">
               {{ item.title }}
               <span class="close" (click)="removeList(item.id, $event)">x</span>
             </li>

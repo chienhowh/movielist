@@ -11,7 +11,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-
+import { NzGridModule } from 'ng-zorro-antd/grid';
 @NgModule({
   declarations: [
     WatchlistComponent,
@@ -26,7 +26,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzFormModule,
     NzDatePickerModule,
     NzModalModule,
-    NzButtonModule
+    NzButtonModule,
+    NzGridModule
   ]
 })
 export class WatchlistModule { }
