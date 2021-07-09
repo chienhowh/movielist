@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { WatchlistComponent } from './watchlist.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
