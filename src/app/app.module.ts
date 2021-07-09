@@ -1,5 +1,4 @@
 import { MovieDetailComponent } from './movie-list/homepage/movie-detail/movie-detail.component';
-import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -21,7 +20,6 @@ registerLocaleData(zh);
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

@@ -7,9 +7,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { API } from '../../consts/global-constants.const';
 import { Paging } from '../../../model/paging';
-import { MatDialog } from '@angular/material/dialog';
 import { MovieDetailComponent } from '../movie-detail/movie-detail.component';
-import { PageEvent } from '@angular/material/paginator';
 
 
 

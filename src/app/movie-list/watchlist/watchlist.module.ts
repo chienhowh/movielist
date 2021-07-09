@@ -1,5 +1,4 @@
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import { SharedModule } from './../../shared/shared.module';
 import { WatchlistComponent } from './watchlist.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 
@@ -21,7 +20,6 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   imports: [
     CommonModule,
     WatchlistRoutingModule,
-    SharedModule,
     ReactiveFormsModule,
     FormsModule,
     NzTabsModule,

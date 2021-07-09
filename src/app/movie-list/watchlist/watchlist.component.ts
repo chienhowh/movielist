@@ -4,9 +4,7 @@ import { CommentComponent } from './comment/comment.component';
 import { DetailService } from './../homepage/shared/detail.service';
 import { API_POSTER } from './../consts/global-constants.const';
 import { Component, OnInit } from '@angular/core';
-import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
 import { IWatchedMovie } from './shared/watchlist';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-watchlist',
@@ -32,7 +30,6 @@ export class WatchlistComponent implements OnInit {
   constructor(
     private watchlistService: WatchlistService,
     private detailService: DetailService,
-    public dialog: MatDialog,
     private modalService: NzModalService
   ) { }
 

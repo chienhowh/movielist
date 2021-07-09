@@ -1,6 +1,6 @@
 import { MovieRequestService } from './../../../core/services/movie-request.service';
 import { Component, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+
 import { API, API_POSTER } from '../../consts/global-constants.const';
 import { IMovieInfo, IResponse } from '../../../core/interfaces/movie.interface';
 import { MovieDetailComponent } from '../movie-detail/movie-detail.component';

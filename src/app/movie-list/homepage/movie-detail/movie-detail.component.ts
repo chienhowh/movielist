@@ -1,10 +1,7 @@
 import { DetailService } from './../shared/detail.service';
 import { API_POSTER } from './../../consts/global-constants.const';
 import { IMovieInfo } from './../../../core/interfaces/movie.interface';
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
-import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
+import { Component, Input, OnInit } from '@angular/core';
 import { tify, sify } from 'chinese-conv';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 @Component({
@@ -31,13 +28,11 @@ export class MovieDetailComponent implements OnInit {
 
   constructor(
     private detailService: DetailService,
-    private library: FaIconLibrary,
     public modalRef: NzModalRef
   ) { }
 
   ngOnInit(): void {
     this.movieId = this.info.id;
-    this.library.addIcons(farHeart, fasHeart);
     if (this.callAgain) {
       this.getDetailById(this.movieId);
     } else {

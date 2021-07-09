@@ -1,11 +1,8 @@
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { DetailService } from './../../homepage/shared/detail.service';
 import { IWatchedMovie } from './../shared/watchlist';
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -23,7 +20,7 @@ export class CommentComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private detailService: DetailService,
-    public modalRef: NzModalRef
+    public modalRef: NzModalRef,
   ) { }
 
   ngOnInit(): void {
