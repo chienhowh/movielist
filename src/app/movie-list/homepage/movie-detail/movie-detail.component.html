@@ -43,15 +43,20 @@
   </div>
 
   <div class="py-3">
-    <button nz-button nzType="primary" (click)="addList(displayList)">
-      <ng-container *ngIf="isInList; else notInList">
-        <i nz-icon [nzType]="'account-book'" [nzTheme]="'fill'"></i>
+    <button
+      nz-button
+      nzType="primary"
+      class="d-flex align-items-center"
+      (click)="addList(displayList)"
+    >
+      <ng-container *ngIf="isInList">
+        <i nz-icon nzType="heart" nzTheme="fill" class="mr-2"></i>
         移出清單
       </ng-container>
-      <ng-template #notInList>
-        <i nz-icon [nzType]="'account-book'" [nzTheme]="'fill'"></i>
+      <ng-container *ngIf="!isInList">
+        <i nz-icon nzType="heart" nzTheme="outline"></i>
         加入清單
-      </ng-template>
+      </ng-container>
     </button>
   </div>
 </ng-container>

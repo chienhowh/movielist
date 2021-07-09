@@ -1,3 +1,4 @@
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { TextEllipsisPipe } from './../../core/pipes/text-ellipsis.pipe';
 import { GenrePipe } from './../../core/pipes/genre.pipe';
 import { SanitizeURLPipe } from './../../core/pipes/sanitize-url.pipe';
@@ -12,11 +13,6 @@ import { FormsModule } from '@angular/forms';
 import { SwiperModule } from 'swiper/angular';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-// import { IconDefinition } from '@ant-design/icons-angular';
-// import { AccountBookFill, AlertFill, AlertOutline } from '@ant-design/icons-angular/icons';
-// const icons: IconDefinition[] = [AccountBookFill, AlertFill, AlertOutline];
-
 @NgModule({
   declarations: [
     HomepageComponent,
@@ -35,7 +31,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzModalModule,
     NzButtonModule,
     NzIconModule
-
   ]
 })
 export class HomepageModule { }
