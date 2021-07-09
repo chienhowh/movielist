@@ -79,7 +79,7 @@ export class MovieDetailComponent implements OnInit {
 
   /** 看電影是否已在清單裡 */
   searchInList(id: number) {
-    this.detailService.readList(id).subscribe(res => {
+    this.detailService.readListById(id).subscribe(res => {
       // 回空值，代表不在名單
       this.isInList = res ? true : false;
     });

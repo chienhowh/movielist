@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
 import { WatchlistRoutingModule } from './watchlist-routing.module';
 import { CommentComponent } from './comment/comment.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { WatchedMovieComponent } from './watched-movie/watched-movie.component';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
@@ -18,7 +17,6 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   declarations: [
     WatchlistComponent,
     CommentComponent,
-    WatchedMovieComponent
   ],
   imports: [
     CommonModule,

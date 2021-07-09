@@ -13,8 +13,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CommentComponent implements OnInit {
   @Input() movie: IWatchedMovie;
+  /** 評論(new) or 看紀錄(read) */
+  @Input() type:string;
   validateForm: FormGroup = this.fb.group({
-    watchedDate: ['', Validators.required],
+    watchedDate: [new Date(), Validators.required],
     comment: ['', Validators.required]
   });
 
@@ -25,6 +27,11 @@ export class CommentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(this.type==='read'){
+    console.log(this.movie);
+    this.validateForm.patchValue({...this.movie});
+    this.validateForm.disable();
+    }
   }
 
   /**

@@ -39,7 +39,7 @@ export class DetailService {
   /**
    * 從DB拿單筆電影
    */
-  readList(id: number): Observable<any> {
+  readListById(id: number): Observable<any> {
     return this.requestService.dbRequest(API.GET, API.WATCHLIST + '/' + id);
   }
   /**
