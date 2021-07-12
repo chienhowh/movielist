@@ -1,57 +1,75 @@
 <ng-container *ngIf="displayList">
-  <h6 mat-dialog-title class="mobile-center font-weight-bold mb-2">
+  <h6 class="text-center font-weight-bold mb-2">
     {{ displayList.title }}
   </h6>
-  <mat-dialog-content>
-    <div class="row">
-      <div class="col-md-6 col-12">
-        <div class="img-box mobile-center">
-          <img
-            src="{{ API_POSTER.GET_POSTER + displayList.poster_path }}"
-            alt=""
-          />
-        </div>
-      </div>
-      <div class="col-md-6 col-12 pt-3">
-        <div class="list-box">
-          <div class="header">類型:</div>
-          <div class="content">{{ getMovieGenres(displayList.genres) }}</div>
-        </div>
-        <hr />
-        <div class="list-box">
-          <div class="header">上映日期:</div>
-          <div class="content">{{ displayList.release_date }}</div>
-        </div>
-        <hr />
-        <div class="list-box">
-          <div class="header">評分:</div>
-          <div class="content">{{ displayList.vote_average }}</div>
-        </div>
-        <hr />
-        <div class="list-box">
-          <div class="header">片長:</div>
-          <div class="content">{{ displayList.runtime }}分</div>
-        </div>
-        <hr />
+
+  <div class="row">
+    <!-- poster start -->
+    <div class="col-md-6 col-12">
+      <div class="img-box mobile-center">
+        <img
+          src="{{ API_POSTER.GET_POSTER + displayList.poster_path }}"
+          (error)="imgError($event)"
+        />
       </div>
     </div>
-    <div class="row">
-      <div class="col-12 my-2">電影介紹:</div>
-      <div class="col-12">
-        {{ displayList.overview ? displayList.overview : "尚無介紹" }}
+    <!-- poster end -->
+
+    <!-- info start -->
+    <div class="col-md-6 col-12 pt-3">
+      <div class="list-box">
+        <div class="header">類型:</div>
+        <div class="content">{{ getMovieGenres(displayList.genres) }}</div>
       </div>
+      <hr />
+      <div class="list-box">
+        <div class="header">上映日期:</div>
+        <div class="content">{{ displayList.release_date }}</div>
+      </div>
+      <hr />
+      <div class="list-box">
+        <div class="header">評分:</div>
+        <div class="content">{{ displayList.vote_average }}</div>
+      </div>
+      <hr />
+      <div class="list-box">
+        <div class="header">片長:</div>
+        <div class="content">{{ displayList.runtime }}分</div>
+      </div>
+      <hr />
     </div>
-  </mat-dialog-content>
-  <mat-dialog-actions class="py-3">
-    <button mat-raised-button color="primary" (click)="addList(displayList)">
-      <ng-container *ngIf="isInList; else notInList">
-        <fa-icon [icon]="['fas', 'heart']"></fa-icon>
-        移出清單
-      </ng-container>
-      <ng-template #notInList>
-        <fa-icon [icon]="['far', 'heart']"></fa-icon>
-        加入清單
-      </ng-template>
+    <!-- info end -->
+  </div>
+  <!-- 簡介 start -->
+  <div class="row">
+    <div class="col-12 my-2">電影介紹:</div>
+    <div class="col-12 overview">
+      {{ displayList.overview ? displayList.overview : "尚無介紹" }}
+    </div>
+  </div>
+
+  <div class="py-3">
+    <button
+      nz-button
+      nzType="primary"
+      class="d-flex align-items-center"
+      (click)="addList(displayList)"
+      *ngIf="isInList; else noInList"
+    >
+      <i nz-icon nzType="heart" nzTheme="fill"></i>
+      移出清單
     </button>
-  </mat-dialog-actions>
+    <ng-template #noInList>
+      <button
+        nz-button
+        nzType="primary"
+        class="d-flex align-items-center"
+        (click)="addList(displayList)"
+        *ngIf="!isInList"
+      >
+        <i nz-icon nzType="heart" nzTheme="outline"></i>
+        加入清單
+      </button>
+    </ng-template>
+  </div>
 </ng-container>

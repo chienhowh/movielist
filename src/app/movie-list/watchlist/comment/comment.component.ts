@@ -1,44 +1,56 @@
+import { NzModalRef } from 'ng-zorro-antd/modal';
 import { DetailService } from './../../homepage/shared/detail.service';
-import { IWatchedMovie } from './../shared/watchlist';
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
+import { IWatchedMovie, WATCHLIST_TYPE } from './../shared/watchlist';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnInit {
-  movieForm: FormGroup = this.fb.group({
+  @Input() movie: IWatchedMovie;
+  /** 評論(new) or 看紀錄(read) */
+  @Input() type: string;
+  validateForm: FormGroup = this.fb.group({
     watchedDate: [new Date(), Validators.required],
     comment: ['', Validators.required]
   });
-  movie: IWatchedMovie;
+
   constructor(
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<CommentComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { movie: IWatchedMovie },
-    private detailService: DetailService
+    private detailService: DetailService,
+    public modalRef: NzModalRef,
   ) { }
 
   ngOnInit(): void {
-    this.movie = this.data.movie;
+    if (this.type === WATCHLIST_TYPE.READ) {
+      this.validateForm.patchValue({ ...this.movie });
+      this.validateForm.disable();
+    }
   }
 
-  patchMovie(id: number) {
-    const formControls = this.movieForm.controls;
+  /**
+   * 更新電影狀態
+   * @id
+   */
+  submitForm() {
+    const formControls = this.validateForm.controls;
     for (const i in formControls) {
       if (formControls.hasOwnProperty(i)) {
-        formControls[i].markAsDirty;
-        formControls[i].updateValueAndValidity;
+        formControls[i].markAsDirty();
+        formControls[i].updateValueAndValidity();
       }
     }
-    if (this.movieForm.invalid) { return; }
-    const value = this.movieForm.value;
-    this.detailService.patchMovie(id, { beenWatched: true, ...value }).subscribe(res =>
-      this.dialogRef.close(res)
+    console.log(this.validateForm);
+
+    if (this.validateForm.invalid) { return; }
+    if (this.type === WATCHLIST_TYPE.READ) {
+      this.modalRef.triggerOk();
+    }
+    const value = this.validateForm.value;
+    this.detailService.patchMovie(this.movie.id, { beenWatched: true, ...value }).subscribe(() =>
+      this.modalRef.triggerOk()
     );
   }
 }

@@ -1,26 +1,16 @@
-<div class="container-xl">
-  <mat-tab-group>
-    <!-- Unwatched Start -->
-    <mat-tab label="尚未觀看">
-      <ul>
-        <ng-container *ngFor="let item of unWatchedList">
-          <li class="title" (click)="writeComment(item)">
-            {{ item.title }}
-            <span class="close" (click)="removeList(item.id, $event)">x</span>
-          </li>
-        </ng-container>
-      </ul>
-    </mat-tab>
-    <!-- Watched Start -->
-    <mat-tab label="已觀看"
-      ><ul>
-        <ng-container *ngFor="let item of watchedList">
-          <li class="title" (click)="getDetailById(item.id)">
-            <div>{{ item.title }}</div>
-            <span class="close" (click)="removeList(item.id, $event)">x</span>
-          </li>
-        </ng-container>
-      </ul>
-    </mat-tab>
-  </mat-tab-group>
+<div class="card-container">
+  <nz-tabset nzType="card">
+    <ng-container *ngFor="let tab of tabList">
+      <nz-tab [nzTitle]="tab.title">
+        <ul>
+          <ng-container *ngFor="let item of displayList[tab.list]">
+            <li class="title" (click)="onPositiveClick(item, tab.type)">
+              {{ item.title }}
+              <span class="close" (click)="removeList(item.id, $event)">x</span>
+            </li>
+          </ng-container>
+        </ul>
+      </nz-tab>
+    </ng-container>
+  </nz-tabset>
 </div>

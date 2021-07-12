@@ -5,3 +5,8 @@ export interface IWatchedMovie {
   comment: string;
   watchedDate: Date;
 }
+
+export const enum WATCHLIST_TYPE {
+  NEW = 'new',
+  READ = 'read'
+}

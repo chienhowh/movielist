@@ -1,24 +1,23 @@
-<h4 class="">{{ movie.title }}</h4>
-<form [formGroup]="movieForm">
-  <mat-form-field appearance="standard" [color]="'primary'">
-    <input matInput [matDatepicker]="picker" formControlName="watchedDate" />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker [color]="'test'"></mat-datepicker>
-  </mat-form-field>
-  <!-- 評論區 -->
-  <mat-form-field appearance="standard" [color]="'primary'">
-    <mat-label style="color: #b88e65">Leave a comment</mat-label>
-    <textarea
-      matInput
-      formControlName="comment"
-    ></textarea>
-    <!-- <mat-error *ngIf="movieForm.invalid">bbb</mat-error> -->
-  </mat-form-field>
+<h4 class="text-center">{{ movie.title }}</h4>
+<form nz-form class="form" [formGroup]="validateForm">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired>觀影日期</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="請選擇觀看日期!">
+      <nz-date-picker formControlName="watchedDate"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired>觀影心得</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="寫些心得吧!">
+      <textarea rows="4" nz-input formControlName="comment"></textarea>
+    </nz-form-control>
+  </nz-form-item>
 </form>
-
-<mat-dialog-actions>
-  <button mat-raised-button color="primary" (click)="patchMovie(movie.id)">
-    儲存
+<div class="text-center">
+  <button nz-button nzType="primary" class="mr-3" (click)="submitForm()">
+    確認
   </button>
-  <button mat-raised-button mat-dialog-close color="warn">離開</button>
-</mat-dialog-actions>
+  <button nz-button nzType="primary" nzDanger (click)="modalRef.close()">
+    取消
+  </button>
+</div>

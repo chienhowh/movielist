@@ -1,15 +1,18 @@
 <div class="web-box">
   <nav class="nav-bar position-relative">
     <div class="header d-flex align-items-center">
-      <div class="mobile" [matMenuTriggerFor]="menu">
-        <fa-icon [icon]="faBars"></fa-icon>
-        <mat-menu #menu="matMenu">
-          <ul class="menu">
-            <li><a routerLink="/home">首頁</a></li>
-            <li><a routerLink="/watchlist">觀賞清單</a></li>
+      <div class="mobile">
+        <a nz-dropdown nzTrigger="click" class="d-flex" [nzDropdownMenu]="menu">
+          <i nz-icon nzType="menu"></i>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable class="hamburger">
+            <li nz-menu-item><a routerLink="/home">首頁</a></li>
+            <li nz-menu-item><a routerLink="/watchlist">觀賞清單</a></li>
           </ul>
-        </mat-menu>
+        </nz-dropdown-menu>
       </div>
+      <!-- 首頁圖標 start -->
       <a routerLink="/home" class="px-3">
         <div class="symbol">
           <img src="assets/movie.png" alt="" height="30" /><span
@@ -18,6 +21,8 @@
           ><span style="color: blue">B</span>
         </div>
       </a>
+      <!-- 首頁圖標 end -->
+
       <ul class="d-flex m-0 align-items-center laptop">
         <li><a routerLink="/home">首頁</a></li>
         <li><a routerLink="/watchlist">待播清單</a></li>

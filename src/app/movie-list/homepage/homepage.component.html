@@ -7,14 +7,17 @@
     <div class="search">
       <input
         matInput
-        placeholder="搜尋電影..."
+        placeholder="輸入電影..."
         [(ngModel)]="searchText"
         class="mr-1 input"
+        (keyup.enter)="searchMovie()"
       />
       <button
-        mat-raised-button
-        color="primary"
+        nz-button
+        nzType="primary"
+
         class="search-btn"
+        nzSize="large"
         (click)="searchMovie()"
       >
         Search

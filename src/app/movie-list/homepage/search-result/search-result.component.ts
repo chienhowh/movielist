@@ -1,3 +1,4 @@
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { API_POSTER } from './../../consts/global-constants.const';
 import { IMovieInfo, IResponse, IKeyword } from './../../../core/interfaces/movie.interface';
 
@@ -6,9 +7,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { API } from '../../consts/global-constants.const';
 import { Paging } from '../../../model/paging';
-import { MatDialog } from '@angular/material/dialog';
 import { MovieDetailComponent } from '../movie-detail/movie-detail.component';
-import { PageEvent } from '@angular/material/paginator';
 
 
 
@@ -22,12 +21,13 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
   query: string;
   // 海報網址
   API_POSTER = API_POSTER;
+
   displayList: IMovieInfo[] = [];
   page: Paging = new Paging();
   paginator = [];
   showPaginator = [];
   constructor(
-    public dialog: MatDialog,
+    private modalService: NzModalService,
     private router: Router,
     private movieRequestService: MovieRequestService
   ) { }
@@ -44,7 +44,8 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
    * 針對字串搜尋符合電影列表
    */
   searchQuery() {
-    const sendData = { query: this.query, page: this.page.pageIndex };
+    if (!this.query.trim()) { return; }
+    const sendData = { query: this.query.trim(), page: this.page.pageIndex };
     this.movieRequestService.request(API.GET, API.SEARCH_MOVIE, sendData).subscribe((res: IResponse) => {
       const details = res.results;
       this.page.totalResults = res.total_results;
@@ -114,20 +115,32 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
     }
   }
 
+  onSearch(){
+    this.page.initialize();
+    this.searchQuery();
+  }
 
   /**
    * 跳出顯示電影詳情視窗
    *
    */
   onWatchDetail(info: IMovieInfo): void {
-    const dialogRef = this.dialog.open(MovieDetailComponent, {
-      width: '500px', data: { info, callAgain: false }
+    this.modalService.create({
+      nzContent: MovieDetailComponent,
+      nzComponentParams: {
+        info, callAgain: false
+      },
+      nzFooter: null,
+      nzBodyStyle: { padding: '24px' },
     });
-    dialogRef.afterClosed().subscribe(res => console.log('this diaglo was closed' + res));
   }
 
   imgError(event) {
     event.target.src = 'assets/not-found.jpeg';
     event.target.style['object-fit'] = 'contain';
+  }
+
+  searchMovie() {
+    this.searchQuery();
   }
 }

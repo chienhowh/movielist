@@ -1,12 +1,13 @@
 import { MovieRequestService } from './../../../core/services/movie-request.service';
 import { Component, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+
 import { API, API_POSTER } from '../../consts/global-constants.const';
 import { IMovieInfo, IResponse } from '../../../core/interfaces/movie.interface';
 import { MovieDetailComponent } from '../movie-detail/movie-detail.component';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 SwiperCore.use([Pagination, Navigation]);
 
 
@@ -17,6 +18,9 @@ SwiperCore.use([Pagination, Navigation]);
   encapsulation: ViewEncapsulation.None
 })
 export class CarouselComponent implements OnInit {
+  API_POSTER = API_POSTER;
+  movieList$: Observable<any[]>;
+  imgNumber: number;
   /**
    * 此表單標題
    */
@@ -28,12 +32,10 @@ export class CarouselComponent implements OnInit {
     this.countImgNumber();
   }
 
-  API_POSTER = API_POSTER;
-  movieList$: Observable<any[]>;
-  imgNumber: number;
+
   constructor(
-    public dialog: MatDialog,
     private movieRequestService: MovieRequestService,
+    private modalService: NzModalService
   ) { }
 
   ngOnInit(): void {
@@ -58,11 +60,14 @@ export class CarouselComponent implements OnInit {
    * 資料不完全所以movieDetail要再用id call一次
    */
   onWatchDetail(info): void {
-    const dialogRef = this.dialog.open(MovieDetailComponent, {
-      width: '500px', data: { info, callAgain: true }
+    this.modalService.create({
+      nzContent: MovieDetailComponent,
+      nzComponentParams: {
+        info, callAgain: true
+      },
+      nzFooter: null,
+      nzBodyStyle: { padding: '24px' },
     });
-
-    dialogRef.afterClosed().subscribe(res => console.log('this diaglo was closed' + res));
   }
 
 

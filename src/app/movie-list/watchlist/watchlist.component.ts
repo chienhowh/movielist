@@ -1,12 +1,10 @@
-import { WatchedMovieComponent } from './watched-movie/watched-movie.component';
+import { WatchlistService } from './../../core/services/watchlist.service';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { CommentComponent } from './comment/comment.component';
 import { DetailService } from './../homepage/shared/detail.service';
-import { WatchlistService } from './watchlist.service';
 import { API_POSTER } from './../consts/global-constants.const';
 import { Component, OnInit } from '@angular/core';
-import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
-import { IWatchedMovie } from './shared/watchlist';
-import { MatDialog } from '@angular/material/dialog';
+import { IWatchedMovie, WATCHLIST_TYPE } from './shared/watchlist';
 
 @Component({
   selector: 'app-watchlist',
@@ -15,16 +13,24 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class WatchlistComponent implements OnInit {
   API_POSTER = API_POSTER;
-  /** 電影詳細資料列表 */
-  displayList: IMovieInfo[] = [];
-  /** 待播清單號碼 */
-  unWatchedList: IWatchedMovie[] = [];
-  watchedList: IWatchedMovie[] = [];
+  displayList: {
+    unWatchedList: IWatchedMovie[],
+    watchedList: IWatchedMovie[]
+  } = {
+      unWatchedList: [],
+      watchedList: []
+    }
+
+
+  tabList = [
+    { title: '尚未觀看', list: 'unWatchedList', type: WATCHLIST_TYPE.NEW },
+    { title: '已經觀看', list: 'watchedList', type: WATCHLIST_TYPE.READ }
+  ]
 
   constructor(
     private watchlistService: WatchlistService,
     private detailService: DetailService,
-    public dialog: MatDialog,
+    private modalService: NzModalService
   ) { }
 
   ngOnInit() {
@@ -34,42 +40,28 @@ export class WatchlistComponent implements OnInit {
 
 
   getWatchList() {
-    this.refreshList();
-    this.watchlistService.getWatchLists().subscribe((res: IWatchedMovie[]) => {
-      res.map(movie => {
-        if (movie.beenWatched) { this.watchedList.push(movie); }
-        else { this.unWatchedList.push(movie); }
-      });
+    this.watchlistService.getWatchLists().subscribe(res => {
+      this.displayList.watchedList = res.filter(movie => movie.beenWatched);
+      this.displayList.unWatchedList = res.filter(movie => !movie.beenWatched);
     });
   }
 
-  /** 查心得 */
-  getDetailById(id: number) {
-    const dialogRef = this.dialog.open(WatchedMovieComponent, {
-      width: '500px', data: { id }
-    });
 
-    dialogRef.afterClosed().subscribe(res => console.log('this diaglo was closed' + res));
-  }
-
-  writeComment(movie: IWatchedMovie): void {
-    const dialogRef = this.dialog.open(CommentComponent, {
-      width: '500px', data: { movie }
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      if (res) { this.getWatchList(); }
-    });
+  onPositiveClick(movie: IWatchedMovie, type: string): void {
+    this.modalService.create({
+      nzContent: CommentComponent,
+      nzComponentParams: { movie, type },
+      nzFooter: null,
+      nzBodyStyle: { padding: '24px' },
+      nzOnOk: () => {
+        this.getWatchList();
+      }
+    })
   }
 
 
   removeList(id: number, event: Event) {
     event.stopPropagation();
     this.detailService.removeList(id).subscribe(() => this.getWatchList());
-  }
-
-  refreshList() {
-    this.watchedList = [];
-    this.unWatchedList = [];
   }
 }

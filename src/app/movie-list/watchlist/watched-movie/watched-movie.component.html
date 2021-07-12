@@ -1,6 +1,0 @@
-<ng-container *ngIf="$movie | async as movie; else Loading">
-  <h4>{{ movie.title }}</h4>
-  <p>{{ movie.watchedDate | date: "MMM d, y" }}</p>
-  <p>{{ movie.comment }}</p>
-</ng-container>
-<ng-template #Loading>Loading</ng-template>
