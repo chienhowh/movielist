@@ -25,7 +25,6 @@ export class CommentComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.type === WATCHLIST_TYPE.READ) {
-      console.log(this.movie);
       this.validateForm.patchValue({ ...this.movie });
       this.validateForm.disable();
     }
@@ -46,6 +45,9 @@ export class CommentComponent implements OnInit {
     console.log(this.validateForm);
 
     if (this.validateForm.invalid) { return; }
+    if (this.type === WATCHLIST_TYPE.READ) {
+      this.modalRef.triggerOk();
+    }
     const value = this.validateForm.value;
     this.detailService.patchMovie(this.movie.id, { beenWatched: true, ...value }).subscribe(() =>
       this.modalRef.triggerOk()

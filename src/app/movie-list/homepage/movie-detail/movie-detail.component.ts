@@ -83,4 +83,10 @@ export class MovieDetailComponent implements OnInit {
   getMovieGenres(genres: [{ id: number, name: string }]): string[] {
     return genres.map(genre => tify(genre.name));
   }
+
+  imgError(event) {
+    event.target.src = 'assets/not-found.jpeg';
+    event.target.style['object-fit'] = 'contain';
+    event.target.style['width'] = '100%';
+  }
 }

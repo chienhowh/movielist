@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { SwiperModule } from 'swiper/angular';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzInputModule } from 'ng-zorro-antd/input';
 @NgModule({
   declarations: [
     HomepageComponent,
@@ -30,6 +31,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     SwiperModule,
     NzModalModule,
     NzButtonModule,
+    NzInputModule,
     NzIconModule
   ]
 })

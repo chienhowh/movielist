@@ -10,10 +10,12 @@
         placeholder="輸入電影..."
         [(ngModel)]="searchText"
         class="mr-1 input"
+        (keyup.enter)="searchMovie()"
       />
       <button
         nz-button
         nzType="primary"
+
         class="search-btn"
         nzSize="large"
         (click)="searchMovie()"

@@ -27,8 +27,8 @@ export class HomepageComponent implements OnInit {
     });
   }
 
-  searchMovie() {
-    if (!this.searchText) { return; }
+  searchMovie(event?) {
+    if (!this.searchText.trim()) { return; }
     this.router.navigate(['home', 'search'], { state: { query: this.searchText } });
   }
 

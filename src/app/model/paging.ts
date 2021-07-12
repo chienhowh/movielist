@@ -11,6 +11,11 @@ export class Paging {
     this.pageSize = pageSize;
   }
 
+  initialize() {
+    this.pageIndex = 1;
+  }
+
+
   get totalPages(): number {
     return Math.ceil(this.totalResults / this.pageSize);
   }

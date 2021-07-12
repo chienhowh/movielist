@@ -21,6 +21,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
   query: string;
   // 海報網址
   API_POSTER = API_POSTER;
+
   displayList: IMovieInfo[] = [];
   page: Paging = new Paging();
   paginator = [];
@@ -43,7 +44,8 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
    * 針對字串搜尋符合電影列表
    */
   searchQuery() {
-    const sendData = { query: this.query, page: this.page.pageIndex };
+    if (!this.query.trim()) { return; }
+    const sendData = { query: this.query.trim(), page: this.page.pageIndex };
     this.movieRequestService.request(API.GET, API.SEARCH_MOVIE, sendData).subscribe((res: IResponse) => {
       const details = res.results;
       this.page.totalResults = res.total_results;
@@ -113,6 +115,10 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
     }
   }
 
+  onSearch(){
+    this.page.initialize();
+    this.searchQuery();
+  }
 
   /**
    * 跳出顯示電影詳情視窗
@@ -132,5 +138,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
   imgError(event) {
     event.target.src = 'assets/not-found.jpeg';
     event.target.style['object-fit'] = 'contain';
+  }
+
+  searchMovie() {
+    this.searchQuery();
   }
 }

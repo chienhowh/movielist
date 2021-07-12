@@ -4,14 +4,18 @@
   </h6>
 
   <div class="row">
+    <!-- poster start -->
     <div class="col-md-6 col-12">
       <div class="img-box mobile-center">
         <img
           src="{{ API_POSTER.GET_POSTER + displayList.poster_path }}"
-          alt=""
+          (error)="imgError($event)"
         />
       </div>
     </div>
+    <!-- poster end -->
+
+    <!-- info start -->
     <div class="col-md-6 col-12 pt-3">
       <div class="list-box">
         <div class="header">類型:</div>
@@ -34,7 +38,9 @@
       </div>
       <hr />
     </div>
+    <!-- info end -->
   </div>
+  <!-- 簡介 start -->
   <div class="row">
     <div class="col-12 my-2">電影介紹:</div>
     <div class="col-12 overview">
@@ -48,15 +54,22 @@
       nzType="primary"
       class="d-flex align-items-center"
       (click)="addList(displayList)"
+      *ngIf="isInList; else noInList"
     >
-      <ng-container *ngIf="isInList">
-        <i nz-icon nzType="heart" nzTheme="fill" class="mr-2"></i>
-        移出清單
-      </ng-container>
-      <ng-container *ngIf="!isInList">
+      <i nz-icon nzType="heart" nzTheme="fill"></i>
+      移出清單
+    </button>
+    <ng-template #noInList>
+      <button
+        nz-button
+        nzType="primary"
+        class="d-flex align-items-center"
+        (click)="addList(displayList)"
+        *ngIf="!isInList"
+      >
         <i nz-icon nzType="heart" nzTheme="outline"></i>
         加入清單
-      </ng-container>
-    </button>
+      </button>
+    </ng-template>
   </div>
 </ng-container>

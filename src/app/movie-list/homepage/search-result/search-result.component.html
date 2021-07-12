@@ -1,3 +1,17 @@
+<!-- 搜索input -->
+<nz-input-group [nzSuffix]="suffixIconSearch" [nzSearch]="true">
+  <input
+    type="text"
+    nz-input
+    placeholder="input search text"
+    [(ngModel)]="query"
+    (keyup.enter)="onSearch()"
+  />
+</nz-input-group>
+<ng-template #suffixIconSearch>
+  <i nz-icon nzType="search" (click)="onSearch()"></i>
+</ng-template>
+<!-- 搜索結果start -->
 <ng-container *ngIf="displayList.length !== 0; else noData">
   <div class="row list-box no-gutters">
     <ng-container *ngFor="let movie of displayList">
@@ -21,7 +35,7 @@
       </div>
     </ng-container>
     <ng-container *ngIf="displayList.length % 2 === 1">
-      <div class="card-box col-10 col-sm-5" style="opacity: 0;"></div>
+      <div class="card-box col-10 col-sm-5" style="opacity: 0"></div>
     </ng-container>
   </div>
   <!-- <mat-paginator
