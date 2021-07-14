@@ -5,7 +5,10 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="6" nzRequired>觀影日期</nz-form-label>
         <nz-form-control [nzSpan]="14" nzErrorTip="請選擇觀看日期!">
-          <nz-date-picker formControlName="watchedDate" style="width: 100%;max-width: 400px;"></nz-date-picker>
+          <nz-date-picker
+            formControlName="watchedDate"
+            style="width: 100%; max-width: 400px"
+          ></nz-date-picker>
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -13,13 +16,18 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="6" nzRequired>觀影心得</nz-form-label>
         <nz-form-control [nzSpan]="14" nzErrorTip="寫些心得吧!">
-          <textarea rows="4" nz-input formControlName="comment" style="width: 100%;max-width: 400px;"></textarea>
+          <textarea
+            rows="4"
+            nz-input
+            formControlName="comment"
+            style="width: 100%; max-width: 400px"
+          ></textarea>
         </nz-form-control>
       </nz-form-item>
     </div>
   </div>
 </form>
-<div class="text-center">
+<div class="text-center" *ngIf="type === 'new'">
   <button nz-button nzType="primary" class="mr-3" (click)="submitForm()">
     確認
   </button>

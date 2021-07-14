@@ -1,3 +1,4 @@
+import { RateIconComponent } from './rate-icon/rate-icon.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NzFormModule } from 'ng-zorro-antd/form';

@@ -46,10 +46,8 @@ export class WatchlistComponent implements OnInit {
 
   getWatchList() {
     this.watchlistService.getWatchLists().subscribe(res => {
-      // 先轉treenode
-      const treeNodes = res.map((movie: IWatchedMovie) => ({ ...movie, key: movie.id, isLeaf: true }));
-      this.displayList.watchedList = treeNodes.filter(movie => movie.beenWatched);
-      this.displayList.unWatchedList = treeNodes.filter(movie => !movie.beenWatched);
+      this.displayList.watchedList = res.filter(movie => movie.beenWatched);
+      this.displayList.unWatchedList = res.filter(movie => !movie.beenWatched);
     });
   }
 
@@ -71,12 +69,5 @@ export class WatchlistComponent implements OnInit {
   removeList(id: number, event: Event) {
     event.stopPropagation();
     this.detailService.removeList(id).subscribe(() => this.getWatchList());
-  }
-
-  nzEvent(event: NzFormatEmitEvent, type: string): void {
-    // 電影資料
-    const movie = event.node.origin as unknown as IWatchedMovie;
-    this.onPositiveClick(movie, type);
-
   }
 }
