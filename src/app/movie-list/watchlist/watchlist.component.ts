@@ -5,6 +5,7 @@ import { DetailService } from './../homepage/shared/detail.service';
 import { API_POSTER } from './../consts/global-constants.const';
 import { Component, OnInit } from '@angular/core';
 import { IWatchedMovie, WATCHLIST_TYPE } from './shared/watchlist';
+import { NzFormatEmitEvent, NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 
 @Component({
   selector: 'app-watchlist',
@@ -13,6 +14,10 @@ import { IWatchedMovie, WATCHLIST_TYPE } from './shared/watchlist';
 })
 export class WatchlistComponent implements OnInit {
   API_POSTER = API_POSTER;
+
+  /**
+   * 待播清單
+   */
   displayList: {
     unWatchedList: IWatchedMovie[],
     watchedList: IWatchedMovie[]
@@ -41,13 +46,16 @@ export class WatchlistComponent implements OnInit {
 
   getWatchList(): void {
     this.watchlistService.getWatchLists().subscribe(res => {
-      this.displayList.watchedList = res.filter(movie => movie.beenWatched);
-      this.displayList.unWatchedList = res.filter(movie => !movie.beenWatched);
+      // 先轉treenode
+      const treeNodes = res.map((movie: IWatchedMovie) => ({ ...movie, key: movie.id, isLeaf: true }));
+      this.displayList.watchedList = treeNodes.filter(movie => movie.beenWatched);
+      this.displayList.unWatchedList = treeNodes.filter(movie => !movie.beenWatched);
     });
   }
 
 
   onPositiveClick(movie: IWatchedMovie, type: string): void {
+
     this.modalService.create({
       nzContent: CommentComponent,
       nzComponentParams: { movie, type },
@@ -63,5 +71,12 @@ export class WatchlistComponent implements OnInit {
   removeList(id: number, event: Event): void {
     event.stopPropagation();
     this.detailService.removeList(id).subscribe(() => this.getWatchList());
+  }
+
+  nzEvent(event: NzFormatEmitEvent, type: string): void {
+    // 電影資料
+    const movie = event.node.origin as unknown as IWatchedMovie;
+    this.onPositiveClick(movie, type);
+
   }
 }

@@ -1,3 +1,4 @@
+import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { DetailService } from './../../homepage/shared/detail.service';
 import { IWatchedMovie, WATCHLIST_TYPE } from './../shared/watchlist';
@@ -34,7 +35,7 @@ export class CommentComponent implements OnInit {
    * 更新電影狀態
    * @id
    */
-  submitForm() {
+  submitForm(): void {
     const formControls = this.validateForm.controls;
     for (const i in formControls) {
       if (formControls.hasOwnProperty(i)) {
