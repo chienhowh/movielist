@@ -24,13 +24,13 @@ export class WatchlistComponent implements OnInit {
   } = {
       unWatchedList: [],
       watchedList: []
-    };
+    }
 
 
   tabList = [
     { title: '尚未觀看', list: 'unWatchedList', type: WATCHLIST_TYPE.NEW },
     { title: '已經觀看', list: 'watchedList', type: WATCHLIST_TYPE.READ }
-  ];
+  ]
 
   constructor(
     private watchlistService: WatchlistService,
@@ -38,13 +38,13 @@ export class WatchlistComponent implements OnInit {
     private modalService: NzModalService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getWatchList();
   }
 
 
 
-  getWatchList(): void {
+  getWatchList() {
     this.watchlistService.getWatchLists().subscribe(res => {
       // 先轉treenode
       const treeNodes = res.map((movie: IWatchedMovie) => ({ ...movie, key: movie.id, isLeaf: true }));
@@ -64,11 +64,11 @@ export class WatchlistComponent implements OnInit {
       nzOnOk: () => {
         this.getWatchList();
       }
-    });
+    })
   }
 
 
-  removeList(id: number, event: Event): void {
+  removeList(id: number, event: Event) {
     event.stopPropagation();
     this.detailService.removeList(id).subscribe(() => this.getWatchList());
   }
