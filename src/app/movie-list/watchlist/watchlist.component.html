@@ -2,14 +2,13 @@
   <nz-tabset nzType="card">
     <ng-container *ngFor="let tab of tabList">
       <nz-tab [nzTitle]="tab.title">
-        <ul>
-          <ng-container *ngFor="let item of displayList[tab.list]">
-            <li class="title" (click)="onPositiveClick(item, tab.type)">
-              {{ item.title }}
-              <span class="close" (click)="removeList(item.id, $event)">x</span>
-            </li>
-          </ng-container>
-        </ul>
+        <nz-tree
+          [nzData]="displayList[tab.list]"
+          nzDraggable
+          (nzClick)="nzEvent($event, tab.type)"
+        ></nz-tree>
+
+        <!-- <span class="close" (click)="removeList(item.id, $event)">x</span> -->
       </nz-tab>
     </ng-container>
   </nz-tabset>
