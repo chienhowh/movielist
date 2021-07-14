@@ -242,6 +242,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ng_zorro_antd_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng-zorro-antd/modal */ "./node_modules/ng-zorro-antd/__ivy_ngcc__/fesm2015/ng-zorro-antd-modal.js");
 /* harmony import */ var ng_zorro_antd_tabs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ng-zorro-antd/tabs */ "./node_modules/ng-zorro-antd/fesm2015/ng-zorro-antd-tabs.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+/* harmony import */ var ng_zorro_antd_tree__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ng-zorro-antd/tree */ "./node_modules/ng-zorro-antd/fesm2015/ng-zorro-antd-tree.js");
 
 
 
@@ -251,28 +252,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function WatchlistComponent_ng_container_2_ng_container_3_Template(rf, ctx) { if (rf & 1) {
-    const _r6 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementContainerStart"](0);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "li", 4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("click", function WatchlistComponent_ng_container_2_ng_container_3_Template_li_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵrestoreView"](_r6); const item_r3 = ctx.$implicit; const tab_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"]().$implicit; const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"](); return ctx_r4.onPositiveClick(item_r3, tab_r1.type); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](3, "span", 5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("click", function WatchlistComponent_ng_container_2_ng_container_3_Template_span_click_3_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵrestoreView"](_r6); const item_r3 = ctx.$implicit; const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"](2); return ctx_r7.removeList(item_r3.id, $event); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](4, "x");
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementContainerEnd"]();
-} if (rf & 2) {
-    const item_r3 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"](" ", item_r3.title, " ");
-} }
+
 function WatchlistComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
+    const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementContainerStart"](0);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "nz-tab", 3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](2, "ul");
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](3, WatchlistComponent_ng_container_2_ng_container_3_Template, 5, 1, "ng-container", 2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](2, "nz-tree", 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("nzClick", function WatchlistComponent_ng_container_2_Template_nz_tree_nzClick_2_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵrestoreView"](_r3); const tab_r1 = ctx.$implicit; const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"](); return ctx_r2.nzEvent($event, tab_r1.type); });
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementContainerEnd"]();
@@ -281,8 +267,8 @@ function WatchlistComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("nzTitle", tab_r1.title);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", ctx_r0.displayList[tab_r1.list]);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("nzData", ctx_r0.displayList[tab_r1.list]);
 } }
 class WatchlistComponent {
     constructor(watchlistService, detailService, modalService) {
@@ -290,6 +276,9 @@ class WatchlistComponent {
         this.detailService = detailService;
         this.modalService = modalService;
         this.API_POSTER = _consts_global_constants_const__WEBPACK_IMPORTED_MODULE_1__["API_POSTER"];
+        /**
+         * 待播清單
+         */
         this.displayList = {
             unWatchedList: [],
             watchedList: []
@@ -304,8 +293,10 @@ class WatchlistComponent {
     }
     getWatchList() {
         this.watchlistService.getWatchLists().subscribe(res => {
-            this.displayList.watchedList = res.filter(movie => movie.beenWatched);
-            this.displayList.unWatchedList = res.filter(movie => !movie.beenWatched);
+            // 先轉treenode
+            const treeNodes = res.map((movie) => (Object.assign(Object.assign({}, movie), { key: movie.id, isLeaf: true })));
+            this.displayList.watchedList = treeNodes.filter(movie => movie.beenWatched);
+            this.displayList.unWatchedList = treeNodes.filter(movie => !movie.beenWatched);
         });
     }
     onPositiveClick(movie, type) {
@@ -323,18 +314,23 @@ class WatchlistComponent {
         event.stopPropagation();
         this.detailService.removeList(id).subscribe(() => this.getWatchList());
     }
+    nzEvent(event, type) {
+        // 電影資料
+        const movie = event.node.origin;
+        this.onPositiveClick(movie, type);
+    }
 }
 WatchlistComponent.ɵfac = function WatchlistComponent_Factory(t) { return new (t || WatchlistComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_core_services_watchlist_service__WEBPACK_IMPORTED_MODULE_3__["WatchlistService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_homepage_shared_detail_service__WEBPACK_IMPORTED_MODULE_4__["DetailService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](ng_zorro_antd_modal__WEBPACK_IMPORTED_MODULE_5__["NzModalService"])); };
-WatchlistComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: WatchlistComponent, selectors: [["app-watchlist"]], decls: 3, vars: 1, consts: [[1, "card-container"], ["nzType", "card"], [4, "ngFor", "ngForOf"], [3, "nzTitle"], [1, "title", 3, "click"], [1, "close", 3, "click"]], template: function WatchlistComponent_Template(rf, ctx) { if (rf & 1) {
+WatchlistComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: WatchlistComponent, selectors: [["app-watchlist"]], decls: 3, vars: 1, consts: [[1, "card-container"], ["nzType", "card"], [4, "ngFor", "ngForOf"], [3, "nzTitle"], ["nzDraggable", "", 3, "nzData", "nzClick"]], template: function WatchlistComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "nz-tabset", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](2, WatchlistComponent_ng_container_2_Template, 4, 2, "ng-container", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](2, WatchlistComponent_ng_container_2_Template, 3, 2, "ng-container", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", ctx.tabList);
-    } }, directives: [ng_zorro_antd_tabs__WEBPACK_IMPORTED_MODULE_6__["NzTabSetComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgForOf"], ng_zorro_antd_tabs__WEBPACK_IMPORTED_MODULE_6__["NzTabComponent"]], styles: ["@charset \"UTF-8\";\n\n.title[_ngcontent-%COMP%] {\n  padding: 4px 12px;\n  position: relative;\n}\n.title[_ngcontent-%COMP%]:hover {\n  background-color: #d1d1c1;\n}\n.close[_ngcontent-%COMP%] {\n  position: absolute;\n  right: 0;\n  top: 0;\n  padding: 0px 12px;\n}\n[_nghost-%COMP%] {\n  background: #f5f5f5;\n  overflow: hidden;\n  padding: 24px;\n  display: block;\n}\n.card-container[_ngcontent-%COMP%]     p {\n  margin: 0;\n}\n.card-container[_ngcontent-%COMP%]     > .ant-tabs-card .ant-tabs-content {\n  margin-top: -16px;\n}\n.card-container[_ngcontent-%COMP%]     > .ant-tabs-card .ant-tabs-content > .ant-tabs-tabpane {\n  background: #fff;\n  padding: 16px;\n}\n.card-container[_ngcontent-%COMP%]     > .ant-tabs-card > .ant-tabs-nav::before {\n  display: none;\n}\n.card-container[_ngcontent-%COMP%]     > .ant-tabs-card .ant-tabs-tab {\n  border-color: transparent;\n  background: transparent;\n}\n.card-container[_ngcontent-%COMP%]     > .ant-tabs-card .ant-tabs-tab-active {\n  border-color: #fff;\n  background: #fff;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW92aWUtbGlzdC93YXRjaGxpc3Qvd2F0Y2hsaXN0LmNvbXBvbmVudC5zY3NzIiwic3JjL2N1c3RvbS1kZXNpZ24uc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxnQkFBZ0I7QUNBaEIsYUFBQTtBREVBO0VBQ0UsaUJBQUE7RUFDQSxrQkFBQTtBQUNGO0FBQ0E7RUFDRSx5QkNJZ0I7QURGbEI7QUFDQTtFQUNFLGtCQUFBO0VBQ0EsUUFBQTtFQUNBLE1BQUE7RUFDQSxpQkFBQTtBQUVGO0FBRUE7RUFDRSxtQkFBQTtFQUNBLGdCQUFBO0VBQ0EsYUFBQTtFQUNBLGNBQUE7QUFDRjtBQUVBO0VBQ0UsU0FBQTtBQUNGO0FBQ0E7RUFDRSxpQkFBQTtBQUVGO0FBQUE7RUFDRSxnQkFBQTtFQUNBLGFBQUE7QUFHRjtBQURBO0VBQ0UsYUFBQTtBQUlGO0FBRkE7RUFDRSx5QkFBQTtFQUNBLHVCQUFBO0FBS0Y7QUFIQTtFQUNFLGtCQUFBO0VBQ0EsZ0JBQUE7QUFNRiIsImZpbGUiOiJzcmMvYXBwL21vdmllLWxpc3Qvd2F0Y2hsaXN0L3dhdGNobGlzdC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgXCIuLi8uLi8uLi9jdXN0b20tZGVzaWduLnNjc3NcIjtcblxuLnRpdGxlIHtcbiAgcGFkZGluZzogNHB4IDEycHg7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cbi50aXRsZTpob3ZlciB7XG4gIGJhY2tncm91bmQtY29sb3I6ICRzZWNvbmRhcnktY29sb3I7XG59XG5cbi5jbG9zZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgcmlnaHQ6IDA7XG4gIHRvcDogMDtcbiAgcGFkZGluZzogMHB4IDEycHg7XG59XG5cbi8vIHRhYiBzdGFydFxuOmhvc3Qge1xuICBiYWNrZ3JvdW5kOiAjZjVmNWY1O1xuICBvdmVyZmxvdzogaGlkZGVuO1xuICBwYWRkaW5nOiAyNHB4O1xuICBkaXNwbGF5OiBibG9jaztcbn1cblxuLmNhcmQtY29udGFpbmVyIDo6bmctZGVlcCBwIHtcbiAgbWFyZ2luOiAwO1xufVxuLmNhcmQtY29udGFpbmVyIDo6bmctZGVlcCA+IC5hbnQtdGFicy1jYXJkIC5hbnQtdGFicy1jb250ZW50IHtcbiAgbWFyZ2luLXRvcDogLTE2cHg7XG59XG4uY2FyZC1jb250YWluZXIgOjpuZy1kZWVwID4gLmFudC10YWJzLWNhcmQgLmFudC10YWJzLWNvbnRlbnQgPiAuYW50LXRhYnMtdGFicGFuZSB7XG4gIGJhY2tncm91bmQ6ICNmZmY7XG4gIHBhZGRpbmc6IDE2cHg7XG59XG4uY2FyZC1jb250YWluZXIgOjpuZy1kZWVwID4gLmFudC10YWJzLWNhcmQgPiAuYW50LXRhYnMtbmF2OjpiZWZvcmUge1xuICBkaXNwbGF5OiBub25lO1xufVxuLmNhcmQtY29udGFpbmVyIDo6bmctZGVlcCA+IC5hbnQtdGFicy1jYXJkIC5hbnQtdGFicy10YWIge1xuICBib3JkZXItY29sb3I6IHRyYW5zcGFyZW50O1xuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDtcbn1cbi5jYXJkLWNvbnRhaW5lciA6Om5nLWRlZXAgPiAuYW50LXRhYnMtY2FyZCAuYW50LXRhYnMtdGFiLWFjdGl2ZSB7XG4gIGJvcmRlci1jb2xvcjogI2ZmZjtcbiAgYmFja2dyb3VuZDogI2ZmZjtcbn1cbiIsIi8qKiDln7rnpI7lip/og73oibLoqK3lrpogKi9cbiRjb2xvci13aGl0ZTogI2ZmZjtcbiRjb2xvci1kYXJrOiByZ2JhKDAsIDAsIDAsIDAuOCk7XG4kY29sb3Itb3JhbmdlOiAjZmY5ZjAwO1xuJGNvbG9yLWdyZWVuOiAjNGNjNzkwO1xuJGNvbG9yLXJlZDogI2VlMTExMTtcbi8vIOS4u+imgeiJslxuJHByaW1hcnktY29sb3I6ICNiODhlNjU7XG4vLyDkuLvopoHoibLororlvaJcbiRwcmltYXJ5LXZhcmlhbnQtY29sb3I6ICM5NWE3OGQ7XG4vLyDmrKHopoHoibJcbiRzZWNvbmRhcnktY29sb3I6ICNkMWQxYzE7XG4vLyDmrKHopoHoibLororlvaJcbiRzZWNvbmRhcnktdmFyaWFudC1jb2xvcjogI2JkODk3ZTtcbi8vIOesrOS4ieiJslxuJHRoaXJkLWNvbG9yOiAjZTQ1NzJlO1xuLy8g56ys5LiJ6Imy6K6K5b2iXG4kdGhpcmQtdmFyaWFudC1jb2xvcjogI2VlZDdlZDtcblxuLy8g5re654GwXG4kY29sb3ItbGlnaHQtZ3JheTogI2Y3ZjdmNztcbiRjb2xvci1ncmF5OiAjNjY2O1xuIl19 */"] });
+    } }, directives: [ng_zorro_antd_tabs__WEBPACK_IMPORTED_MODULE_6__["NzTabSetComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgForOf"], ng_zorro_antd_tabs__WEBPACK_IMPORTED_MODULE_6__["NzTabComponent"], ng_zorro_antd_tree__WEBPACK_IMPORTED_MODULE_8__["NzTreeComponent"]], styles: ["@charset \"UTF-8\";\n\n.title[_ngcontent-%COMP%] {\n  padding: 4px 12px;\n  position: relative;\n}\n.title[_ngcontent-%COMP%]:hover {\n  background-color: #d1d1c1;\n}\n.close[_ngcontent-%COMP%] {\n  position: absolute;\n  right: 0;\n  top: 0;\n  padding: 0px 12px;\n}\n[_nghost-%COMP%] {\n  background: #f5f5f5;\n  overflow: hidden;\n  padding: 24px;\n  display: block;\n}\n.card-container[_ngcontent-%COMP%]     p {\n  margin: 0;\n}\n.card-container[_ngcontent-%COMP%]     > .ant-tabs-card .ant-tabs-content {\n  margin-top: -16px;\n}\n.card-container[_ngcontent-%COMP%]     > .ant-tabs-card .ant-tabs-content > .ant-tabs-tabpane {\n  background: #fff;\n  padding: 16px;\n}\n.card-container[_ngcontent-%COMP%]     > .ant-tabs-card > .ant-tabs-nav::before {\n  display: none;\n}\n.card-container[_ngcontent-%COMP%]     > .ant-tabs-card .ant-tabs-tab {\n  border-color: transparent;\n  background: transparent;\n}\n.card-container[_ngcontent-%COMP%]     > .ant-tabs-card .ant-tabs-tab-active {\n  border-color: #fff;\n  background: #fff;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW92aWUtbGlzdC93YXRjaGxpc3Qvd2F0Y2hsaXN0LmNvbXBvbmVudC5zY3NzIiwic3JjL2N1c3RvbS1kZXNpZ24uc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxnQkFBZ0I7QUNBaEIsYUFBQTtBREVBO0VBQ0UsaUJBQUE7RUFDQSxrQkFBQTtBQUNGO0FBQ0E7RUFDRSx5QkNJZ0I7QURGbEI7QUFDQTtFQUNFLGtCQUFBO0VBQ0EsUUFBQTtFQUNBLE1BQUE7RUFDQSxpQkFBQTtBQUVGO0FBRUE7RUFDRSxtQkFBQTtFQUNBLGdCQUFBO0VBQ0EsYUFBQTtFQUNBLGNBQUE7QUFDRjtBQUVBO0VBQ0UsU0FBQTtBQUNGO0FBQ0E7RUFDRSxpQkFBQTtBQUVGO0FBQUE7RUFDRSxnQkFBQTtFQUNBLGFBQUE7QUFHRjtBQURBO0VBQ0UsYUFBQTtBQUlGO0FBRkE7RUFDRSx5QkFBQTtFQUNBLHVCQUFBO0FBS0Y7QUFIQTtFQUNFLGtCQUFBO0VBQ0EsZ0JBQUE7QUFNRiIsImZpbGUiOiJzcmMvYXBwL21vdmllLWxpc3Qvd2F0Y2hsaXN0L3dhdGNobGlzdC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgXCIuLi8uLi8uLi9jdXN0b20tZGVzaWduLnNjc3NcIjtcblxuLnRpdGxlIHtcbiAgcGFkZGluZzogNHB4IDEycHg7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cbi50aXRsZTpob3ZlciB7XG4gIGJhY2tncm91bmQtY29sb3I6ICRzZWNvbmRhcnktY29sb3I7XG59XG5cbi5jbG9zZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgcmlnaHQ6IDA7XG4gIHRvcDogMDtcbiAgcGFkZGluZzogMHB4IDEycHg7XG59XG5cbi8vIHRhYiBzdGFydFxuOmhvc3Qge1xuICBiYWNrZ3JvdW5kOiAjZjVmNWY1O1xuICBvdmVyZmxvdzogaGlkZGVuO1xuICBwYWRkaW5nOiAyNHB4O1xuICBkaXNwbGF5OiBibG9jaztcbn1cblxuLmNhcmQtY29udGFpbmVyIDo6bmctZGVlcCBwIHtcbiAgbWFyZ2luOiAwO1xufVxuLmNhcmQtY29udGFpbmVyIDo6bmctZGVlcCA+IC5hbnQtdGFicy1jYXJkIC5hbnQtdGFicy1jb250ZW50IHtcbiAgbWFyZ2luLXRvcDogLTE2cHg7XG59XG4uY2FyZC1jb250YWluZXIgOjpuZy1kZWVwID4gLmFudC10YWJzLWNhcmQgLmFudC10YWJzLWNvbnRlbnQgPiAuYW50LXRhYnMtdGFicGFuZSB7XG4gIGJhY2tncm91bmQ6ICNmZmY7XG4gIHBhZGRpbmc6IDE2cHg7XG59XG4uY2FyZC1jb250YWluZXIgOjpuZy1kZWVwID4gLmFudC10YWJzLWNhcmQgPiAuYW50LXRhYnMtbmF2OjpiZWZvcmUge1xuICBkaXNwbGF5OiBub25lO1xufVxuLmNhcmQtY29udGFpbmVyIDo6bmctZGVlcCA+IC5hbnQtdGFicy1jYXJkIC5hbnQtdGFicy10YWIge1xuICBib3JkZXItY29sb3I6IHRyYW5zcGFyZW50O1xuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDtcbn1cbi5jYXJkLWNvbnRhaW5lciA6Om5nLWRlZXAgPiAuYW50LXRhYnMtY2FyZCAuYW50LXRhYnMtdGFiLWFjdGl2ZSB7XG4gIGJvcmRlci1jb2xvcjogI2ZmZjtcbiAgYmFja2dyb3VuZDogI2ZmZjtcbn1cbiIsIi8qKiDln7rnpI7lip/og73oibLoqK3lrpogKi9cbiRjb2xvci13aGl0ZTogI2ZmZjtcbiRjb2xvci1kYXJrOiByZ2JhKDAsIDAsIDAsIDAuOCk7XG4kY29sb3Itb3JhbmdlOiAjZmY5ZjAwO1xuJGNvbG9yLWdyZWVuOiAjNGNjNzkwO1xuJGNvbG9yLXJlZDogI2VlMTExMTtcbi8vIOS4u+imgeiJslxuJHByaW1hcnktY29sb3I6ICNiODhlNjU7XG4vLyDkuLvopoHoibLororlvaJcbiRwcmltYXJ5LXZhcmlhbnQtY29sb3I6ICM5NWE3OGQ7XG4vLyDmrKHopoHoibJcbiRzZWNvbmRhcnktY29sb3I6ICNkMWQxYzE7XG4vLyDmrKHopoHoibLororlvaJcbiRzZWNvbmRhcnktdmFyaWFudC1jb2xvcjogI2JkODk3ZTtcbi8vIOesrOS4ieiJslxuJHRoaXJkLWNvbG9yOiAjZTQ1NzJlO1xuLy8g56ys5LiJ6Imy6K6K5b2iXG4kdGhpcmQtdmFyaWFudC1jb2xvcjogI2VlZDdlZDtcblxuLy8g5re654GwXG4kY29sb3ItbGlnaHQtZ3JheTogI2Y3ZjdmNztcbiRjb2xvci1ncmF5OiAjNjY2O1xuIl19 */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵsetClassMetadata"](WatchlistComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"],
         args: [{

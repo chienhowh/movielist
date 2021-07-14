@@ -816,6 +816,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ng-zorro-antd/input */ "./node_modules/ng-zorro-antd/fesm2015/ng-zorro-antd-input.js");
 /* harmony import */ var ng_zorro_antd_icon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ng-zorro-antd/icon */ "./node_modules/ng-zorro-antd/__ivy_ngcc__/fesm2015/ng-zorro-antd-icon.js");
 /* harmony import */ var ng_zorro_antd_dropdown__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ng-zorro-antd/dropdown */ "./node_modules/ng-zorro-antd/fesm2015/ng-zorro-antd-dropdown.js");
+/* harmony import */ var ng_zorro_antd_tree__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ng-zorro-antd/tree */ "./node_modules/ng-zorro-antd/fesm2015/ng-zorro-antd-tree.js");
+
 
 
 
@@ -842,7 +844,8 @@ SharedModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjec
         ng_zorro_antd_modal__WEBPACK_IMPORTED_MODULE_7__["NzModalModule"],
         ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_9__["NzInputModule"],
         ng_zorro_antd_icon__WEBPACK_IMPORTED_MODULE_10__["NzIconModule"],
-        ng_zorro_antd_dropdown__WEBPACK_IMPORTED_MODULE_11__["NzDropDownModule"]] });
+        ng_zorro_antd_dropdown__WEBPACK_IMPORTED_MODULE_11__["NzDropDownModule"],
+        ng_zorro_antd_tree__WEBPACK_IMPORTED_MODULE_12__["NzTreeModule"]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](SharedModule, { declarations: [_rate_icon_rate_icon_component__WEBPACK_IMPORTED_MODULE_0__["RateIconComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"]], exports: [_rate_icon_rate_icon_component__WEBPACK_IMPORTED_MODULE_0__["RateIconComponent"],
         ng_zorro_antd_tabs__WEBPACK_IMPORTED_MODULE_4__["NzTabsModule"],
         ng_zorro_antd_form__WEBPACK_IMPORTED_MODULE_3__["NzFormModule"],
@@ -852,7 +855,8 @@ SharedModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjec
         ng_zorro_antd_modal__WEBPACK_IMPORTED_MODULE_7__["NzModalModule"],
         ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_9__["NzInputModule"],
         ng_zorro_antd_icon__WEBPACK_IMPORTED_MODULE_10__["NzIconModule"],
-        ng_zorro_antd_dropdown__WEBPACK_IMPORTED_MODULE_11__["NzDropDownModule"]] }); })();
+        ng_zorro_antd_dropdown__WEBPACK_IMPORTED_MODULE_11__["NzDropDownModule"],
+        ng_zorro_antd_tree__WEBPACK_IMPORTED_MODULE_12__["NzTreeModule"]] }); })();
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](SharedModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"],
         args: [{
@@ -872,7 +876,8 @@ SharedModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjec
                     ng_zorro_antd_modal__WEBPACK_IMPORTED_MODULE_7__["NzModalModule"],
                     ng_zorro_antd_input__WEBPACK_IMPORTED_MODULE_9__["NzInputModule"],
                     ng_zorro_antd_icon__WEBPACK_IMPORTED_MODULE_10__["NzIconModule"],
-                    ng_zorro_antd_dropdown__WEBPACK_IMPORTED_MODULE_11__["NzDropDownModule"]
+                    ng_zorro_antd_dropdown__WEBPACK_IMPORTED_MODULE_11__["NzDropDownModule"],
+                    ng_zorro_antd_tree__WEBPACK_IMPORTED_MODULE_12__["NzTreeModule"]
                 ]
             }]
     }], null, null); })();
