@@ -28,7 +28,7 @@ export class CarouselComponent implements OnInit {
   @Input() searchApi: string;
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
+  onResize(event: any): void {
     this.countImgNumber();
   }
 
@@ -46,10 +46,11 @@ export class CarouselComponent implements OnInit {
 
   }
 
-  countImgNumber() {
+  countImgNumber(): void {
     const width = window.innerWidth;
     if (width >= 1200) {
-      this.imgNumber = Math.floor((width - 74) / 140); // 扣掉兩邊跟圖片之間padding
+      // this.imgNumber = Math.floor((width - 74) / 140); // 扣掉兩邊跟圖片之間padding
+      this.imgNumber = 9;
     } else {
       this.imgNumber = Math.floor((width - 14) / 140);
     }
