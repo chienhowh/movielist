@@ -53,7 +53,6 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
       // 避免重複塞矩陣
       if (!this.page.beenSearched) {
-        console.warn('push array');
         for (let i = 0; i < this.page.totalPages; i++) {
           this.paginator.push({ pageIndex: i + 1 });
         }

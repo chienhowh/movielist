@@ -1,3 +1,4 @@
+import { SharedModule } from './shared/shared.module';
 import { MovieDetailComponent } from './movie-list/homepage/movie-detail/movie-detail.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -29,6 +30,7 @@ const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, Me
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     NzDropDownModule,
     NzIconModule.forRoot(icons)
   ],
