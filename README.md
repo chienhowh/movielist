@@ -1,16 +1,16 @@
 ## Movielist-電影清單
 查看電影詳情，加入我的最愛，觀看後可留下評語。
-<a href="https://github.com/chienhowh/movielist" target="blank">實際操作網站</a>
+<a href="https://github.com/chienhowh/movielist" target="_blank">實際操作網站</a>
 <p align="center">
 <img src="https://user-images.githubusercontent.com/63964025/126886661-60fb9ae7-aea6-48db-b00e-2c731aea013d.png" width="600">
 </p>
 
 ## 特點
-* 前端使用Angular，搭配Bootstrap, NG-ZORRO建立樣式。
+* 前端使用Angular，完成SPA，搭配Bootstrap, NG-ZORRO建立樣式、RWD。
 * 後端server利用Node.js, Express，並部署在Linode。
-* 使用者資料儲存於MongoDB。
-* 前後端以RestfulAPI連接。
-* <a href="https://github.com/chienhowh/movielistback" target="blank">後端server github</a>。
+* 使用者電影清單儲存於MongoDB，以RestfulAPI連接。
+* 電影資訊連接`TMDB API`。
+* <a href="https://github.com/chienhowh/movielistback" target="_blank">後端server github</a>。
 
 
 
@@ -44,14 +44,13 @@
 * 尚未觀看電影可紀錄觀影日期、評語。
 * 已觀看電影可查看觀影日期、評語。
 <p align="center">
-<img src="https://user-images.githubusercontent.com/63964025/126887683-bad0df93-c589-44d0-ae8a-acb091800be5.png
+<img src="https://user-images.githubusercontent.com/63964025/126888614-4c437805-3b70-4ab8-8f5e-d7d2f3f07a53.png
 " width="600">
 </p>
 <p align="center">
-<img src="https://user-images.githubusercontent.com/63964025/126887814-256608ed-dbfd-43ca-9348-045f6eaab494.png
+<img src="https://user-images.githubusercontent.com/63964025/126888642-6ef2a8bd-eed1-412c-94ac-4969b6a29bc0.png
 " width="600">
 </p>
-
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.6.
 
