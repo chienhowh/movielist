@@ -42,8 +42,6 @@ export class CarouselComponent implements OnInit {
     this.countImgNumber();
     this.movieList$ = this.movieRequestService.request(API.GET, `/movie/${this.searchApi}`)
       .pipe(map(res => [...res.results]));
-    console.log(this.imgNumber);
-
   }
 
   countImgNumber(): void {

@@ -56,15 +56,13 @@ export class MovieDetailComponent implements OnInit {
     const sendData = { id, title };
     if (this.isInList) {
       this.detailService.removeList(id).subscribe((res) => {
-        console.log(res);
-
-        if (res.errors) { console.log('error'); return; }
+        if (res.errors) { return; }
         this.isInList = false;
       });
     } else {
       // 不在list，我們新增
       this.detailService.addtoList(sendData).subscribe((res) => {
-        if (res.errors) { console.log('error'); return; }
+        if (res.errors) { return; }
         this.isInList = true;
       });
     }

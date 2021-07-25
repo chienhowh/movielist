@@ -32,7 +32,6 @@ export class MovieRequestService {
   dbRequest(method: string, url: string, sendData?: any): Observable<any> {
     const headers = this.getHTTPHeaders();
     const params = { ...sendData };
-    console.log(params, headers);
 
     const sendUrl = environment.DB_IP + url;
     switch (method) {

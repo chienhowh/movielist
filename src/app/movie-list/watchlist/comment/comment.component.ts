@@ -43,7 +43,6 @@ export class CommentComponent implements OnInit {
         formControls[i].updateValueAndValidity();
       }
     }
-    console.log(this.validateForm);
 
     if (this.validateForm.invalid) { return; }
     if (this.type === WATCHLIST_TYPE.READ) {

@@ -27,15 +27,13 @@ export class HomepageComponent implements OnInit {
     });
   }
 
-  searchMovie(event?) {
+  searchMovie(event?):void {
     if (!this.searchText.trim()) { return; }
     this.router.navigate(['home', 'search'], { state: { query: this.searchText } });
   }
 
-  onSwiper(swiper) {
-    console.log(swiper);
+  onSwiper(swiper) :void{
   }
-  onSlideChange() {
-    console.log('slide change');
+  onSlideChange():void {
   }
 }

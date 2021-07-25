@@ -12,7 +12,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
 @NgModule({
-  declarations: [],
+  declarations: [
+    RateIconComponent
+  ],
   imports: [
     CommonModule
   ],

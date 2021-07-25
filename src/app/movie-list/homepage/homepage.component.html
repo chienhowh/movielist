@@ -15,7 +15,6 @@
       <button
         nz-button
         nzType="primary"
-
         class="search-btn"
         nzSize="large"
         (click)="searchMovie()"
@@ -30,13 +29,14 @@
     [searchApi]="'now_playing'"
   ></app-carousel>
   <app-carousel
-    [searchTitle]="'熱門精選'"
-    [searchApi]="'popular'"
-  ></app-carousel>
-  <app-carousel
-    [searchTitle]="'評價最高'"
+    [searchTitle]="'最受好評'"
     [searchApi]="'top_rated'"
   ></app-carousel>
+  <app-carousel
+    [searchTitle]="'最受歡迎'"
+    [searchApi]="'popular'"
+  ></app-carousel>
+
   <!-- <app-carousel
     [searchTitle]="'Upcoming'"
     [searchApi]="'upcoming'"

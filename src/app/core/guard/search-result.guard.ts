@@ -16,7 +16,7 @@ export class SearchResultGuard implements CanActivate {
     console.log(next);
     console.log(state);
 
-return true;
+    return true;
     // return this.router.parseUrl('');
   }
 

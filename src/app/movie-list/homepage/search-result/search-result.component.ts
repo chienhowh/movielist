@@ -50,7 +50,6 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
       const details = res.results;
       this.page.totalResults = res.total_results;
       this.displayList = [];
-      console.log('page.totalPages', this.page.totalPages);
 
       // 避免重複塞矩陣
       if (!this.page.beenSearched) {
@@ -60,7 +59,6 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
         }
         this.page.beenSearched = true;
       }
-      console.log(this.paginator);
       this.setShowPaginator(this.page.pageIndex);
 
       details.forEach(movie => {
@@ -72,7 +70,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
   /**
    * 用ID 摳詳細資訊
    */
-  searchMovieById(movie: IKeyword) {
+  searchMovieById(movie: IKeyword): void {
     this.movieRequestService.request(API.GET, `${API.MOVIE}/${movie.id}`).subscribe(
       detail => {
         this.displayList.push(detail);
@@ -85,7 +83,6 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
   /** 換頁 */
   changePage(pageIndex: number): void {
     if (pageIndex < 1 || pageIndex > this.page.totalPages) {
-      console.log('invalid page');
       return;
     }
     this.page.pageIndex = pageIndex;
@@ -93,9 +90,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
     window.scrollTo({ top: 0 }); // 回到上層
   }
   /** 顯示paginator */
-  setShowPaginator(pageIndex: number) {
+  setShowPaginator(pageIndex: number): void {
     this.showPaginator = [];
-    console.log(this.paginator);
+
     // 不到五頁
     if (this.page.totalPages <= 5 || pageIndex < 4) {
       this.showPaginator = this.paginator.slice(0, 5);
@@ -104,7 +101,6 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
     } else {
       this.showPaginator = this.paginator.slice(pageIndex - 3, pageIndex + 2);
     }
-    console.log(this.showPaginator);
 
 
     if (this.page.totalPages - pageIndex >= 5) {
@@ -115,7 +111,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onSearch(){
+  onSearch() {
     this.page.initialize();
     this.searchQuery();
   }

@@ -1,3 +1,4 @@
+import { SharedModule } from './../../shared/shared.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { TextEllipsisPipe } from './../../core/pipes/text-ellipsis.pipe';
 import { GenrePipe } from './../../core/pipes/genre.pipe';
@@ -32,7 +33,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     NzModalModule,
     NzButtonModule,
     NzInputModule,
-    NzIconModule
+    NzIconModule,
+    SharedModule
   ]
 })
 export class HomepageModule { }

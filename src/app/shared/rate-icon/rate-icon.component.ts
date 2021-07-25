@@ -10,7 +10,7 @@ export class RateIconComponent implements OnInit {
   @Input() rate: string;
 
   // 儀表板長度
-  circleRate:number;
+  circleRate: number;
   // 儀表板顏色
   circleColor: string;
   constructor() { }

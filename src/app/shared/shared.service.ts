@@ -11,6 +11,5 @@ export class SharedService {
 
   set setUserDeviceSubject(value: string) {
     this.device = value;
-    console.log('device', this.device);
   }
 }
