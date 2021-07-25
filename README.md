@@ -1,6 +1,6 @@
 ## Movielist-電影清單
 查看電影詳情，加入我的最愛，觀看後可留下評語。
-<a href="https://github.com/chienhowh/movielist" target="_blank">實際操作網站</a>
+<a href="https://chienhowh.github.io/movielist/#/home" target="_blank">實際操作網站</a>
 <p align="center">
 <img src="https://user-images.githubusercontent.com/63964025/126886661-60fb9ae7-aea6-48db-b00e-2c731aea013d.png" width="600">
 </p>
@@ -44,12 +44,10 @@
 * 尚未觀看電影可紀錄觀影日期、評語。
 * 已觀看電影可查看觀影日期、評語。
 <p align="center">
-<img src="https://user-images.githubusercontent.com/63964025/126888614-4c437805-3b70-4ab8-8f5e-d7d2f3f07a53.png
-" width="600">
+<img src="https://user-images.githubusercontent.com/63964025/126888614-4c437805-3b70-4ab8-8f5e-d7d2f3f07a53.png" width="600">
 </p>
 <p align="center">
-<img src="https://user-images.githubusercontent.com/63964025/126888642-6ef2a8bd-eed1-412c-94ac-4969b6a29bc0.png
-" width="600">
+<img src="https://user-images.githubusercontent.com/63964025/126888642-6ef2a8bd-eed1-412c-94ac-4969b6a29bc0.png" width="600">
 </p>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.6.
