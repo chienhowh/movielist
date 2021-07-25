@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"default~movie-list-homepage-homepage-module~movie-list-watchlist-watchlist-module":"default~movie-list-homepage-homepage-module~movie-list-watchlist-watchlist-module","movie-list-homepage-homepage-module":"movie-list-homepage-homepage-module","movie-list-watchlist-watchlist-module":"movie-list-watchlist-watchlist-module"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"movie-list-homepage-homepage-module":"movie-list-homepage-homepage-module","movie-list-watchlist-watchlist-module":"movie-list-watchlist-watchlist-module"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
