@@ -1,15 +1,56 @@
-# Movielist
+## Movielist-電影清單
 查看電影詳情，加入我的最愛，觀看後可留下評語。
-`實踐操作網站`(https://github.com/chienhowh/movielist)
+<a href="https://github.com/chienhowh/movielist" target="blank">實際操作網站</a>
 <p align="center">
 <img src="https://user-images.githubusercontent.com/63964025/126886661-60fb9ae7-aea6-48db-b00e-2c731aea013d.png" width="600">
 </p>
 
-# 特點
-*前端使用Angular，搭配Bootstrap, NG-ZORRO建立樣式。
-*後端server利用Node.js, Express，並部署在Linode。
-*使用者資料儲存於MongoDB。
-*前後端以RestfulAPI連接。
+## 特點
+* 前端使用Angular，搭配Bootstrap, NG-ZORRO建立樣式。
+* 後端server利用Node.js, Express，並部署在Linode。
+* 使用者資料儲存於MongoDB。
+* 前後端以RestfulAPI連接。
+* <a href="https://github.com/chienhowh/movielistback" target="blank">後端server github</a>。
+
+
+
+## 畫面預覽
+
+### 首頁
+* 可搜索想了解電影。
+* 使用swiper套件，可左右滑動查看。
+* 點擊海報可查看電影詳情。
+<p align="center">
+<img src="https://user-images.githubusercontent.com/63964025/126886661-60fb9ae7-aea6-48db-b00e-2c731aea013d.png" width="600">
+</p>
+
+### 搜索列表
+* 顯示查詢結果。
+* 搭配分頁，避免列表過長。
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/63964025/126887528-b6a24536-63f3-4d1a-9f7e-0cb8e4ee54a6.png" width="600">
+</p>
+
+### 電影詳情頁
+* 可將電影加入清單，在我的最愛有所有紀錄。
+<p align="center">
+<img src="https://user-images.githubusercontent.com/63964025/126887377-49018f72-7bfc-466a-a07d-bbebad962cf8.png" width="600">
+</p>
+
+### 我的最愛
+* 紀錄加入清單之電影，分為尚未觀看、已觀看。
+* 提供移出列表功能。
+* 尚未觀看電影可紀錄觀影日期、評語。
+* 已觀看電影可查看觀影日期、評語。
+<p align="center">
+<img src="https://user-images.githubusercontent.com/63964025/126887683-bad0df93-c589-44d0-ae8a-acb091800be5.png
+" width="600">
+</p>
+<p align="center">
+<img src="https://user-images.githubusercontent.com/63964025/126887814-256608ed-dbfd-43ca-9348-045f6eaab494.png
+" width="600">
+</p>
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.6.
