@@ -26,7 +26,7 @@ export class DetailService {
    * 加入後端待播清單
    */
   addtoList(id, data): Observable<any> {
-    const url = `${API.WATCHLIST}/${id}`
+    const url = `${API.WATCHLIST}/${id}`;
     // return this.requestService.dbRequest(API.POST, API.WATCHLIST, movie);
     return this.requestService.fbRequest(API.PUT, url, data);
   }
@@ -35,14 +35,14 @@ export class DetailService {
    * remove movie from list
    */
   removeList(id: number): Observable<any> {
-    return this.requestService.dbRequest(API.DELETE, API.WATCHLIST + '/' + id);
+    return this.requestService.fbRequest(API.DELETE, API.WATCHLIST + '/' + id);
   }
 
   /**
    * 從DB拿單筆電影
    */
   readListById(id: number): Observable<any> {
-    return this.requestService.dbRequest(API.GET, API.WATCHLIST + '/' + id);
+    return this.requestService.fbRequest(API.GET, API.WATCHLIST + '/' + id);
   }
   /**
    * 修改電影內容
@@ -50,6 +50,6 @@ export class DetailService {
    * @patchData 資料
    */
   patchMovie(id: number, patchData): Observable<any> {
-    return this.requestService.dbRequest(API.PATCH, API.WATCHLIST + '/' + id, patchData);
+    return this.requestService.fbRequest(API.PATCH, API.WATCHLIST + '/' + id, patchData);
   }
 }

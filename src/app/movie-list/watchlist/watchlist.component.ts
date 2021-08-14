@@ -24,13 +24,13 @@ export class WatchlistComponent implements OnInit {
   } = {
       unWatchedList: [],
       watchedList: []
-    }
+    };
 
 
   tabList = [
     { title: '尚未觀看', list: 'unWatchedList', type: WATCHLIST_TYPE.NEW },
     { title: '已經觀看', list: 'watchedList', type: WATCHLIST_TYPE.READ }
-  ]
+  ];
 
   constructor(
     private watchlistService: WatchlistService,
@@ -38,22 +38,24 @@ export class WatchlistComponent implements OnInit {
     private modalService: NzModalService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getWatchList();
   }
 
 
 
-  getWatchList() {
+  getWatchList(): void {
     this.watchlistService.getWatchLists().subscribe(res => {
+      // 分類電影
       this.displayList.watchedList = res.filter(movie => movie.beenWatched);
       this.displayList.unWatchedList = res.filter(movie => !movie.beenWatched);
     });
   }
 
-
+  /**
+   * 新增 or 查看評語
+   */
   onPositiveClick(movie: IWatchedMovie, type: string): void {
-
     this.modalService.create({
       nzContent: CommentComponent,
       nzComponentParams: { movie, type },
@@ -62,11 +64,11 @@ export class WatchlistComponent implements OnInit {
       nzOnOk: () => {
         this.getWatchList();
       }
-    })
+    });
   }
 
 
-  removeList(id: number, event: Event) {
+  removeList(id: number, event: Event): void {
     event.stopPropagation();
     this.detailService.removeList(id).subscribe(() => this.getWatchList());
   }

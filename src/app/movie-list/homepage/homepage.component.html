@@ -24,19 +24,24 @@
     </div>
   </section>
   <!-- Movie List Start -->
-  <app-carousel
-    [searchTitle]="'現正熱映'"
-    [searchApi]="'now_playing'"
-  ></app-carousel>
-  <app-carousel
-    [searchTitle]="'最受好評'"
-    [searchApi]="'top_rated'"
-  ></app-carousel>
-  <app-carousel
-    [searchTitle]="'最受歡迎'"
-    [searchApi]="'popular'"
-  ></app-carousel>
-
+  <section class="carousel-box">
+    <app-carousel
+      [searchTitle]="'現正熱映'"
+      [searchApi]="'now_playing'"
+    ></app-carousel>
+  </section>
+  <section class="carousel-box">
+    <app-carousel
+      [searchTitle]="'最受好評'"
+      [searchApi]="'top_rated'"
+    ></app-carousel>
+  </section>
+  <section class="carousel-box">
+    <app-carousel
+      [searchTitle]="'最受歡迎'"
+      [searchApi]="'popular'"
+    ></app-carousel>
+  </section>
   <!-- <app-carousel
     [searchTitle]="'Upcoming'"
     [searchApi]="'upcoming'"

@@ -51,34 +51,28 @@ export class MovieDetailComponent implements OnInit {
 
 
   /** click icon to addlist */
-  addList(detail: IMovieInfo) {
-    console.log(detail)
-    const { id, title } = detail
+  addList(detail: IMovieInfo): void {
+    const { id, title } = detail;
     const sendData = {
-
-
       title,
-      addTime: new Date().valueOf()
-
+      addTime: new Date().valueOf(),
+      beenWatched: false
     };
     if (this.isInList) {
-      // this.detailService.removeList(id).subscribe((res) => {
-      //   if (res.errors) { return; }
-      //   this.isInList = false;
-      // });
+      this.detailService.removeList(id).subscribe(() =>
+        this.isInList = false
+      );
     } else {
       // 不在list，我們新增
-      this.detailService.addtoList(id,sendData).subscribe((res) => {
-        if (res.errors) { return; }
-        this.isInList = true;
-      });
+      this.detailService.addtoList(id, sendData).subscribe(() =>
+        this.isInList = true);
     }
   }
 
 
 
   /** 看電影是否已在清單裡 */
-  searchInList(id: number) {
+  searchInList(id: number): void {
     this.detailService.readListById(id).subscribe(res => {
       // 回空值，代表不在名單
       this.isInList = res ? true : false;
@@ -89,7 +83,7 @@ export class MovieDetailComponent implements OnInit {
     return genres.map(genre => tify(genre.name));
   }
 
-  imgError(event) {
+  imgError(event): void {
     event.target.src = 'assets/not-found.jpeg';
     event.target.style['object-fit'] = 'contain';
     event.target.style['width'] = '100%';

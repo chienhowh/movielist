@@ -45,9 +45,7 @@ export class CommentComponent implements OnInit {
     }
 
     if (this.validateForm.invalid) { return; }
-    if (this.type === WATCHLIST_TYPE.READ) {
-      this.modalRef.triggerOk();
-    }
+
     const value = this.validateForm.value;
     this.detailService.patchMovie(this.movie.id, { beenWatched: true, ...value }).subscribe(() =>
       this.modalRef.triggerOk()
