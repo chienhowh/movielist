@@ -412,8 +412,29 @@ class MovieRequestService {
                 return this.http.delete(sendUrl, { params, headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
         }
     }
+    /** 拿海報 */
     requestPoster(posterPath, width = '200') {
         return this.http.get(`${_movie_list_consts_global_constants_const__WEBPACK_IMPORTED_MODULE_4__["API_POSTER"].GET_POSTER}/w${width}/${posterPath}`);
+    }
+    /**
+     * call firebase
+     */
+    fbRequest(method, url, sendData) {
+        const headers = this.getHTTPHeaders();
+        const params = Object.assign({}, sendData);
+        const sendUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_0__["environment"].FB_IP + url + '.json';
+        switch (method) {
+            case "get" /* GET */:
+                return this.http.get(sendUrl, { params, headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+            case "post" /* POST */:
+                return this.http.post(sendUrl, params, { headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+            case "put" /* PUT */:
+                return this.http.put(sendUrl, params, { headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+            case "patch" /* PATCH */:
+                return this.http.patch(sendUrl, params, { headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+            case "delete" /* DELETE */:
+                return this.http.delete(sendUrl, { params, headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+        }
     }
     getHTTPHeaders() {
         const result = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
@@ -642,24 +663,18 @@ class MovieDetailComponent {
     }
     /** click icon to addlist */
     addList(detail) {
-        const { title, id } = detail;
-        const sendData = { id, title };
+        const { id, title } = detail;
+        const sendData = {
+            title,
+            addTime: new Date().valueOf(),
+            beenWatched: false
+        };
         if (this.isInList) {
-            this.detailService.removeList(id).subscribe((res) => {
-                if (res.errors) {
-                    return;
-                }
-                this.isInList = false;
-            });
+            this.detailService.removeList(id).subscribe(() => this.isInList = false);
         }
         else {
             // 不在list，我們新增
-            this.detailService.addtoList(sendData).subscribe((res) => {
-                if (res.errors) {
-                    return;
-                }
-                this.isInList = true;
-            });
+            this.detailService.addtoList(id, sendData).subscribe(() => this.isInList = true);
         }
     }
     /** 看電影是否已在清單裡 */
@@ -729,20 +744,22 @@ class DetailService {
     /**
      * 加入後端待播清單
      */
-    addtoList(movie) {
-        return this.requestService.dbRequest("post" /* POST */, "/watchlist" /* WATCHLIST */, movie);
+    addtoList(id, data) {
+        const url = `${"/watchlist" /* WATCHLIST */}/${id}`;
+        // return this.requestService.dbRequest(API.POST, API.WATCHLIST, movie);
+        return this.requestService.fbRequest("put" /* PUT */, url, data);
     }
     /**
      * remove movie from list
      */
     removeList(id) {
-        return this.requestService.dbRequest("delete" /* DELETE */, "/watchlist" /* WATCHLIST */ + '/' + id);
+        return this.requestService.fbRequest("delete" /* DELETE */, "/watchlist" /* WATCHLIST */ + '/' + id);
     }
     /**
      * 從DB拿單筆電影
      */
     readListById(id) {
-        return this.requestService.dbRequest("get" /* GET */, "/watchlist" /* WATCHLIST */ + '/' + id);
+        return this.requestService.fbRequest("get" /* GET */, "/watchlist" /* WATCHLIST */ + '/' + id);
     }
     /**
      * 修改電影內容
@@ -750,7 +767,7 @@ class DetailService {
      * @patchData 資料
      */
     patchMovie(id, patchData) {
-        return this.requestService.dbRequest("patch" /* PATCH */, "/watchlist" /* WATCHLIST */ + '/' + id, patchData);
+        return this.requestService.fbRequest("patch" /* PATCH */, "/watchlist" /* WATCHLIST */ + '/' + id, patchData);
     }
 }
 DetailService.ɵfac = function DetailService_Factory(t) { return new (t || DetailService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_core_services_movie_request_service__WEBPACK_IMPORTED_MODULE_1__["MovieRequestService"])); };
@@ -967,7 +984,8 @@ __webpack_require__.r(__webpack_exports__);
 const environment = {
     production: false,
     DEFAULT_IP: 'https://api.themoviedb.org/3',
-    DB_IP: 'https://movieback.duckdns.org'
+    DB_IP: 'https://movieback.duckdns.org',
+    FB_IP: 'https://react-meetup-aff59-default-rtdb.asia-southeast1.firebasedatabase.app'
     // DB_IP: 'localhost:80'
 };
 /*

@@ -10,8 +10,10 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WatchlistService", function() { return WatchlistService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _movie_request_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./movie-request.service */ "./src/app/core/services/movie-request.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _movie_request_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./movie-request.service */ "./src/app/core/services/movie-request.service.ts");
+
 
 
 
@@ -21,23 +23,31 @@ class WatchlistService {
     }
     /** 取得ＤＢ所有電影紀錄 */
     getWatchLists() {
-        return this.requestService.dbRequest("get" /* GET */, "/watchlist" /* WATCHLIST */);
+        return this.requestService.fbRequest("get" /* GET */, "/watchlist" /* WATCHLIST */).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])(res => {
+            const list = [];
+            for (const key in res) {
+                if (res.hasOwnProperty(key)) {
+                    list.push(Object.assign({ id: key }, res[key]));
+                }
+            }
+            return list;
+        }));
     }
     /**
-    * 從DB拿單筆電影
-    */
+     * 從DB拿單筆電影
+     */
     getWatchById(id) {
         return this.requestService.dbRequest("get" /* GET */, "/watchlist" /* WATCHLIST */ + '/' + id);
     }
 }
-WatchlistService.ɵfac = function WatchlistService_Factory(t) { return new (t || WatchlistService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_movie_request_service__WEBPACK_IMPORTED_MODULE_1__["MovieRequestService"])); };
-WatchlistService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: WatchlistService, factory: WatchlistService.ɵfac, providedIn: 'root' });
-/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](WatchlistService, [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
+WatchlistService.ɵfac = function WatchlistService_Factory(t) { return new (t || WatchlistService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_movie_request_service__WEBPACK_IMPORTED_MODULE_2__["MovieRequestService"])); };
+WatchlistService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: WatchlistService, factory: WatchlistService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](WatchlistService, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"],
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: _movie_request_service__WEBPACK_IMPORTED_MODULE_1__["MovieRequestService"] }]; }, null); })();
+    }], function () { return [{ type: _movie_request_service__WEBPACK_IMPORTED_MODULE_2__["MovieRequestService"] }]; }, null); })();
 
 
 /***/ }),
@@ -120,15 +130,12 @@ class CommentComponent {
         if (this.validateForm.invalid) {
             return;
         }
-        if (this.type === "read" /* READ */) {
-            this.modalRef.triggerOk();
-        }
         const value = this.validateForm.value;
         this.detailService.patchMovie(this.movie.id, Object.assign({ beenWatched: true }, value)).subscribe(() => this.modalRef.triggerOk());
     }
 }
 CommentComponent.ɵfac = function CommentComponent_Factory(t) { return new (t || CommentComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_homepage_shared_detail_service__WEBPACK_IMPORTED_MODULE_2__["DetailService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ng_zorro_antd_modal__WEBPACK_IMPORTED_MODULE_3__["NzModalRef"])); };
-CommentComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CommentComponent, selectors: [["app-comment"]], inputs: { movie: "movie", type: "type" }, decls: 17, vars: 7, consts: [[1, "text-center"], ["nz-form", "", 1, "form", 3, "formGroup"], [1, "row"], [1, "col-12"], ["nzRequired", "", 3, "nzSpan"], ["nzErrorTip", "\u8ACB\u9078\u64C7\u89C0\u770B\u65E5\u671F!", 3, "nzSpan"], ["formControlName", "watchedDate", 2, "width", "100%", "max-width", "400px"], ["nzErrorTip", "\u5BEB\u4E9B\u5FC3\u5F97\u5427!", 3, "nzSpan"], ["rows", "4", "nz-input", "", "formControlName", "comment", 2, "width", "100%", "max-width", "400px"], ["class", "text-center", 4, "ngIf"], ["nz-button", "", "nzType", "primary", 1, "mr-3", 3, "click"], ["nz-button", "", "nzType", "primary", "nzDanger", "", 3, "click"]], template: function CommentComponent_Template(rf, ctx) { if (rf & 1) {
+CommentComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CommentComponent, selectors: [["app-comment"]], inputs: { movie: "movie", type: "type" }, decls: 17, vars: 7, consts: [[1, "text-center"], ["nz-form", "", 1, "form", 3, "formGroup"], [1, "row"], [1, "col-12"], ["nzRequired", "", 3, "nzSpan"], ["nzErrorTip", "\u8ACB\u9078\u64C7\u89C0\u770B\u65E5\u671F!", 3, "nzSpan"], ["formControlName", "watchedDate", 2, "width", "100%", "max-width", "400px"], ["nzErrorTip", "\u5BEB\u4E9B\u5FC3\u5F97\u5427!", 3, "nzSpan"], ["rows", "4", "nz-input", "", "formControlName", "comment", 2, "width", "100%", "max-width", "400px"], ["class", "text-center", 4, "ngIf"], ["nz-button", "", "nzType", "primary", 1, "mr-3", 3, "click"], ["nz-button", "", "nzType", "primary", "nzGhost", "", 3, "click"]], template: function CommentComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h4", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -309,10 +316,14 @@ class WatchlistComponent {
     }
     getWatchList() {
         this.watchlistService.getWatchLists().subscribe(res => {
+            // 分類電影
             this.displayList.watchedList = res.filter(movie => movie.beenWatched);
             this.displayList.unWatchedList = res.filter(movie => !movie.beenWatched);
         });
     }
+    /**
+     * 新增 or 查看評語
+     */
     onPositiveClick(movie, type) {
         this.modalService.create({
             nzContent: _comment_comment_component__WEBPACK_IMPORTED_MODULE_0__["CommentComponent"],
