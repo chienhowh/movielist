@@ -52,16 +52,23 @@ export class MovieDetailComponent implements OnInit {
 
   /** click icon to addlist */
   addList(detail: IMovieInfo) {
-    const { title, id } = detail;
-    const sendData = { id, title };
+    console.log(detail)
+    const { id, title } = detail
+    const sendData = {
+
+
+      title,
+      addTime: new Date().valueOf()
+
+    };
     if (this.isInList) {
-      this.detailService.removeList(id).subscribe((res) => {
-        if (res.errors) { return; }
-        this.isInList = false;
-      });
+      // this.detailService.removeList(id).subscribe((res) => {
+      //   if (res.errors) { return; }
+      //   this.isInList = false;
+      // });
     } else {
       // 不在list，我們新增
-      this.detailService.addtoList(sendData).subscribe((res) => {
+      this.detailService.addtoList(id,sendData).subscribe((res) => {
         if (res.errors) { return; }
         this.isInList = true;
       });

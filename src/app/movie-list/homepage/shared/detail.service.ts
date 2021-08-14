@@ -25,8 +25,10 @@ export class DetailService {
   /**
    * 加入後端待播清單
    */
-  addtoList(movie): Observable<any> {
-    return this.requestService.dbRequest(API.POST, API.WATCHLIST, movie);
+  addtoList(id, data): Observable<any> {
+    const url = `${API.WATCHLIST}/${id}`
+    // return this.requestService.dbRequest(API.POST, API.WATCHLIST, movie);
+    return this.requestService.fbRequest(API.PUT, url, data);
   }
 
   /**

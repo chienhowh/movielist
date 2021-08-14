@@ -46,6 +46,7 @@ export class MovieRequestService {
     }
   }
 
+  /** 拿海報 */
   requestPoster(posterPath: string, width = '200'): Observable<any> {
     return this.http.get(`${API_POSTER.GET_POSTER}/w${width}/${posterPath}`);
   }
@@ -64,6 +65,28 @@ export class MovieRequestService {
     }
     // return an observable with a user-facing error message
     return throwError('Something bad happened; please try again later.');
+  }
+
+  /**
+   * call firebase
+   */
+  fbRequest(method: string, url: string, sendData?: any): Observable<any> {
+    const headers = this.getHTTPHeaders();
+    const params = { ...sendData };
+
+    const sendUrl = environment.FB_IP + url + '.json';
+    switch (method) {
+      case API.GET:
+        return this.http.get(sendUrl, { params, headers }).pipe(catchError(this.handleError));
+      case API.POST:
+        return this.http.post(sendUrl, params, { headers }).pipe(catchError(this.handleError));
+      case API.PUT:
+        return this.http.put(sendUrl, params, { headers }).pipe(catchError(this.handleError));
+      case API.PATCH:
+        return this.http.patch(sendUrl, params, { headers }).pipe(catchError(this.handleError));
+      case API.DELETE:
+        return this.http.delete(sendUrl, { params, headers }).pipe(catchError(this.handleError));
+    }
   }
 
 
