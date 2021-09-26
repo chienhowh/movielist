@@ -2,25 +2,38 @@
   <nav class="nav-bar position-relative">
     <div class="header d-flex align-items-center">
       <div class="mobile">
-        <a nz-dropdown nzTrigger="click" class="d-flex" [nzDropdownMenu]="menu">
+        <a class="d-flex" (click)="drawerVisible = !drawerVisible">
           <i nz-icon nzType="menu"></i>
         </a>
-        <nz-dropdown-menu #menu="nzDropdownMenu">
-          <ul nz-menu nzSelectable class="hamburger">
-            <li nz-menu-item><a routerLink="/home">首頁</a></li>
-            <li nz-menu-item><a routerLink="/watchlist">我的最愛</a></li>
-          </ul>
-        </nz-dropdown-menu>
+        <nz-drawer
+          [nzClosable]="false"
+          [nzVisible]="drawerVisible"
+          nzPlacement="left"
+          [nzBodyStyle]="{'font-weight': '600',
+            'font-size':' 1.3em',padding:'16px'}"
+          (nzOnClose)="drawerVisible = false"
+        >
+          <ng-container *nzDrawerContent>
+            <p style="padding-bottom: 10px">
+              <a routerLink="/home" (click)="drawerVisible = false">首頁</a>
+            </p>
+            <p>
+              <a routerLink="/watchlist" (click)="drawerVisible = false"
+                >我的最愛</a
+              >
+            </p>
+          </ng-container>
+        </nz-drawer>
       </div>
       <!-- 首頁圖標 start -->
-      <a routerLink="/home" class="px-3">
+      <a routerLink="/home" class="px-3 logo">
         <!-- <div class="symbol">
           <img src="assets/movie.png" alt="" height="30" /><span
             style="color: red"
             >D </span
           ><span style="color: blue">B</span>
         </div> -->
-        <img src="assets/logo1.jpg" height="30" alt="">
+        <img src="assets/logo1.jpg" height="30" alt="" />
       </a>
       <!-- 首頁圖標 end -->
 

@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
 
   title = 'movielist';
-
+  drawerVisible = false;
   constructor(
     private sharedService: SharedService
   ) {
