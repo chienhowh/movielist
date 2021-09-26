@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { API } from '../../consts/global-constants.const';
 import { Paging } from '../../../model/paging';
 import { MovieDetailComponent } from '../movie-detail/movie-detail.component';
+import { from, Observable } from 'rxjs';
+import { concatAll, concatMap } from 'rxjs/operators';
 
 
 
@@ -34,7 +36,10 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.query = history.state.query;
-    if (!this.query) { this.router.navigateByUrl('/'); }
+    if (!this.query) {
+      this.router.navigateByUrl('/');
+      return;
+    }
     this.searchQuery();
   }
   ngAfterViewInit(): void {
@@ -43,11 +48,12 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
   /**
    * 針對字串搜尋符合電影列表
    */
-  searchQuery() {
+  searchQuery(): void {
     if (!this.query.trim()) { return; }
     const sendData = { query: this.query.trim(), page: this.page.pageIndex };
     this.movieRequestService.request(API.GET, API.SEARCH_MOVIE, sendData).subscribe((res: IResponse) => {
-      const details = res.results;
+      const details: IMovieInfo[] = res.results;
+
       this.page.totalResults = res.total_results;
       this.displayList = [];
 
@@ -59,23 +65,17 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
         this.page.beenSearched = true;
       }
       this.setShowPaginator(this.page.pageIndex);
-
-      details.forEach(movie => {
-        this.searchMovieById(movie);
-      });
+      from(details).pipe(
+        concatMap(id => this.searchMovieById(id)))
+        .subscribe(movie => this.displayList.push(movie));
     });
   }
 
   /**
    * 用ID 摳詳細資訊
    */
-  searchMovieById(movie: IKeyword): void {
-    this.movieRequestService.request(API.GET, `${API.MOVIE}/${movie.id}`).subscribe(
-      detail => {
-        this.displayList.push(detail);
-      },
-      err => console.log('err:', err)
-    );
+  searchMovieById(movie: IMovieInfo): Observable<any> {
+    return this.movieRequestService.request(API.GET, `${API.MOVIE}/${movie.id}`);
   }
 
   // page start

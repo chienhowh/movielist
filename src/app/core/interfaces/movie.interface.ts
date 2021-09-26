@@ -18,7 +18,7 @@ export interface IMovieInfo {
 
 export interface IResponse {
   page: number;
-  results: IMovieInfo[] | IKeyword[];
+  results: any;
   total_pages: number;
   total_results: number;
   dates?: { maximum: string, minimum: string };
