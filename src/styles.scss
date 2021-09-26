@@ -4,6 +4,7 @@
 @import "~swiper/swiper";
 @import "~swiper/components/pagination/pagination";
 @import "~swiper/components/navigation/navigation";
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
 // 覆蓋 ant-design color
 
 html,
@@ -12,8 +13,9 @@ body {
 }
 body {
   margin: 0;
-  font-family: "Noto Serif TC", "Roboto", "Helvetica Neue", sans-serif;
+  font-family: "Noto Sans TC", "Roboto", "Helvetica Neue", sans-serif;
 }
+// "Noto Serif TC"
 ul {
   list-style: none;
   padding: 0px;
