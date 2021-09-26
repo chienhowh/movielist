@@ -1,4 +1,10 @@
 @import "../custom-design.scss";
+
+.header {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
 .web-box {
   display: flex;
   flex-direction: column;
@@ -92,5 +98,3 @@ h5 {
 .hamburger a {
   color: black;
 }
-
-

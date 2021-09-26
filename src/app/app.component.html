@@ -1,8 +1,8 @@
 <div class="web-box">
   <nav class="nav-bar position-relative">
-    <div class="header d-flex align-items-center">
+    <div class="header row align-items-center">
       <!-- mobile drawer start -->
-      <div class="mobile">
+      <div class="mobile col-4">
         <a class="d-flex" (click)="drawerVisible = !drawerVisible">
           <i nz-icon nzType="menu"></i>
         </a>
@@ -31,22 +31,21 @@
       </div>
       <!-- mobile drawer end -->
       <!-- 首頁圖標 start -->
-      <a routerLink="/home" class="px-3 logo">
-        <!-- <div class="symbol">
-          <img src="assets/movie.png" alt="" height="30" /><span
-            style="color: red"
-            >D </span
-          ><span style="color: blue">B</span>
-        </div> -->
-        <img src="assets/logo1.jpg" height="30" alt="" />
-      </a>
+      <div class="col-4 col-sm-auto">
+        <a routerLink="/home" class="px-3 logo">
+          <img src="assets/logo1.jpg" height="30" alt="" />
+        </a>
+      </div>
       <!-- 首頁圖標 end -->
       <div class="laptop">
         <ul class="d-flex m-0 align-items-center">
           <li><a routerLink="/home">首頁</a></li>
           <li><a routerLink="/watchlist">我的最愛</a></li>
-
-          <!-- <li><a (click)="login()">登入</a></li> -->
+        </ul>
+      </div>
+      <div class="col-4 ml-auto pr-3">
+        <ul class="d-flex m-0 align-items-center justify-content-end">
+          <li><a (click)="login()">登入</a></li>
         </ul>
       </div>
     </div>

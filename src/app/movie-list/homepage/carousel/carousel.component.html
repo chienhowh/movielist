@@ -34,15 +34,20 @@
 >
   <ng-template swiperSlide *ngFor="let movie of movieList">
     <div class="carousel-cell" (click)="onWatchDetail(movie)">
-      <div class="img-box">
+      <div class="img-box position-relative">
         <img src="{{ API_POSTER.GET_POSTER + movie.poster_path }}" alt="" />
+        <div class="options">
+          <i nz-icon nzType="dash" nzTheme="outline" class="align-middle"></i>
+        </div>
       </div>
       <div class="info-box position-relative">
         <div class="rate-box">
           <app-rate-icon [rate]="movie.vote_average"></app-rate-icon>
         </div>
-        <h6 class="pt-3 font-weight-bold mb-0">{{ movie.title }}</h6>
-        <p class="fc-light">{{movie.release_date}}</p>
+        <div class="pl-2">
+          <h6 class="pt-3 font-weight-bold mb-0">{{ movie.title }}</h6>
+          <p class="fc-light">{{ movie.release_date }}</p>
+        </div>
       </div>
     </div>
   </ng-template>
