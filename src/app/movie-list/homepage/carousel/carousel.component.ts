@@ -48,7 +48,7 @@ export class CarouselComponent implements OnInit {
     const width = window.innerWidth;
     if (width >= 1200) {
       // this.imgNumber = Math.floor((width - 74) / 140); // 扣掉兩邊跟圖片之間padding
-      this.imgNumber = 9;
+      this.imgNumber = 7;
     } else {
       this.imgNumber = Math.floor((width - 14) / 140);
     }
