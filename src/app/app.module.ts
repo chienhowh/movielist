@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { MovieDetailComponent } from './movie-list/homepage/movie-detail/movie-detail.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,6 +16,8 @@ import { NZ_I18N, zh_TW } from 'ng-zorro-antd/i18n';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { registerLocaleData, CommonModule } from '@angular/common';
 import zh from '@angular/common/locales/zh';
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import { environment } from 'src/environments/environment';
 registerLocaleData(zh);
 const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, MenuOutline, CloseOutline];
 
@@ -32,9 +35,27 @@ const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, Me
     ReactiveFormsModule,
     SharedModule,
     NzDropDownModule,
-    NzIconModule.forRoot(icons)
+    RouterModule,
+    NzIconModule.forRoot(icons),
+    SocialLoginModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_TW }],
+  providers: [
+    { provide: NZ_I18N, useValue: zh_TW },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+             environment.GAPI_CLIENT_ID
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
   entryComponents: [MovieDetailComponent],
   bootstrap: [AppComponent],
 

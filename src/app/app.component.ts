@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { DEVICE } from './movie-list/consts/device.const';
 import { SharedService } from './shared/shared.service';
 import { Component, OnInit } from '@angular/core';
@@ -7,17 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
   title = 'movielist';
   drawerVisible = false;
   constructor(
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private authSvc: AuthService
   ) {
 
   }
 
   ngOnInit(): void {
     this.initUserDevice(document.documentElement.offsetWidth);
+  }
+
+  login(): void {
+    // this.authSvc.loginForUser().then(()=>console.log(this.authSvc.user) );
+    this.authSvc.loginWithGoogle();
+
   }
 
   initUserDevice(size: number): void {

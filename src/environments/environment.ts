@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   DEFAULT_IP: 'https://api.themoviedb.org/3',
   DB_IP: 'https://movieback.duckdns.org',
-  FB_IP:'https://react-meetup-aff59-default-rtdb.asia-southeast1.firebasedatabase.app'
+  FB_IP: 'https://react-meetup-aff59-default-rtdb.asia-southeast1.firebasedatabase.app',
+  GAPI_CLIENT_ID: '564087547062-3r0maars7kgpun3fonkjjpv616e88n95.apps.googleusercontent.com'
   // DB_IP: 'localhost:80'
 };
 
