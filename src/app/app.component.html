@@ -1,6 +1,7 @@
 <div class="web-box">
   <nav class="nav-bar position-relative">
     <div class="header d-flex align-items-center">
+      <!-- mobile drawer start -->
       <div class="mobile">
         <a class="d-flex" (click)="drawerVisible = !drawerVisible">
           <i nz-icon nzType="menu"></i>
@@ -9,8 +10,11 @@
           [nzClosable]="false"
           [nzVisible]="drawerVisible"
           nzPlacement="left"
-          [nzBodyStyle]="{'font-weight': '600',
-            'font-size':' 1.3em',padding:'16px'}"
+          [nzBodyStyle]="{
+            'font-weight': '600',
+            'font-size': ' 1.3em',
+            padding: '16px'
+          }"
           (nzOnClose)="drawerVisible = false"
         >
           <ng-container *nzDrawerContent>
@@ -25,6 +29,7 @@
           </ng-container>
         </nz-drawer>
       </div>
+      <!-- mobile drawer end -->
       <!-- 首頁圖標 start -->
       <a routerLink="/home" class="px-3 logo">
         <!-- <div class="symbol">
@@ -36,11 +41,14 @@
         <img src="assets/logo1.jpg" height="30" alt="" />
       </a>
       <!-- 首頁圖標 end -->
+      <div class="laptop">
+        <ul class="d-flex m-0 align-items-center">
+          <li><a routerLink="/home">首頁</a></li>
+          <li><a routerLink="/watchlist">我的最愛</a></li>
 
-      <ul class="d-flex m-0 align-items-center laptop">
-        <li><a routerLink="/home">首頁</a></li>
-        <li><a routerLink="/watchlist">我的最愛</a></li>
-      </ul>
+          <li><a (click)="login()">登入</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
   <!-- body start -->

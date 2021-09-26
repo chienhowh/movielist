@@ -1,12 +1,12 @@
 <ng-container *ngIf="displayList">
-  <h6 class="text-center font-weight-bold mb-2">
+  <h2 class="text-center font-weight-bold mb-3">
     {{ displayList.title }}
-  </h6>
+  </h2>
 
   <div class="row">
     <!-- poster start -->
     <div class="col-md-6 col-12">
-      <div class="img-box mobile-center">
+      <div class="img-box text-center">
         <img
           src="{{ API_POSTER.GET_POSTER + displayList.poster_path }}"
           (error)="imgError($event)"
@@ -37,18 +37,42 @@
         <div class="content">{{ displayList.runtime }}分</div>
       </div>
       <hr />
+      <div class="py-3 d-md-block d-none">
+        <button
+          nz-button
+          nzType="primary"
+          class="d-flex align-items-center"
+          (click)="addList(displayList)"
+          *ngIf="isInList; else noInList"
+        >
+          <i nz-icon nzType="heart" nzTheme="fill"></i>
+          移出清單
+        </button>
+        <ng-template #noInList>
+          <button
+            nz-button
+            nzType="primary"
+            class="d-flex align-items-center"
+            (click)="addList(displayList)"
+            *ngIf="!isInList"
+          >
+            <i nz-icon nzType="heart" nzTheme="outline"></i>
+            加入清單
+          </button>
+        </ng-template>
+      </div>
     </div>
     <!-- info end -->
   </div>
   <!-- 簡介 start -->
   <div class="row">
-    <div class="col-12 my-2">電影介紹:</div>
+    <div class="col-12 mb-2 my-sm-2" style="font-size: 18px;">電影介紹:</div>
     <div class="col-12 overview">
       {{ displayList.overview ? displayList.overview : "尚無介紹" }}
     </div>
   </div>
 
-  <div class="py-3">
+  <div class="py-3 d-block d-md-none">
     <button
       nz-button
       nzType="primary"

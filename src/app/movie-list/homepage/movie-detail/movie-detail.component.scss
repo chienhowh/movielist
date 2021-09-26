@@ -22,3 +22,10 @@
   height: 200px;
   overflow-y: scroll;
 }
+
+
+hr{
+  @media screen and (max-width:575px){
+    margin: 0.5rem 0;
+  }
+}
