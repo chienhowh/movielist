@@ -38,28 +38,7 @@
       </div>
       <hr />
       <div class="py-3 d-md-block d-none">
-        <button
-          nz-button
-          nzType="primary"
-          class="d-flex align-items-center"
-          (click)="addList(displayList)"
-          *ngIf="isInList; else noInList"
-        >
-          <i nz-icon nzType="heart" nzTheme="fill"></i>
-          移出清單
-        </button>
-        <ng-template #noInList>
-          <button
-            nz-button
-            nzType="primary"
-            class="d-flex align-items-center"
-            (click)="addList(displayList)"
-            *ngIf="!isInList"
-          >
-            <i nz-icon nzType="heart" nzTheme="outline"></i>
-            加入清單
-          </button>
-        </ng-template>
+        <ng-container *ngTemplateOutlet="btns"></ng-container>
       </div>
     </div>
     <!-- info end -->
@@ -73,27 +52,21 @@
   </div>
 
   <div class="py-3 d-block d-md-none">
-    <button
-      nz-button
-      nzType="primary"
-      class="d-flex align-items-center"
-      (click)="addList(displayList)"
-      *ngIf="isInList; else noInList"
-    >
-      <i nz-icon nzType="heart" nzTheme="fill"></i>
-      移出清單
-    </button>
-    <ng-template #noInList>
-      <button
-        nz-button
-        nzType="primary"
-        class="d-flex align-items-center"
-        (click)="addList(displayList)"
-        *ngIf="!isInList"
-      >
-        <i nz-icon nzType="heart" nzTheme="outline"></i>
-        加入清單
-      </button>
-    </ng-template>
+    <ng-container *ngTemplateOutlet="btns"></ng-container>
   </div>
 </ng-container>
+
+<ng-template #btns>
+  <div class="btn-groups">
+    <button nz-button nzType="primary" nzSize="large" nzShape="circle">
+      <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
+    </button>
+    <button nz-button nzType="primary" nzSize="large" nzShape="circle"(click)="handleAdd(ListType.FAVORITE)" >
+      <i nz-icon nzType="heart" [nzTheme]="inFavorite? 'fill':'outline'" [ngClass]="{'add-favorite':inFavorite}"></i>
+
+    </button>
+    <button nz-button nzType="primary" nzSize="large" nzShape="circle" (click)="handleAdd(ListType.WATCHLIST)">
+      <i nz-icon nzType="book" [nzTheme]="inWatchlist? 'fill':'outline'" [ngClass]="{'add-watchlist':inWatchlist}"></i>
+    </button>
+  </div>
+</ng-template>

@@ -9,7 +9,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { AccountBookOutline, HeartFill, HeartOutline, MenuOutline, CloseOutline, DashOutline } from '@ant-design/icons-angular/icons';
+import {
+  AccountBookOutline, HeartFill, HeartOutline, MenuOutline,
+  CloseOutline, DashOutline, BookOutline, UnorderedListOutline, BookFill
+} from '@ant-design/icons-angular/icons';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NZ_I18N, zh_TW } from 'ng-zorro-antd/i18n';
@@ -19,7 +22,9 @@ import zh from '@angular/common/locales/zh';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
 registerLocaleData(zh);
-const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, MenuOutline, CloseOutline, DashOutline];
+const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, MenuOutline,
+  CloseOutline, DashOutline, UnorderedListOutline, BookOutline,
+  BookFill];
 
 @NgModule({
   declarations: [

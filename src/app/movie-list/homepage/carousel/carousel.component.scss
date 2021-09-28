@@ -15,7 +15,7 @@ h1 {
   padding: 0;
 }
 
-.img-box{
+.img-box {
   cursor: pointer;
 }
 
@@ -27,7 +27,6 @@ h1 {
 
 .swiper-slide {
   background: #fff;
-
   /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;
@@ -72,13 +71,28 @@ h1 {
   }
 }
 
-.options{
+.options-box {
   position: absolute;
   top: 8px;
   right: 8px;
-  width: 26px;
+  width: 24px;
   text-align: center;
-  height: 26px;
+  height: 24px;
   border-radius: 50%;
-  background-color: rgba(190,190,184,0.6);
+  background-color: rgba(190, 190, 184, 0.6);
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(1, 180, 229);
+  }
 }
+
+.options {
+  li {
+    padding: 6px 20px;
+  }
+}
+
+i {
+  vertical-align: middle !important;
+}
+

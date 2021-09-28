@@ -1,9 +1,12 @@
+import { ListType } from './../../../core/enums/list-type.enum';
+import { MessageService } from './../../../core/services/message.service';
 import { DetailService } from './../shared/detail.service';
 import { API_POSTER } from './../../consts/global-constants.const';
 import { IMovieInfo } from './../../../core/interfaces/movie.interface';
 import { Component, Input, OnInit } from '@angular/core';
 import { tify, sify } from 'chinese-conv';
 import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.component.html',
@@ -16,9 +19,11 @@ export class MovieDetailComponent implements OnInit {
   API_POSTER = API_POSTER;
   movieId: number;
   displayList: IMovieInfo;
-
-
+  /** 清單類別 */
+  ListType = ListType;
   isInList = false;
+  inFavorite = false;
+  inWatchlist = false;
   listMap = [
     { header: '類型', key: 'genres' },
     { header: '上映日期', key: 'release_date' },
@@ -28,7 +33,8 @@ export class MovieDetailComponent implements OnInit {
 
   constructor(
     private detailService: DetailService,
-    public modalRef: NzModalRef
+    public modalRef: NzModalRef,
+    private msgSvc: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +47,7 @@ export class MovieDetailComponent implements OnInit {
     }
   }
 
-  getDetailById(id: number) {
+  getDetailById(id: number): void {
     this.detailService.getMovieDetail(id).subscribe(res => {
       this.displayList = res;
     });
@@ -68,7 +74,18 @@ export class MovieDetailComponent implements OnInit {
         this.isInList = true);
     }
   }
-
+  handleAdd(type: ListType): void {
+    switch (type) {
+      case ListType.WATCHLIST:
+        this.inWatchlist = !this.inWatchlist;
+        this.msgSvc.handleAddAction('待播清單', this.inWatchlist);
+        break;
+      case ListType.FAVORITE:
+        this.inFavorite = !this.inFavorite;
+        this.msgSvc.handleAddAction('我的最愛', this.inFavorite);
+        break;
+    }
+  }
 
 
   /** 看電影是否已在清單裡 */

@@ -1,6 +1,10 @@
 @import "../../../custom-design.scss";
 
 .search-box {
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: $secondary-color;
   // 放backdrop_path
   background-image: linear-gradient(to right, $secondary-color, rgba(255, 255, 255, 0.2)),

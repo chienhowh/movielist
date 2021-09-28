@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { ListType } from '../../../core/enums/list-type.enum';
 SwiperCore.use([Pagination, Navigation]);
 
 
@@ -19,6 +20,7 @@ SwiperCore.use([Pagination, Navigation]);
 })
 export class CarouselComponent implements OnInit {
   API_POSTER = API_POSTER;
+  listType = ListType;
   movieList$: Observable<any[]>;
   imgNumber: number;
   /**
@@ -69,5 +71,18 @@ export class CarouselComponent implements OnInit {
     });
   }
 
+  getMovieOption(movie: IMovieInfo): void {
+
+  }
+
+
+  handleOption(listType: ListType, movie: IMovieInfo): void {
+    switch (listType) {
+      case ListType.FAVORITE:
+        break;
+      case ListType.WATCHLIST:
+        break;
+    }
+  }
 
 }

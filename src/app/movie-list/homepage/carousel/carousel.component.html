@@ -36,9 +36,58 @@
     <div class="carousel-cell" (click)="onWatchDetail(movie)">
       <div class="img-box position-relative">
         <img src="{{ API_POSTER.GET_POSTER + movie.poster_path }}" alt="" />
-        <div class="options">
-          <i nz-icon nzType="dash" nzTheme="outline" class="align-middle"></i>
-        </div>
+        <!-- add list actions start -->
+        <!-- <div class="options-box">
+          <i
+            nz-icon
+            nz-dropdown
+            [nzDropdownMenu]="menu"
+            [nzClickHide]="false"
+            nzTrigger="click"
+            nzPlacement="bottomCenter"
+            nzType="dash"
+            nzTheme="outline"
+            (click)=" $event.stopPropagation()"
+          ></i>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu class="options">
+              <li
+                nz-menu-item
+                nz-tooltip
+                nzTooltipTitle="prompt text"
+                nzTooltipPlacement="right"
+                nzTooltipTrigger="click"
+              >
+                <i nz-icon nzType="unordered-list" nzTheme="outline"></i
+                >加入列表
+              </li>
+              <li nz-menu-item (click)="handleOption(listType.FAVORITE, movie)">
+                <i nz-icon nzType="heart" nzTheme="outline"></i>
+                <i
+                  nz-icon
+                  nzType="heart"
+                  nzTheme="fill"
+                  class="add-favorite"
+                ></i>
+                我的最愛
+              </li>
+              <li
+                nz-menu-item
+                (click)="handleOption(listType.WATCHLIST, movie)"
+              >
+                <i nz-icon nzType="book" nzTheme="outline"></i>
+                <i
+                  nz-icon
+                  nzType="book"
+                  nzTheme="fill"
+                  class="add-watchlist"
+                ></i>
+                待看清單
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </div> -->
+        <!-- add list actions end -->
       </div>
       <div class="info-box position-relative">
         <div class="rate-box">
