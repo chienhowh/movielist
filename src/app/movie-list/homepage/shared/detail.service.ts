@@ -35,12 +35,15 @@ export class DetailService {
       case ListType.WATCHLIST:
         url = API.WATCHLIST;
         break;
+      case ListType.ADDLIST:
+        url = API.ADDLIST;
+
       default:
         console.log('error type');
         return;
     }
     // return this.requestService.dbRequest(API.POST, API.WATCHLIST, movie);
-    return this.requestService.fbRequest(API.PUT, url, data);
+    return this.requestService.fbRequest(API.PUT, url + '/' + id, data);
   }
 
   /**
