@@ -73,11 +73,7 @@
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <div>
         <div>
-          <a
-            [routerLink]="ROUTING_PATH.HOME + '/' + ROUTING_PATH.LIST_ADDING"
-            (click)="modalRef.close()"
-            ><i nz-icon nzType="plus" nzTheme="outline"></i> 建立新清單</a
-          >
+          <a (click)="openNewList()"><i nz-icon nzType="plus" nzTheme="outline"></i> 建立新清單</a>
         </div>
         <nz-select
           nzShowSearch

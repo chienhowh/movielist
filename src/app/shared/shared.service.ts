@@ -1,4 +1,4 @@
-import { DEVICE } from './../movie-list/consts/device.const';
+import { DEVICE } from '../movie-list/core/consts/device.const';
 import { Injectable } from '@angular/core';
 
 @Injectable({

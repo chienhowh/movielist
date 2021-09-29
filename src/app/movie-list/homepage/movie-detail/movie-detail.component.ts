@@ -1,15 +1,16 @@
+import { ListAddingComponent } from './../list-adding/list-adding.component';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ROUTING_PATH } from './../../consts/routing-path.const';
+import { ROUTING_PATH } from '../../core/consts/routing-path.const';
 import { Observable } from 'rxjs';
 import { ListType } from './../../../core/enums/list-type.enum';
 import { MessageService } from './../../../core/services/message.service';
 import { DetailService } from './../shared/detail.service';
-import { API_POSTER } from './../../consts/global-constants.const';
+import { API_POSTER } from '../../core/consts/global-constants.const';
 import { IMovieInfo } from './../../../core/interfaces/movie.interface';
 import { Component, Input, OnInit } from '@angular/core';
 import { tify } from 'chinese-conv';
-import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-movie-detail',
@@ -39,11 +40,12 @@ export class MovieDetailComponent implements OnInit {
   ];
 
 
-  selectedValue = ''
+  selectedValue = '';
   constructor(
     private detailService: DetailService,
     public modalRef: NzModalRef,
-    private msgSvc: MessageService
+    private msgSvc: MessageService,
+    private nzModal: NzModalService
   ) { }
 
   ngOnInit(): void {
@@ -123,5 +125,15 @@ export class MovieDetailComponent implements OnInit {
     event.target.src = 'assets/not-found.jpeg';
     event.target.style['object-fit'] = 'contain';
     event.target.style['width'] = '100%';
+  }
+
+
+  openNewList(): void {
+    this.nzModal.create({
+      nzTitle: '建立新清單',
+      nzContent: ListAddingComponent,
+      nzFooter: null,
+      nzBodyStyle: { padding: '24px' },
+    });
   }
 }

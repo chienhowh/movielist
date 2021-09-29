@@ -4,6 +4,7 @@ import { DetailService } from './../../homepage/shared/detail.service';
 import { IWatchedMovie, WATCHLIST_TYPE } from './../shared/watchlist';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { verifyForm } from '../../core/funcs/verify-form';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -36,15 +37,7 @@ export class CommentComponent implements OnInit {
    * @id
    */
   submitForm(): void {
-    const formControls = this.validateForm.controls;
-    for (const i in formControls) {
-      if (formControls.hasOwnProperty(i)) {
-        formControls[i].markAsDirty();
-        formControls[i].updateValueAndValidity();
-      }
-    }
-
-    if (this.validateForm.invalid) { return; }
+    if (verifyForm(this.validateForm)) { return; }
 
     const value = this.validateForm.value;
     this.detailService.patchMovie(this.movie.id, { beenWatched: true, ...value }).subscribe(() =>

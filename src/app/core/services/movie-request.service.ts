@@ -2,7 +2,7 @@ import { environment } from './../../../environments/environment';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { API, API_POSTER } from '../../movie-list/consts/global-constants.const';
+import { API, API_POSTER } from '../../movie-list/core/consts/global-constants.const';
 import { catchError, filter, tap } from 'rxjs/operators';
 
 @Injectable({

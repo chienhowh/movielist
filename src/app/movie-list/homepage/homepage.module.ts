@@ -10,7 +10,7 @@ import { HomepageRoutingModule } from './homepage-routing.module';
 import { CarouselComponent } from './carousel/carousel.component';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 import { SearchResultComponent } from './search-result/search-result.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SwiperModule } from 'swiper/angular';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -31,6 +31,7 @@ import { ListAddingComponent } from './list-adding/list-adding.component';
     CommonModule,
     HomepageRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     SwiperModule,
     NzModalModule,
     NzButtonModule,

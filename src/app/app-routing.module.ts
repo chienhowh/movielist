@@ -1,4 +1,4 @@
-import { ROUTING_PATH } from './movie-list/consts/routing-path.const';
+import { ROUTING_PATH } from './movie-list/core/consts/routing-path.const';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

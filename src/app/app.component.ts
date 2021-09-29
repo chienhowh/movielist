@@ -1,5 +1,5 @@
 import { AuthService } from './auth.service';
-import { DEVICE } from './movie-list/consts/device.const';
+import { DEVICE } from './movie-list/core/consts/device.const';
 import { SharedService } from './shared/shared.service';
 import { Component, OnInit } from '@angular/core';
 @Component({
