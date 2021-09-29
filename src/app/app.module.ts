@@ -21,6 +21,8 @@ import { registerLocaleData, CommonModule } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
+
+
 registerLocaleData(zh);
 const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, MenuOutline,
   CloseOutline, DashOutline, UnorderedListOutline, BookOutline, PlusOutline,
@@ -42,7 +44,7 @@ const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, Me
     NzDropDownModule,
     RouterModule,
     NzIconModule.forRoot(icons),
-    SocialLoginModule
+    SocialLoginModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_TW },

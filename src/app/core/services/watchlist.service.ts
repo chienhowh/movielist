@@ -2,7 +2,7 @@ import { map, tap } from 'rxjs/operators';
 import { MovieRequestService } from './movie-request.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { API } from 'src/app/movie-list/core/consts/global-constants.const';
+import { API } from 'src/app/core/consts/global-constants.const';
 import { IWatchedMovie } from 'src/app/movie-list/watchlist/shared/watchlist';
 
 @Injectable({

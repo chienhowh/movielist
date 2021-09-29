@@ -4,7 +4,7 @@ import { DetailService } from './../../homepage/shared/detail.service';
 import { IWatchedMovie, WATCHLIST_TYPE } from './../shared/watchlist';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { verifyForm } from '../../core/funcs/verify-form';
+import { verifyForm } from '../../../core/funcs/verify-form';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',

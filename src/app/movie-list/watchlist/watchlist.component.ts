@@ -2,7 +2,7 @@ import { WatchlistService } from './../../core/services/watchlist.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { CommentComponent } from './comment/comment.component';
 import { DetailService } from './../homepage/shared/detail.service';
-import { API_POSTER } from '../core/consts/global-constants.const';
+import { API_POSTER } from '../../core/consts/global-constants.const';
 import { Component, OnInit } from '@angular/core';
 import { IWatchedMovie, WATCHLIST_TYPE } from './shared/watchlist';
 import { NzFormatEmitEvent, NzTreeNodeOptions } from 'ng-zorro-antd/tree';

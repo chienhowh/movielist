@@ -2,7 +2,7 @@ import { ListType } from './../../../core/enums/list-type.enum';
 import { Observable } from 'rxjs';
 import { MovieRequestService } from './../../../core/services/movie-request.service';
 import { Injectable } from '@angular/core';
-import { API } from '../../core/consts/global-constants.const';
+import { API } from '../../../core/consts/global-constants.const';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
@@ -35,9 +35,6 @@ export class DetailService {
       case ListType.WATCHLIST:
         url = API.WATCHLIST;
         break;
-      case ListType.ADDLIST:
-        url = API.ADDLIST;
-
       default:
         console.log('error type');
         return;

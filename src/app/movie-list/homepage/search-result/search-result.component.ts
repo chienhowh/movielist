@@ -1,11 +1,11 @@
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { API_POSTER } from '../../core/consts/global-constants.const';
+import { API_POSTER } from '../../../core/consts/global-constants.const';
 import { IMovieInfo, IResponse, IKeyword } from './../../../core/interfaces/movie.interface';
 
 import { MovieRequestService } from './../../../core/services/movie-request.service';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { API } from '../../core/consts/global-constants.const';
+import { API } from '../../../core/consts/global-constants.const';
 import { Paging } from '../../../model/paging';
 import { MovieDetailComponent } from '../movie-detail/movie-detail.component';
 import { from, Observable } from 'rxjs';

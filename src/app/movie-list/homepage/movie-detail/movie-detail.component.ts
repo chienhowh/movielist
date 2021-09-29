@@ -1,12 +1,13 @@
+import { NewListService } from './../shared/new-list.service';
 import { ListAddingComponent } from './../list-adding/list-adding.component';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ROUTING_PATH } from '../../core/consts/routing-path.const';
+import { ROUTING_PATH } from '../../../core/consts/routing-path.const';
 import { Observable } from 'rxjs';
 import { ListType } from './../../../core/enums/list-type.enum';
 import { MessageService } from './../../../core/services/message.service';
 import { DetailService } from './../shared/detail.service';
-import { API_POSTER } from '../../core/consts/global-constants.const';
+import { API_POSTER } from '../../../core/consts/global-constants.const';
 import { IMovieInfo } from './../../../core/interfaces/movie.interface';
 import { Component, Input, OnInit } from '@angular/core';
 import { tify } from 'chinese-conv';
@@ -29,7 +30,6 @@ export class MovieDetailComponent implements OnInit {
   displayList: IMovieInfo;
   /** 清單類別 */
   ListType = ListType;
-  isInList = false;
   inFavorite = false;
   inWatchlist = false;
   listMap = [
@@ -39,13 +39,14 @@ export class MovieDetailComponent implements OnInit {
     { header: '片長', key: 'runtime' },
   ];
 
-
-  selectedValue = '';
+  /** 客制清單 */
+  customList = [];
   constructor(
     private detailService: DetailService,
     public modalRef: NzModalRef,
     private msgSvc: MessageService,
-    private nzModal: NzModalService
+    private nzModal: NzModalService,
+    private newListSvc: NewListService
   ) { }
 
   ngOnInit(): void {
@@ -56,6 +57,8 @@ export class MovieDetailComponent implements OnInit {
       this.displayList = this.info;
       this.searchInList(this.movieId);
     }
+    this.newListSvc.getList().subscribe(console.log)
+
   }
 
   getDetailById(id: number): void {
@@ -130,7 +133,6 @@ export class MovieDetailComponent implements OnInit {
 
   openNewList(): void {
     this.nzModal.create({
-      nzTitle: '建立新清單',
       nzContent: ListAddingComponent,
       nzFooter: null,
       nzBodyStyle: { padding: '24px' },
