@@ -18,8 +18,9 @@ export const enum API {
   NOW_PLAYING = '/movie/now_playing',
   GET_BY_ID = '/movie',
 
-  /** DB start */
-  WATCHLIST = '/watchlist'
+  // DB start
+  WATCHLIST = '/watchlist',
+  FAVORITE = '/favorite'
 }
 
 export enum API_POSTER {

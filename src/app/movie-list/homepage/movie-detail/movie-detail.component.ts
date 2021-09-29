@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { ListType } from './../../../core/enums/list-type.enum';
 import { MessageService } from './../../../core/services/message.service';
 import { DetailService } from './../shared/detail.service';
@@ -54,47 +55,60 @@ export class MovieDetailComponent implements OnInit {
     this.searchInList(id);
   }
 
-
-
-  /** click icon to addlist */
-  addList(detail: IMovieInfo): void {
-    const { id, title } = detail;
+  handleAdd(type: ListType): void {
     const sendData = {
-      title,
+      title: this.displayList.title,
       addTime: new Date().valueOf(),
       beenWatched: false
     };
-    if (this.isInList) {
-      this.detailService.removeList(id).subscribe(() =>
-        this.isInList = false
-      );
-    } else {
-      // 不在list，我們新增
-      this.detailService.addtoList(id, sendData).subscribe(() =>
-        this.isInList = true);
-    }
-  }
-  handleAdd(type: ListType): void {
     switch (type) {
       case ListType.WATCHLIST:
-        this.inWatchlist = !this.inWatchlist;
-        this.msgSvc.handleAddAction('待播清單', this.inWatchlist);
+        if (this.inWatchlist) {
+          this.detailService.removeList(this.movieId, type).subscribe(res => {
+            this.inWatchlist = false;
+            this.msgSvc.handleAddAction('待播清單', this.inWatchlist);
+          });
+        } else {
+          this.detailService.addtoList(this.movieId, type, sendData).subscribe(res => {
+            this.inWatchlist = true;
+            this.msgSvc.handleAddAction('待播清單', this.inWatchlist);
+          });
+        }
         break;
       case ListType.FAVORITE:
-        this.inFavorite = !this.inFavorite;
-        this.msgSvc.handleAddAction('我的最愛', this.inFavorite);
-        break;
+        if (this.inFavorite) {
+          this.detailService.removeList(this.movieId, type).subscribe(res => {
+            this.inFavorite = false;
+            this.msgSvc.handleAddAction('我的最愛', this.inFavorite);
+          });
+        } else {
+          this.detailService.addtoList(this.movieId, type, sendData).subscribe(res => {
+            this.inFavorite = true;
+            this.msgSvc.handleAddAction('我的最愛', this.inFavorite);
+          });
+        }
+
     }
   }
 
 
-  /** 看電影是否已在清單裡 */
+  /** 看電影是否有在清單 */
   searchInList(id: number): void {
-    this.detailService.readListById(id).subscribe(res => {
-      // 回空值，代表不在名單
-      this.isInList = res ? true : false;
-    });
+    this.searchWatchlist(id).subscribe(res => this.inWatchlist = !!res);
+    this.searchFavorite(id).subscribe(res => this.inFavorite = !!res);
   }
+
+
+  searchWatchlist(id: number): Observable<any> {
+    return this.detailService.readListById(id, ListType.WATCHLIST);
+  }
+
+  searchFavorite(id: number): Observable<any> {
+    return this.detailService.readListById(id, ListType.FAVORITE);
+  }
+
+
+
 
   getMovieGenres(genres: [{ id: number, name: string }]): string[] {
     return genres.map(genre => tify(genre.name));

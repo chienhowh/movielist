@@ -6,6 +6,7 @@ import { API_POSTER } from './../consts/global-constants.const';
 import { Component, OnInit } from '@angular/core';
 import { IWatchedMovie, WATCHLIST_TYPE } from './shared/watchlist';
 import { NzFormatEmitEvent, NzTreeNodeOptions } from 'ng-zorro-antd/tree';
+import { ListType } from 'src/app/core/enums/list-type.enum';
 
 @Component({
   selector: 'app-watchlist',
@@ -70,6 +71,6 @@ export class WatchlistComponent implements OnInit {
 
   removeList(id: number, event: Event): void {
     event.stopPropagation();
-    this.detailService.removeList(id).subscribe(() => this.getWatchList());
+    this.detailService.removeList(id, ListType.WATCHLIST).subscribe(() => this.getWatchList());
   }
 }
