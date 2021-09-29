@@ -1,3 +1,6 @@
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { ROUTING_PATH } from './../../consts/routing-path.const';
 import { Observable } from 'rxjs';
 import { ListType } from './../../../core/enums/list-type.enum';
 import { MessageService } from './../../../core/services/message.service';
@@ -5,9 +8,9 @@ import { DetailService } from './../shared/detail.service';
 import { API_POSTER } from './../../consts/global-constants.const';
 import { IMovieInfo } from './../../../core/interfaces/movie.interface';
 import { Component, Input, OnInit } from '@angular/core';
-import { tify, sify } from 'chinese-conv';
+import { tify } from 'chinese-conv';
 import { NzModalRef } from 'ng-zorro-antd/modal';
-import { NzMessageService } from 'ng-zorro-antd/message';
+
 @Component({
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.component.html',
@@ -17,6 +20,9 @@ export class MovieDetailComponent implements OnInit {
   @Input() info;
   /* 取得資料是否完全，不完全則callAgain true */
   @Input() callAgain: boolean;
+  get ROUTING_PATH(): typeof ROUTING_PATH {
+    return ROUTING_PATH;
+  }
   API_POSTER = API_POSTER;
   movieId: number;
   displayList: IMovieInfo;
@@ -32,6 +38,8 @@ export class MovieDetailComponent implements OnInit {
     { header: '片長', key: 'runtime' },
   ];
 
+
+  selectedValue = ''
   constructor(
     private detailService: DetailService,
     public modalRef: NzModalRef,
@@ -106,9 +114,6 @@ export class MovieDetailComponent implements OnInit {
   searchFavorite(id: number): Observable<any> {
     return this.detailService.readListById(id, ListType.FAVORITE);
   }
-
-
-
 
   getMovieGenres(genres: [{ id: number, name: string }]): string[] {
     return genres.map(genre => tify(genre.name));

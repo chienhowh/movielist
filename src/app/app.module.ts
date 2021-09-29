@@ -11,7 +11,7 @@ import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import {
   AccountBookOutline, HeartFill, HeartOutline, MenuOutline,
-  CloseOutline, DashOutline, BookOutline, UnorderedListOutline, BookFill
+  CloseOutline, DashOutline, BookOutline, UnorderedListOutline, BookFill, PlusOutline
 } from '@ant-design/icons-angular/icons';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +23,7 @@ import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 
 import { environment } from 'src/environments/environment';
 registerLocaleData(zh);
 const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, MenuOutline,
-  CloseOutline, DashOutline, UnorderedListOutline, BookOutline,
+  CloseOutline, DashOutline, UnorderedListOutline, BookOutline, PlusOutline,
   BookFill];
 
 @NgModule({

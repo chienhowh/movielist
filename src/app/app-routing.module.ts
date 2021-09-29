@@ -1,10 +1,11 @@
+import { ROUTING_PATH } from './movie-list/consts/routing-path.const';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'watchlist', loadChildren: () => import('./movie-list/watchlist/watchlist.module').then(m => m.WatchlistModule) },
-  { path: 'home', loadChildren: () => import('./movie-list/homepage/homepage.module').then(m => m.HomepageModule) },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: ROUTING_PATH.WATCHLIST, loadChildren: () => import('./movie-list/watchlist/watchlist.module').then(m => m.WatchlistModule) },
+  { path: ROUTING_PATH.HOME, loadChildren: () => import('./movie-list/homepage/homepage.module').then(m => m.HomepageModule) },
+  { path: '', redirectTo: ROUTING_PATH.HOME, pathMatch: 'full' }
 ];
 
 @NgModule({

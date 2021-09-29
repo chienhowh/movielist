@@ -15,6 +15,7 @@ import { SwiperModule } from 'swiper/angular';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { ListAddingComponent } from './list-adding/list-adding.component';
 @NgModule({
   declarations: [
     HomepageComponent,
@@ -23,7 +24,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     SearchResultComponent,
     SanitizeURLPipe,
     GenrePipe,
-    TextEllipsisPipe
+    TextEllipsisPipe,
+    ListAddingComponent
   ],
   imports: [
     CommonModule,

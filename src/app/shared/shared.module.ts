@@ -14,6 +14,7 @@ import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzSelectModule } from 'ng-zorro-antd/select'
 @NgModule({
   declarations: [
     RateIconComponent
@@ -35,7 +36,8 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
     NzTreeModule,
     NzDrawerModule,
     NzToolTipModule,
-    NzMessageModule
+    NzMessageModule,
+    NzSelectModule
   ]
 })
 export class SharedModule { }

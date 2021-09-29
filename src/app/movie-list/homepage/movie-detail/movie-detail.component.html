@@ -58,15 +58,68 @@
 
 <ng-template #btns>
   <div class="btn-groups">
-    <button nz-button nzType="primary" nzSize="large" nzShape="circle">
+    <!-- 新增清單 start -->
+    <button
+      nz-button
+      nz-dropdown
+      [nzDropdownMenu]="menu"
+      nzTrigger="click"
+      nzType="primary"
+      nzSize="large"
+      nzShape="circle"
+    >
       <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
     </button>
-    <button nz-button nzType="primary" nzSize="large" nzShape="circle"(click)="handleAdd(ListType.FAVORITE)" >
-      <i nz-icon nzType="heart" [nzTheme]="inFavorite? 'fill':'outline'" [ngClass]="{'add-favorite':inFavorite}"></i>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <div>
+        <div>
+          <a
+            [routerLink]="ROUTING_PATH.HOME + '/' + ROUTING_PATH.LIST_ADDING"
+            (click)="modalRef.close()"
+            ><i nz-icon nzType="plus" nzTheme="outline"></i> 建立新清單</a
+          >
+        </div>
+        <nz-select
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="Select a person"
+          [(ngModel)]="selectedValue"
+        >
+          <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+          <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+          <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+        </nz-select>
+      </div>
+    </nz-dropdown-menu>
+    <!-- 新增清單 end -->
 
+    <button
+      nz-button
+      nzType="primary"
+      nzSize="large"
+      nzShape="circle"
+      (click)="handleAdd(ListType.FAVORITE)"
+    >
+      <i
+        nz-icon
+        nzType="heart"
+        [nzTheme]="inFavorite ? 'fill' : 'outline'"
+        [ngClass]="{ 'add-favorite': inFavorite }"
+      ></i>
     </button>
-    <button nz-button nzType="primary" nzSize="large" nzShape="circle" (click)="handleAdd(ListType.WATCHLIST)">
-      <i nz-icon nzType="book" [nzTheme]="inWatchlist? 'fill':'outline'" [ngClass]="{'add-watchlist':inWatchlist}"></i>
+    <button
+      nz-button
+      nzType="primary"
+      nzSize="large"
+      nzShape="circle"
+      (click)="handleAdd(ListType.WATCHLIST)"
+    >
+      <i
+        nz-icon
+        nzType="book"
+        [nzTheme]="inWatchlist ? 'fill' : 'outline'"
+        [ngClass]="{ 'add-watchlist': inWatchlist }"
+      ></i>
     </button>
   </div>
 </ng-template>
