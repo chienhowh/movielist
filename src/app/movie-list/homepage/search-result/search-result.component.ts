@@ -48,10 +48,8 @@ export class SearchResultComponent implements OnInit {
     if (!this.query.trim()) { return; }
     const sendData = { query: this.query.trim(), page: this.page.pageIndex };
     this.movieRequestService.request(API.GET, API.SEARCH_MOVIE, sendData).subscribe((res: IResponse) => {
-      const details: IMovieInfo[] = res.results;
-
       this.page.totalResults = res.total_results;
-      this.displayList = [];
+      this.displayList = res.results;
 
       // 避免重複塞矩陣
       if (!this.page.beenSearched) {
@@ -61,9 +59,6 @@ export class SearchResultComponent implements OnInit {
         this.page.beenSearched = true;
       }
       this.setShowPaginator(this.page.pageIndex);
-      from(details).pipe(
-        concatMap(id => this.searchMovieById(id)))
-        .subscribe(movie => this.displayList.push(movie));
     });
   }
 

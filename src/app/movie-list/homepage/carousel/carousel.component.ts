@@ -64,7 +64,7 @@ export class CarouselComponent implements OnInit {
     this.modalService.create({
       nzContent: MovieDetailComponent,
       nzComponentParams: {
-        info, callAgain: true
+        info
       },
       nzFooter: null,
       nzBodyStyle: { padding: '24px' },

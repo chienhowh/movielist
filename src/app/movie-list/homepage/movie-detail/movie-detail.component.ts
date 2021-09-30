@@ -20,8 +20,7 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 })
 export class MovieDetailComponent implements OnInit {
   @Input() info;
-  /* 取得資料是否完全，不完全則callAgain true */
-  @Input() callAgain: boolean;
+
   get ROUTING_PATH(): typeof ROUTING_PATH {
     return ROUTING_PATH;
   }
@@ -51,12 +50,7 @@ export class MovieDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.movieId = this.info.id;
-    if (this.callAgain) {
-      this.getDetailById(this.movieId);
-    } else {
-      this.displayList = this.info;
-      this.searchInList(this.movieId);
-    }
+    this.getDetailById(this.movieId);
     this.newListSvc.getList().subscribe(console.log)
 
   }

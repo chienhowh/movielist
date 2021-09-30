@@ -9,7 +9,10 @@ export const enum API {
   MOVIE = '/movie',
   // 關鍵字搜尋
   SEARCH_MOVIE = '/search/movie',
-  // 所有類型列表
+  /** 按類搜索 */
+  DISCOVER = '/discover/movie',
+
+  // 分類列表
   GENRE_LIST = '/genre/movie/list',
 
   POPULAR = '/movie/popular',

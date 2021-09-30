@@ -29,7 +29,7 @@ export class MovieCardComponent implements OnInit {
     this.modalSvc.create({
       nzContent: MovieDetailComponent,
       nzComponentParams: {
-        info, callAgain: false
+        info
       },
       nzFooter: null,
       nzBodyStyle: { padding: '24px' },
