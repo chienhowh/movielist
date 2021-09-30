@@ -1,3 +1,4 @@
+import { FormBuilder } from '@angular/forms';
 import { filter, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -9,8 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpecificTypeComponent implements OnInit {
   type: string;
+  validateForm = this.fb.group({
+
+  });
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {

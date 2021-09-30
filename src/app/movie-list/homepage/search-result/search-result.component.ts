@@ -18,18 +18,16 @@ import { concatAll, concatMap } from 'rxjs/operators';
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss']
 })
-export class SearchResultComponent implements OnInit, AfterViewInit {
+export class SearchResultComponent implements OnInit {
   // 搜尋字串
   query: string;
-  // 海報網址
-  API_POSTER = API_POSTER;
+
 
   displayList: IMovieInfo[] = [];
   page: Paging = new Paging();
   paginator = [];
   showPaginator = [];
   constructor(
-    private modalService: NzModalService,
     private router: Router,
     private movieRequestService: MovieRequestService
   ) { }
@@ -41,8 +39,6 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
       return;
     }
     this.searchQuery();
-  }
-  ngAfterViewInit(): void {
   }
 
   /**
@@ -115,25 +111,6 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
     this.searchQuery();
   }
 
-  /**
-   * 跳出顯示電影詳情視窗
-   *
-   */
-  onWatchDetail(info: IMovieInfo): void {
-    this.modalService.create({
-      nzContent: MovieDetailComponent,
-      nzComponentParams: {
-        info, callAgain: false
-      },
-      nzFooter: null,
-      nzBodyStyle: { padding: '24px' },
-    });
-  }
-
-  imgError(event) {
-    event.target.src = 'assets/not-found.jpeg';
-    event.target.style['object-fit'] = 'contain';
-  }
 
   searchMovie() {
     this.searchQuery();

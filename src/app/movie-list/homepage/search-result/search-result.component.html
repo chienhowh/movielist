@@ -1,5 +1,5 @@
 <!-- 搜索input -->
-<nz-input-group [nzSuffix]="suffixIconSearch" [nzSearch]="true">
+<nz-input-group [nzSuffix]="suffixIconSearch" [nzSearch]="true" nzSize="large">
   <input
     type="text"
     nz-input
@@ -15,27 +15,12 @@
 <ng-container *ngIf="displayList.length !== 0; else noData">
   <div class="row list-box no-gutters">
     <ng-container *ngFor="let movie of displayList">
-      <div class="card-box col-10 col-sm-5" (click)="onWatchDetail(movie)">
-        <div class="d-flex">
-          <div class="img-box">
-            <img
-              (error)="imgError($event)"
-              src="{{ API_POSTER.GET_POSTER + movie.poster_path }}"
-              alt=""
-            />
-          </div>
-          <div class="overview-box p-3">
-            <h6>{{ movie.title }}</h6>
-            <p class="mb-2 fc-light">{{ movie.release_date }}</p>
-            <div #overview class="overview">
-              {{ movie.overview ? movie.overview : "尚無介紹" }}
-            </div>
-          </div>
-        </div>
+      <div class="col-10 my-3 col-sm-5">
+        <app-movie-card [movie]="movie"></app-movie-card>
       </div>
     </ng-container>
     <ng-container *ngIf="displayList.length % 2 === 1">
-      <div class="card-box col-10 col-sm-5" style="opacity: 0"></div>
+      <div class="col-10 col-sm-5" style="opacity: 0"></div>
     </ng-container>
   </div>
   <!-- <mat-paginator

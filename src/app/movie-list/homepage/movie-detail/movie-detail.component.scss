@@ -19,9 +19,11 @@
   }
 }
 
-.over-view {
-  height: 200px;
-  overflow-y: scroll;
+.overview {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
 }
 
 hr {
@@ -37,6 +39,7 @@ hr {
     align-items: center;
   }
 }
+
 
 
 .add-favorite {

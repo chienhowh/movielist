@@ -14,10 +14,14 @@ import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzMessageModule } from 'ng-zorro-antd/message';
-import { NzSelectModule } from 'ng-zorro-antd/select'
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { MovieCardComponent } from './components/movie-card/movie-card.component';
+
 @NgModule({
   declarations: [
-    RateIconComponent
+    RateIconComponent,
+    MovieCardComponent
   ],
   imports: [
     CommonModule
@@ -37,7 +41,9 @@ import { NzSelectModule } from 'ng-zorro-antd/select'
     NzDrawerModule,
     NzToolTipModule,
     NzMessageModule,
-    NzSelectModule
+    NzSelectModule,
+    NzCollapseModule,
+    MovieCardComponent
   ]
 })
 export class SharedModule { }

@@ -1,3 +1,5 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -6,10 +8,15 @@ import { SpecificTypeComponent } from './specific-type.component';
 
 
 @NgModule({
-  declarations: [SpecificTypeComponent],
+  declarations: [
+    SpecificTypeComponent
+  ],
   imports: [
     CommonModule,
-    SpecificTypeRoutingModule
+    ReactiveFormsModule,
+    FormsModule,
+    SpecificTypeRoutingModule,
+    SharedModule,
   ]
 })
 export class SpecificTypeModule { }

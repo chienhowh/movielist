@@ -1,0 +1,18 @@
+<div class="card-box">
+  <div class="d-flex" (click)="onWatchDetail(movie)">
+    <div class="img-box">
+      <img
+        (error)="imgError($event)"
+        src="{{ API_POSTER.GET_POSTER + movie.poster_path }}"
+        alt=""
+      />
+    </div>
+    <div class="overview-box p-3">
+      <h6>{{ movie.title }}</h6>
+      <p class="mb-2 fc-light">{{ movie.release_date }}</p>
+      <div #overview class="overview">
+        {{ movie.overview ? movie.overview : "尚無介紹" }}
+      </div>
+    </div>
+  </div>
+</div>
