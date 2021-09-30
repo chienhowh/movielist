@@ -31,6 +31,7 @@ export class MovieDetailComponent implements OnInit {
   ListType = ListType;
   inFavorite = false;
   inWatchlist = false;
+  genres: string[] = [];
   listMap = [
     { header: '類型', key: 'genres' },
     { header: '上映日期', key: 'release_date' },
@@ -56,8 +57,9 @@ export class MovieDetailComponent implements OnInit {
   }
 
   getDetailById(id: number): void {
-    this.detailService.getMovieDetail(id).subscribe(res => {
+    this.detailService.getMovieDetail(id).subscribe((res) => {
       this.displayList = res;
+      this.genres = this.getMovieGenres(res.genres)
     });
     this.searchInList(id);
   }
@@ -114,7 +116,7 @@ export class MovieDetailComponent implements OnInit {
     return this.detailService.readListById(id, ListType.FAVORITE);
   }
 
-  getMovieGenres(genres: [{ id: number, name: string }]): string[] {
+  getMovieGenres(genres: { id: number, name: string }[]): string[] {
     return genres.map(genre => tify(genre.name));
   }
 

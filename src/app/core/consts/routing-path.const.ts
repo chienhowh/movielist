@@ -7,3 +7,9 @@ export const ROUTING_PATH = {
   /** 電影類別 */
   SPECIFIC_TYPE: 'specific-type'
 }
+
+
+export const LOCALSTORAGE_KEY = {
+  GENRES: 'genres'
+}
+

@@ -24,7 +24,7 @@ export interface IResponse {
   dates?: { maximum: string, minimum: string };
 }
 
-export interface IKeyword {
+export interface IGenre {
   name: string;
   id: number;
 }

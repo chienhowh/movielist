@@ -1,3 +1,4 @@
+
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { MovieDetailComponent } from './movie-list/homepage/movie-detail/movie-detail.component';
@@ -30,7 +31,7 @@ const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, Me
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,8 +13,8 @@ import { SpecificTypeComponent } from './specific-type.component';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
     SpecificTypeRoutingModule,
     SharedModule,
   ]

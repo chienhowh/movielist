@@ -1,0 +1,17 @@
+.specific-box {
+  padding: 20px;
+  @media screen and (min-width: 576px) {
+    padding: 30px 40px;
+  }
+}
+
+
+nz-collapse{
+  margin-bottom: 12px;
+}
+
+
+.form-label{
+  font-size: 16px;
+  margin-bottom: 8px;
+}

@@ -1,6 +1,6 @@
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { API_POSTER } from '../../../core/consts/global-constants.const';
-import { IMovieInfo, IResponse, IKeyword } from './../../../core/interfaces/movie.interface';
+import { IMovieInfo, IResponse } from './../../../core/interfaces/movie.interface';
 
 import { MovieRequestService } from './../../../core/services/movie-request.service';
 import { AfterViewInit, Component, OnInit } from '@angular/core';

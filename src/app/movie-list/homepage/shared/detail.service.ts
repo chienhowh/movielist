@@ -1,3 +1,4 @@
+import { IMovieInfo } from './../../../core/interfaces/movie.interface';
 import { ListType } from './../../../core/enums/list-type.enum';
 import { Observable } from 'rxjs';
 import { MovieRequestService } from './../../../core/services/movie-request.service';
@@ -17,7 +18,7 @@ export class DetailService {
   /**
    * 取得電影明細
    */
-  getMovieDetail(id: number): Observable<any> {
+  getMovieDetail(id: number): Observable<IMovieInfo> {
     return this.requestService.request(API.GET, `${API.GET_BY_ID}/${id}`);
   }
 

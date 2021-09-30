@@ -1,24 +1,82 @@
-<p>specific-type {{ type }} works!</p>
-<form>
-  <!-- 排序 start -->
-  <nz-collapse nzExpandIconPosition="right">
-    <nz-collapse-panel [nzHeader]="'排序'">
-      <div>排序結果依據</div>
-      <div>
-        <nz-select>
-          <nz-option>aaaa</nz-option>
-        </nz-select>
-      </div>
-    </nz-collapse-panel>
-  </nz-collapse>
-  <!-- 篩選 start -->
-  <nz-collapse nzExpandIconPosition="right">
-    <nz-collapse-panel [nzHeader]="'篩選'">
-      <p style="margin: 0">
-        A dog is a type of domesticated animal. Known for its loyalty and
-        faithfulness, it can be found as a welcome guest in many households
-        across the world.
-      </p>
-    </nz-collapse-panel>
-  </nz-collapse>
-</form>
+<div class="row no-gutters specific-box">
+  <div class="col-12 col-md-3">
+    <form [formGroup]="validateForm" (ngSubmit)="onSubmit()">
+      <!-- 排序 start -->
+      <nz-collapse nzExpandIconPosition="right">
+        <nz-collapse-panel [nzHeader]="'排序'">
+          <div>
+            <div class="form-label">排序結果依據</div>
+            <div>
+              <nz-select formControlName="sort_by" class="w-100">
+                <nz-option
+                  [nzValue]="'popularity.asc'"
+                  [nzLabel]="'依人氣降序'"
+                ></nz-option>
+                <nz-option
+                  [nzValue]="'popularity.desc'"
+                  [nzLabel]="'依人氣升序'"
+                ></nz-option>
+              </nz-select>
+            </div>
+          </div>
+        </nz-collapse-panel>
+      </nz-collapse>
+      <!-- 篩選 start -->
+      <nz-collapse nzExpandIconPosition="right">
+        <nz-collapse-panel [nzHeader]="'篩選'">
+          <!-- 發布日期 start -->
+          <div>
+            <div class="form-label">發布日期</div>
+            <div>
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                從<nz-date-picker
+                  formControlName="release_date.gte"
+                ></nz-date-picker>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                到<nz-date-picker
+                  formControlName="release_date.lte"
+                ></nz-date-picker>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <!-- 類型 -->
+          <div>
+            <button nz-button nzShape="round" *ngFor="let item of genresList">
+              {{ item.name }}
+            </button>
+          </div>
+        </nz-collapse-panel>
+      </nz-collapse>
+      <button
+        nz-button
+        nzType="primary"
+        [nzSize]="'large'"
+        nzShape="round"
+        class="w-100"
+      >
+        搜尋
+      </button>
+    </form>
+  </div>
+  <div class="col-12 col-md-9">
+    <div class="list-box">
+      <ng-container *ngIf="displayList.length !== 0; else loading">
+        <!-- <div class="row no-gutters"> -->
+        <ng-container *ngFor="let movie of displayList">
+          <div class="my-3">
+            <app-movie-card [movie]="movie"></app-movie-card>
+          </div>
+        </ng-container>
+        <!-- <ng-container *ngIf="displayList.length % 2 === 1">
+            <div class="col-10 col-sm-5" style="opacity: 0"></div>
+          </ng-container> -->
+        <!-- </div> -->
+      </ng-container>
+      <ng-template #loading> Loading </ng-template>
+    </div>
+  </div>
+</div>

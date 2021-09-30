@@ -3,3 +3,4 @@ export enum ListType{
   FAVORITE,
   ADDLIST
 }
+

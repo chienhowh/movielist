@@ -25,7 +25,7 @@ import { ListAddingComponent } from './list-adding/list-adding.component';
     SanitizeURLPipe,
     GenrePipe,
     TextEllipsisPipe,
-    ListAddingComponent
+    ListAddingComponent,
   ],
   imports: [
     CommonModule,

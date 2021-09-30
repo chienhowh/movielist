@@ -19,7 +19,7 @@
     <div class="col-md-6 col-12 pt-3">
       <div class="list-box">
         <div class="header">類型:</div>
-        <div class="content">{{ getMovieGenres(displayList.genres) }}</div>
+        <div class="content">{{ genres }}</div>
       </div>
       <hr />
       <div class="list-box">
@@ -73,7 +73,9 @@
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <div>
         <div>
-          <a (click)="openNewList()"><i nz-icon nzType="plus" nzTheme="outline"></i> 建立新清單</a>
+          <a (click)="openNewList()"
+            ><i nz-icon nzType="plus" nzTheme="outline"></i> 建立新清單</a
+          >
         </div>
         <nz-select
           nzShowSearch
@@ -81,7 +83,7 @@
           nzPlaceHolder="Select a person"
           [(ngModel)]="selectedValue"
         >
-          <nz-option nzLabel="Jack" nzValue="jack" ></nz-option>
+          <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
           <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
           <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
         </nz-select>
