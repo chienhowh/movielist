@@ -1,31 +1,35 @@
-<div class="row no-gutters specific-box">
-  <div class="col-12 col-md-3">
-    <form [formGroup]="validateForm" (ngSubmit)="onSubmit()">
-      <!-- 排序 start -->
-      <nz-collapse nzExpandIconPosition="right">
-        <nz-collapse-panel [nzHeader]="'排序'">
-          <div>
-            <div class="form-label">排序結果依據</div>
+<div class="container-xl">
+  <div class="row specific-box">
+    <div class="col-12 col-md-3">
+      <h4 class="font-weight-bold">探索電影</h4>
+      <form [formGroup]="validateForm" (ngSubmit)="onSubmit(1)">
+        <!-- 排序 start -->
+        <nz-collapse nzExpandIconPosition="right">
+          <nz-collapse-panel [nzHeader]="'排序'">
             <div>
-              <nz-select formControlName="sort_by" class="w-100">
-                <nz-option
-                  [nzValue]="'popularity.asc'"
-                  [nzLabel]="'依人氣降序'"
-                ></nz-option>
-                <nz-option
-                  [nzValue]="'popularity.desc'"
-                  [nzLabel]="'依人氣升序'"
-                ></nz-option>
-              </nz-select>
+              <div class="form-label">排序結果依據</div>
+              <div>
+                <nz-select
+                  formControlName="sort_by"
+                  class="w-100"
+                  nzPlaceHolder="請選擇排序"
+                >
+                  <nz-option
+                    *ngFor="let opt of sortOpts"
+                    [nzValue]="opt.value"
+                    [nzLabel]="opt.text"
+                  ></nz-option>
+                </nz-select>
+              </div>
             </div>
-          </div>
-        </nz-collapse-panel>
-      </nz-collapse>
-      <!-- 篩選 start -->
-      <nz-collapse nzExpandIconPosition="right">
-        <nz-collapse-panel [nzHeader]="'篩選'">
-          <!-- 發布日期 start -->
-          <div>
+          </nz-collapse-panel>
+        </nz-collapse>
+        <!-- 篩選 start -->
+        <nz-collapse nzExpandIconPosition="right">
+          <nz-collapse-panel [nzHeader]="'篩選'">
+            <!-- 發布日期 start -->
+            <!-- TODO:日期格式目前過不了 -->
+            <!-- <div>
             <div class="form-label">發布日期</div>
             <div>
               <div
@@ -42,41 +46,96 @@
               </div>
             </div>
           </div>
-          <hr />
-          <!-- 類型 -->
-          <div>
-            <button nz-button nzShape="round" *ngFor="let item of genresList">
-              {{ item.name }}
-            </button>
-          </div>
-        </nz-collapse-panel>
-      </nz-collapse>
+          <hr /> -->
+            <!-- 類型 -->
+            <div>
+              <div class="form-label">類型</div>
+              <div>
+                <button
+                  nz-button
+                  type="button"
+                  nzShape="round"
+                  [nzType]="
+                    setOfCheckedGenre.has(item.id) ? 'primary' : 'default'
+                  "
+                  class="genre-btn"
+                  *ngFor="let item of genresList"
+                  (click)="selectGenre(item.id)"
+                >
+                  {{ item.name }}
+                </button>
+              </div>
+            </div>
+            <hr />
+            <!-- 使用者評分 -->
+            <div>
+              <div class="form-label">使用者評分</div>
+              <div>
+                <nz-slider
+                  [nzMarks]="rateMarks"
+                  formControlName="rateSlider"
+                  nzRange
+                  [nzMin]="0"
+                  [nzMax]="10"
+                  [nzStep]="1"
+                ></nz-slider>
+              </div>
+            </div>
+            <hr />
+            <!-- 片長 -->
+            <div>
+              <div class="form-label">片長</div>
+              <div>
+                <nz-slider
+                  [nzMarks]="runtimeMarks"
+                  formControlName="runtimeSlider"
+                  nzRange
+                  [nzMin]="0"
+                  [nzMax]="400"
+                  [nzStep]="20"
+                  (ngModelChange)="log($event)"
+                ></nz-slider>
+              </div>
+            </div>
+          </nz-collapse-panel>
+        </nz-collapse>
+        <button
+          nz-button
+          nzType="primary"
+          [nzSize]="'large'"
+          nzShape="round"
+          class="w-100"
+        >
+          搜尋
+        </button>
+      </form>
+    </div>
+    <div class="col-12 col-md-9">
+      <div class="list-box">
+        <ng-container *ngIf="displayList.length !== 0; else loading">
+          <!-- <div class="row no-gutters"> -->
+          <ng-container *ngFor="let movie of displayList">
+            <div class="my-3">
+              <app-movie-card [movie]="movie"></app-movie-card>
+            </div>
+          </ng-container>
+          <!-- <ng-container *ngIf="displayList.length % 2 === 1">
+            <div class="col-10 col-sm-5" style="opacity: 0"></div>
+          </ng-container> -->
+          <!-- </div> -->
+        </ng-container>
+        <ng-template #loading> Loading </ng-template>
+      </div>
       <button
         nz-button
         nzType="primary"
         [nzSize]="'large'"
         nzShape="round"
         class="w-100"
+        (click)="onSubmit(currentPage + 1)"
       >
-        搜尋
+        載入更多
       </button>
-    </form>
-  </div>
-  <div class="col-12 col-md-9">
-    <div class="list-box">
-      <ng-container *ngIf="displayList.length !== 0; else loading">
-        <!-- <div class="row no-gutters"> -->
-        <ng-container *ngFor="let movie of displayList">
-          <div class="my-3">
-            <app-movie-card [movie]="movie"></app-movie-card>
-          </div>
-        </ng-container>
-        <!-- <ng-container *ngIf="displayList.length % 2 === 1">
-            <div class="col-10 col-sm-5" style="opacity: 0"></div>
-          </ng-container> -->
-        <!-- </div> -->
-      </ng-container>
-      <ng-template #loading> Loading </ng-template>
     </div>
   </div>
 </div>

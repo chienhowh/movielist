@@ -17,7 +17,7 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
-
+import { NzSliderModule } from 'ng-zorro-antd/slider';
 @NgModule({
   declarations: [
     RateIconComponent,
@@ -43,6 +43,7 @@ import { MovieCardComponent } from './components/movie-card/movie-card.component
     NzMessageModule,
     NzSelectModule,
     NzCollapseModule,
+    NzSliderModule,
     MovieCardComponent
   ]
 })
