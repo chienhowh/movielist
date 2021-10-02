@@ -18,6 +18,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 @NgModule({
   declarations: [
     RateIconComponent,
@@ -44,7 +45,8 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
     NzSelectModule,
     NzCollapseModule,
     NzSliderModule,
-    MovieCardComponent
+    MovieCardComponent,
+    NzBackTopModule
   ]
 })
 export class SharedModule { }

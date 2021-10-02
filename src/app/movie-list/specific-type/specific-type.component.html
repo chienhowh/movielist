@@ -1,5 +1,5 @@
-<div class="container-xl">
-  <div class="row specific-box">
+<div class="container-xl" >
+  <div class="row specific-box" #specific>
     <div class="col-12 col-md-3">
       <h4 class="font-weight-bold">探索電影</h4>
       <form [formGroup]="validateForm" (ngSubmit)="onSubmit(1)">
@@ -132,10 +132,23 @@
         [nzSize]="'large'"
         nzShape="round"
         class="w-100"
+        *ngIf="!isScrollMore"
         (click)="onSubmit(currentPage + 1)"
       >
         載入更多
       </button>
+      <!-- <button
+        nz-button
+        nzType="primary"
+        [nzSize]="'large'"
+        nzShape="round"
+        class="w-100"
+        *ngIf="!isScrollMore"
+        (click)="onSubmit(currentPage + 1)"
+      >
+      <i nz-icon nzType="to-top" nzTheme="outline"></i>
+      </button> -->
+      <nz-back-top [nzVisibilityHeight]="1000"></nz-back-top>
     </div>
   </div>
 </div>

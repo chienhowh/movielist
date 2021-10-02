@@ -3,11 +3,11 @@ import { MovieRequestService } from './../../core/services/movie-request.service
 import { FormBuilder } from '@angular/forms';
 import { filter, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
 import { API } from 'src/app/core/consts/global-constants.const';
 import { LOCALSTORAGE_KEY } from 'src/app/core/consts/routing-path.const';
-import { NzMark } from 'ng-zorro-antd/slider';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-specific-type',
@@ -15,7 +15,7 @@ import { NzMark } from 'ng-zorro-antd/slider';
   styleUrls: ['./specific-type.component.scss']
 })
 export class SpecificTypeComponent implements OnInit {
-  // @HostListener('scroll')
+  @ViewChild('specific') specific: ElementRef;
   type: string;
   currentPage = 1;
   validateForm = this.fb.group({
@@ -28,8 +28,10 @@ export class SpecificTypeComponent implements OnInit {
   displayList: IMovieInfo[] = [];
   genresList: IGenre[] = [];
   setOfCheckedGenre = new Set();
-  /** 是否滑動增加 */
-  isScollMore = false;
+  /** 是否開放滑動增加 */
+  isScrollMore = false;
+  /** 滑動頁是否載入完成 */
+  loaded = false;
   rateMarks = {
     0: '0',
     5: '5',
@@ -51,15 +53,31 @@ export class SpecificTypeComponent implements OnInit {
     { text: '按評分降序', value: 'vote_average.asc' },
     { text: '按評分降序', value: 'vote_average.desc' },
   ];
+  @HostListener('window:scroll', ['$event'])
+  private onScroll($event): void {
+    const clientHeight = $event.target.documentElement.clientHeight;
+    const scrollTop = $event.target.documentElement.scrollTop;
+    const scrollHeight = $event.target.documentElement.scrollHeight;
+
+    if (this.isScrollMore && this.loaded) {
+      if (scrollHeight - scrollTop - clientHeight < clientHeight * 0.3) {
+        this.loaded = false;
+        this.onSubmit(this.currentPage + 1);
+      }
+    }
+  }
   constructor(
     private fb: FormBuilder,
-    private mvReqSvc: MovieRequestService
+    private mvReqSvc: MovieRequestService,
+    private eleRef: ElementRef
   ) { }
 
   ngOnInit(): void {
     this.genresList = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY.GENRES));
     this.onSubmit(1);
   }
+
+
 
   onSubmit(page: number): void {
     const formValue = this.validateForm.value;
@@ -82,12 +100,17 @@ export class SpecificTypeComponent implements OnInit {
   // TODO:選項跟日期讀不到
   getMovies(page: number, reqBody: any): void {
     if (page === 1) {
+      this.isScrollMore = false;
+      this.loaded = false;
       this.mvReqSvc.request(API.GET, API.DISCOVER, reqBody).subscribe((res: IResponse) => {
         this.displayList = res.results;
       });
     } else {
+      // 第二頁開始變滾動
+      this.isScrollMore = true;
       this.mvReqSvc.request(API.GET, API.DISCOVER, reqBody).subscribe((res: IResponse) => {
         this.displayList = this.displayList.concat(res.results);
+        this.loaded = true;
       });
     }
 
