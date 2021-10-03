@@ -16,16 +16,16 @@ export class AppComponent implements OnInit {
     return ROUTING_PATH;
   }
   title = 'movielist';
-  movieDropList: IDropDown[] = [
-    { name: '熱門', type: 'aaa' },
-    { name: '上映中', type: 'bbb' },
-    { name: '即將上映', type: '' },
-    { name: '評分最高', type: '' },
-  ];
+  // movieDropList: IDropDown[] = [
+  //   { name: '熱門', type: 'aaa' },
+  //   { name: '上映中', type: 'bbb' },
+  //   { name: '即將上映', type: '' },
+  //   { name: '評分最高', type: '' },
+  // ];
   collectionDropList: IDropDown[] = [
-    { name: '清單', type: '' },
-    { name: '我的最愛', type: '' },
-    { name: '待播清單', type: '' },
+    { name: '清單', link: '' },
+    { name: '我的最愛', link: '' },
+    { name: '待播清單', link: '' },
   ];
 
   drawerVisible = false;

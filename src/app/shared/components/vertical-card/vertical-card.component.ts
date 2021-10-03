@@ -13,7 +13,7 @@ export class VerticalCardComponent implements OnInit {
   @Input() movie: IMovieInfo;
   API_POSTER = API_POSTER;
   constructor(
-    private modalSvc:NzModalService
+    private modalSvc: NzModalService
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class VerticalCardComponent implements OnInit {
    * 跳出顯示電影詳情視窗
    * 資料不完全所以movieDetail要再用id call一次
    */
-   onWatchDetail(info): void {
+  onWatchDetail(info): void {
     this.modalSvc.create({
       nzContent: MovieDetailComponent,
       nzComponentParams: {

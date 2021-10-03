@@ -8,8 +8,17 @@
       />
     </div>
     <div class="overview-box p-3">
-      <h6>{{ movie.title }}</h6>
-      <p class="mb-2 fc-light">{{ movie.release_date }}</p>
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <div class="rate-box">
+            <app-rate-icon [rate]="movie.vote_average"></app-rate-icon>
+          </div>
+        </div>
+        <div class="col pl-0">
+          <h6>{{ movie.title }}</h6>
+          <p class="mb-2 fc-light">{{ movie.release_date }}</p>
+        </div>
+      </div>
       <div #overview class="overview">
         {{ movie.overview ? movie.overview : "尚無介紹" }}
       </div>
