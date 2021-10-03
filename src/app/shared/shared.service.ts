@@ -1,4 +1,4 @@
-import { DEVICE } from '../core/consts/device.const';
+import { DEVICE } from './../core/consts/device.const';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,10 +6,15 @@ import { Injectable } from '@angular/core';
 })
 export class SharedService {
 
-  device = '';
+  private device: DEVICE;
   constructor() { }
 
-  set setUserDeviceSubject(value: string) {
+  /** PAD || MOBILE */
+  set UserDeviceSubject(value) {
     this.device = value;
+  }
+
+  get UserDeviceSubject(): DEVICE {
+    return this.device;
   }
 }

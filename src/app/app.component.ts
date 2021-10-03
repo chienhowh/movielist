@@ -41,10 +41,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.initUserDevice(document.documentElement.offsetWidth);
   }
-  test(){
-    console.log('werwerewr');
 
-  }
+
   login(): void {
     // this.authSvc.loginForUser().then(()=>console.log(this.authSvc.user) );
     this.authSvc.loginWithGoogle();
@@ -52,11 +50,11 @@ export class AppComponent implements OnInit {
   }
 
   initUserDevice(size: number): void {
-    if (size >= 1024) {
-      this.sharedService.setUserDeviceSubject = DEVICE.PAD;
+    if (size >= 768) {
+      this.sharedService.UserDeviceSubject = DEVICE.PAD;
       // 手機版
-    } else if (size > 0 && size < 1024) {
-      this.sharedService.setUserDeviceSubject = DEVICE.MOBILE;
+    } else if (size > 0 && size < 768) {
+      this.sharedService.UserDeviceSubject = DEVICE.MOBILE;
     }
   }
 }

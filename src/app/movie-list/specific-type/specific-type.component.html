@@ -116,10 +116,16 @@
         <ng-container *ngIf="displayList.length !== 0; else loading">
           <div class="row">
             <ng-container *ngFor="let movie of displayList">
-              <div class="my-3 col-cus">
-                <!-- <app-movie-card [movie]="movie"></app-movie-card> -->
-                <app-vertical-card [movie]="movie"></app-vertical-card>
-              </div>
+              <ng-container *ngIf="device === DEVICE.PAD">
+                <div class="my-3 col-cus">
+                  <app-vertical-card [movie]="movie"></app-vertical-card>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="device === DEVICE.MOBILE">
+                <div class="my-3 col-12">
+                  <app-movie-card [movie]="movie"></app-movie-card>
+                </div>
+              </ng-container>
             </ng-container>
           </div>
         </ng-container>

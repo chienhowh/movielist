@@ -1,3 +1,5 @@
+import { DEVICE } from './../../core/consts/device.const';
+import { SharedService } from './../../shared/shared.service';
 import { IResponse, IGenre } from './../../core/interfaces/movie.interface';
 import { MovieRequestService } from './../../core/services/movie-request.service';
 import { FormBuilder } from '@angular/forms';
@@ -16,6 +18,9 @@ import { fromEvent } from 'rxjs';
 })
 export class SpecificTypeComponent implements OnInit {
   @ViewChild('specific') specific: ElementRef;
+  DEVICE = DEVICE;
+  /** current device */
+  device: DEVICE;
   type: string;
   currentPage = 1;
   validateForm = this.fb.group({
@@ -69,9 +74,12 @@ export class SpecificTypeComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private mvReqSvc: MovieRequestService,
+    private sharedSvc: SharedService
   ) { }
 
   ngOnInit(): void {
+    this.device = this.sharedSvc.UserDeviceSubject;
+    this.log(this.device);
     this.genresList = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY.GENRES));
     this.onSubmit(1);
   }

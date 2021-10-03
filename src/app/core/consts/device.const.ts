@@ -1,5 +1,5 @@
 
-export const DEVICE = {
-  PAD: 'PAD',
-  MOBILE: 'MOBILE'
+export enum DEVICE  {
+  PAD,
+  MOBILE
 }
