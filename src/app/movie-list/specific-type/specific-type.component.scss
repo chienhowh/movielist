@@ -18,3 +18,20 @@ nz-collapse {
   margin-bottom: 8px;
   margin-right: 6px;
 }
+
+.col-cus {
+  flex: 0 0 33.33%;
+  max-width: 33.33%;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  @media screen and (min-width: 1024px) {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  @media screen and (min-width: 1140px) {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+}

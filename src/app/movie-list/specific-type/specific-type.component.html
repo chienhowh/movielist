@@ -1,4 +1,4 @@
-<div class="container-xl" >
+<div class="container-xl">
   <div class="row specific-box" #specific>
     <div class="col-12 col-md-3">
       <h4 class="font-weight-bold">探索電影</h4>
@@ -110,19 +110,18 @@
         </button>
       </form>
     </div>
+    <!-- 搜索結果 start -->
     <div class="col-12 col-md-9">
       <div class="list-box">
         <ng-container *ngIf="displayList.length !== 0; else loading">
-          <!-- <div class="row no-gutters"> -->
-          <ng-container *ngFor="let movie of displayList">
-            <div class="my-3">
-              <app-movie-card [movie]="movie"></app-movie-card>
-            </div>
-          </ng-container>
-          <!-- <ng-container *ngIf="displayList.length % 2 === 1">
-            <div class="col-10 col-sm-5" style="opacity: 0"></div>
-          </ng-container> -->
-          <!-- </div> -->
+          <div class="row">
+            <ng-container *ngFor="let movie of displayList">
+              <div class="my-3 col-cus">
+                <!-- <app-movie-card [movie]="movie"></app-movie-card> -->
+                <app-vertical-card [movie]="movie"></app-vertical-card>
+              </div>
+            </ng-container>
+          </div>
         </ng-container>
         <ng-template #loading> Loading </ng-template>
       </div>

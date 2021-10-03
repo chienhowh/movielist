@@ -69,7 +69,6 @@ export class SpecificTypeComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private mvReqSvc: MovieRequestService,
-    private eleRef: ElementRef
   ) { }
 
   ngOnInit(): void {

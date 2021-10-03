@@ -19,10 +19,12 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
+import { VerticalCardComponent } from './components/vertical-card/vertical-card.component';
 @NgModule({
   declarations: [
     RateIconComponent,
-    MovieCardComponent
+    MovieCardComponent,
+    VerticalCardComponent
   ],
   imports: [
     CommonModule
@@ -45,8 +47,9 @@ import { NzBackTopModule } from 'ng-zorro-antd/back-top';
     NzSelectModule,
     NzCollapseModule,
     NzSliderModule,
+    NzBackTopModule,
     MovieCardComponent,
-    NzBackTopModule
+    VerticalCardComponent
   ]
 })
 export class SharedModule { }
