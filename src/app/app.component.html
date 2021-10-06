@@ -68,10 +68,19 @@
                   <li nz-menu-item>4th menu item</li>
                 </ul>
               </li>
+              <li nz-menu-item [routerLink]="ROUTING_PATH.WATCHLIST">
+                我的最愛
+              </li>
               <li nz-menu-item *ngFor="let item of collectionDropList">
                 <p
-                  [routerLink]="ROUTING_PATH.WATCHLIST"
-                  [queryParams]="{ name: item.name, endpoint: item.endpoint }"
+                  [routerLink]="
+                    ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.EITHER_WATCH
+                  "
+                  [queryParams]="{
+                    name: item.name,
+                    endpoint: item.endpoint,
+                    type: item.type
+                  }"
                 >
                   {{ item.name }}
                 </p>

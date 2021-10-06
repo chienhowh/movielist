@@ -3,6 +3,6 @@ export interface IDropDown {
   /** router link */
   link?: string;
   /** 類別 */
-  type?: string;
+  type?: any;
   endpoint?: string;
 }

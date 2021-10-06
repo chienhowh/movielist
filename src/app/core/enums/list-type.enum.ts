@@ -4,3 +4,8 @@ export enum ListType{
   ADDLIST
 }
 
+
+export enum EitherWatch{
+  BEENWATCHED,
+  NOTWATCHED
+}

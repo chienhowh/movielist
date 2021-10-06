@@ -5,11 +5,13 @@ import { CommonModule } from '@angular/common';
 import { WatchlistRoutingModule } from './watchlist-routing.module';
 import { CommentComponent } from './content/comment/comment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EitherWatchComponent } from './content/either-watch/either-watch.component';
 
 @NgModule({
   declarations: [
     WatchlistComponent,
-    CommentComponent
+    CommentComponent,
+    EitherWatchComponent
   ],
   imports: [
     CommonModule,

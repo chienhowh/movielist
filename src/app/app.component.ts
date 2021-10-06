@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { IDropDown } from './core/interfaces/utilities';
 import { ROUTING_PATH } from './core/consts/routing-path.const';
+import { EitherWatch } from './core/enums/list-type.enum';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -24,9 +25,8 @@ export class AppComponent implements OnInit {
   //   { name: '評分最高', type: '' },
   // ];
   collectionDropList: IDropDown[] = [
-    { name: '我的最愛', endpoint: API.FAVORITE },
-    { name: '待播清單', endpoint: API.WATCHLIST },
-    { name: '已經觀看', endpoint: API.BEENWATCHED },
+    { name: '待播清單', endpoint: API.WATCHLIST, type: EitherWatch.NOTWATCHED },
+    { name: '已經觀看', endpoint: API.WATCHLIST, type: EitherWatch.BEENWATCHED },
   ];
 
   drawerVisible = false;
