@@ -29,6 +29,7 @@ export class DetailService {
    */
   addtoList(id: number, listType: ListType, data: any): Observable<any> {
     let url = '';
+    data.id = id;
     switch (listType) {
       case ListType.FAVORITE:
         url = API.FAVORITE;

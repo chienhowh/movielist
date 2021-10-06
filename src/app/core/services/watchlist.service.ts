@@ -19,18 +19,7 @@ export class WatchlistService {
   /** 取得ＤＢ所有電影紀錄 */
   getWatchLists(endpoint: string): Observable<any> {
     return this.requestService.fbRequest(API.GET, endpoint).pipe(
-      map(res => {
-        const list = [];
-        for (const key in res) {
-          if (res.hasOwnProperty(key)) {
-            list.push({
-              id: key,
-              ...res[key]
-            });
-          }
-        }
-        return list;
-      })
+      map(res => Object.values(res))
     );
   }
 
