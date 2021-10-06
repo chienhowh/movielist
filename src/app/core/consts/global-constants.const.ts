@@ -24,7 +24,9 @@ export const enum API {
   // DB start
   WATCHLIST = '/watchlist',
   FAVORITE = '/favorite',
-  ADDLIST = '/customlist'
+  ADDLIST = '/customlist',
+  /** 已經觀看 */
+  BEENWATCHED = '/watched'
 }
 
 export enum API_POSTER {

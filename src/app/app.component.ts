@@ -1,3 +1,4 @@
+import { API } from 'src/app/core/consts/global-constants.const';
 
 import { AuthService } from './auth.service';
 import { DEVICE } from './core/consts/device.const';
@@ -23,9 +24,9 @@ export class AppComponent implements OnInit {
   //   { name: '評分最高', type: '' },
   // ];
   collectionDropList: IDropDown[] = [
-    { name: '清單', link: '' },
-    { name: '我的最愛', link: '' },
-    { name: '待播清單', link: '' },
+    { name: '我的最愛', endpoint: API.FAVORITE },
+    { name: '待播清單', endpoint: API.WATCHLIST },
+    { name: '已經觀看', endpoint: API.BEENWATCHED },
   ];
 
   drawerVisible = false;

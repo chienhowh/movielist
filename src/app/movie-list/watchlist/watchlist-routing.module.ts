@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   { path: '', component: WatchlistComponent }
-]
+];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

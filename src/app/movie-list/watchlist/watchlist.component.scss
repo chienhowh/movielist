@@ -1,46 +1,51 @@
 @import "../../../custom-design.scss";
 
-.title {
-  padding: 4px 12px;
-  position: relative;
-}
-.title:hover {
-  background-color: $secondary-color;
+.list-box {
+  justify-content: space-evenly;
 }
 
-.close {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 0px 12px;
-}
+// .title {
+//   padding: 4px 12px;
+//   position: relative;
+// }
+// .title:hover {
+//   background-color: $secondary-color;
+// }
+
+// .close {
+//   position: absolute;
+//   right: 0;
+//   top: 0;
+//   padding: 0px 12px;
+// }
 
 // tab start
-:host {
-  background: #f5f5f5;
-  overflow: hidden;
-  padding: 24px;
-  display: block;
-}
+// :host {
+//   background: #f5f5f5;
+//   overflow: hidden;
+//   padding: 24px;
+//   display: block;
+// }
 
-.card-container ::ng-deep p {
-  margin: 0;
-}
-.card-container ::ng-deep > .ant-tabs-card .ant-tabs-content {
-  margin-top: -16px;
-}
-.card-container ::ng-deep > .ant-tabs-card .ant-tabs-content > .ant-tabs-tabpane {
-  background: #fff;
-  padding: 16px;
-}
-.card-container ::ng-deep > .ant-tabs-card > .ant-tabs-nav::before {
-  display: none;
-}
-.card-container ::ng-deep > .ant-tabs-card .ant-tabs-tab {
-  border-color: transparent;
-  background: transparent;
-}
-.card-container ::ng-deep > .ant-tabs-card .ant-tabs-tab-active {
-  border-color: #fff;
-  background: #fff;
-}
+// .card-container ::ng-deep p {
+//   margin: 0;
+// }
+// .card-container ::ng-deep > .ant-tabs-card .ant-tabs-content {
+//   margin-top: -16px;
+// }
+// .card-container ::ng-deep > .ant-tabs-card .ant-tabs-content > .ant-tabs-tabpane {
+//   background: #fff;
+//   padding: 16px;
+// }
+// .card-container ::ng-deep > .ant-tabs-card > .ant-tabs-nav::before {
+//   display: none;
+// }
+// .card-container ::ng-deep > .ant-tabs-card .ant-tabs-tab {
+//   border-color: transparent;
+//   background: transparent;
+// }
+// .card-container ::ng-deep > .ant-tabs-card .ant-tabs-tab-active {
+//   border-color: #fff;
+//   background: #fff;
+// }
+

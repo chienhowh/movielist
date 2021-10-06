@@ -57,9 +57,24 @@
           <!-- 我的最愛 start -->
           <li><a nz-dropdown [nzDropdownMenu]="listMenu">我的最愛</a></li>
           <nz-dropdown-menu #listMenu="nzDropdownMenu">
-            <ul nz-menu nzSelectable>
+            <ul nz-menu>
+              <li
+                nz-submenu
+                nzTitle="我的清單"
+                [routerLink]="ROUTING_PATH.WATCHLIST"
+              >
+                <ul>
+                  <li nz-menu-item>3rd menu item</li>
+                  <li nz-menu-item>4th menu item</li>
+                </ul>
+              </li>
               <li nz-menu-item *ngFor="let item of collectionDropList">
-                {{ item.name }}
+                <p
+                  [routerLink]="ROUTING_PATH.WATCHLIST"
+                  [queryParams]="{ name: item.name, endpoint: item.endpoint }"
+                >
+                  {{ item.name }}
+                </p>
               </li>
             </ul>
           </nz-dropdown-menu>

@@ -1,56 +1,68 @@
+import { MovieRequestService } from 'src/app/core/services/movie-request.service';
+import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
+import { ActivatedRoute } from '@angular/router';
 import { WatchlistService } from './../../core/services/watchlist.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { CommentComponent } from './comment/comment.component';
+import { CommentComponent } from './content/comment/comment.component';
 import { DetailService } from './../homepage/shared/detail.service';
-import { API_POSTER } from '../../core/consts/global-constants.const';
-import { Component, OnInit } from '@angular/core';
+import { API, API_POSTER } from '../../core/consts/global-constants.const';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IWatchedMovie, WATCHLIST_TYPE } from './shared/watchlist';
 import { NzFormatEmitEvent, NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { ListType } from 'src/app/core/enums/list-type.enum';
+import { takeUntil, concatAll, map, concatMap } from 'rxjs/operators';
+import { from, Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-watchlist',
   templateUrl: './watchlist.component.html',
   styleUrls: ['./watchlist.component.scss']
 })
-export class WatchlistComponent implements OnInit {
+export class WatchlistComponent implements OnInit, OnDestroy {
   API_POSTER = API_POSTER;
-
-  /**
-   * 待播清單
-   */
-  displayList: {
-    unWatchedList: IWatchedMovie[],
-    watchedList: IWatchedMovie[]
-  } = {
-      unWatchedList: [],
-      watchedList: []
-    };
-
-
-  tabList = [
-    { title: '尚未觀看', list: 'unWatchedList', type: WATCHLIST_TYPE.NEW },
-    { title: '已經觀看', list: 'watchedList', type: WATCHLIST_TYPE.READ }
-  ];
-
+  /** 清單 api */
+  endpoint: string;
+  /** 清單類型 */
+  name: string;
+  displayList: IMovieInfo[] = [];
+  unsubscribe = new Subject();
   constructor(
     private watchlistService: WatchlistService,
+    private mvReqSvc: MovieRequestService,
     private detailService: DetailService,
-    private modalService: NzModalService
+    private modalService: NzModalService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.getWatchList();
+    this.route.queryParams.pipe(takeUntil(this.unsubscribe)).subscribe(res => {
+      this.endpoint = res.endpoint;
+      this.name = res.name;
+      this.getWatchList();
+    });
   }
 
-
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.unsubscribe();
+  }
 
   getWatchList(): void {
-    this.watchlistService.getWatchLists().subscribe(res => {
-      // 分類電影
-      this.displayList.watchedList = res.filter(movie => movie.beenWatched);
-      this.displayList.unWatchedList = res.filter(movie => !movie.beenWatched);
+    this.watchlistService.getWatchLists(this.endpoint).subscribe(res => {
+      console.log(res);
+      from(res).pipe(
+        concatMap((mv: any) => this.searchMovieById(mv.id))).subscribe(list => {
+          this.displayList.push(list);
+          console.log(this.displayList);
+        });
     });
+  }
+
+  /**
+   * 用ID 摳詳細資訊
+   */
+  searchMovieById(id: number): Observable<any> {
+    return this.mvReqSvc.request(API.GET, `${API.MOVIE}/${id}`);
   }
 
   /**

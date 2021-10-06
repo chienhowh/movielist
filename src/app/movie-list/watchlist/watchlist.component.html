@@ -1,16 +1,20 @@
-<div class="card-container container-xl">
-  <nz-tabset nzType="card">
-    <ng-container *ngFor="let tab of tabList">
-      <nz-tab [nzTitle]="tab.title">
-        <ul>
-          <ng-container *ngFor="let item of displayList[tab.list]">
-            <li class="title" (click)="onPositiveClick(item, tab.type)">
-              {{ item.title }}
-              <span class="close" (click)="removeList(item.id, $event)">x</span>
-            </li>
-          </ng-container>
-        </ul>
-      </nz-tab>
+<div class="card-container">
+  <h4 class="font-weight-bold">{{ name }}</h4>
+  <!-- 搜索結果start -->
+<ng-container *ngIf="displayList.length !== 0; else noData">
+  <div class="row list-box no-gutters">
+    <ng-container *ngFor="let movie of displayList">
+      <div class="col-10 my-3 col-lg-5">
+        <app-movie-card [movie]="movie"></app-movie-card>
+      </div>
     </ng-container>
-  </nz-tabset>
+    <ng-container *ngIf="displayList.length % 2 === 1">
+      <div class="col-10 col-sm-5" style="opacity: 0"></div>
+    </ng-container>
+  </div>
+</ng-container>
 </div>
+<!-- no data -->
+<ng-template #noData>
+  <div class="text-center py-3">查無資料</div>
+</ng-template>
