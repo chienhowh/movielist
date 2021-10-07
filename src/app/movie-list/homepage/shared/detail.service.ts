@@ -1,3 +1,4 @@
+import { IWatchedMovie } from 'src/app/movie-list/watchlist/shared/watchlist';
 import { IMovieInfo } from './../../../core/interfaces/movie.interface';
 import { ListType } from './../../../core/enums/list-type.enum';
 import { Observable } from 'rxjs';
@@ -26,6 +27,8 @@ export class DetailService {
   // DB start
   /**
    * 加入後端待播清單
+   * @param id movidId
+   * @param listType ListType enum
    */
   addtoList(id: number, listType: ListType, data: any): Observable<any> {
     let url = '';
@@ -69,7 +72,7 @@ export class DetailService {
    * @param id movieid
    * @param listType watchlist, favorite
    */
-  readListById(id: number, listType: ListType): Observable<any> {
+  readListById(id: number, listType: ListType): Observable<IWatchedMovie> {
     let url = '';
     switch (listType) {
       case ListType.FAVORITE:

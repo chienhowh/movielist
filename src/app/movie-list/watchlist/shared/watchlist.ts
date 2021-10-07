@@ -2,8 +2,10 @@ export interface IWatchedMovie {
   title: string;
   id: number;
   beenWatched: boolean;
-  comment: string;
-  watchedDate: Date;
+  /** 評論 */
+  comment?: string;
+  /** 觀影日期 */
+  watchedDate?: Date;
 }
 
 export const enum WATCHLIST_TYPE {

@@ -19,7 +19,6 @@ export class MessageService {
     added ?
       this.nzMsgSvc.success(`已加入${type}`) :
       this.nzMsgSvc.warning(`已移出${type}`);
-
   }
 
 

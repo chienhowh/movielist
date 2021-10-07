@@ -1,3 +1,4 @@
+import { MessageService } from './../../../../../core/services/message.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { DetailService } from 'src/app/movie-list/homepage/shared/detail.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -21,13 +22,16 @@ export class MovieInfoComponent implements OnInit {
   @Output() refreshList = new EventEmitter();
   // 海報網址
   API_POSTER = API_POSTER;
+  inFavorite = false;
   constructor(
     private modalSvc: NzModalService,
     private detailSvc: DetailService,
-    private msgSvc: NzMessageService
+    private msgSvc: MessageService,
   ) { }
 
   ngOnInit(): void {
+    this.detailSvc.readListById(this.movie.id, ListType.FAVORITE).subscribe(res => this.inFavorite = !!res);
+
   }
 
   /**
@@ -67,9 +71,37 @@ export class MovieInfoComponent implements OnInit {
     });
   }
 
+
+
+
+  /**
+   * 加到最愛
+   */
+  handleAdd(): void {
+    const sendData = {
+      title: this.movie.title,
+      addTime: new Date().valueOf(),
+      beenWatched: false,
+      id: this.movie.id
+    };
+    if (this.inFavorite) {
+      this.detailSvc.removeList(this.movie.id, ListType.FAVORITE).subscribe(res => {
+        this.inFavorite = false;
+        this.msgSvc.handleAddAction('我的最愛', this.inFavorite);
+      });
+    } else {
+      this.detailSvc.addtoList(this.movie.id, ListType.FAVORITE, sendData).subscribe(res => {
+        this.inFavorite = true;
+        this.msgSvc.handleAddAction('我的最愛', this.inFavorite);
+      });
+
+
+    }
+  }
+
   removeFromList(movie: IMovieInfo): void {
     this.detailSvc.removeList(movie.id, ListType.WATCHLIST).subscribe(() => {
-      this.msgSvc.info(`已將${movie.title}移出清單`);
+      this.msgSvc.handleAddAction('我的最愛', false);
       this.refreshList.emit();
     });
   }

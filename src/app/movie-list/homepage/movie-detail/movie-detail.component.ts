@@ -12,6 +12,8 @@ import { IMovieInfo } from './../../../core/interfaces/movie.interface';
 import { Component, Input, OnInit } from '@angular/core';
 import { tify } from 'chinese-conv';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { map, tap } from 'rxjs/operators';
+import { IWatchedMovie } from '../../watchlist/shared/watchlist';
 
 @Component({
   selector: 'app-movie-detail',
@@ -30,6 +32,7 @@ export class MovieDetailComponent implements OnInit {
   /** 清單類別 */
   ListType = ListType;
   inFavorite = false;
+  /** 待播清單 */
   inWatchlist = false;
   genres: string[] = [];
   listMap = [
@@ -59,7 +62,7 @@ export class MovieDetailComponent implements OnInit {
   getDetailById(id: number): void {
     this.detailService.getMovieDetail(id).subscribe((res) => {
       this.displayList = res;
-      this.genres = this.getMovieGenres(res.genres)
+      this.genres = this.getMovieGenres(res.genres);
     });
     this.searchInList(id);
   }
@@ -96,19 +99,21 @@ export class MovieDetailComponent implements OnInit {
             this.msgSvc.handleAddAction('我的最愛', this.inFavorite);
           });
         }
-
     }
   }
 
 
   /** 看電影是否有在清單 */
   searchInList(id: number): void {
-    this.searchWatchlist(id).subscribe(res => this.inWatchlist = !!res);
+    // 已經看過則不在待播清單(會存到已觀看)
+    this.searchWatchlist(id).pipe(
+      map(m => m?.beenWatched ?? true)
+    ).subscribe(res => this.inWatchlist = !res);
     this.searchFavorite(id).subscribe(res => this.inFavorite = !!res);
   }
 
 
-  searchWatchlist(id: number): Observable<any> {
+  searchWatchlist(id: number): Observable<IWatchedMovie> {
     return this.detailService.readListById(id, ListType.WATCHLIST);
   }
 

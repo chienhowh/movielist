@@ -38,7 +38,6 @@ export class CommentComponent implements OnInit {
         this.validateForm.disable();
       }
     });
-
   }
 
   /**

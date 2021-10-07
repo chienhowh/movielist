@@ -33,12 +33,13 @@
             </a>
           </li>
           <li>
-            <a>
+            <a (click)="handleAdd()">
               <button nz-button nzType="primary" nzShape="circle">
                 <i
                   nz-icon
                   nzType="heart"
-                  [nzTheme]="true ? 'fill' : 'outline'"
+                  [nzTheme]="inFavorite ? 'fill' : 'outline'"
+                  [ngClass]="{ 'add-favorite': inFavorite }"
                 ></i>
               </button>
               <span class="d-none d-md-inline">我的最愛</span>
