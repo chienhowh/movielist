@@ -11,7 +11,6 @@ import { API_POSTER } from 'src/app/core/consts/global-constants.const';
 })
 export class MovieCardComponent implements OnInit {
   @Input() movie: IMovieInfo;
-
   // 海報網址
   API_POSTER = API_POSTER;
   constructor(

@@ -98,3 +98,21 @@ mat-paginator .mat-paginator-container {
   width: 36px;
   height: 36px;
 }
+
+// btn actions color
+.add-favorite {
+  color: $color-favorite;
+}
+
+.add-watchlist {
+  color: $color-watchlist;
+}
+
+// fix icon 無法置中
+.btn-groups {
+  button{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

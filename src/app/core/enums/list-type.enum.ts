@@ -1,11 +1,12 @@
-export enum ListType{
+export enum ListType {
+  /** 待看＆＆已看清單 */
   WATCHLIST,
   FAVORITE,
   ADDLIST
 }
 
 
-export enum EitherWatch{
+export enum EitherWatch {
   BEENWATCHED,
   NOTWATCHED
 }

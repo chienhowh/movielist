@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { Subject, from, Observable } from 'rxjs';
-import { takeUntil, concatMap } from 'rxjs/operators';
+import { Subject, from, Observable, iif, EMPTY } from 'rxjs';
+import { takeUntil, concatMap, filter, tap, map } from 'rxjs/operators';
 import { API_POSTER, API } from 'src/app/core/consts/global-constants.const';
-import { ListType } from 'src/app/core/enums/list-type.enum';
+import { EitherWatch, ListType } from 'src/app/core/enums/list-type.enum';
 import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
 import { MovieRequestService } from 'src/app/core/services/movie-request.service';
 import { WatchlistService } from 'src/app/core/services/watchlist.service';
@@ -22,8 +22,9 @@ export class EitherWatchComponent implements OnInit, OnDestroy {
   API_POSTER = API_POSTER;
   /** 清單 api */
   endpoint: string;
-  /** 清單類型 */
   name: string;
+  /** 已看 || 未看 */
+  type: EitherWatch;
   displayList: IMovieInfo[] = [];
   unsubscribe = new Subject();
   constructor(
@@ -38,6 +39,7 @@ export class EitherWatchComponent implements OnInit, OnDestroy {
     this.route.queryParams.pipe(takeUntil(this.unsubscribe)).subscribe(res => {
       this.endpoint = res.endpoint;
       this.name = res.name;
+      this.type = +res.type; // 要把query param轉回數字
       this.displayList = [];
       this.getWatchList();
     });
@@ -50,12 +52,17 @@ export class EitherWatchComponent implements OnInit, OnDestroy {
 
   getWatchList(): void {
     this.watchlistService.getWatchLists(this.endpoint).subscribe(res => {
-      console.log(res);
-      from(res).pipe(
-        concatMap((mv: any) => this.searchMovieById(mv.id))).subscribe(list => {
-          this.displayList.push(list);
-          console.log(this.displayList);
-        });
+      let seachMovies = [];
+      if (+this.type === EitherWatch.BEENWATCHED) {
+        seachMovies = res.filter(m => m.beenWatched);
+      } else {
+        seachMovies = res.filter(m => !m.beenWatched);
+      }
+      from(seachMovies).pipe(
+        concatMap((mv: any) => this.searchMovieById(mv.id)),
+      ).subscribe(list => {
+        this.displayList.push(list);
+      });
     });
   }
 
@@ -69,22 +76,23 @@ export class EitherWatchComponent implements OnInit, OnDestroy {
   /**
    * 新增 or 查看評語
    */
-  onPositiveClick(movie: IWatchedMovie, type: string): void {
-    this.modalService.create({
-      nzContent: CommentComponent,
-      nzComponentParams: { movie, type },
-      nzFooter: null,
-      nzBodyStyle: { padding: '24px' },
-      nzOnOk: () => {
-        this.getWatchList();
-      }
-    });
+  // onPositiveClick(movie: IWatchedMovie, type: string): void {
+  //   this.modalService.create({
+  //     nzContent: CommentComponent,
+  //     nzComponentParams: { movie, type },
+  //     nzFooter: null,
+  //     nzBodyStyle: { padding: '24px' },
+  //     nzOnOk: () => {
+  //       this.getWatchList();
+  //     }
+  //   });
+  // }
+
+  refreshList(): void {
+    this.displayList = [];
+    this.getWatchList();
   }
 
 
-  removeList(id: number, event: Event): void {
-    event.stopPropagation();
-    this.detailService.removeList(id, ListType.WATCHLIST).subscribe(() => this.getWatchList());
-  }
 
 }

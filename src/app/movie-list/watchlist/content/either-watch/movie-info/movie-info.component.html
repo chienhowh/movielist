@@ -1,0 +1,67 @@
+<div class="card-box">
+  <div class="d-flex h-100">
+    <div class="img-box">
+      <img
+        (error)="imgError($event)"
+        src="{{ API_POSTER.GET_POSTER + movie.poster_path }}"
+        alt=""
+      />
+    </div>
+    <div class="overview-box p-3">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <div class="rate-box">
+            <app-rate-icon [rate]="movie.vote_average"></app-rate-icon>
+          </div>
+        </div>
+        <div class="col pl-0">
+          <h6>{{ movie.title }}</h6>
+          <p class="mb-2 fc-light">{{ movie.release_date }}</p>
+        </div>
+      </div>
+      <div #overview class="overview">
+        {{ movie.overview ? movie.overview : "尚無介紹" }}
+      </div>
+      <div class="btn-groups">
+        <ul class="d-flex mb-0 mt-3">
+          <li>
+            <a (click)="onPositiveClick(movie, type)">
+              <button nz-button nzType="primary" nzShape="circle">
+                <i nz-icon nzType="comment" nzTheme="outline"></i>
+              </button>
+              <span class="d-none d-md-inline">我的評論</span>
+            </a>
+          </li>
+          <li>
+            <a>
+              <button nz-button nzType="primary" nzShape="circle">
+                <i
+                  nz-icon
+                  nzType="heart"
+                  [nzTheme]="true ? 'fill' : 'outline'"
+                ></i>
+              </button>
+              <span class="d-none d-md-inline">我的最愛</span>
+            </a>
+          </li>
+          <li>
+            <a>
+              <button nz-button nzType="primary" nzShape="circle">
+                <i nz-icon nzType="plus" nzTheme="outline"></i>
+              </button>
+              <span class="d-none d-md-inline">新稱至清單</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="removeFromList(movie)">
+              <button nz-button nzType="primary" nzShape="circle">
+                <i nz-icon nzType="close" nzTheme="outline"></i>
+              </button>
+              <span class="d-none d-md-inline">移除</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

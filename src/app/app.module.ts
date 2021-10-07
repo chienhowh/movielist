@@ -12,7 +12,7 @@ import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import {
   AccountBookOutline, HeartFill, HeartOutline, MenuOutline,
-  CloseOutline, DashOutline, BookOutline, UnorderedListOutline, BookFill, PlusOutline, ToTopOutline
+  CloseOutline, DashOutline, BookOutline, UnorderedListOutline, BookFill, PlusOutline, ToTopOutline, CommentOutline
 } from '@ant-design/icons-angular/icons';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -27,7 +27,7 @@ import { environment } from 'src/environments/environment';
 registerLocaleData(zh);
 const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, MenuOutline,
   CloseOutline, DashOutline, UnorderedListOutline, BookOutline, PlusOutline, ToTopOutline,
-  BookFill];
+  BookFill, CommentOutline];
 
 @NgModule({
   declarations: [
