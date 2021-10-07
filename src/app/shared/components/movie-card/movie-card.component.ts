@@ -1,8 +1,9 @@
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
 import { MovieDetailComponent } from 'src/app/movie-list/homepage/movie-detail/movie-detail.component';
 import { API_POSTER } from 'src/app/core/consts/global-constants.const';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-movie-card',
@@ -11,6 +12,7 @@ import { API_POSTER } from 'src/app/core/consts/global-constants.const';
 })
 export class MovieCardComponent implements OnInit {
   @Input() movie: IMovieInfo;
+  @Output() refreshList = new EventEmitter();
   // 海報網址
   API_POSTER = API_POSTER;
   constructor(
@@ -18,8 +20,6 @@ export class MovieCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.movie);
-
   }
 
   /**
@@ -27,7 +27,7 @@ export class MovieCardComponent implements OnInit {
    *
    */
   onWatchDetail(info: IMovieInfo): void {
-    this.modalSvc.create({
+    const modal = this.modalSvc.create({
       nzContent: MovieDetailComponent,
       nzComponentParams: {
         info
@@ -35,9 +35,10 @@ export class MovieCardComponent implements OnInit {
       nzFooter: null,
       nzBodyStyle: { padding: '24px' },
     });
+    modal.afterClose.pipe(take(1)).subscribe(() => this.refreshList.emit());
   }
 
-  imgError(event) {
+  imgError(event): void {
     event.target.src = 'assets/not-found.jpeg';
     event.target.style['object-fit'] = 'contain';
   }

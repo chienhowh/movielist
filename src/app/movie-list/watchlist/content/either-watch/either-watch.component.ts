@@ -30,8 +30,6 @@ export class EitherWatchComponent implements OnInit, OnDestroy {
   constructor(
     private watchlistService: WatchlistService,
     private mvReqSvc: MovieRequestService,
-    private detailService: DetailService,
-    private modalService: NzModalService,
     private route: ActivatedRoute
   ) { }
 

@@ -1,0 +1,10 @@
+<div class="row justify-evenly no-gutters">
+  <ng-container *ngFor="let movie of displayList">
+    <div class="col-10 my-3 col-lg-5">
+      <app-movie-card [movie]="movie" (refreshList)="getWatchList()"></app-movie-card>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="displayList.length % 2 === 1">
+    <div class="col-10 col-sm-5" style="opacity: 0"></div>
+  </ng-container>
+</div>

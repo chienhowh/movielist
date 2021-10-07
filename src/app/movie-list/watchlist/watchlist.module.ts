@@ -7,13 +7,15 @@ import { CommentComponent } from './content/comment/comment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EitherWatchComponent } from './content/either-watch/either-watch.component';
 import { MovieInfoComponent } from './content/either-watch/movie-info/movie-info.component';
+import { FavoriteListComponent } from './content/favorite-list/favorite-list.component';
 
 @NgModule({
   declarations: [
     WatchlistComponent,
     CommentComponent,
     EitherWatchComponent,
-    MovieInfoComponent
+    MovieInfoComponent,
+    FavoriteListComponent
   ],
   imports: [
     CommonModule,

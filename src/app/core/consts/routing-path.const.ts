@@ -6,6 +6,8 @@ export const ROUTING_PATH = {
   LIST_ADDING: 'listadd',
   /** 電影類別 */
   SPECIFIC_TYPE: 'specific-type',
+  /** 我的最愛 */
+  FAVORITE_LIST: 'favoritelist',
   /** 待播 or 已看清單 */
   EITHER_WATCH: 'eitherwatch'
 }
