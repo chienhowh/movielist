@@ -1,3 +1,4 @@
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { NewListService } from './../shared/new-list.service';
 import { ListAddingComponent } from './../list-adding/list-adding.component';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -8,7 +9,7 @@ import { ListType } from './../../../core/enums/list-type.enum';
 import { MessageService } from './../../../core/services/message.service';
 import { DetailService } from './../shared/detail.service';
 import { API_POSTER } from '../../../core/consts/global-constants.const';
-import { IMovieInfo } from './../../../core/interfaces/movie.interface';
+import { ICustomList, IMovieInfo } from './../../../core/interfaces/movie.interface';
 import { Component, Input, OnInit } from '@angular/core';
 import { tify } from 'chinese-conv';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
@@ -43,20 +44,20 @@ export class MovieDetailComponent implements OnInit {
   ];
 
   /** 客制清單 */
-  customList = [];
+  customList: ICustomList[] = [];
   constructor(
     private detailService: DetailService,
     public modalRef: NzModalRef,
     private msgSvc: MessageService,
     private nzModal: NzModalService,
-    private newListSvc: NewListService
+    private newListSvc: NewListService,
+    private nzMsgSvc: NzMessageService
   ) { }
 
   ngOnInit(): void {
     this.movieId = this.info.id;
     this.getDetailById(this.movieId);
-    this.newListSvc.getList().subscribe(console.log)
-
+    this.getCustomList();
   }
 
   getDetailById(id: number): void {
@@ -102,6 +103,34 @@ export class MovieDetailComponent implements OnInit {
     }
   }
 
+  /** 取得所有客制清單 */
+  getCustomList(): void {
+    this.newListSvc.getList().subscribe(res => this.customList = res);
+  }
+
+  /** 加到客製清單 */
+  addToCustom(listInfo: ICustomList): void {
+    // 新的清單，完全沒值
+    if (!listInfo.collections) {
+      listInfo.collections = [this.movieId];
+      this.newListSvc.addMovie(listInfo.id, listInfo).subscribe(() => {
+        this.nzMsgSvc.success(`已加入${listInfo.subject}`);
+      });
+    } else {
+      const collections = listInfo.collections;
+      if (collections.includes(this.movieId)) {
+        this.nzMsgSvc.info(`已在${listInfo.subject}`);
+        return;
+      } else {
+        collections.push(this.movieId);
+      }
+      this.newListSvc.addMovie(listInfo.id, listInfo).subscribe(() => {
+        this.nzMsgSvc.success(`已加入${listInfo.subject}`);
+      });
+    }
+  }
+
+
 
   /** 看電影是否有在清單 */
   searchInList(id: number): void {
@@ -111,7 +140,6 @@ export class MovieDetailComponent implements OnInit {
     ).subscribe(res => this.inWatchlist = !res);
     this.searchFavorite(id).subscribe(res => this.inFavorite = !!res);
   }
-
 
   searchWatchlist(id: number): Observable<IWatchedMovie> {
     return this.detailService.readListById(id, ListType.WATCHLIST);
@@ -137,6 +165,7 @@ export class MovieDetailComponent implements OnInit {
       nzContent: ListAddingComponent,
       nzFooter: null,
       nzBodyStyle: { padding: '24px' },
+      nzOnOk: () => { this.getCustomList(); }
     });
   }
 }

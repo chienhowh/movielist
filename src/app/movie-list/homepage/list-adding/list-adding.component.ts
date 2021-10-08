@@ -1,3 +1,4 @@
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { NewListService } from './../shared/new-list.service';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -14,7 +15,8 @@ export class ListAddingComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public modalRef: NzModalRef,
-    private newListSvc: NewListService
+    private newListSvc: NewListService,
+    private nzMsgSvc: NzMessageService
   ) { }
 
   ngOnInit(): void {
@@ -32,9 +34,14 @@ export class ListAddingComponent implements OnInit {
 
   submitForm(): void {
     if (verifyForm(this.validateForm)) { return; }
-    const value = this.validateForm.value;
-    value.collections = [];
-    this.newListSvc.newList(uuidv4(), value).subscribe(() => this.modalRef.close());
+    const id = uuidv4();
+    const requestBody = this.validateForm.value;
+    requestBody.collections = [];
+    requestBody.id = id;
+    this.newListSvc.newList(id, requestBody).subscribe(() => {
+      this.nzMsgSvc.success(`新增${this.validateForm.get('subject').value}`);
+      this.modalRef.triggerOk();
+    });
   }
 
 

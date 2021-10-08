@@ -28,3 +28,12 @@ export interface IGenre {
   name: string;
   id: number;
 }
+
+
+export interface ICustomList {
+  subject: string;
+  desc: string;
+  id: string;
+  /** movie id */
+  collections: number[];
+}

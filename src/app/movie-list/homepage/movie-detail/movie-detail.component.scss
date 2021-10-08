@@ -32,11 +32,18 @@ hr {
   }
 }
 .btn-groups {
-  button{
+  button {
     margin-right: 20px;
   }
 }
 
+.new-list-dropdown {
+  width: 180px;
+  padding: 16px;
+  background-color: $color-light-gray;
+}
 
-
-
+.new-list-btn {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
