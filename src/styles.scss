@@ -121,3 +121,8 @@ mat-paginator .mat-paginator-container {
 .justify-evenly{
   justify-content: space-evenly;
 }
+
+
+.ant-input[disabled],.ant-picker-input > input[disabled]{
+  color: rgba(0, 0, 0, 0.6);
+}
