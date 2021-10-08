@@ -4,6 +4,8 @@ export const ROUTING_PATH = {
   WATCHLIST: 'watchlist',
   /** 新增清單 */
   LIST_ADDING: 'listadd',
+  /** 客製表單 */
+  CUSTOM_LIST: 'cutomlist',
   /** 電影類別 */
   SPECIFIC_TYPE: 'specific-type',
   /** 我的最愛 */

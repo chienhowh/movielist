@@ -110,6 +110,7 @@ export class MovieDetailComponent implements OnInit {
 
   /** 加到客製清單 */
   addToCustom(listInfo: ICustomList): void {
+    if (!listInfo) { return; }
     // 新的清單，完全沒值
     if (!listInfo.collections) {
       listInfo.collections = [this.movieId];

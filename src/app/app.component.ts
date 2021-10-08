@@ -1,3 +1,4 @@
+import { NewListService } from './movie-list/homepage/shared/new-list.service';
 import { API } from 'src/app/core/consts/global-constants.const';
 
 import { AuthService } from './auth.service';
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 import { IDropDown } from './core/interfaces/utilities';
 import { ROUTING_PATH } from './core/consts/routing-path.const';
 import { EitherWatch } from './core/enums/list-type.enum';
+import { Observable } from 'rxjs';
+import { ICustomList } from './core/interfaces/movie.interface';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,6 +19,10 @@ import { EitherWatch } from './core/enums/list-type.enum';
 export class AppComponent implements OnInit {
   get ROUTING_PATH(): typeof ROUTING_PATH {
     return ROUTING_PATH;
+  }
+
+  get API(): typeof API {
+    return API;
   }
   title = 'movielist';
   // movieDropList: IDropDown[] = [
@@ -29,18 +36,20 @@ export class AppComponent implements OnInit {
     { name: '已經觀看', endpoint: API.WATCHLIST, type: EitherWatch.BEENWATCHED },
   ];
 
+
+  customDropList$: Observable<ICustomList[]>;
+
   drawerVisible = false;
   constructor(
     private sharedService: SharedService,
     private authSvc: AuthService,
-
-  ) {
-
-
-  }
+    private newListSvc: NewListService
+  ) { }
 
   ngOnInit(): void {
     this.initUserDevice(document.documentElement.offsetWidth);
+
+    this.customDropList$ = this.newListSvc.getList();
   }
 
 

@@ -34,6 +34,6 @@ export interface ICustomList {
   subject: string;
   desc: string;
   id: string;
-  /** movie id */
-  collections: number[];
+  /** movie id[] */
+  collections?: number[];
 }

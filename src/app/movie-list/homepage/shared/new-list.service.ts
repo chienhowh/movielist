@@ -20,6 +20,7 @@ export class NewListService {
     return this.requestSvc.fbRequest(API.PUT, API.ADDLIST + '/' + id, data);
   }
 
+  /** 取得所有客制清單 */
   getList(): Observable<any> {
     return this.requestSvc.fbRequest(API.GET, API.ADDLIST).pipe(map(res => Object.values(res)));
   }
