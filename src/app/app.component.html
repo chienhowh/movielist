@@ -18,13 +18,52 @@
           (nzOnClose)="drawerVisible = false"
         >
           <ng-container *nzDrawerContent>
-            <p style="padding-bottom: 10px">
+            <p>
               <a routerLink="/home" (click)="drawerVisible = false">首頁</a>
+            </p>
+            <p>
+              <a
+                [routerLink]="ROUTING_PATH.SPECIFIC_TYPE"
+                (click)="drawerVisible = false"
+                >探索</a
+              >
             </p>
             <p>
               <a routerLink="/watchlist" (click)="drawerVisible = false"
                 >我的最愛</a
               >
+            </p>
+            <ng-container *ngIf="customDropList$ | async as customDropList">
+              <p *ngFor="let item of customDropList">
+                <a
+                  [routerLink]="
+                    ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.FAVORITE_LIST
+                  "
+                  [queryParams]="{
+                    id: item.id,
+                    endpoint: API.ADDLIST
+                  }"
+                  (click)="drawerVisible = false"
+                >
+                  {{ item.subject }}
+                </a>
+              </p>
+            </ng-container>
+
+            <p *ngFor="let item of collectionDropList">
+              <a
+                [routerLink]="
+                  ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.EITHER_WATCH
+                "
+                [queryParams]="{
+                  name: item.name,
+                  endpoint: item.endpoint,
+                  type: item.type
+                }"
+                (click)="drawerVisible = false"
+              >
+                {{ item.name }}
+              </a>
             </p>
           </ng-container>
         </nz-drawer>
@@ -40,7 +79,7 @@
       <div class="laptop">
         <ul class="d-flex m-0 align-items-center">
           <!-- 電影 start -->
-          <li><a [routerLink]="'specific-type'">探索</a></li>
+          <li><a [routerLink]="ROUTING_PATH.SPECIFIC_TYPE">探索</a></li>
           <!-- <li><a nz-dropdown [nzDropdownMenu]="movieMenu">電影</a></li> -->
           <!-- <nz-dropdown-menu #movieMenu="nzDropdownMenu">
             <ul nz-menu nzSelectable>
@@ -55,7 +94,7 @@
             </ul>
           </nz-dropdown-menu> -->
           <!-- 我的最愛 start -->
-          <li><a nz-dropdown [nzDropdownMenu]="listMenu">我的最愛</a></li>
+          <li><a nz-dropdown [nzDropdownMenu]="listMenu">清單</a></li>
           <nz-dropdown-menu #listMenu="nzDropdownMenu">
             <ul nz-menu>
               <li nz-submenu nzTitle="我的清單">
