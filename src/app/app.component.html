@@ -18,53 +18,64 @@
           (nzOnClose)="drawerVisible = false"
         >
           <ng-container *nzDrawerContent>
-            <p>
-              <a routerLink="/home" (click)="drawerVisible = false">首頁</a>
-            </p>
-            <p>
-              <a
-                [routerLink]="ROUTING_PATH.SPECIFIC_TYPE"
-                (click)="drawerVisible = false"
-                >探索</a
-              >
-            </p>
-            <p>
-              <a routerLink="/watchlist" (click)="drawerVisible = false"
-                >我的最愛</a
-              >
-            </p>
-            <ng-container *ngIf="customDropList$ | async as customDropList">
-              <p *ngFor="let item of customDropList">
+            <ul class="mobile-drawer">
+              <li>
+                <a routerLink="/home" (click)="drawerVisible = false">首頁</a>
+              </li>
+              <li>
+                <a
+                  [routerLink]="ROUTING_PATH.SPECIFIC_TYPE"
+                  (click)="drawerVisible = false"
+                  >探索</a
+                >
+              </li>
+              <li>
+                <a routerLink="/watchlist" (click)="drawerVisible = false"
+                  >我的最愛</a
+                >
+              </li>
+              <li *ngFor="let item of collectionDropList">
                 <a
                   [routerLink]="
-                    ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.FAVORITE_LIST
+                    ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.EITHER_WATCH
                   "
                   [queryParams]="{
-                    id: item.id,
-                    endpoint: API.ADDLIST
+                    name: item.name,
+                    endpoint: item.endpoint,
+                    type: item.type
                   }"
                   (click)="drawerVisible = false"
                 >
-                  {{ item.subject }}
+                  {{ item.name }}
                 </a>
-              </p>
-            </ng-container>
-
-            <p *ngFor="let item of collectionDropList">
-              <a
-                [routerLink]="
-                  ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.EITHER_WATCH
-                "
-                [queryParams]="{
-                  name: item.name,
-                  endpoint: item.endpoint,
-                  type: item.type
-                }"
-                (click)="drawerVisible = false"
-              >
-                {{ item.name }}
-              </a>
-            </p>
+              </li>
+              <li>
+                <span style="color: rgba(0, 0, 0, 0.45)">清單</span>
+                <hr class="m-1"/>
+                <ul>
+                  <ng-container
+                    *ngIf="customDropList$ | async as customDropList"
+                  >
+                    <li *ngFor="let item of customDropList">
+                      <a
+                        [routerLink]="
+                          ROUTING_PATH.WATCHLIST +
+                          '/' +
+                          ROUTING_PATH.FAVORITE_LIST
+                        "
+                        [queryParams]="{
+                          id: item.id,
+                          endpoint: API.ADDLIST
+                        }"
+                        (click)="drawerVisible = false"
+                      >
+                        {{ item.subject }}
+                      </a>
+                    </li>
+                  </ng-container>
+                </ul>
+              </li>
+            </ul>
           </ng-container>
         </nz-drawer>
       </div>

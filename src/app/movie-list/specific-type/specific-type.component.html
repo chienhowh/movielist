@@ -129,7 +129,7 @@
             </ng-container>
           </div>
         </ng-container>
-        <ng-template #loading> Loading </ng-template>
+        <ng-template #loading>查無資料</ng-template>
       </div>
       <button
         nz-button
@@ -137,7 +137,7 @@
         [nzSize]="'large'"
         nzShape="round"
         class="w-100"
-        *ngIf="!isScrollMore"
+        *ngIf="!isScrollMore && displayList.length !== 0"
         (click)="onSubmit(currentPage + 1)"
       >
         載入更多

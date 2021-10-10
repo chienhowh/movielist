@@ -4,7 +4,7 @@ export const API = {
   DELETE: 'delete',
   PATCH: 'patch',
   PUT: 'put',
-  KEY: '?api_key:bc0a486e34f46f2e1df814d9d7d35008',
+  KEY: '?api_key=bc0a486e34f46f2e1df814d9d7d35008',
   /** TMDB start */
   MOVIE: '/movie',
   // 關鍵字搜尋
