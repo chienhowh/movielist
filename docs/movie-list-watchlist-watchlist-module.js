@@ -628,19 +628,18 @@ class FavoriteListComponent {
         this.route.queryParams.subscribe(res => {
             this.endpoint = res.endpoint;
             this.customId = res.id;
-            let url = '';
             if (this.customId) {
-                url = `${res.endpoint}/${res.id}`;
+                this.requestUrl = `${res.endpoint}/${res.id}`;
             }
             else {
-                url = res.endpoint;
+                this.requestUrl = res.endpoint;
             }
-            this.getWatchList(url);
+            this.getWatchList();
         });
     }
-    getWatchList(url) {
+    getWatchList() {
         this.displayList = [];
-        this.watchlistSvc.getWatchLists(url).subscribe(res => {
+        this.watchlistSvc.getWatchLists(this.requestUrl).subscribe(res => {
             // 客制清單
             if (this.customId) {
                 this.title = res[3];
