@@ -22,6 +22,10 @@ import { registerLocaleData, CommonModule } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
 registerLocaleData(zh);
@@ -46,23 +50,13 @@ const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, Me
     RouterModule,
     NzIconModule.forRoot(icons),
     SocialLoginModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_TW },
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              environment.GAPI_CLIENT_ID
-            )
-          }
-        ]
-      } as SocialAuthServiceConfig,
-    }
   ],
   entryComponents: [MovieDetailComponent],
   bootstrap: [AppComponent],

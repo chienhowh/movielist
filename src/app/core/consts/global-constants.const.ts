@@ -32,3 +32,8 @@ export const API = {
 export enum API_POSTER {
   GET_POSTER = 'https://image.tmdb.org/t/p/w200'
 }
+
+
+export const COMMON = {
+  UID: 'uid'
+}
