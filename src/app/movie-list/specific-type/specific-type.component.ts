@@ -55,7 +55,7 @@ export class SpecificTypeComponent implements OnInit {
     { text: '按人氣降序', value: 'popularity.desc' },
     { text: '按日期升序', value: 'primary_release_date.asc' },
     { text: '按日期降序', value: 'primary_release_date.desc' },
-    { text: '按評分降序', value: 'vote_average.asc' },
+    { text: '按評分升序', value: 'vote_average.asc' },
     { text: '按評分降序', value: 'vote_average.desc' },
   ];
   @HostListener('window:scroll', ['$event'])
