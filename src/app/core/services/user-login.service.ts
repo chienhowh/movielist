@@ -8,9 +8,6 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class UserLoginService {
-  /** 身分 */
-  user: User;
-  isLogin = false;
   constructor(
     private afAuth: AngularFireAuth
 
@@ -23,15 +20,22 @@ export class UserLoginService {
     const provider = new firebase.default.auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
     console.log(credential);
-    this.user = new User(credential.user);
-    this.isLogin = true;
+    const user = {
+      username: credential.user.displayName,
+      email: credential.user.email
+    };
     sessionStorage.setItem(COMMON.UID, credential.user.uid);
+    sessionStorage.setItem(COMMON.USER, JSON.stringify(user));
   }
 
   logout(): void {
     this.afAuth.signOut().then(() => {
       sessionStorage.removeItem(COMMON.UID);
-      this.isLogin = false;
+      sessionStorage.removeItem(COMMON.USER);
     });
+  }
+
+  isLogin(): boolean {
+    return !!sessionStorage.getItem(COMMON.UID);
   }
 }

@@ -1,6 +1,6 @@
 import { UserLoginService } from './core/services/user-login.service';
 import { NewListService } from './movie-list/homepage/shared/new-list.service';
-import { API } from 'src/app/core/consts/global-constants.const';
+import { API, COMMON } from 'src/app/core/consts/global-constants.const';
 
 import { DEVICE } from './core/consts/device.const';
 import { SharedService } from './shared/shared.service';
@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
     return API;
   }
   title = 'movielist';
+  userInfo: { username: string, email: string };
   // movieDropList: IDropDown[] = [
   //   { name: '熱門', type: 'aaa' },
   //   { name: '上映中', type: 'bbb' },
@@ -50,6 +51,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.initUserDevice(document.documentElement.offsetWidth);
     this.customDropList$ = this.newListSvc.getList();
+    this.userInfo = JSON.parse(sessionStorage.getItem(COMMON.USER));
+    console.log(this.userInfo);
   }
 
   login(): void {

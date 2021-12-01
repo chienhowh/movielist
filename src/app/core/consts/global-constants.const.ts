@@ -27,7 +27,7 @@ export const API = {
   ADDLIST: '/customlist',
   /** 已經觀看 */
   BEENWATCHED: '/watched'
-}
+};
 
 export enum API_POSTER {
   GET_POSTER = 'https://image.tmdb.org/t/p/w200'
@@ -35,5 +35,7 @@ export enum API_POSTER {
 
 
 export const COMMON = {
-  UID: 'uid'
-}
+  UID: 'uid',
+  USER: 'movie-user'
+};
+
