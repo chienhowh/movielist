@@ -1,3 +1,12 @@
+<div>
+  <ul>
+    <li *ngFor="let item of testItems | async">
+      {{ item.title }}
+    </li>
+  </ul>
+</div>
+<button (click)="addItem()"> add item</button>
+
 <ng-container *ngIf="displayList">
   <h2 class="text-center font-weight-bold mb-3">
     {{ displayList.title }}
@@ -71,10 +80,16 @@
       <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
     </button>
     <nz-dropdown-menu #menu="nzDropdownMenu">
-      <div class="new-list-dropdown" >
+      <div class="new-list-dropdown">
         <div class="mb-2">
           <a (click)="openNewList()" class="new-list-btn"
-            ><i nz-icon nzType="plus" nzTheme="outline" class="align-middle"></i> 建立新清單</a
+            ><i
+              nz-icon
+              nzType="plus"
+              nzTheme="outline"
+              class="align-middle"
+            ></i>
+            建立新清單</a
           >
         </div>
         <nz-select
@@ -108,8 +123,8 @@
       <i
         nz-icon
         nzType="heart"
-        [nzTheme]="inFavorite ? 'fill' : 'outline'"
-        [ngClass]="{ 'add-favorite': inFavorite }"
+        [nzTheme]="isFavorite ? 'fill' : 'outline'"
+        [ngClass]="{ 'add-favorite': isFavorite }"
       ></i>
     </button>
     <button

@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
   }
 
   login(): void {
-    this.userLoginSvc.login();
+    this.userLoginSvc.login().then(() => this.userInfo = JSON.parse(sessionStorage.getItem(COMMON.USER)));
   }
 
   logout(): void {

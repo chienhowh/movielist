@@ -1,27 +1,29 @@
+import { ListHandleService } from './../../../core/services/list-handle.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NewListService } from './../shared/new-list.service';
 import { ListAddingComponent } from './../list-adding/list-adding.component';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { ROUTING_PATH } from '../../../core/consts/routing-path.const';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ListType } from './../../../core/enums/list-type.enum';
 import { MessageService } from './../../../core/services/message.service';
 import { DetailService } from './../shared/detail.service';
 import { API_POSTER } from '../../../core/consts/global-constants.const';
 import { ICustomList, IMovieInfo } from './../../../core/interfaces/movie.interface';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { tify } from 'chinese-conv';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { map, tap } from 'rxjs/operators';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { IWatchedMovie } from '../../watchlist/shared/watchlist';
-
+import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase';
 @Component({
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.component.html',
   styleUrls: ['./movie-detail.component.scss']
 })
-export class MovieDetailComponent implements OnInit {
+export class MovieDetailComponent implements OnInit, OnDestroy {
   @Input() info;
 
   get ROUTING_PATH(): typeof ROUTING_PATH {
@@ -32,8 +34,8 @@ export class MovieDetailComponent implements OnInit {
   displayList: IMovieInfo;
   /** 清單類別 */
   ListType = ListType;
-  inFavorite = false;
-  /** 待播清單 */
+  isFavorite = false;
+  /** 在待播清單 */
   inWatchlist = false;
   genres: string[] = [];
   listMap = [
@@ -45,19 +47,36 @@ export class MovieDetailComponent implements OnInit {
 
   /** 客制清單 */
   customList: ICustomList[] = [];
+  ngUnsubscribe = new Subject();
+  testItems;
   constructor(
     private detailService: DetailService,
     public modalRef: NzModalRef,
     private msgSvc: MessageService,
     private nzModal: NzModalService,
     private newListSvc: NewListService,
-    private nzMsgSvc: NzMessageService
-  ) { }
+    private nzMsgSvc: NzMessageService,
+    private listHandleSvc: ListHandleService,
+    private fireStore: AngularFirestore
+  ) {
+  }
 
   ngOnInit(): void {
     this.movieId = this.info.id;
     this.getDetailById(this.movieId);
-    this.getCustomList();
+    // this.getCustomList();
+    this.getFavorite();
+    this.getWatchList();
+  }
+
+  addItem() {
+    const params = {
+      timestamp: firebase.default.firestore.FieldValue.serverTimestamp(),
+      title: this.displayList.title,
+      id: this.movieId,
+      isWatched: false
+    };
+    this.listHandleSvc.addToFavorite(params);
   }
 
   getDetailById(id: number): void {
@@ -65,40 +84,36 @@ export class MovieDetailComponent implements OnInit {
       this.displayList = res;
       this.genres = this.getMovieGenres(res.genres);
     });
-    this.searchInList(id);
   }
 
   handleAdd(type: ListType): void {
     const sendData = {
+      timestamp: firebase.default.firestore.FieldValue.serverTimestamp(),
       title: this.displayList.title,
-      addTime: new Date().valueOf(),
-      beenWatched: false
+      id: this.movieId,
+      isWatched: false
     };
     switch (type) {
       case ListType.WATCHLIST:
         if (this.inWatchlist) {
-          this.detailService.removeList(this.movieId, type).subscribe(res => {
-            this.inWatchlist = false;
-            this.msgSvc.handleAddAction('待播清單', this.inWatchlist);
-          });
+          this.listHandleSvc.removeFromWatchList(this.movieId);
+          this.inWatchlist = false;
+          this.msgSvc.handleAddAction('待播清單', this.inWatchlist);
         } else {
-          this.detailService.addtoList(this.movieId, type, sendData).subscribe(res => {
-            this.inWatchlist = true;
-            this.msgSvc.handleAddAction('待播清單', this.inWatchlist);
-          });
+          this.listHandleSvc.addToWatchList(sendData);
+          this.inWatchlist = true;
+          this.msgSvc.handleAddAction('待播清單', this.inWatchlist);
         }
         break;
       case ListType.FAVORITE:
-        if (this.inFavorite) {
-          this.detailService.removeList(this.movieId, type).subscribe(res => {
-            this.inFavorite = false;
-            this.msgSvc.handleAddAction('我的最愛', this.inFavorite);
-          });
+        if (this.isFavorite) {
+          this.listHandleSvc.removeFavorite(this.movieId);
+          this.isFavorite = false;
+          this.msgSvc.handleAddAction('我的最愛', this.isFavorite);
         } else {
-          this.detailService.addtoList(this.movieId, type, sendData).subscribe(res => {
-            this.inFavorite = true;
-            this.msgSvc.handleAddAction('我的最愛', this.inFavorite);
-          });
+          this.listHandleSvc.addToFavorite(sendData);
+          this.isFavorite = true;
+          this.msgSvc.handleAddAction('我的最愛', this.isFavorite);
         }
     }
   }
@@ -131,7 +146,15 @@ export class MovieDetailComponent implements OnInit {
     }
   }
 
+  getFavorite(): void {
+    this.listHandleSvc.getFromFavorite(this.movieId)
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => this.isFavorite = res ? true : false);
+  }
 
+  getWatchList(): void {
+    this.listHandleSvc.getFromWatchList(this.movieId)
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => this.inWatchlist = res ? true : false);
+  }
 
   /** 看電影是否有在清單 */
   searchInList(id: number): void {
@@ -139,7 +162,7 @@ export class MovieDetailComponent implements OnInit {
     this.searchWatchlist(id).pipe(
       map(m => m?.beenWatched ?? true)
     ).subscribe(res => this.inWatchlist = !res);
-    this.searchFavorite(id).subscribe(res => this.inFavorite = !!res);
+    this.searchFavorite(id).subscribe(res => this.isFavorite = !!res);
   }
 
   searchWatchlist(id: number): Observable<IWatchedMovie> {
@@ -169,4 +192,10 @@ export class MovieDetailComponent implements OnInit {
       nzOnOk: () => { this.getCustomList(); }
     });
   }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.unsubscribe();
+  }
+
 }

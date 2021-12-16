@@ -1,6 +1,7 @@
 export const API = {
   POST: 'post',
   GET: 'get',
+  GET_BY_ID: 'getbyid',
   DELETE: 'delete',
   PATCH: 'patch',
   PUT: 'put',
@@ -19,7 +20,7 @@ export const API = {
   UPCOMING: '/movie/upcoming',
   TOP_RATED: '/movie/top_rated',
   NOW_PLAYING: '/movie/now_playing',
-  GET_BY_ID: '/movie',
+
 
   // DB start
   WATCHLIST: '/watchlist',

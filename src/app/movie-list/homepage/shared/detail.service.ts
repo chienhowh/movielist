@@ -20,7 +20,7 @@ export class DetailService {
    * 取得電影明細
    */
   getMovieDetail(id: number): Observable<IMovieInfo> {
-    return this.requestService.request(API.GET, `${API.GET_BY_ID}/${id}`);
+    return this.requestService.request(API.GET, `${API.MOVIE}/${id}`);
   }
 
 

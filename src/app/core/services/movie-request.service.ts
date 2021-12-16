@@ -2,8 +2,9 @@ import { environment } from './../../../environments/environment';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { API, API_POSTER } from '../consts/global-constants.const';
-import { catchError, filter, tap } from 'rxjs/operators';
+import { API, API_POSTER, COMMON } from '../consts/global-constants.const';
+import { catchError, filter, tap, map, take } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { catchError, filter, tap } from 'rxjs/operators';
 export class MovieRequestService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private fireStore: AngularFirestore
   ) { }
 
   /**
@@ -74,7 +76,7 @@ export class MovieRequestService {
     const headers = this.getHTTPHeaders();
     const params = { ...sendData };
 
-    const sendUrl = environment.FB_IP + url + '.json' ;
+    const sendUrl = environment.FB_IP + url + '.json';
     switch (method) {
       case API.GET:
         return this.http.get(sendUrl, { params, headers }).pipe(catchError(this.handleError));
@@ -86,6 +88,27 @@ export class MovieRequestService {
         return this.http.patch(sendUrl, params, { headers }).pipe(catchError(this.handleError));
       case API.DELETE:
         return this.http.delete(sendUrl, { params, headers }).pipe(catchError(this.handleError));
+    }
+  }
+
+
+  /**
+   * fireStore DB
+   */
+  fsRequest(method: string, collectionName: string, params?: any) {
+    const uid = sessionStorage.getItem(COMMON.UID);
+    console.log(uid);
+    console.log(collectionName, '::', JSON.stringify(params));
+    switch (method) {
+      case API.GET:
+        return this.fireStore.collection('users').doc(uid).collection(collectionName).valueChanges().pipe(take(1));
+      case API.GET_BY_ID:
+        return this.fireStore.collection('users').doc(uid).collection(collectionName).doc(params).get().pipe(map(res => res.data()));
+      case API.POST:
+        this.fireStore.collection('users').doc(uid).collection(collectionName).doc(`${params.id}`).set(params);
+        break;
+      case API.DELETE:
+        this.fireStore.collection('users').doc(uid).collection(collectionName).doc(params).delete();
     }
   }
 
