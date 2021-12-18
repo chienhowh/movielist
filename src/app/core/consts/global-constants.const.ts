@@ -40,3 +40,12 @@ export const COMMON = {
   USER: 'movie-user'
 };
 
+
+export const FIRE_STORE_COLLECTIONS = {
+  /** 客製名單 */
+  CUSTOMLIST: 'customlist',
+  /** 待播清單 */
+  WATCHLIST: 'watchlist',
+  /** 我的最愛 */
+  FAVORITELIST: 'favorite'
+}

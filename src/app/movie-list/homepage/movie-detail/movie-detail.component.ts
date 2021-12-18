@@ -1,3 +1,4 @@
+import { UserLoginService } from './../../../core/services/user-login.service';
 import { ListHandleService } from './../../../core/services/list-handle.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NewListService } from './../shared/new-list.service';
@@ -34,9 +35,9 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   displayList: IMovieInfo;
   /** 清單類別 */
   ListType = ListType;
-  isFavorite = false;
   /** 在待播清單 */
   inWatchlist = false;
+  isFavorite = false;
   genres: string[] = [];
   listMap = [
     { header: '類型', key: 'genres' },
@@ -48,28 +49,30 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   /** 客制清單 */
   customList: ICustomList[] = [];
   ngUnsubscribe = new Subject();
-  testItems;
   constructor(
     private detailService: DetailService,
     public modalRef: NzModalRef,
+    private nzMsgSvc: NzMessageService,
     private msgSvc: MessageService,
     private nzModal: NzModalService,
     private newListSvc: NewListService,
-    private nzMsgSvc: NzMessageService,
     private listHandleSvc: ListHandleService,
-    private fireStore: AngularFirestore
+    private fireStore: AngularFirestore,
+    private loginSvc: UserLoginService
   ) {
   }
 
   ngOnInit(): void {
     this.movieId = this.info.id;
     this.getDetailById(this.movieId);
-    // this.getCustomList();
-    this.getFavorite();
-    this.getWatchList();
+    if (this.loginSvc.isLogin()) {
+      this.getFavorite();
+      this.getWatchList();
+      this.getCustomList();
+    }
   }
 
-  addItem() {
+  addItem(): void {
     const params = {
       timestamp: firebase.default.firestore.FieldValue.serverTimestamp(),
       title: this.displayList.title,
@@ -87,6 +90,10 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   }
 
   handleAdd(type: ListType): void {
+    if (!this.loginSvc.isLogin()) {
+      this.nzMsgSvc.error('請先登入!');
+      return;
+    }
     const sendData = {
       timestamp: firebase.default.firestore.FieldValue.serverTimestamp(),
       title: this.displayList.title,
@@ -120,7 +127,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
   /** 取得所有客制清單 */
   getCustomList(): void {
-    this.newListSvc.getList().subscribe(res => this.customList = res);
+    this.listHandleSvc.getCustomlist().pipe(takeUntil(this.ngUnsubscribe)).subscribe((res) => this.customList = res);
   }
 
   /** 加到客製清單 */

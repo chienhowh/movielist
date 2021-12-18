@@ -1,12 +1,3 @@
-<div>
-  <ul>
-    <li *ngFor="let item of testItems | async">
-      {{ item.title }}
-    </li>
-  </ul>
-</div>
-<button (click)="addItem()"> add item</button>
-
 <ng-container *ngIf="displayList">
   <h2 class="text-center font-weight-bold mb-3">
     {{ displayList.title }}

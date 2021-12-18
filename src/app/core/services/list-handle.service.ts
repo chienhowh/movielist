@@ -2,8 +2,9 @@ import { MovieRequestService } from './movie-request.service';
 import { map, take, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentData } from '@angular/fire/firestore'
-import { API } from '../consts/global-constants.const';
+import { API, FIRE_STORE_COLLECTIONS } from '../consts/global-constants.const';
 import { Observable } from 'rxjs';
+import { ICustomList } from '../interfaces/movie.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -56,5 +57,15 @@ export class ListHandleService {
 
   removeFromWatchList(id: number): void {
     this.removeFromList('watchlist', id);
+  }
+
+  // 客製清單 start
+  /** 取得客製化清單 */
+  getCustomlist(): Observable<ICustomList[]> {
+    return this.movieRequestSvc.fsGet(FIRE_STORE_COLLECTIONS.CUSTOMLIST);
+  }
+  /** 新增客製清單 */
+  newCustomList(params: any): Promise<void> {
+    return this.movieRequestSvc.fsPost(FIRE_STORE_COLLECTIONS.CUSTOMLIST, params);
   }
 }
