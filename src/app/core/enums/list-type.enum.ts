@@ -7,6 +7,6 @@ export enum ListType {
 
 
 export enum EitherWatch {
-  BEENWATCHED,
-  NOTWATCHED
+  BEENWATCHED = '0',
+  NOTWATCHED = '1'
 }

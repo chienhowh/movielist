@@ -101,12 +101,12 @@ export class MovieRequestService {
     console.log(collectionName, '::', JSON.stringify(params));
     switch (method) {
       case API.GET:
-        return this.fireStore.collection('users').doc(uid).collection(collectionName).valueChanges().pipe(take(1));
+        return this.fireStore.collection('users').doc(uid).collection(collectionName).valueChanges();
       case API.GET_BY_ID:
         return this.fireStore.collection('users').doc(uid).collection(collectionName).doc(params).get().pipe(map(res => res.data()));
       case API.POST:
         if (params?.id) {
-          this.fireStore.collection('users').doc(uid).collection(collectionName).doc(`${params.id}`).set(params);
+          this.fireStore.collection('users').doc(uid).collection(collectionName).doc(`${params.id}`).set(params, { merge: true });
         } else {
           this.fireStore.collection('users').doc(uid).collection(collectionName).doc().set(params);
         }

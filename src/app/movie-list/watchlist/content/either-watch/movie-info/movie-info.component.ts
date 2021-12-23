@@ -1,37 +1,56 @@
+import { Subject } from 'rxjs';
+import { ListHandleService } from './../../../../../core/services/list-handle.service';
 import { MessageService } from './../../../../../core/services/message.service';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { DetailService } from 'src/app/movie-list/homepage/shared/detail.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { API_POSTER } from 'src/app/core/consts/global-constants.const';
-import { EitherWatch, ListType } from 'src/app/core/enums/list-type.enum';
-import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
+import { EitherWatch } from 'src/app/core/enums/list-type.enum';
+import { ICustomList, IMovieInfo } from 'src/app/core/interfaces/movie.interface';
 import { MovieDetailComponent } from 'src/app/movie-list/homepage/movie-detail/movie-detail.component';
-import { IWatchedMovie } from '../../../shared/watchlist';
 import { CommentComponent } from '../../comment/comment.component';
+import { takeUntil } from 'rxjs/operators';
+import * as firebase from 'firebase';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { UserLoginService } from 'src/app/core/services/user-login.service';
 
 @Component({
   selector: 'app-movie-info',
   templateUrl: './movie-info.component.html',
   styleUrls: ['./movie-info.component.scss']
 })
-export class MovieInfoComponent implements OnInit {
+export class MovieInfoComponent implements OnInit, OnDestroy {
   @Input() movie: IMovieInfo;
   /** 已看 || 未看 */
-  @Input() type: EitherWatch;
-  @Output() refreshList = new EventEmitter();
+  @Input() isWatched: EitherWatch;
   // 海報網址
   API_POSTER = API_POSTER;
-  inFavorite = false;
+  isFavorite = false;
+  /** 客制清單 */
+  customList: ICustomList[] = [];
+  customListName: ICustomList;
+  ngUnsubscribe = new Subject();
   constructor(
     private modalSvc: NzModalService,
-    private detailSvc: DetailService,
+    private listHandleSvc: ListHandleService,
     private msgSvc: MessageService,
+    private nzMsgSvc: NzMessageService,
+    private loginSvc: UserLoginService
   ) { }
 
   ngOnInit(): void {
-    this.detailSvc.readListById(this.movie.id, ListType.FAVORITE).subscribe(res => this.inFavorite = !!res);
+    if (this.loginSvc.isLogin()) {
+      this.getFavorite();
+      this.getCustomList();
+    }
+  }
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.unsubscribe();
+  }
 
+  getFavorite(): void {
+    this.listHandleSvc.getFromFavorite(this.movie.id)
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => this.isFavorite = res ? true : false);
   }
 
   /**
@@ -54,20 +73,34 @@ export class MovieInfoComponent implements OnInit {
     event.target.style['object-fit'] = 'contain';
   }
 
+  /** 取得所有客制清單 */
+  getCustomList(): void {
+    this.listHandleSvc.getCustomlist().pipe(takeUntil(this.ngUnsubscribe)).subscribe((res) => this.customList = res);
+  }
 
+  /** 加到客製清單 */
+  addToCustom(listInfo: ICustomList): void {
+    if (!listInfo) { return; }
+    const sendData = {
+      timestamp: firebase.default.firestore.FieldValue.serverTimestamp(),
+      title: this.movie.title,
+      id: this.movie.id.toString(),
+      isWatched: false
+    };
+    this.listHandleSvc.addToSpecList(listInfo.id, sendData).then(() => {
+      this.nzMsgSvc.success(`已加入${listInfo.subject}`);
+    });
+  }
 
   /**
    * 新增 or 查看評語
    */
-  onPositiveClick(movie: IMovieInfo, type: EitherWatch): void {
-    this.modalSvc.create({
+  onPositiveClick(movie: IMovieInfo): void {
+    const modal = this.modalSvc.create({
       nzContent: CommentComponent,
-      nzComponentParams: { movie, type },
+      nzComponentParams: { movie, isWatched: this.isWatched },
       nzFooter: null,
       nzBodyStyle: { padding: '24px' },
-      nzOnOk: () => {
-        this.refreshList.emit();
-      }
     });
   }
 
@@ -79,30 +112,25 @@ export class MovieInfoComponent implements OnInit {
    */
   handleAdd(): void {
     const sendData = {
+      timestamp: firebase.default.firestore.FieldValue.serverTimestamp(),
       title: this.movie.title,
-      addTime: new Date().valueOf(),
-      beenWatched: false,
-      id: this.movie.id
+      id: this.movie.id,
+      isWatched: false
     };
-    if (this.inFavorite) {
-      this.detailSvc.removeList(this.movie.id, ListType.FAVORITE).subscribe(res => {
-        this.inFavorite = false;
-        this.msgSvc.handleAddAction('我的最愛', this.inFavorite);
-      });
+    if (this.isFavorite) {
+      this.listHandleSvc.removeFavorite(this.movie.id);
+      this.isFavorite = false;
+      this.msgSvc.handleAddAction('我的最愛', this.isFavorite);
     } else {
-      this.detailSvc.addtoList(this.movie.id, ListType.FAVORITE, sendData).subscribe(res => {
-        this.inFavorite = true;
-        this.msgSvc.handleAddAction('我的最愛', this.inFavorite);
-      });
-
-
+      this.listHandleSvc.addToFavorite(sendData);
+      this.isFavorite = true;
+      this.msgSvc.handleAddAction('我的最愛', this.isFavorite);
     }
+
   }
 
-  removeFromList(movie: IMovieInfo): void {
-    this.detailSvc.removeList(movie.id, ListType.WATCHLIST).subscribe(() => {
-      this.msgSvc.handleAddAction('我的最愛', false);
-      this.refreshList.emit();
-    });
+  removeFromWatchList(movie: IMovieInfo): void {
+    this.listHandleSvc.removeFromWatchList(movie.id);
+    this.msgSvc.handleAddAction('待播清單', false);
   }
 }

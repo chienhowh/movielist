@@ -1,8 +1,9 @@
+import { ListHandleService } from './../../../../core/services/list-handle.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Subject, from, Observable, iif, EMPTY } from 'rxjs';
-import { takeUntil, concatMap, filter, tap, map } from 'rxjs/operators';
+import { takeUntil, concatMap, filter, tap, map, mergeMap } from 'rxjs/operators';
 import { API_POSTER, API } from 'src/app/core/consts/global-constants.const';
 import { EitherWatch, ListType } from 'src/app/core/enums/list-type.enum';
 import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
@@ -21,24 +22,22 @@ export class EitherWatchComponent implements OnInit, OnDestroy {
 
   API_POSTER = API_POSTER;
   /** 清單 api */
-  endpoint: string;
   name: string;
   /** 已看 || 未看 */
-  type: EitherWatch;
+  isWatched: EitherWatch;
+  EitherWatch = EitherWatch;
   displayList: IMovieInfo[] = [];
   unsubscribe = new Subject();
   constructor(
-    private watchlistService: WatchlistService,
     private mvReqSvc: MovieRequestService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private listHandleSvc: ListHandleService
   ) { }
 
   ngOnInit(): void {
     this.route.queryParams.pipe(takeUntil(this.unsubscribe)).subscribe(res => {
-      this.endpoint = res.endpoint;
       this.name = res.name;
-      this.type = +res.type; // 要把query param轉回數字
-      this.displayList = [];
+      this.isWatched = res.type;
       this.getWatchList();
     });
   }
@@ -49,18 +48,15 @@ export class EitherWatchComponent implements OnInit, OnDestroy {
   }
 
   getWatchList(): void {
-    this.watchlistService.getWatchLists(this.endpoint).subscribe(res => {
-      let seachMovies = [];
-      if (+this.type === EitherWatch.BEENWATCHED) {
-        seachMovies = res.filter(m => m.beenWatched);
-      } else {
-        seachMovies = res.filter(m => !m.beenWatched);
-      }
-      from(seachMovies).pipe(
-        concatMap((mv: any) => this.searchMovieById(mv.id)),
-      ).subscribe(list => {
-        this.displayList.push(list);
+    this.listHandleSvc.getFromWatchList().pipe(
+      takeUntil(this.unsubscribe)
+    ).subscribe(res => {
+      this.displayList = [];
+      const movies = res.filter(m => {
+        if (this.isWatched === EitherWatch.BEENWATCHED) { return m.isWatched; }
+        else { return !m.isWatched; }
       });
+      from(movies).pipe(mergeMap((mv: any) => this.searchMovieById(mv.id))).subscribe(list => this.displayList.push(list));
     });
   }
 

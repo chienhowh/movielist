@@ -25,7 +25,7 @@
       <div class="btn-groups">
         <ul class="d-flex mb-0 mt-3">
           <li>
-            <a (click)="onPositiveClick(movie, type)">
+            <a (click)="onPositiveClick(movie)">
               <button nz-button nzType="primary" nzShape="circle">
                 <i nz-icon nzType="comment" nzTheme="outline"></i>
               </button>
@@ -38,8 +38,8 @@
                 <i
                   nz-icon
                   nzType="heart"
-                  [nzTheme]="inFavorite ? 'fill' : 'outline'"
-                  [ngClass]="{ 'add-favorite': inFavorite }"
+                  [nzTheme]="isFavorite ? 'fill' : 'outline'"
+                  [ngClass]="{ 'add-favorite': isFavorite }"
                 ></i>
               </button>
               <span class="d-none d-md-inline">我的最愛</span>
@@ -47,14 +47,39 @@
           </li>
           <li>
             <a>
-              <button nz-button nzType="primary" nzShape="circle">
-                <i nz-icon nzType="plus" nzTheme="outline"></i>
+              <button
+                nz-button
+                nzType="primary"
+                nz-dropdown
+                [nzDropdownMenu]="menu"
+                nzTrigger="click"
+                nzShape="circle"
+              >
+                <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
               </button>
+              <nz-dropdown-menu #menu="nzDropdownMenu">
+                <div class="new-list-dropdown">
+                  <nz-select
+                    nzShowSearch
+                    nzAllowClear
+                    nzPlaceHolder="新增至清單"
+                    (ngModelChange)="addToCustom($event)"
+                    class="w-100"
+                    [(ngModel)]="customListName"
+                  >
+                    <nz-option
+                      *ngFor="let item of customList"
+                      [nzLabel]="item.subject"
+                      [nzValue]="item"
+                    ></nz-option>
+                  </nz-select>
+                </div>
+              </nz-dropdown-menu>
               <span class="d-none d-md-inline">新稱至清單</span>
             </a>
           </li>
           <li>
-            <a (click)="removeFromList(movie)">
+            <a (click)="removeFromWatchList(movie)">
               <button nz-button nzType="primary" nzShape="circle">
                 <i nz-icon nzType="close" nzTheme="outline"></i>
               </button>
