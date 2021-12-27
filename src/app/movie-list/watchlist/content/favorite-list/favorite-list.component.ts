@@ -14,8 +14,8 @@ import { API } from 'src/app/core/consts/global-constants.const';
   styleUrls: ['./favorite-list.component.scss']
 })
 export class FavoriteListComponent implements OnInit, OnDestroy {
-  endpoint: string;
-  /** 客制表單id */
+
+  /** customlist id(favorite:undefined) */
   customId: string;
   title: string;
   desc: string;
@@ -30,13 +30,12 @@ export class FavoriteListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.route.snapshot.queryParams.subscribe(res => {
-      this.endpoint = res.endpoint;
+    this.route.queryParams.pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       this.customId = res.id;
       // 拿自訂清單by id
       if (this.customId) {
-        this.listHandleSvc.getSpecList(this.customId).pipe(takeUntil(this.ngUnsubscribe)).subscribe(m => {
-          this.fsList = m;
+        this.listHandleSvc.getSpecList(this.customId).pipe(takeUntil(this.ngUnsubscribe)).subscribe(lists => {
+          this.fsList = lists;
           this.getWatchList();
         });
         this.listHandleSvc.getSpecFields(this.customId).subscribe(i => {
@@ -46,6 +45,8 @@ export class FavoriteListComponent implements OnInit, OnDestroy {
       } else {
         this.listHandleSvc.getFromFavorite().pipe(takeUntil(this.ngUnsubscribe)).subscribe((lists: any[]) => {
           this.fsList = lists;
+          this.title = '我的最愛';
+          this.desc = '';
           this.getWatchList();
         });
       }

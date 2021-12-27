@@ -1,14 +1,12 @@
 import { ListHandleService } from './../../../../core/services/list-handle.service';
 import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
-import { EitherWatch, ListType } from 'src/app/core/enums/list-type.enum';
-import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
+import { EitherWatch } from 'src/app/core/enums/list-type.enum';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { verifyForm } from '../../../../core/funcs/verify-form';
-import { DetailService } from 'src/app/movie-list/homepage/shared/detail.service';
-import { IWatchedMovie, WATCHLIST_TYPE } from '../../shared/watchlist';
+import { IWatchedMovie } from '../../shared/watchlist';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -33,7 +31,6 @@ export class CommentComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('isWatched :: ', this.isWatched);
-
     this.listHandleSvc.getFromWatchListById(this.movie.id).subscribe(res => {
       this.validateForm.patchValue(res);
       if (this.isWatched === EitherWatch.BEENWATCHED) {

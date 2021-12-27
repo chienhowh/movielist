@@ -53,7 +53,8 @@ const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, Me
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_TW },

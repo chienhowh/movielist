@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ListHandleService } from './core/services/list-handle.service';
 import { UserLoginService } from './core/services/user-login.service';
 import { NewListService } from './movie-list/homepage/shared/new-list.service';
@@ -11,6 +12,7 @@ import { ROUTING_PATH } from './core/consts/routing-path.const';
 import { EitherWatch } from './core/enums/list-type.enum';
 import { Observable } from 'rxjs';
 import { ICustomList } from './core/interfaces/movie.interface';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -45,7 +47,8 @@ export class AppComponent implements OnInit {
     private sharedService: SharedService,
     private newListSvc: NewListService,
     public userLoginSvc: UserLoginService,
-    private listHandleSvc: ListHandleService
+    private listHandleSvc: ListHandleService,
+    private router: Router
   ) {
   }
 
@@ -53,18 +56,25 @@ export class AppComponent implements OnInit {
     this.initUserDevice(document.documentElement.offsetWidth);
     this.userInfo = JSON.parse(sessionStorage.getItem(COMMON.USER));
     console.log(this.userInfo);
-    this.listHandleSvc.getCustomlist().subscribe((res) => this.customDropList = res);
+    this.getCustomList();
   }
 
   login(): void {
-    this.userLoginSvc.login().then(() => this.userInfo = JSON.parse(sessionStorage.getItem(COMMON.USER)));
+    this.userLoginSvc.login().then(() => {
+      this.userInfo = JSON.parse(sessionStorage.getItem(COMMON.USER));
+      this.getCustomList();
+    });
   }
 
   logout(): void {
     this.userLoginSvc.logout();
+    this.customDropList = [];
+    this.router.navigate(['home']);
   }
 
-
+  getCustomList(): void {
+    this.listHandleSvc.getCustomlist().pipe(take(1)).subscribe((res) => this.customDropList = res);
+  }
 
   initUserDevice(size: number): void {
     if (size >= 768) {

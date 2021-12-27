@@ -1,3 +1,4 @@
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
@@ -9,8 +10,8 @@ import { User } from '../models/user';
 })
 export class UserLoginService {
   constructor(
-    private afAuth: AngularFireAuth
-
+    private afAuth: AngularFireAuth,
+    private nzMsgSvc: NzMessageService
   ) { }
 
 
@@ -30,8 +31,10 @@ export class UserLoginService {
 
   logout(): void {
     this.afAuth.signOut().then(() => {
+      const user = JSON.parse(sessionStorage.getItem(COMMON.USER)).username;
       sessionStorage.removeItem(COMMON.UID);
       sessionStorage.removeItem(COMMON.USER);
+      this.nzMsgSvc.success(`${user} 已登出!`);
     });
   }
 

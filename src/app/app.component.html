@@ -117,8 +117,7 @@
                         ROUTING_PATH.FAVORITE_LIST
                       "
                       [queryParams]="{
-                        id: item.id,
-                        endpoint: API.ADDLIST
+                        id: item.id
                       }"
                     >
                       {{ item.subject }}
@@ -126,17 +125,11 @@
                   </ng-container>
                 </ul>
               </li>
-              <!-- <li nz-menu-item [routerLink]="ROUTING_PATH.WATCHLIST">
-                我的清單
-              </li> -->
               <li
                 nz-menu-item
                 [routerLink]="
                   ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.FAVORITE_LIST
                 "
-                [queryParams]="{
-                  endpoint: API.FAVORITE
-                }"
               >
                 我的最愛
               </li>
