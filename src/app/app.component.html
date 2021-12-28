@@ -156,7 +156,12 @@
         <ul class="d-flex m-0 align-items-center justify-content-end">
           <li *ngIf="!userLoginSvc.isLogin()"><a (click)="login()">登入</a></li>
           <li *ngIf="userLoginSvc.isLogin()">
-            <a (click)="logout()">Welcomback!{{ userInfo.username }}</a>
+            <a (click)="logout()"
+              >Welcomback!<span
+                *ngIf="sharedService.UserDeviceSubject === DEVICE.PAD"
+                >{{ userInfo.username }}</span
+              ></a
+            >
           </li>
         </ul>
       </div>

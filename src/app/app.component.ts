@@ -41,10 +41,10 @@ export class AppComponent implements OnInit {
   ];
   items: Observable<any[]>;
   customDropList: ICustomList[] = [];
-
+  DEVICE = DEVICE;
   drawerVisible = false;
   constructor(
-    private sharedService: SharedService,
+    public sharedService: SharedService,
     private newListSvc: NewListService,
     public userLoginSvc: UserLoginService,
     private listHandleSvc: ListHandleService,
