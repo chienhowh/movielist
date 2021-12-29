@@ -1,13 +1,12 @@
+import { ListHandleService } from './../../../../core/services/list-handle.service';
 import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
-import { EitherWatch, ListType } from 'src/app/core/enums/list-type.enum';
-import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
+import { EitherWatch } from 'src/app/core/enums/list-type.enum';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { verifyForm } from '../../../../core/funcs/verify-form';
-import { DetailService } from 'src/app/movie-list/homepage/shared/detail.service';
-import { IWatchedMovie, WATCHLIST_TYPE } from '../../shared/watchlist';
+import { IWatchedMovie } from '../../shared/watchlist';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -16,7 +15,7 @@ import { IWatchedMovie, WATCHLIST_TYPE } from '../../shared/watchlist';
 export class CommentComponent implements OnInit {
   @Input() movie: IMovieInfo;
   /** 評論(new) or 看紀錄(read) */
-  @Input() type: EitherWatch;
+  @Input() isWatched: EitherWatch;
   EitherWatch = EitherWatch;
   validateForm: FormGroup = this.fb.group({
     watchedDate: [new Date(), Validators.required],
@@ -26,15 +25,15 @@ export class CommentComponent implements OnInit {
   movieFb: IWatchedMovie;
   constructor(
     private fb: FormBuilder,
-    private detailService: DetailService,
+    private listHandleSvc: ListHandleService,
     public modalRef: NzModalRef,
   ) { }
 
   ngOnInit(): void {
-    this.detailService.readListById(this.movie.id, ListType.WATCHLIST).subscribe(res => {
-      this.movieFb = res;
-      if (this.type === EitherWatch.BEENWATCHED) {
-        this.validateForm.patchValue(res);
+    console.log('isWatched :: ', this.isWatched);
+    this.listHandleSvc.getFromWatchListById(this.movie.id).subscribe(res => {
+      this.validateForm.patchValue(res);
+      if (this.isWatched === EitherWatch.BEENWATCHED) {
         this.validateForm.disable();
       }
     });
@@ -47,8 +46,9 @@ export class CommentComponent implements OnInit {
   submitForm(): void {
     if (verifyForm(this.validateForm)) { return; }
     const value = this.validateForm.value;
-    this.detailService.patchMovie(this.movie.id, { beenWatched: true, ...value }).subscribe(() =>
-      this.modalRef.triggerOk()
-    );
+    value.id = this.movie.id;
+    value.isWatched = true;
+    this.listHandleSvc.addCommentToWatchList(value);
+    this.modalRef.close();
   }
 }

@@ -41,7 +41,6 @@
                   "
                   [queryParams]="{
                     name: item.name,
-                    endpoint: item.endpoint,
                     type: item.type
                   }"
                   (click)="drawerVisible = false"
@@ -51,11 +50,9 @@
               </li>
               <li>
                 <span style="color: rgba(0, 0, 0, 0.45)">清單</span>
-                <hr class="m-1"/>
+                <hr class="m-1" />
                 <ul>
-                  <ng-container
-                    *ngIf="customDropList$ | async as customDropList"
-                  >
+                  <ng-container>
                     <li *ngFor="let item of customDropList">
                       <a
                         [routerLink]="
@@ -110,9 +107,7 @@
             <ul nz-menu>
               <li nz-submenu nzTitle="我的清單">
                 <ul>
-                  <ng-container
-                    *ngIf="customDropList$ | async as customDropList"
-                  >
+                  <ng-container>
                     <li
                       nz-menu-item
                       *ngFor="let item of customDropList"
@@ -122,8 +117,7 @@
                         ROUTING_PATH.FAVORITE_LIST
                       "
                       [queryParams]="{
-                        id: item.id,
-                        endpoint: API.ADDLIST
+                        id: item.id
                       }"
                     >
                       {{ item.subject }}
@@ -131,17 +125,11 @@
                   </ng-container>
                 </ul>
               </li>
-              <!-- <li nz-menu-item [routerLink]="ROUTING_PATH.WATCHLIST">
-                我的清單
-              </li> -->
               <li
                 nz-menu-item
                 [routerLink]="
                   ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.FAVORITE_LIST
                 "
-                [queryParams]="{
-                  endpoint: API.FAVORITE
-                }"
               >
                 我的最愛
               </li>
@@ -166,7 +154,15 @@
       <!-- 登入 -->
       <div class="col-4 ml-auto pr-3">
         <ul class="d-flex m-0 align-items-center justify-content-end">
-          <li><a (click)="login()">登入</a></li>
+          <li *ngIf="!userLoginSvc.isLogin()"><a (click)="login()">登入</a></li>
+          <li *ngIf="userLoginSvc.isLogin()">
+            <a (click)="logout()"
+              >Welcomback!<span
+                *ngIf="sharedService.UserDeviceSubject === DEVICE.PAD"
+                >{{ userInfo.username }}</span
+              ></a
+            >
+          </li>
         </ul>
       </div>
     </div>

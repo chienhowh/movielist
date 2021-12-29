@@ -5,7 +5,7 @@
     <div class="row list-box no-gutters">
       <ng-container *ngFor="let movie of displayList">
         <div class="col-10 my-3">
-          <app-movie-info [movie]="movie" [type]="type" (refreshList)="refreshList()"></app-movie-info>
+          <app-movie-info [movie]="movie" [isWatched]="isWatched"></app-movie-info>
         </div>
       </ng-container>
     </div>

@@ -1,16 +1,19 @@
+import { Router } from '@angular/router';
+import { ListHandleService } from './core/services/list-handle.service';
+import { UserLoginService } from './core/services/user-login.service';
 import { NewListService } from './movie-list/homepage/shared/new-list.service';
-import { API } from 'src/app/core/consts/global-constants.const';
+import { API, COMMON } from 'src/app/core/consts/global-constants.const';
 
-import { AuthService } from './auth.service';
 import { DEVICE } from './core/consts/device.const';
 import { SharedService } from './shared/shared.service';
 import { Component, OnInit } from '@angular/core';
-
 import { IDropDown } from './core/interfaces/utilities';
 import { ROUTING_PATH } from './core/consts/routing-path.const';
 import { EitherWatch } from './core/enums/list-type.enum';
 import { Observable } from 'rxjs';
 import { ICustomList } from './core/interfaces/movie.interface';
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -25,6 +28,7 @@ export class AppComponent implements OnInit {
     return API;
   }
   title = 'movielist';
+  userInfo: { username: string, email: string };
   // movieDropList: IDropDown[] = [
   //   { name: '熱門', type: 'aaa' },
   //   { name: '上映中', type: 'bbb' },
@@ -32,31 +36,46 @@ export class AppComponent implements OnInit {
   //   { name: '評分最高', type: '' },
   // ];
   collectionDropList: IDropDown[] = [
-    { name: '待播清單', endpoint: API.WATCHLIST, type: EitherWatch.NOTWATCHED },
-    { name: '已經觀看', endpoint: API.WATCHLIST, type: EitherWatch.BEENWATCHED },
+    { name: '待播清單', type: EitherWatch.NOTWATCHED },
+    { name: '已經觀看', type: EitherWatch.BEENWATCHED },
   ];
-
-
-  customDropList$: Observable<ICustomList[]>;
-
+  items: Observable<any[]>;
+  customDropList: ICustomList[] = [];
+  DEVICE = DEVICE;
   drawerVisible = false;
   constructor(
-    private sharedService: SharedService,
-    private authSvc: AuthService,
-    private newListSvc: NewListService
-  ) { }
+    public sharedService: SharedService,
+    private newListSvc: NewListService,
+    public userLoginSvc: UserLoginService,
+    private listHandleSvc: ListHandleService,
+    private router: Router
+  ) {
+  }
 
   ngOnInit(): void {
     this.initUserDevice(document.documentElement.offsetWidth);
-
-    this.customDropList$ = this.newListSvc.getList();
+    this.userInfo = JSON.parse(sessionStorage.getItem(COMMON.USER));
+    console.log(this.userInfo);
+    if (this.userInfo) {
+      this.getCustomList();
+    }
   }
 
-
   login(): void {
-    // this.authSvc.loginForUser().then(()=>console.log(this.authSvc.user) );
-    this.authSvc.loginWithGoogle();
+    this.userLoginSvc.login().then(() => {
+      this.userInfo = JSON.parse(sessionStorage.getItem(COMMON.USER));
+      this.getCustomList();
+    });
+  }
 
+  logout(): void {
+    this.userLoginSvc.logout();
+    this.customDropList = [];
+    this.router.navigate(['home']);
+  }
+
+  getCustomList(): void {
+    this.listHandleSvc.getCustomlist().pipe(take(1)).subscribe((res) => this.customDropList = res);
   }
 
   initUserDevice(size: number): void {

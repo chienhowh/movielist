@@ -71,10 +71,16 @@
       <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
     </button>
     <nz-dropdown-menu #menu="nzDropdownMenu">
-      <div class="new-list-dropdown" >
+      <div class="new-list-dropdown">
         <div class="mb-2">
           <a (click)="openNewList()" class="new-list-btn"
-            ><i nz-icon nzType="plus" nzTheme="outline" class="align-middle"></i> 建立新清單</a
+            ><i
+              nz-icon
+              nzType="plus"
+              nzTheme="outline"
+              class="align-middle"
+            ></i>
+            建立新清單</a
           >
         </div>
         <nz-select
@@ -85,9 +91,6 @@
           (ngModelChange)="addToCustom($event)"
           class="w-100"
         >
-          <!-- <nz-option *ngFor="let item of customList" [nzLabel]="item.subject" [nzValue]="item.id"
-            ></nz-option
-          > -->
           <nz-option
             *ngFor="let item of customList"
             [nzLabel]="item.subject"
@@ -108,8 +111,8 @@
       <i
         nz-icon
         nzType="heart"
-        [nzTheme]="inFavorite ? 'fill' : 'outline'"
-        [ngClass]="{ 'add-favorite': inFavorite }"
+        [nzTheme]="isFavorite ? 'fill' : 'outline'"
+        [ngClass]="{ 'add-favorite': isFavorite }"
       ></i>
     </button>
     <button

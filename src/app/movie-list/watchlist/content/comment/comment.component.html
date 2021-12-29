@@ -27,7 +27,7 @@
     </div>
   </div>
 </form>
-<div class="text-center" *ngIf="type === EitherWatch.NOTWATCHED">
+<div class="text-center" *ngIf="isWatched === EitherWatch.NOTWATCHED">
   <button nz-button nzType="primary" class="mr-3" (click)="submitForm()">
     確認
   </button>

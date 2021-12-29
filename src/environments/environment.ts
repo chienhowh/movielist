@@ -8,9 +8,10 @@ export const environment = {
   DB_IP: 'https://movieback.duckdns.org',
   FB_IP: 'https://react-meetup-aff59-default-rtdb.asia-southeast1.firebasedatabase.app',
   GAPI_CLIENT_ID: '564087547062-3r0maars7kgpun3fonkjjpv616e88n95.apps.googleusercontent.com',
-  firebaseConfig: {
+  firebase: {
     apiKey: 'AIzaSyDfXBFy3P1IPBncApDTKUBLHk6B9tiQwVQ',
     authDomain: 'movieback-25655.firebaseapp.com',
+    databaseURL: 'https://movieback-25655-default-rtdb.asia-southeast1.firebasedatabase.app',
     projectId: 'movieback-25655',
     storageBucket: 'movieback-25655.appspot.com',
     messagingSenderId: '703003658373',

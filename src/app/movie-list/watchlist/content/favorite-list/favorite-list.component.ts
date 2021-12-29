@@ -1,10 +1,11 @@
+import { ListHandleService } from './../../../../core/services/list-handle.service';
 import { ActivatedRoute } from '@angular/router';
 import { MovieRequestService } from 'src/app/core/services/movie-request.service';
 import { WatchlistService } from 'src/app/core/services/watchlist.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
-import { from, Observable } from 'rxjs';
-import { concatMap } from 'rxjs/operators';
+import { from, Observable, Subject } from 'rxjs';
+import { concatMap, takeUntil } from 'rxjs/operators';
 import { API } from 'src/app/core/consts/global-constants.const';
 
 @Component({
@@ -12,56 +13,53 @@ import { API } from 'src/app/core/consts/global-constants.const';
   templateUrl: './favorite-list.component.html',
   styleUrls: ['./favorite-list.component.scss']
 })
-export class FavoriteListComponent implements OnInit {
-  endpoint: string;
-  /** 客制表單id */
-  customId: number;
-  title;
+export class FavoriteListComponent implements OnInit, OnDestroy {
+
+  /** customlist id(favorite:undefined) */
+  customId: string;
+  title: string;
+  desc: string;
+  fsList: any[] = [];
   displayList: IMovieInfo[] = [];
-  requestUrl: string;
+
+  ngUnsubscribe = new Subject();
   constructor(
-    private watchlistSvc: WatchlistService,
     private mvReqSvc: MovieRequestService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private listHandleSvc: ListHandleService
   ) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(res => {
-      this.endpoint = res.endpoint;
+    this.route.queryParams.pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       this.customId = res.id;
+      // 拿自訂清單by id
       if (this.customId) {
-        this.requestUrl = `${res.endpoint}/${res.id}`;
+        this.listHandleSvc.getSpecList(this.customId).pipe(takeUntil(this.ngUnsubscribe)).subscribe(lists => {
+          this.fsList = lists;
+          this.getWatchList();
+        });
+        this.listHandleSvc.getSpecFields(this.customId).subscribe(i => {
+          this.title = i.subject;
+          this.desc = i.desc;
+        });
       } else {
-        this.requestUrl = res.endpoint;
+        this.listHandleSvc.getFromFavorite().pipe(takeUntil(this.ngUnsubscribe)).subscribe((lists: any[]) => {
+          this.fsList = lists;
+          this.title = '我的最愛';
+          this.desc = '';
+          this.getWatchList();
+        });
       }
-      this.getWatchList();
-
     });
   }
 
 
   getWatchList(): void {
     this.displayList = [];
-
-    this.watchlistSvc.getWatchLists(this.requestUrl).subscribe(res => {
-      // 客制清單
-      if (this.customId) {
-        this.title = res[3];
-        from(res[0]).pipe(
-          concatMap((id: any) => this.searchMovieById(id)),
-        ).subscribe(list => {
-          this.displayList.push(list);
-        });
-      } else {
-        this.title = '我的最愛';
-        // my favorite
-        from(res).pipe(
-          concatMap((mv: any) => this.searchMovieById(mv.id)),
-        ).subscribe(list => {
-          this.displayList.push(list);
-        });
-      }
-    });
+    from(this.fsList).pipe(
+      concatMap(({ id }) => this.searchMovieById(id))
+    ).subscribe(info => this.displayList.push(info));
+    if (!this.customId) { this.title = '我的最愛'; }
   }
 
   /**
@@ -71,5 +69,8 @@ export class FavoriteListComponent implements OnInit {
     return this.mvReqSvc.request(API.GET, `${API.MOVIE}/${id}`);
   }
 
-
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.unsubscribe();
+  }
 }

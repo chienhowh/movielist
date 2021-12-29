@@ -1,7 +1,7 @@
 export interface IWatchedMovie {
   title: string;
   id: number;
-  beenWatched: boolean;
+  isWatched: boolean;
   /** 評論 */
   comment?: string;
   /** 觀影日期 */
