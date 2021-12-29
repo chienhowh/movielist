@@ -56,7 +56,9 @@ export class EitherWatchComponent implements OnInit, OnDestroy {
         if (this.isWatched === EitherWatch.BEENWATCHED) { return m.isWatched; }
         else { return !m.isWatched; }
       });
-      from(movies).pipe(mergeMap((mv: any) => this.searchMovieById(mv.id))).subscribe(list => this.displayList.push(list));
+      from(movies).pipe(mergeMap((mv: any) => this.searchMovieById(mv.id))).subscribe(info =>
+        this.displayList.push(info)
+      );
     });
   }
 
