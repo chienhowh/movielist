@@ -56,7 +56,9 @@ export class AppComponent implements OnInit {
     this.initUserDevice(document.documentElement.offsetWidth);
     this.userInfo = JSON.parse(sessionStorage.getItem(COMMON.USER));
     console.log(this.userInfo);
-    this.getCustomList();
+    if (this.userInfo) {
+      this.getCustomList();
+    }
   }
 
   login(): void {

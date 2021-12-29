@@ -1,7 +1,7 @@
 import { MovieRequestService } from './movie-request.service';
-import { map, take, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentData, DocumentReference } from '@angular/fire/firestore'
+import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
 import { API, COMMON, FIRE_STORE_COLLECTIONS } from '../consts/global-constants.const';
 import { Observable } from 'rxjs';
 import { ICustomList } from '../interfaces/movie.interface';

@@ -20,7 +20,7 @@ import { NZ_I18N, zh_TW } from 'ng-zorro-antd/i18n';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { registerLocaleData, CommonModule } from '@angular/common';
 import zh from '@angular/common/locales/zh';
-import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -49,7 +49,6 @@ const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, Me
     NzDropDownModule,
     RouterModule,
     NzIconModule.forRoot(icons),
-    SocialLoginModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
