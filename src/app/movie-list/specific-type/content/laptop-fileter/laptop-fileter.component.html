@@ -1,0 +1,87 @@
+<h4 class="font-weight-bold">探索電影</h4>
+<form [formGroup]="validateForm" (ngSubmit)="onSubmit()">
+  <!-- 排序 start -->
+  <nz-collapse nzExpandIconPosition="right">
+    <nz-collapse-panel [nzHeader]="'排序'">
+      <div>
+        <div class="form-label">排序結果依據</div>
+        <div>
+          <nz-select
+            formControlName="sort_by"
+            class="w-100"
+            nzPlaceHolder="請選擇排序"
+          >
+            <nz-option
+              *ngFor="let opt of sortOpts"
+              [nzValue]="opt.value"
+              [nzLabel]="opt.text"
+            ></nz-option>
+          </nz-select>
+        </div>
+      </div>
+    </nz-collapse-panel>
+  </nz-collapse>
+  <!-- 篩選 start -->
+  <nz-collapse nzExpandIconPosition="right">
+    <nz-collapse-panel [nzHeader]="'篩選'">
+      <!-- 類型 -->
+      <div>
+        <div class="form-label">類型</div>
+        <div>
+          <button
+            nz-button
+            type="button"
+            nzShape="round"
+            [nzType]="
+              setOfCheckedGenre.has(item.id) ? 'primary' : 'default'
+            "
+            class="genre-btn"
+            *ngFor="let item of genresList"
+            (click)="selectGenre(item.id)"
+          >
+            {{ item.name }}
+          </button>
+        </div>
+      </div>
+      <hr />
+      <!-- 使用者評分 -->
+      <div>
+        <div class="form-label">使用者評分</div>
+        <div>
+          <nz-slider
+            [nzMarks]="rateMarks"
+            formControlName="rateSlider"
+            nzRange
+            [nzMin]="0"
+            [nzMax]="10"
+            [nzStep]="1"
+          ></nz-slider>
+        </div>
+      </div>
+      <hr />
+      <!-- 片長 -->
+      <div>
+        <div class="form-label">片長</div>
+        <div>
+          <nz-slider
+            [nzMarks]="runtimeMarks"
+            formControlName="runtimeSlider"
+            nzRange
+            [nzMin]="0"
+            [nzMax]="400"
+            [nzStep]="20"
+          ></nz-slider>
+        </div>
+      </div>
+    </nz-collapse-panel>
+  </nz-collapse>
+  <button
+    nz-button
+    nzType="primary"
+    [nzSize]="'large'"
+    nzShape="round"
+    class="w-100"
+  >
+    查看結果
+  </button>
+</form>

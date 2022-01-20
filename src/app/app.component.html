@@ -26,7 +26,7 @@
                 <a
                   [routerLink]="ROUTING_PATH.SPECIFIC_TYPE"
                   (click)="drawerVisible = false"
-                  >探索</a
+                  >進階搜尋</a
                 >
               </li>
               <li>
@@ -87,20 +87,7 @@
       <div class="laptop">
         <ul class="d-flex m-0 align-items-center">
           <!-- 電影 start -->
-          <li><a [routerLink]="ROUTING_PATH.SPECIFIC_TYPE">探索</a></li>
-          <!-- <li><a nz-dropdown [nzDropdownMenu]="movieMenu">電影</a></li> -->
-          <!-- <nz-dropdown-menu #movieMenu="nzDropdownMenu">
-            <ul nz-menu nzSelectable>
-              <li
-                nz-menu-item
-                *ngFor="let item of movieDropList"
-                [routerLink]="'specific-type'"
-                [queryParams]="{ type: item.type }"
-              >
-                {{ item.name }}
-              </li>
-            </ul>
-          </nz-dropdown-menu> -->
+          <li><a [routerLink]="ROUTING_PATH.SPECIFIC_TYPE">進階搜尋</a></li>
           <!-- 我的最愛 start -->
           <li><a nz-dropdown [nzDropdownMenu]="listMenu">清單</a></li>
           <nz-dropdown-menu #listMenu="nzDropdownMenu">

@@ -5,11 +5,15 @@ import { CommonModule } from '@angular/common';
 
 import { SpecificTypeRoutingModule } from './specific-type-routing.module';
 import { SpecificTypeComponent } from './specific-type.component';
+import { LaptopFileterComponent } from './content/laptop-fileter/laptop-fileter.component';
+import { MobileFilterComponent } from './content/mobile-filter/mobile-filter.component';
 
 
 @NgModule({
   declarations: [
-    SpecificTypeComponent
+    SpecificTypeComponent,
+    LaptopFileterComponent,
+    MobileFilterComponent
   ],
   imports: [
     CommonModule,

@@ -56,26 +56,6 @@ export class CarouselComponent implements OnInit {
     }
   }
 
-  /**
-   * 跳出顯示電影詳情視窗
-   * 資料不完全所以movieDetail要再用id call一次
-   */
-  onWatchDetail(info): void {
-    this.modalService.create({
-      nzContent: MovieDetailComponent,
-      nzComponentParams: {
-        info
-      },
-      nzFooter: null,
-      nzBodyStyle: { padding: '24px' },
-    });
-  }
-
-  getMovieOption(movie: IMovieInfo): void {
-
-  }
-
-
   handleOption(listType: ListType, movie: IMovieInfo): void {
     switch (listType) {
       case ListType.FAVORITE:
