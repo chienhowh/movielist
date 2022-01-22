@@ -5,6 +5,13 @@
   class="login-form"
   (ngSubmit)="submitForm()"
 >
+  <h4>登入至你的帳戶</h4>
+  <p>
+    登入至你的帳戶 為了使用清單和紀錄功能，你需要登入你的帳戶。 如果沒有，請按<a
+      [routerLink]="'/' + ROUTING_PATH.SIGNUP"
+      >此處</a
+    >開始註冊帳戶。
+  </p>
   <nz-form-item>
     <nz-form-label nzRequired>信箱</nz-form-label>
     <nz-form-control [nzErrorTip]="errorMsg(validateForm, 'email')">
@@ -38,5 +45,4 @@
     登入
   </button>
   或
-  <a [routerLink]="'/' + ROUTING_PATH.SIGNUP">立即註冊!</a>
 </form>

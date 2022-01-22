@@ -5,6 +5,8 @@
   class="login-form"
   (ngSubmit)="submitForm()"
 >
+  <h4 class="text-">註冊帳戶</h4>
+  <p>請填寫完下列資料後即可完成註冊流程。</p>
   <nz-form-item>
     <nz-form-label nzRequired>信箱</nz-form-label>
     <nz-form-control [nzErrorTip]="errorMsg(validateForm, 'email')">

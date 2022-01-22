@@ -1,7 +1,5 @@
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { ListHandleService } from './core/services/list-handle.service';
-import { UserLoginService } from './core/services/user-login.service';
-import { NewListService } from './movie-list/homepage/shared/new-list.service';
 import { API, COMMON } from 'src/app/core/consts/global-constants.const';
 
 import { DEVICE } from './core/consts/device.const';
@@ -49,11 +47,15 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.initUserDevice(document.documentElement.offsetWidth);
-    this.userInfo = JSON.parse(sessionStorage.getItem(COMMON.USER));
-    console.log(this.userInfo);
-    if (this.userInfo) {
-      this.getCustomList();
-    }
+    this.router.events.subscribe(res => {
+      if (res instanceof NavigationStart && res.url === '/home') {
+        this.userInfo = JSON.parse(sessionStorage.getItem(COMMON.USER));
+        console.log(this.userInfo);
+        if (this.userInfo) {
+          this.getCustomList();
+        }
+      }
+    });
   }
 
 
@@ -76,5 +78,6 @@ export class AppComponent implements OnInit {
       this.sharedService.UserDeviceSubject = DEVICE.MOBILE;
     }
   }
+
 }
 

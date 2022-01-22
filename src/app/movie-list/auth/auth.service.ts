@@ -1,9 +1,11 @@
+import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { COMMON, FIRE_BASE_AUTH_METHOD } from 'src/app/core/consts/global-constants.const';
+import { ROUTING_PATH } from 'src/app/core/consts/routing-path.const';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private nzMsgSvc: NzMessageService
+    private nzMsgSvc: NzMessageService,
+    private router: Router
   ) { }
 
   firebaseAuthService(sendData: any, method: string) {
@@ -38,6 +41,7 @@ export class AuthService {
   logout(): void {
     sessionStorage.removeItem(COMMON.UID);
     sessionStorage.removeItem(COMMON.USER);
+    this.router.navigate([ROUTING_PATH.HOME]);
     this.nzMsgSvc.success(`已登出!`);
   }
 

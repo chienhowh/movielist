@@ -92,7 +92,11 @@
           <li><a nz-dropdown [nzDropdownMenu]="listMenu">清單</a></li>
           <nz-dropdown-menu #listMenu="nzDropdownMenu">
             <ul nz-menu>
-              <li nz-submenu nzTitle="我的清單">
+              <li
+                nz-submenu
+                nzTitle="我的清單"
+                *ngIf="customDropList.length !== 0"
+              >
                 <ul>
                   <ng-container>
                     <li
@@ -145,11 +149,12 @@
             <a [routerLink]="ROUTING_PATH.LOGIN">登入</a>
           </li>
           <li *ngIf="authSvc.isLogin()">
-            <a (click)="logout()"
-              ><span *ngIf="sharedService.UserDeviceSubject === DEVICE.PAD">{{
-                userInfo.email
-              }}</span></a
+            <span
+              *ngIf="sharedService.UserDeviceSubject === DEVICE.PAD"
+              class="pr-2"
+              >歡迎 {{ userInfo.email }}</span
             >
+            <a (click)="logout()">登出</a>
           </li>
         </ul>
       </div>
