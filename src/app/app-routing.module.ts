@@ -1,10 +1,15 @@
+
 import { UserlistGuard } from './core/guard/userlist.guard';
 
 import { ROUTING_PATH } from './core/consts/routing-path.const';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { SignupComponent } from './movie-list/auth/signup/signup.component';
+import { LoginComponent } from './movie-list/auth/login/login.component';
 
 const routes: Routes = [
+  { path: ROUTING_PATH.SIGNUP, component: SignupComponent },
+  { path: ROUTING_PATH.LOGIN, component: LoginComponent },
   {
     path: ROUTING_PATH.WATCHLIST, loadChildren: () => import('./movie-list/watchlist/watchlist.module').then(m => m.WatchlistModule),
     canActivate: [UserlistGuard]

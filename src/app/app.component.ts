@@ -13,6 +13,7 @@ import { EitherWatch } from './core/enums/list-type.enum';
 import { Observable } from 'rxjs';
 import { ICustomList } from './core/interfaces/movie.interface';
 import { take } from 'rxjs/operators';
+import { User, AuthService } from './movie-list/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -28,13 +29,8 @@ export class AppComponent implements OnInit {
     return API;
   }
   title = 'movielist';
-  userInfo: { username: string, email: string };
-  // movieDropList: IDropDown[] = [
-  //   { name: '熱門', type: 'aaa' },
-  //   { name: '上映中', type: 'bbb' },
-  //   { name: '即將上映', type: '' },
-  //   { name: '評分最高', type: '' },
-  // ];
+  userInfo: User;
+
   collectionDropList: IDropDown[] = [
     { name: '待播清單', type: EitherWatch.NOTWATCHED },
     { name: '已經觀看', type: EitherWatch.BEENWATCHED },
@@ -45,8 +41,7 @@ export class AppComponent implements OnInit {
   drawerVisible = false;
   constructor(
     public sharedService: SharedService,
-    private newListSvc: NewListService,
-    public userLoginSvc: UserLoginService,
+    public authSvc: AuthService,
     private listHandleSvc: ListHandleService,
     private router: Router
   ) {
@@ -61,15 +56,10 @@ export class AppComponent implements OnInit {
     }
   }
 
-  login(): void {
-    this.userLoginSvc.login().then(() => {
-      this.userInfo = JSON.parse(sessionStorage.getItem(COMMON.USER));
-      this.getCustomList();
-    });
-  }
+
 
   logout(): void {
-    this.userLoginSvc.logout();
+    this.authSvc.logout();
     this.customDropList = [];
     this.router.navigate(['home']);
   }

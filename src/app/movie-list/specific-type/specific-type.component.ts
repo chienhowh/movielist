@@ -23,6 +23,7 @@ export class SpecificTypeComponent implements OnInit {
   device: DEVICE;
   type: string;
   currentPage = 1;
+
   displayList: IMovieInfo[] = [];
   searchFilter: any;
 

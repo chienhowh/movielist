@@ -1,0 +1,42 @@
+<form
+  nz-form
+  [nzLayout]="'vertical'"
+  [formGroup]="validateForm"
+  class="login-form"
+  (ngSubmit)="submitForm()"
+>
+  <nz-form-item>
+    <nz-form-label nzRequired>信箱</nz-form-label>
+    <nz-form-control [nzErrorTip]="errorMsg(validateForm, 'email')">
+      <input
+        type="text"
+        nz-input
+        formControlName="email"
+        nzSize="large"
+        placeholder="email"
+      />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired>密碼</nz-form-label>
+    <nz-form-control [nzErrorTip]="errorMsg(validateForm, 'password')">
+      <input
+        type="password"
+        nz-input
+        formControlName="password"
+        nzSize="large"
+        placeholder="Password"
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <button
+    nz-button
+    class="login-form-button login-form-margin"
+    [nzType]="'primary'"
+  >
+    登入
+  </button>
+  或
+  <a [routerLink]="'/' + ROUTING_PATH.SIGNUP">立即註冊!</a>
+</form>
