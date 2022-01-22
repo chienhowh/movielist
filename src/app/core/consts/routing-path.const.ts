@@ -11,8 +11,11 @@ export const ROUTING_PATH = {
   /** 我的最愛 */
   FAVORITE_LIST: 'favoritelist',
   /** 待播 or 已看清單 */
-  EITHER_WATCH: 'eitherwatch'
+  EITHER_WATCH: 'eitherwatch',
+  LOGIN: 'login',
+  SIGNUP: 'signup'
 }
+
 
 
 export const LOCALSTORAGE_KEY = {

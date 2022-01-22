@@ -26,6 +26,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { LoginComponent } from './movie-list/auth/login/login.component';
+import { SignupComponent } from './movie-list/auth/signup/signup.component';
 
 
 registerLocaleData(zh);
@@ -36,6 +38,8 @@ const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, Me
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

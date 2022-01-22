@@ -1,0 +1,89 @@
+<ng-container *ngIf="!isSearching" >
+  <form [formGroup]="validateForm" (ngSubmit)="onSubmit()">
+    <!-- 排序 start -->
+    <div class="filter-box">
+      <div class="form-label">排序</div>
+      <div class="d-flex py-1 overflow-x-scroll">
+        <button
+          nz-button
+          type="button"
+          nzShape="round"
+          [nzType]="setOfsortOpts.has(item.value) ? 'primary' : 'default'"
+          class="genre-btn"
+          *ngFor="let item of sortOpts"
+          (click)="selectSort(item.value)"
+        >
+          {{ item.text }}
+        </button>
+      </div>
+    </div>
+    <!-- 篩選 start -->
+    <!-- 類型 -->
+    <div class="filter-box">
+      <div class="form-label">類型</div>
+      <div class="d-flex py-1 overflow-x-scroll">
+        <button
+          nz-button
+          type="button"
+          nzShape="round"
+          [nzType]="setOfCheckedGenre.has(item.id) ? 'primary' : 'default'"
+          class="genre-btn"
+          *ngFor="let item of genresList"
+          (click)="selectGenre(item.id)"
+        >
+          {{ item.name }}
+        </button>
+      </div>
+    </div>
+    <hr />
+    <!-- 使用者評分 -->
+    <div class="filter-box">
+      <div class="form-label">使用者評分</div>
+      <div>
+        <nz-slider
+          [nzMarks]="rateMarks"
+          formControlName="rateSlider"
+          nzRange
+          [nzMin]="0"
+          [nzMax]="10"
+          [nzStep]="1"
+        ></nz-slider>
+      </div>
+    </div>
+    <hr />
+    <!-- 片長 -->
+    <div class="filter-box">
+      <div class="form-label">片長</div>
+      <div>
+        <nz-slider
+          [nzMarks]="runtimeMarks"
+          formControlName="runtimeSlider"
+          nzRange
+          [nzMin]="0"
+          [nzMax]="400"
+          [nzStep]="20"
+        ></nz-slider>
+      </div>
+    </div>
+    <button
+      nz-button
+      nzType="primary"
+      [nzSize]="'large'"
+      nzShape="round"
+      class="w-100"
+    >
+      查看結果
+    </button>
+  </form>
+</ng-container>
+<button
+  nz-button
+  nzType="primary"
+  [nzSize]="'large'"
+  nzShape="round"
+  class="w-100"
+  (click)="isSearching = false"
+  *ngIf="isSearching"
+>
+  修改查詢條件
+</button>

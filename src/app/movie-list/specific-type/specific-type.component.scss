@@ -5,20 +5,6 @@
   }
 }
 
-nz-collapse {
-  margin-bottom: 12px;
-}
-
-.form-label {
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-.genre-btn {
-  margin-bottom: 8px;
-  margin-right: 6px;
-}
-
 .col-cus {
   flex: 0 0 33.33%;
   max-width: 33.33%;
@@ -34,4 +20,10 @@ nz-collapse {
     flex: 0 0 20%;
     max-width: 20%;
   }
+}
+
+.loading-box {
+  font-weight: 700 !important;
+  text-align: center;
+  font-size: 1.5rem;
 }

@@ -23,41 +23,17 @@ export class SpecificTypeComponent implements OnInit {
   device: DEVICE;
   type: string;
   currentPage = 1;
-  validateForm = this.fb.group({
-    sort_by: [],
-    // 'release_date.gte': [],
-    // 'release_date.lte': [],
-    rateSlider: [[0, 10]],
-    runtimeSlider: [[0, 400]]
-  });
+
   displayList: IMovieInfo[] = [];
-  genresList: IGenre[] = [];
-  setOfCheckedGenre = new Set();
+  searchFilter: any;
+
   /** 是否開放滑動增加 */
   isScrollMore = false;
   /** 滑動頁是否載入完成 */
   loaded = false;
-  rateMarks = {
-    0: '0',
-    5: '5',
-    10: '10'
-  };
-  runtimeMarks = {
-    0: '0',
-    100: '100',
-    200: '200',
-    300: '300',
-    400: '400'
-  };
 
-  sortOpts: { text: string, value: string }[] = [
-    { text: '按人氣升序', value: 'popularity.asc' },
-    { text: '按人氣降序', value: 'popularity.desc' },
-    { text: '按日期升序', value: 'primary_release_date.asc' },
-    { text: '按日期降序', value: 'primary_release_date.desc' },
-    { text: '按評分升序', value: 'vote_average.asc' },
-    { text: '按評分降序', value: 'vote_average.desc' },
-  ];
+
+
   @HostListener('window:scroll', ['$event'])
   private onScroll($event): void {
     const clientHeight = $event.target.documentElement.clientHeight;
@@ -72,34 +48,24 @@ export class SpecificTypeComponent implements OnInit {
     }
   }
   constructor(
-    private fb: FormBuilder,
     private mvReqSvc: MovieRequestService,
     private sharedSvc: SharedService
   ) { }
 
   ngOnInit(): void {
     this.device = this.sharedSvc.UserDeviceSubject;
-    this.log(this.device);
-    this.genresList = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY.GENRES));
+    console.log(this.device);
+  }
+
+  searchMovieHandler(filterOpts: any): void {
+    this.searchFilter = filterOpts;
     this.onSubmit(1);
   }
 
-
-
   onSubmit(page: number): void {
-    const formValue = this.validateForm.value;
     this.currentPage = page;
-    // console.log(typeof formValue['release_date.lte']);
-    // console.log(this.validateForm['release_date_str']);
-    // const reqBody = Object.keys(formValue).filter(f => !!formValue[f]).reduce((p, c) => ({ ...p, [c]: formValue[c] }), {});
-    const reqBody = {};
-    reqBody['vote_average.gte'] = formValue.rateSlider[0];
-    reqBody['vote_average.lte'] = formValue.rateSlider[1];
-    reqBody['with_runtime.gte'] = formValue.runtimeSlider[0];
-    reqBody['with_runtime.lte'] = formValue.runtimeSlider[1];
-    reqBody['with_genres'] = [...this.setOfCheckedGenre].join(',');
-    reqBody['page'] = page;
-    if (this.validateForm.get('sort_by').value) { reqBody['sort_by'] = this.validateForm.get('sort_by').value; }
+    const reqBody = { ...this.searchFilter, page };
+    console.log(reqBody);
     this.getMovies(page, reqBody);
   }
 
@@ -123,15 +89,4 @@ export class SpecificTypeComponent implements OnInit {
 
   }
 
-  selectGenre(id: number): void {
-    this.setOfCheckedGenre.has(id) ? this.setOfCheckedGenre.delete(id) : this.setOfCheckedGenre.add(id);
-  }
-
-  formatter(value: number): string {
-    return `value`;
-  }
-
-  log(e: any): void {
-    console.log(e);
-  }
 }

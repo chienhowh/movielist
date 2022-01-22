@@ -26,7 +26,7 @@
                 <a
                   [routerLink]="ROUTING_PATH.SPECIFIC_TYPE"
                   (click)="drawerVisible = false"
-                  >探索</a
+                  >進階搜尋</a
                 >
               </li>
               <li>
@@ -87,25 +87,16 @@
       <div class="laptop">
         <ul class="d-flex m-0 align-items-center">
           <!-- 電影 start -->
-          <li><a [routerLink]="ROUTING_PATH.SPECIFIC_TYPE">探索</a></li>
-          <!-- <li><a nz-dropdown [nzDropdownMenu]="movieMenu">電影</a></li> -->
-          <!-- <nz-dropdown-menu #movieMenu="nzDropdownMenu">
-            <ul nz-menu nzSelectable>
-              <li
-                nz-menu-item
-                *ngFor="let item of movieDropList"
-                [routerLink]="'specific-type'"
-                [queryParams]="{ type: item.type }"
-              >
-                {{ item.name }}
-              </li>
-            </ul>
-          </nz-dropdown-menu> -->
+          <li><a [routerLink]="ROUTING_PATH.SPECIFIC_TYPE">進階搜尋</a></li>
           <!-- 我的最愛 start -->
           <li><a nz-dropdown [nzDropdownMenu]="listMenu">清單</a></li>
           <nz-dropdown-menu #listMenu="nzDropdownMenu">
             <ul nz-menu>
-              <li nz-submenu nzTitle="我的清單">
+              <li
+                nz-submenu
+                nzTitle="我的清單"
+                *ngIf="customDropList.length !== 0"
+              >
                 <ul>
                   <ng-container>
                     <li
@@ -154,14 +145,16 @@
       <!-- 登入 -->
       <div class="col-4 ml-auto pr-3">
         <ul class="d-flex m-0 align-items-center justify-content-end">
-          <li *ngIf="!userLoginSvc.isLogin()"><a (click)="login()">登入</a></li>
-          <li *ngIf="userLoginSvc.isLogin()">
-            <a (click)="logout()"
-              >Welcomback!<span
-                *ngIf="sharedService.UserDeviceSubject === DEVICE.PAD"
-                >{{ userInfo.username }}</span
-              ></a
+          <li *ngIf="!authSvc.isLogin()">
+            <a [routerLink]="ROUTING_PATH.LOGIN">登入</a>
+          </li>
+          <li *ngIf="authSvc.isLogin()">
+            <span
+              *ngIf="sharedService.UserDeviceSubject === DEVICE.PAD"
+              class="pr-2"
+              >歡迎 {{ userInfo.email }}</span
             >
+            <a (click)="logout()">登出</a>
           </li>
         </ul>
       </div>

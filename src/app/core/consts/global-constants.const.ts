@@ -48,5 +48,11 @@ export const FIRE_STORE_COLLECTIONS = {
   WATCHLIST: 'watchlist',
   /** 我的最愛 */
   FAVORITELIST: 'favorite',
-  MOVIES: 'movies'
+  MOVIES: 'movies',
+
+}
+
+export const FIRE_BASE_AUTH_METHOD = {
+  SIGNUP: 'signUp',
+  SIGNIN: 'signInWithPassword'
 }
