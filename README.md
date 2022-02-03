@@ -7,8 +7,7 @@
 
 ## 特點
 * 前端使用Angular，完成SPA，搭配Bootstrap, NG-ZORRO建立樣式、RWD。
-* 後端server利用Node.js, Express，並部署在Linode。
-* 使用者電影清單儲存於MongoDB，以RestfulAPI連接。
+* 後端搭配Firebase。
 * 電影資訊連接`TMDB API`。
 * <a href="https://github.com/chienhowh/movielistback" target="_blank">後端server github</a>。
 
