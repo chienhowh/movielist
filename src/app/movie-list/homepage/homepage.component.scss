@@ -10,7 +10,8 @@
   background-image: linear-gradient(to right, $secondary-color, rgba(0, 0, 0, 0.1)),
     url("https://image.tmdb.org/t/p/w500/1Rr5SrvHxMXHu5RjKpaMba8VTzi.jpg");
   background-repeat: no-repeat;
-  background-position: center, right;
+  background-position: center;
+  background-size: cover;
   margin-left: -15px;
   margin-right: -15px;
   @media screen and (min-width: 1200px) {
