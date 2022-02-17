@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm(): void {
+    console.log(this.validateForm);
+
     if (this.validateForm.valid) {
       this.authSvc.login(this.validateForm.value).subscribe(
         (user: User) => {

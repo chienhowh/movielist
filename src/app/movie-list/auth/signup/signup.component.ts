@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.min(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 

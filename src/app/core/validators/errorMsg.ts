@@ -15,8 +15,11 @@ export function getFormErrorStr(form: FormGroup, key: string, customMsg?: string
     return msg = '*此欄位為必填欄位';
   }
 
-  if (errors?.msg) {
-    msg = errors.msg;
+  if (errors?.email) {
+    msg = '*此為無效的email';
+  }
+  if (errors?.minlength) {
+    msg = '*密碼長度至少為六個字';
   }
 
   if (errors && customMsg) {

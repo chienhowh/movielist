@@ -87,9 +87,17 @@
       <div class="laptop">
         <ul class="d-flex m-0 align-items-center">
           <!-- 電影 start -->
-          <li><a [routerLink]="ROUTING_PATH.SPECIFIC_TYPE">進階搜尋</a></li>
+          <li>
+            <a class="need-hover" [routerLink]="ROUTING_PATH.SPECIFIC_TYPE"
+              >進階搜尋</a
+            >
+          </li>
           <!-- 我的最愛 start -->
-          <li><a nz-dropdown [nzDropdownMenu]="listMenu">清單</a></li>
+          <li>
+            <a class="need-hover" nz-dropdown [nzDropdownMenu]="listMenu"
+              >清單</a
+            >
+          </li>
           <nz-dropdown-menu #listMenu="nzDropdownMenu">
             <ul nz-menu>
               <li
@@ -146,7 +154,7 @@
       <div class="col-4 ml-auto pr-3">
         <ul class="d-flex m-0 align-items-center justify-content-end">
           <li *ngIf="!authSvc.isLogin()">
-            <a [routerLink]="ROUTING_PATH.LOGIN">登入</a>
+            <a class="need-hover" [routerLink]="ROUTING_PATH.LOGIN">登入</a>
           </li>
           <li *ngIf="authSvc.isLogin()">
             <span

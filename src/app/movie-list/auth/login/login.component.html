@@ -7,7 +7,7 @@
 >
   <h4>登入至你的帳戶</h4>
   <p>
-    登入至你的帳戶 為了使用清單和紀錄功能，你需要登入你的帳戶。 如果沒有，請按<a
+    為了使用清單和紀錄功能，你需要登入你的帳戶。 如果沒有，請按<a
       [routerLink]="'/' + ROUTING_PATH.SIGNUP"
       >此處</a
     >開始註冊帳戶。
@@ -33,6 +33,7 @@
         formControlName="password"
         nzSize="large"
         placeholder="Password"
+        minlength="6"
       />
     </nz-form-control>
   </nz-form-item>

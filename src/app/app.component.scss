@@ -87,11 +87,11 @@
 
 li > a {
   color: white;
-  &:hover {
-    padding: 8px;
-    background-color: rgba(256, 256, 256, 0.3);
-    border-radius: 4px;
-  }
+}
+.need-hover:hover {
+  padding: 8px;
+  background-color: rgba(256, 256, 256, 0.3);
+  border-radius: 4px;
 }
 
 h5 {
