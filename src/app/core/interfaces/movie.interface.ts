@@ -36,4 +36,5 @@ export interface ICustomList {
   id: string;
   /** movie id[] */
   collections?: number[];
+  inList?: boolean;
 }

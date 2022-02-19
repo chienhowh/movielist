@@ -5,16 +5,16 @@ import { NewListService } from './../shared/new-list.service';
 import { ListAddingComponent } from './../list-adding/list-adding.component';
 
 import { ROUTING_PATH } from '../../../core/consts/routing-path.const';
-import { Observable, Subject } from 'rxjs';
+import { from, Observable, Subject } from 'rxjs';
 import { ListType } from './../../../core/enums/list-type.enum';
 import { MessageService } from './../../../core/services/message.service';
 import { DetailService } from './../shared/detail.service';
 import { API_POSTER } from '../../../core/consts/global-constants.const';
 import { ICustomList, IMovieInfo } from './../../../core/interfaces/movie.interface';
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, Pipe } from '@angular/core';
 import { tify } from 'chinese-conv';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { map, takeUntil, tap } from 'rxjs/operators';
+import { map, takeUntil, tap, mergeMap, toArray } from 'rxjs/operators';
 import { IWatchedMovie } from '../../watchlist/shared/watchlist';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
@@ -66,6 +66,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
       this.getFavorite();
       this.getWatchListById();
       this.getCustomList();
+      // this.inCustomList('615904')
     }
   }
 
@@ -125,7 +126,29 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   /** 取得所有客制清單 */
   getCustomList(): void {
     this.listHandleSvc.getCustomlist().pipe(takeUntil(this.ngUnsubscribe)).pipe(
-      tap(r => console.log(r))).subscribe((res) => this.customList = res);
+      tap(r => console.log(r))).subscribe((lists) => {
+        from(lists).pipe(
+          mergeMap(li => {
+            return this.inCustomList(li, li.id, this.movieId.toString());
+          }),
+          toArray()
+        ).subscribe(res => this.customList = res);
+
+
+      });
+  }
+
+  /** 電影是否在客制清單裡 */
+  inCustomList(list: ICustomList, listId: string, movieId: string) {
+    return this.listHandleSvc.getCustomlistById(listId, movieId).pipe(map(r => ({ ...list, inList: r ? true : false })));
+  }
+
+  toggleCustom(item: ICustomList) {
+    if (item.inList) {
+      this.deleteFromCustom(item);
+    } else {
+      this.addToCustom(item);
+    }
   }
 
   /** 加到客製清單 */
@@ -138,9 +161,18 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
       isWatched: false
     };
     this.listHandleSvc.addToSpecList(listInfo.id, sendData).then(() => {
+      this.getCustomList();
       this.nzMsgSvc.success(`已加入${listInfo.subject}`);
     });
   }
+
+  deleteFromCustom(list: ICustomList) {
+    this.listHandleSvc.removeFromSpecList(list.id, this.movieId.toString()).then(() => {
+      this.getCustomList();
+      this.nzMsgSvc.success(`已移出${list.subject}`);
+    });
+  }
+
 
   getFavorite(): void {
     this.listHandleSvc.getFromFavorite(this.movieId)
@@ -193,5 +225,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.unsubscribe();
   }
+
+
 
 }

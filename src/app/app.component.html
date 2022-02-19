@@ -87,26 +87,34 @@
       <div class="laptop">
         <ul class="d-flex m-0 align-items-center">
           <!-- 電影 start -->
-          <li>
-            <a class="need-hover" [routerLink]="ROUTING_PATH.SPECIFIC_TYPE"
-              >進階搜尋</a
-            >
+          <li class="px-2 touched">
+            <a [routerLink]="ROUTING_PATH.SPECIFIC_TYPE">進階搜尋</a>
           </li>
-          <!-- 我的最愛 start -->
-          <li>
-            <a class="need-hover" nz-dropdown [nzDropdownMenu]="listMenu"
-              >清單</a
-            >
+        </ul>
+      </div>
+      <!-- 登入 -->
+      <div class="col-4 ml-auto pr-3">
+        <ul class="d-flex m-0 align-items-center justify-content-end">
+          <li *ngIf="!authSvc.isLogin()" class="px-2 touched">
+            <a [routerLink]="ROUTING_PATH.LOGIN">登入</a>
           </li>
-          <nz-dropdown-menu #listMenu="nzDropdownMenu">
-            <ul nz-menu>
-              <li
-                nz-submenu
-                nzTitle="我的清單"
-                *ngIf="customDropList.length !== 0"
-              >
-                <ul>
-                  <ng-container>
+          <li *ngIf="authSvc.isLogin()">
+            <a
+              *ngIf="sharedService.UserDeviceSubject === DEVICE.PAD"
+              class="pr-2 need-hover"
+              nz-dropdown
+              [nzDropdownMenu]="listMenu"
+              >{{ userInfo?.email }}</a
+            >
+            <!-- 我的最愛 start -->
+            <nz-dropdown-menu #listMenu="nzDropdownMenu">
+              <ul nz-menu>
+                <li
+                  nz-submenu
+                  nzTitle="我的清單"
+                  *ngIf="customDropList.length !== 0"
+                >
+                  <ul>
                     <li
                       nz-menu-item
                       *ngFor="let item of customDropList"
@@ -121,48 +129,41 @@
                     >
                       {{ item.subject }}
                     </li>
-                  </ng-container>
-                </ul>
-              </li>
-              <li
-                nz-menu-item
-                [routerLink]="
-                  ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.FAVORITE_LIST
-                "
-              >
-                我的最愛
-              </li>
-              <li nz-menu-item *ngFor="let item of collectionDropList">
-                <p
+                  </ul>
+                </li>
+                <li
+                  nz-menu-item
                   [routerLink]="
-                    ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.EITHER_WATCH
+                    ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.FAVORITE_LIST
                   "
-                  [queryParams]="{
-                    name: item.name,
-                    endpoint: item.endpoint,
-                    type: item.type
-                  }"
                 >
-                  {{ item.name }}
-                </p>
-              </li>
-            </ul>
-          </nz-dropdown-menu>
-        </ul>
-      </div>
-      <!-- 登入 -->
-      <div class="col-4 ml-auto pr-3">
-        <ul class="d-flex m-0 align-items-center justify-content-end">
-          <li *ngIf="!authSvc.isLogin()">
-            <a class="need-hover" [routerLink]="ROUTING_PATH.LOGIN">登入</a>
-          </li>
-          <li *ngIf="authSvc.isLogin()">
-            <span
-              *ngIf="sharedService.UserDeviceSubject === DEVICE.PAD"
-              class="pr-2"
-              >歡迎 {{ userInfo.email }}</span
+                  我的最愛
+                </li>
+                <li nz-menu-item *ngFor="let item of collectionDropList">
+                  <p
+                    [routerLink]="
+                      ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.EITHER_WATCH
+                    "
+                    [queryParams]="{
+                      name: item.name,
+                      endpoint: item.endpoint,
+                      type: item.type
+                    }"
+                  >
+                    {{ item.name }}
+                  </p>
+                </li>
+                <li nz-menu-item (click)="logout()">登出</li>
+              </ul>
+            </nz-dropdown-menu>
+            <!-- 我的最愛 end -->
+
+            <a
+              *ngIf="sharedService.UserDeviceSubject === DEVICE.MOBILE"
+              class="pr-2 need-hover"
+              (click)="logout()"
+              >登出</a
             >
-            <a (click)="logout()">登出</a>
           </li>
         </ul>
       </div>

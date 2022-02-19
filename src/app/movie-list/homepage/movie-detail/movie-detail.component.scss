@@ -39,8 +39,19 @@ hr {
 
 .new-list-dropdown {
   width: 180px;
-  padding: 16px;
   background-color: $color-light-gray;
+  .list-add {
+    border-bottom: 1px solid lightgray;
+    padding: 12px;
+  }
+  .list-opt {
+    color: $primary-color;
+    cursor: pointer;
+    padding: 4px 12px;
+    &:hover {
+      background-color: antiquewhite;
+    }
+  }
 }
 
 .new-list-btn {

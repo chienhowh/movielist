@@ -77,6 +77,10 @@ export class ListHandleService {
   getCustomlist(): Observable<ICustomList[]> {
     return this.movieRequestSvc.fsGet(FIRE_STORE_COLLECTIONS.CUSTOMLIST);
   }
+
+  getCustomlistById(listId: string, movieId: string) {
+    return this.movieRequestSvc.fsRequest(API.GET_BY_ID, `${FIRE_STORE_COLLECTIONS.CUSTOMLIST}/${listId}/movies`, movieId);
+  }
   /** 新增客製清單 */
   newCustomList(params: any): Promise<void> {
     return this.movieRequestSvc.fsPost(FIRE_STORE_COLLECTIONS.CUSTOMLIST, params);
@@ -88,10 +92,13 @@ export class ListHandleService {
    * @param params 電影資料
    */
   async addToSpecList(listId: string, params: any): Promise<void> {
-    const uid = sessionStorage.getItem(COMMON.UID);
-    return this.fireStore.collection('users').doc(uid)
-      .collection(FIRE_STORE_COLLECTIONS.CUSTOMLIST)
-      .doc(listId).collection(FIRE_STORE_COLLECTIONS.MOVIES).doc(params.id).set(params, { merge: true });
+    const collection = `${FIRE_STORE_COLLECTIONS.CUSTOMLIST}/${listId}/${FIRE_STORE_COLLECTIONS.MOVIES}`;
+    return this.movieRequestSvc.fsPost(collection, params, params.id);
+  }
+
+  removeFromSpecList(listId: string, movieId: string) {
+    const collection = `${FIRE_STORE_COLLECTIONS.CUSTOMLIST}/${listId}/${FIRE_STORE_COLLECTIONS.MOVIES}`;
+    return this.movieRequestSvc.fsDelete(collection, movieId);
   }
 
   getSpecList(listId: string): Observable<DocumentData[]> {

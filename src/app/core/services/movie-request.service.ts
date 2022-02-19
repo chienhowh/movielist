@@ -1,7 +1,7 @@
 import { environment } from './../../../environments/environment';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { from, Observable, throwError } from 'rxjs';
 import { API, API_POSTER, COMMON } from '../consts/global-constants.const';
 import { catchError, map, take } from 'rxjs/operators';
 import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
@@ -95,7 +95,7 @@ export class MovieRequestService {
   /**
    * fireStore DB
    */
-  fsRequest(method: string, collectionName: string, params?: any) {
+  fsRequest(method: string, collectionName: string, params?: any): Observable<DocumentData> {
     const uid = sessionStorage.getItem(COMMON.UID);
     console.log(uid);
     console.log(collectionName, '::', JSON.stringify(params));
@@ -106,7 +106,8 @@ export class MovieRequestService {
         return this.fireStore.collection('users').doc(uid).collection(collectionName).doc(params).get().pipe(map(res => res.data()));
       case API.POST:
         if (params?.id) {
-          this.fireStore.collection('users').doc(uid).collection(collectionName).doc(`${params.id}`).set(params, { merge: true });
+          this.fireStore.collection('users').doc(uid).collection(collectionName).doc(`${params.id}`)
+            .set(params, { merge: true });
         } else {
           this.fireStore.collection('users').doc(uid).collection(collectionName).doc().set(params);
         }
@@ -126,7 +127,6 @@ export class MovieRequestService {
       })
     ));
   }
-
   async fsPost(collectionName: string, params?: any, id?: string): Promise<void> {
     const uid = sessionStorage.getItem(COMMON.UID);
     if (id) {
@@ -135,7 +135,10 @@ export class MovieRequestService {
       this.fireStore.collection('users').doc(uid).collection(collectionName).doc().set(params);
     }
   }
-
+  async fsDelete(collectionName: string, id: string): Promise<void> {
+    const uid = sessionStorage.getItem(COMMON.UID);
+    this.fireStore.collection('users').doc(uid).collection(collectionName).doc(id).delete();
+  }
 
   private getHTTPHeaders(): HttpHeaders {
     const result = new HttpHeaders({

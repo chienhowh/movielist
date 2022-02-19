@@ -72,7 +72,7 @@
     </button>
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <div class="new-list-dropdown">
-        <div class="mb-2">
+        <div class="list-add">
           <a (click)="openNewList()" class="new-list-btn"
             ><i
               nz-icon
@@ -83,7 +83,18 @@
             建立新清單</a
           >
         </div>
-        <nz-select
+        <ul>
+          <li
+            *ngFor="let item of customList"
+            class="list-opt"
+            (click)="toggleCustom(item)"
+          >
+            <i nz-icon nzType="plus" nzTheme="outline" *ngIf="!item.inList"></i>
+            <i nz-icon nzType="check" nzTheme="outline" *ngIf="item.inList"></i>
+            {{ item.subject }}
+          </li>
+        </ul>
+        <!-- <nz-select
           nzShowSearch
           nzAllowClear
           nzPlaceHolder="新增至清單"
@@ -96,7 +107,7 @@
             [nzLabel]="item.subject"
             [nzValue]="item"
           ></nz-option>
-        </nz-select>
+        </nz-select> -->
       </div>
     </nz-dropdown-menu>
     <!-- 新增清單 end -->
