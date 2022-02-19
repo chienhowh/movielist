@@ -213,6 +213,10 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
 
   openNewList(): void {
+    if (!this.loginSvc.isLogin()) {
+      this.nzMsgSvc.error('請先登入!');
+      return;
+    }
     this.nzModal.create({
       nzContent: ListAddingComponent,
       nzFooter: null,
