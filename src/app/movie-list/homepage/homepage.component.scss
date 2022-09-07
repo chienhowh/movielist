@@ -8,7 +8,7 @@
   background-color: $secondary-color;
   // 放backdrop_path
   background-image: linear-gradient(to right, $secondary-color, rgba(0, 0, 0, 0.1)),
-    url("https://image.tmdb.org/t/p/w500/1Rr5SrvHxMXHu5RjKpaMba8VTzi.jpg");
+    url("/assets/banner-bg.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
