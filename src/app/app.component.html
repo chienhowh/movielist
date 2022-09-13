@@ -1,43 +1,44 @@
-<nav class="nav-bar position-relative">
-  <div class="header row align-items-center">
-    <!-- mobile drawer start -->
-    <div class="mobile col-4">
-      <a class="d-flex" (click)="drawerVisible = !drawerVisible">
-        <i nz-icon nzType="menu"></i>
-      </a>
-      <nz-drawer [nzClosable]="false" [nzVisible]="drawerVisible" nzPlacement="left" [nzBodyStyle]="{
+<div class="web-box">
+  <nav class="nav-bar position-relative">
+    <div class="header row align-items-center">
+      <!-- mobile drawer start -->
+      <div class="mobile col-4">
+        <a class="d-flex" (click)="drawerVisible = !drawerVisible">
+          <i nz-icon nzType="menu"></i>
+        </a>
+        <nz-drawer [nzClosable]="false" [nzVisible]="drawerVisible" nzPlacement="left" [nzBodyStyle]="{
             'font-weight': '600',
             'font-size': ' 1.3em',
             padding: '16px'
           }" (nzOnClose)="drawerVisible = false">
-        <ng-container *nzDrawerContent>
-          <ul class="mobile-drawer">
-            <li>
-              <a routerLink="/home" (click)="drawerVisible = false">首頁</a>
-            </li>
-            <li>
-              <a [routerLink]="ROUTING_PATH.SPECIFIC_TYPE" (click)="drawerVisible = false">進階搜尋</a>
-            </li>
-            <li>
-              <a routerLink="/watchlist" (click)="drawerVisible = false">我的最愛</a>
-            </li>
-            <li *ngFor="let item of collectionDropList">
-              <a [routerLink]="
+          <ng-container *nzDrawerContent>
+            <ul class="mobile-drawer">
+              <li>
+                <a routerLink="/home" (click)="drawerVisible = false">首頁</a>
+              </li>
+              <li>
+                <a [routerLink]="ROUTING_PATH.SPECIFIC_TYPE" (click)="drawerVisible = false">進階搜尋</a>
+              </li>
+              <li>
+                <a routerLink="/watchlist" (click)="drawerVisible = false">我的最愛</a>
+              </li>
+              <li *ngFor="let item of collectionDropList">
+                <a [routerLink]="
                     ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.EITHER_WATCH
                   " [queryParams]="{
                     name: item.name,
                     type: item.type
                   }" (click)="drawerVisible = false">
-                {{ item.name }}
-              </a>
-            </li>
-            <li>
-              <span style="color: rgba(0, 0, 0, 0.45)">清單</span>
-              <hr class="m-1" />
-              <ul>
-                <ng-container>
-                  <li *ngFor="let item of customDropList">
-                    <a [routerLink]="
+                  {{ item.name }}
+                </a>
+              </li>
+              <li>
+                <span style="color: rgba(0, 0, 0, 0.45)">清單</span>
+                <hr class="m-1" />
+                <ul>
+                  <ng-container>
+                    <li *ngFor="let item of customDropList">
+                      <a [routerLink]="
                           ROUTING_PATH.WATCHLIST +
                           '/' +
                           ROUTING_PATH.FAVORITE_LIST
@@ -45,118 +46,120 @@
                           id: item.id,
                           endpoint: API.ADDLIST
                         }" (click)="drawerVisible = false">
-                      {{ item.subject }}
-                    </a>
-                  </li>
-                </ng-container>
-              </ul>
-            </li>
-          </ul>
-        </ng-container>
-      </nz-drawer>
-    </div>
-    <!-- mobile drawer end -->
-    <!-- 首頁圖標 start -->
-    <div class="col-4 col-sm-auto">
-      <a routerLink="/home" class="px-3 logo">
-        <img src="assets/logo1.jpg" height="30" alt="" />
-      </a>
-    </div>
-    <!-- 首頁圖標 end -->
-    <div class="laptop">
-      <ul class="d-flex m-0 align-items-center">
-        <!-- 電影 start -->
-        <li class="px-2 touched">
-          <a [routerLink]="ROUTING_PATH.SPECIFIC_TYPE">進階搜尋</a>
-        </li>
-      </ul>
-    </div>
-    <!-- 登入 -->
-    <div class="col-4 ml-auto pr-3">
-      <ul class="d-flex m-0 align-items-center justify-content-end">
-        <li *ngIf="!authSvc.isLogin()" class="px-2 touched">
-          <a [routerLink]="ROUTING_PATH.LOGIN">登入</a>
-        </li>
-        <li *ngIf="authSvc.isLogin()">
-          <a *ngIf="sharedService.UserDeviceSubject === DEVICE.PAD" class="pr-2 need-hover" nz-dropdown
-            [nzDropdownMenu]="listMenu">{{ userInfo?.email }}</a>
-          <!-- 我的最愛 start -->
-          <nz-dropdown-menu #listMenu="nzDropdownMenu">
-            <ul nz-menu>
-              <li nz-submenu nzTitle="我的清單" *ngIf="customDropList.length !== 0">
-                <ul>
-                  <li nz-menu-item *ngFor="let item of customDropList" [routerLink]="
+                        {{ item.subject }}
+                      </a>
+                    </li>
+                  </ng-container>
+                </ul>
+              </li>
+            </ul>
+          </ng-container>
+        </nz-drawer>
+      </div>
+      <!-- mobile drawer end -->
+      <!-- 首頁圖標 start -->
+      <div class="col-4 col-sm-auto">
+        <a routerLink="/home" class="px-3 logo">
+          <img src="assets/logo1.jpg" height="30" alt="" />
+        </a>
+      </div>
+      <!-- 首頁圖標 end -->
+      <div class="laptop">
+        <ul class="d-flex m-0 align-items-center">
+          <!-- 電影 start -->
+          <li class="px-2 touched">
+            <a [routerLink]="ROUTING_PATH.SPECIFIC_TYPE">進階搜尋</a>
+          </li>
+        </ul>
+      </div>
+      <!-- 登入 -->
+      <div class="col-4 ml-auto pr-3">
+        <ul class="d-flex m-0 align-items-center justify-content-end">
+          <li *ngIf="!authSvc.isLogin()" class="px-2 touched">
+            <a [routerLink]="ROUTING_PATH.LOGIN">登入</a>
+          </li>
+          <li *ngIf="authSvc.isLogin()">
+            <a *ngIf="sharedService.UserDeviceSubject === DEVICE.PAD" class="pr-2 need-hover" nz-dropdown
+              [nzDropdownMenu]="listMenu">{{ userInfo?.email }}</a>
+            <!-- 我的最愛 start -->
+            <nz-dropdown-menu #listMenu="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-submenu nzTitle="我的清單" *ngIf="customDropList.length !== 0">
+                  <ul>
+                    <li nz-menu-item *ngFor="let item of customDropList" [routerLink]="
                         ROUTING_PATH.WATCHLIST +
                         '/' +
                         ROUTING_PATH.FAVORITE_LIST
                       " [queryParams]="{
                         id: item.id
                       }">
-                    {{ item.subject }}
-                  </li>
-                </ul>
-              </li>
-              <li nz-menu-item [routerLink]="
+                      {{ item.subject }}
+                    </li>
+                  </ul>
+                </li>
+                <li nz-menu-item [routerLink]="
                     ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.FAVORITE_LIST
                   ">
-                我的最愛
-              </li>
-              <li nz-menu-item *ngFor="let item of collectionDropList">
-                <p [routerLink]="
+                  我的最愛
+                </li>
+                <li nz-menu-item *ngFor="let item of collectionDropList">
+                  <p [routerLink]="
                       ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.EITHER_WATCH
                     " [queryParams]="{
                       name: item.name,
                       endpoint: item.endpoint,
                       type: item.type
                     }">
-                  {{ item.name }}
-                </p>
-              </li>
-              <li nz-menu-item (click)="logout()">登出</li>
-            </ul>
-          </nz-dropdown-menu>
-          <!-- 我的最愛 end -->
+                    {{ item.name }}
+                  </p>
+                </li>
+                <li nz-menu-item (click)="logout()">登出</li>
+              </ul>
+            </nz-dropdown-menu>
+            <!-- 我的最愛 end -->
 
-          <a *ngIf="sharedService.UserDeviceSubject === DEVICE.MOBILE" class="pr-2 need-hover" (click)="logout()">登出</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<!-- body start -->
-<div class="mb-3">
-  <router-outlet></router-outlet>
-</div>
-<!-- body end -->
-<!-- footer start -->
-<footer class="footer p-4">
-  <nav class="row">
-    <div class="col">
-      <h5>關於我們</h5>
-      <ul>
-        <li><a>關於電影清單</a></li>
-        <li><a>聯絡我們</a></li>
-        <li class="text-nowrap">
-          <a href="https://www.flaticon.com/authors/iconixar" title="iconixar">Icons made by Flaticon</a>
-        </li>
-      </ul>
-    </div>
-    <div class="col">
-      <h5>參與我們</h5>
-      <ul>
-        <li><a>貢獻指南</a></li>
-        <li><a>新增電影</a></li>
-      </ul>
-    </div>
-    <div class="col">
-      <h5>社群</h5>
-      <ul>
-        <li><a>指南</a></li>
-        <li><a>討論</a></li>
-      </ul>
+            <a *ngIf="sharedService.UserDeviceSubject === DEVICE.MOBILE" class="pr-2 need-hover"
+              (click)="logout()">登出</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
-</footer>
+  <!-- body start -->
+  <div class="content mb-3">
+    <router-outlet></router-outlet>
+  </div>
+  <!-- body end -->
+  <!-- footer start -->
+  <footer class="footer p-4">
+    <nav class="row">
+      <div class="col">
+        <h5>關於我們</h5>
+        <ul>
+          <li><a>關於電影清單</a></li>
+          <li><a>聯絡我們</a></li>
+          <li class="text-nowrap">
+            <a href="https://www.flaticon.com/authors/iconixar" title="iconixar">Icons made by Flaticon</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col">
+        <h5>參與我們</h5>
+        <ul>
+          <li><a>貢獻指南</a></li>
+          <li><a>新增電影</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h5>社群</h5>
+        <ul>
+          <li><a>指南</a></li>
+          <li><a>討論</a></li>
+        </ul>
+      </div>
+    </nav>
+  </footer>
+</div>
 <!-- <div>
   Icons made by
   <a href="https://www.flaticon.com/authors/iconixar" title="iconixar"
