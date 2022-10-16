@@ -51,7 +51,7 @@
               "buildOptimizer": true,
               "aot": true,
               "vendorChunk": true,
-              "serviceWorker": true,
+              "serviceWorker": false,
               "deleteOutputPath": true,
               "budgets": [
                 {
