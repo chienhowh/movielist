@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { RateIconComponent } from './rate-icon/rate-icon.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -19,15 +20,19 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { VerticalCardComponent } from './components/vertical-card/vertical-card.component';
+import { BackgroundImgDirective } from './directives/background-img.directive';
 @NgModule({
   declarations: [
     RateIconComponent,
     MovieCardComponent,
-    VerticalCardComponent
+    VerticalCardComponent,
+    BackgroundImgDirective
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     RateIconComponent,
@@ -48,8 +53,10 @@ import { VerticalCardComponent } from './components/vertical-card/vertical-card.
     NzCollapseModule,
     NzSliderModule,
     NzBackTopModule,
+    NzPopoverModule,
     MovieCardComponent,
-    VerticalCardComponent
+    VerticalCardComponent,
+    BackgroundImgDirective
   ]
 })
 export class SharedModule { }

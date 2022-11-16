@@ -1,10 +1,11 @@
 import { environment } from './../../../environments/environment';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, Observable, throwError } from 'rxjs';
 import { API, API_POSTER, COMMON } from '../consts/global-constants.const';
 import { catchError, map, take } from 'rxjs/operators';
 import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
+import { Params } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +21,14 @@ export class MovieRequestService {
    *
    * @param querys 搜索條件
    */
-  request(method: string, url: string, sendData?: any): Observable<any> {
-    const params = { ...sendData, language: 'zh-TW' };
+  request<T>(method: string, url: string, params?: Params) {
     if (method === API.POST) {
       return;
     }
-    return this.http.get(environment.DEFAULT_IP + url + API.KEY, { params }).pipe(catchError(this.handleError));
+    const qureyParams = { api_key: API.KEY, ...params };
+    return this.http.get<T>(environment.DEFAULT_IP + url, { params: qureyParams }).pipe(catchError(this.handleError));
   }
+
   /**
    * call database
    * @param querys 搜索條件

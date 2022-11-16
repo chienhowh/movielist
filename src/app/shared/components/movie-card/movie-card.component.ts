@@ -30,7 +30,7 @@ export class MovieCardComponent implements OnInit {
     const modal = this.modalSvc.create({
       nzContent: MovieDetailComponent,
       nzComponentParams: {
-        info
+        // info
       },
       nzFooter: null,
       nzBodyStyle: { padding: '24px' },

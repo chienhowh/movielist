@@ -61,7 +61,7 @@ export class MovieInfoComponent implements OnInit, OnDestroy {
     this.modalSvc.create({
       nzContent: MovieDetailComponent,
       nzComponentParams: {
-        info
+        // info
       },
       nzFooter: null,
       nzBodyStyle: { padding: '24px' },

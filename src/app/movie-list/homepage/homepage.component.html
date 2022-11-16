@@ -2,45 +2,25 @@
   <section class="search-box mb-2">
     <div class="title">
       <!-- <h2>Welcome.</h2> -->
-      <h3 class="text-white">上百萬部電影在等你探索，立即瀏覽吧！</h3>
+      <h2 class="text-white">Welcome.</h2>
+      <h3 class="text-white">Millions of movies, TV shows and people to discover. Explore now.</h3>
     </div>
     <div class="search">
-      <input
-        matInput
-        placeholder="輸入電影..."
-        [(ngModel)]="searchText"
-        class="mr-1 input"
-        (keyup.enter)="searchMovie()"
-      />
-      <button
-        nz-button
-        nzType="primary"
-        class="search-btn"
-        nzSize="large"
-        (click)="searchMovie()"
-      >
+      <input placeholder="Search for a movie..." [(ngModel)]="searchText" class="mr-1 input" (keyup.enter)="searchMovie()" />
+      <button nz-button nzType="primary" class="search-btn" nzSize="large" (click)="searchMovie()">
         Search
       </button>
     </div>
   </section>
   <!-- Movie List Start -->
   <section class="carousel-box">
-    <app-carousel
-      [searchTitle]="'現正熱映'"
-      [searchApi]="'now_playing'"
-    ></app-carousel>
+    <app-carousel [searchTitle]="'Now playing'" [searchApi]="'now_playing'"></app-carousel>
   </section>
   <section class="carousel-box">
-    <app-carousel
-      [searchTitle]="'最受好評'"
-      [searchApi]="'top_rated'"
-    ></app-carousel>
+    <app-carousel [searchTitle]="'Top rated'" [searchApi]="'top_rated'"></app-carousel>
   </section>
   <section class="carousel-box">
-    <app-carousel
-      [searchTitle]="'最受歡迎'"
-      [searchApi]="'popular'"
-    ></app-carousel>
+    <app-carousel [searchTitle]="'Popular'" [searchApi]="'popular'"></app-carousel>
   </section>
   <!-- <app-carousel
     [searchTitle]="'Upcoming'"

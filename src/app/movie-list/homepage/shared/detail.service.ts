@@ -1,11 +1,13 @@
 import { IWatchedMovie } from 'src/app/movie-list/watchlist/shared/watchlist';
-import { IMovieInfo } from './../../../core/interfaces/movie.interface';
+import { IMovieInfo, IRecommendation, IResponse } from './../../../core/interfaces/movie.interface';
 import { ListType } from './../../../core/enums/list-type.enum';
 import { Observable } from 'rxjs';
 import { MovieRequestService } from './../../../core/services/movie-request.service';
 import { Injectable } from '@angular/core';
 import { API } from '../../../core/consts/global-constants.const';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Params } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +21,13 @@ export class DetailService {
   /**
    * 取得電影明細
    */
-  getMovieDetail(id: number): Observable<IMovieInfo> {
-    return this.requestService.request(API.GET, `${API.MOVIE}/${id}`);
+  getMovieDetail(id: number, params?: Params) {
+    return this.requestService.request<IMovieInfo>(API.GET, `${API.MOVIE}/${id}`, params);
   }
 
+  getRecommandtions(id: number) {
+    return this.requestService.request<IResponse>(API.GET, `${API.MOVIE}/${id}${API.RECOMMENDATIONS}`).pipe(map(res => res.results));
+  }
 
   // DB start
   /**

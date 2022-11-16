@@ -15,11 +15,4 @@ export class GenresService {
     private mvReqSvc: MovieRequestService
   ) { }
 
-
-  getGenres(): Observable<IGenre[]> {
-    return this.mvReqSvc.request(API.GET, API.GENRE_LIST).pipe(
-      map(res => res.genres),
-      map(g => g.map(r => ({ id: r.id, name: tify(r.name) })))
-    );
-  }
 }

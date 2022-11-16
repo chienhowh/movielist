@@ -16,6 +16,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { ListAddingComponent } from './list-adding/list-adding.component';
+import { AddCustomlistModalComponent } from './movie-detail/add-customlist-modal/add-customlist-modal.component';
 @NgModule({
   declarations: [
     HomepageComponent,
@@ -26,6 +27,7 @@ import { ListAddingComponent } from './list-adding/list-adding.component';
     GenrePipe,
     TextEllipsisPipe,
     ListAddingComponent,
+    AddCustomlistModalComponent,
   ],
   imports: [
     CommonModule,

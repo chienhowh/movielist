@@ -1,0 +1,14 @@
+<h3 class="font-weight-bolder mb-3">
+  <a class="d-flex align-items-center">
+    <i nz-icon nzType="plus" nzTheme="outline" class="mr-2"></i>Create New List</a>
+</h3>
+<div class="px-3">
+  <p class="font-weight-bolder">Add {{movie.title}} to one of your lists...</p>
+  <ul>
+    <li *ngFor="let item of customList" class="p-2" (click)="toggleCustom(item)">
+      <i nz-icon nzType="plus" nzTheme="outline" *ngIf="!item.inList"></i>
+      <i nz-icon nzType="check" nzTheme="outline" *ngIf="item.inList"></i>
+      {{ item.subject }}
+    </li>
+  </ul>
+</div>

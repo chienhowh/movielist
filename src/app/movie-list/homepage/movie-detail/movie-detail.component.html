@@ -1,53 +1,125 @@
-<ng-container *ngIf="displayList">
-  <h2 class="text-center font-weight-bold mb-3">
-    {{ displayList.title }}
-  </h2>
-
-  <div class="row">
-    <!-- poster start -->
-    <div class="col-md-6 col-12">
-      <div class="img-box text-center">
-        <img
-          src="{{ API_POSTER.GET_POSTER + displayList.poster_path }}"
-          (error)="imgError($event)"
-        />
+<ng-container *ngIf="movie">
+  <div class="header-wrapper position-relative overflow-hidden p-5">
+    <img class="header-bg" [src]="posterBg" alt='' />
+    <div class="header-content row">
+      <!-- poster start -->
+      <div class="col-auto">
+        <img [src]="poster1x" srcset="{{poster1x}} 1x, {{poster2x}} 2x" (error)="imgError($event)" />
       </div>
+      <!-- info start -->
+      <div class="col">
+        <section>
+          <div class="mb-4">
+            <h2 class="text-white mb-0"><a [routerLink]="[]" class="text-white hover-white">{{movie.title}}</a> <span
+                class="pl-2 release_date">({{movie.release_date|date:'yyyy'}})</span></h2>
+            <div class="text-white facts">
+              <span>{{movie.release_date|date:'shortDate'}}({{movie.production_countries[0]?.iso_3166_1}})</span>
+              <span>
+                <ng-container *ngFor="let genre of movie.genres;last as last ">
+                  <a [routerLink]="[ROUTING_PATH.GENRE,genre.id]" class="text-white hover-white">{{genre.name}}</a>
+                  <span class="pr-2" *ngIf="!last">,</span>
+                </ng-container>
+              </span>
+              <span>{{runtime}}</span>
+            </div>
+          </div>
+          <ul class="actions d-flex align-items-center mb-4">
+            <li class="d-inline-flex align-items-center">
+              <div class="user_score_chart">
+                <app-rate-icon [rate]="movie.vote_average"></app-rate-icon>
+              </div>
+              <div class="font-weight-bold text-white ml-2">User<br />Score</div>
+            </li>
+            <li><button nz-button nz-popover [nzPopoverContent]="customListTemplate" nzPopoverPlacement="bottom"
+                nzType="primary" nzSize="large" nzShape="circle" (click)="showAddCustomlistModal()">
+                <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
+              </button>
+            </li>
+            <li>
+              <button nz-button nzType="primary" nzSize="large" nzShape="circle" nz-popover
+                [nzPopoverContent]="favoriteListTemplate" nzPopoverPlacement="bottom"
+                (click)="handleAdd(ListType.FAVORITE)">
+                <i nz-icon nzType="heart" [nzTheme]="isFavorite ? 'fill' : 'outline'"
+                  [ngClass]="{ 'add-favorite': isFavorite }"></i>
+              </button>
+            </li>
+            <li> <button nz-button nzType="primary" nzSize="large" nzShape="circle" nz-popover
+                [nzPopoverContent]="watchListTemplate" nzPopoverPlacement="bottom"
+                (click)="handleAdd(ListType.WATCHLIST)">
+                <i nz-icon nzType="book" [nzTheme]="inWatchlist ? 'fill' : 'outline'"
+                  [ngClass]="{ 'add-watchlist': inWatchlist }"></i>
+              </button>
+            </li>
+          </ul>
+          <p class="tagline">{{movie.tagline}}</p>
+          <div class="header_info text-white">
+            <h3 class="text-white">Overview</h3>
+            <p>{{movie.overview}}</p>
+            <ol class="crew flex-wrap mt-4">
+              <li *ngFor="let crew of movie.credits.crew" class="col-4 m pr-4">
+                <p><a class="font-weight-bolder text-white hover-white"> {{crew.name}}</a></p>
+                <p>{{crew.job}}</p>
+              </li>
+            </ol>
+          </div>
+        </section>
+      </div>
+      <!-- info end -->
     </div>
-    <!-- poster end -->
-
-    <!-- info start -->
-    <div class="col-md-6 col-12 pt-3">
-      <div class="list-box">
-        <div class="header">類型:</div>
-        <div class="content">{{ genres }}</div>
-      </div>
-      <hr />
-      <div class="list-box">
-        <div class="header">上映日期:</div>
-        <div class="content">{{ displayList.release_date }}</div>
-      </div>
-      <hr />
-      <div class="list-box">
-        <div class="header">評分:</div>
-        <div class="content">{{ displayList.vote_average }}</div>
-      </div>
-      <hr />
-      <div class="list-box">
-        <div class="header">片長:</div>
-        <div class="content">{{ displayList.runtime }}分</div>
-      </div>
-      <hr />
-      <div class="py-3 d-md-block d-none">
-        <ng-container *ngTemplateOutlet="btns"></ng-container>
-      </div>
-    </div>
-    <!-- info end -->
   </div>
-  <!-- 簡介 start -->
-  <div class="row">
-    <div class="col-12 mb-2 my-sm-2" style="font-size: 18px">電影介紹:</div>
-    <div class="col-12 overview">
-      {{ displayList.overview ? displayList.overview : "尚無介紹" }}
+  <div>
+  </div>
+  <div class="container-xl d-flex flex-nowrap">
+    <!-- cast start -->
+    <div class="content_main">
+      <section class="panel">
+        <h3>Cast</h3>
+        <div class="position-relative">
+          <ol class="people scroller">
+            <ng-container *ngFor="let cast of movie.credits.cast;index as i">
+              <li class="card" *ngIf="i<7">
+                <a>
+                  <img loading="lazy" src="{{API_POSTER.GET_PERSON_1X+cast.profile_path}}"
+                    srcset="{{API_POSTER.GET_PERSON_1X+cast.profile_path}} 1x, {{API_POSTER.GET_PERSON_2X+cast.profile_path}} 2x"
+                    [alt]="cast.name">
+                </a>
+                <p><a class="font-weight-bolder text-black hover-black">{{cast.name}}</a></p>
+                <p class="character">{{cast.character}}</p>
+              </li>
+            </ng-container>
+          </ol>
+          <div class="style_wrapper"></div>
+        </div>
+      </section>
+      <section class="panel">
+        <h3>Recommendations</h3>
+        <div class="position-relative">
+          <ol class="recommendations scroller">
+
+            <ng-container *ngFor="let remcommend of recommendations$|async;index as i">
+              <li>
+                <a>
+                  <img loading="lazy" src="{{API_POSTER.GET_RECOMMEND_1X+remcommend.backdrop_path}}"
+                    srcset="{{API_POSTER.GET_RECOMMEND_1X+remcommend.backdrop_path}} 1x, {{API_POSTER.GET_RECOMMEND_2X+remcommend.backdrop_path}} 2x"
+                    [alt]="remcommend.title">
+                </a>
+                <p class="d-flex justify-content-between"><a
+                    class="font-weight-bolder text-black hover-black">{{remcommend.title}}</a><span>{{remcommend.vote_average}}%</span>
+                </p>
+              </li>
+            </ng-container>
+          </ol>
+          <div class="style_wrapper"></div>
+        </div>
+      </section>
+    </div>
+    <div class="content_side">
+      <section>
+        <p><strong>Status</strong>{{movie.status}}</p>
+        <p><strong>Original Language</strong>{{movie.original_language|uppercase}}</p>
+        <p><strong>Budge</strong>{{movie.budget|currency:'':'symbol':'0.0-0'}}</p>
+        <p><strong>Revenue</strong>{{movie.revenue|currency :'':'symbol':'0.0-0'}}</p>
+      </section>
     </div>
   </div>
 
@@ -56,89 +128,12 @@
   </div>
 </ng-container>
 
-<ng-template #btns>
-  <div class="btn-groups">
-    <!-- 新增清單 start -->
-    <button
-      nz-button
-      nz-dropdown
-      [nzDropdownMenu]="menu"
-      nzTrigger="click"
-      nzType="primary"
-      nzSize="large"
-      nzShape="circle"
-    >
-      <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
-    </button>
-    <nz-dropdown-menu #menu="nzDropdownMenu">
-      <div class="new-list-dropdown">
-        <div class="list-add">
-          <a (click)="openNewList()" class="new-list-btn"
-            ><i
-              nz-icon
-              nzType="plus"
-              nzTheme="outline"
-              class="align-middle"
-            ></i>
-            建立新清單</a
-          >
-        </div>
-        <ul>
-          <li
-            *ngFor="let item of customList"
-            class="list-opt"
-            (click)="toggleCustom(item)"
-          >
-            <i nz-icon nzType="plus" nzTheme="outline" *ngIf="!item.inList"></i>
-            <i nz-icon nzType="check" nzTheme="outline" *ngIf="item.inList"></i>
-            {{ item.subject }}
-          </li>
-        </ul>
-        <!-- <nz-select
-          nzShowSearch
-          nzAllowClear
-          nzPlaceHolder="新增至清單"
-          [(ngModel)]="selectedValue"
-          (ngModelChange)="addToCustom($event)"
-          class="w-100"
-        >
-          <nz-option
-            *ngFor="let item of customList"
-            [nzLabel]="item.subject"
-            [nzValue]="item"
-          ></nz-option>
-        </nz-select> -->
-      </div>
-    </nz-dropdown-menu>
-    <!-- 新增清單 end -->
-
-    <button
-      nz-button
-      nzType="primary"
-      nzSize="large"
-      nzShape="circle"
-      (click)="handleAdd(ListType.FAVORITE)"
-    >
-      <i
-        nz-icon
-        nzType="heart"
-        [nzTheme]="isFavorite ? 'fill' : 'outline'"
-        [ngClass]="{ 'add-favorite': isFavorite }"
-      ></i>
-    </button>
-    <button
-      nz-button
-      nzType="primary"
-      nzSize="large"
-      nzShape="circle"
-      (click)="handleAdd(ListType.WATCHLIST)"
-    >
-      <i
-        nz-icon
-        nzType="book"
-        [nzTheme]="inWatchlist ? 'fill' : 'outline'"
-        [ngClass]="{ 'add-watchlist': inWatchlist }"
-      ></i>
-    </button>
-  </div>
+<ng-template #customListTemplate>
+  <p> {{isLogin?'Add to list':'Login to create and edit custom lists'}}</p>
+</ng-template>
+<ng-template #favoriteListTemplate>
+  <p> {{isLogin?'Mark as favorite':'Login to add this movie to your favorite list'}}</p>
+</ng-template>
+<ng-template #watchListTemplate>
+  <p> {{isLogin?'Add to your watchlist':'Login to add this movie to your watch list'}}</p>
 </ng-template>

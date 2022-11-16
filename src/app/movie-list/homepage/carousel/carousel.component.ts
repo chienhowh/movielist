@@ -42,8 +42,8 @@ export class CarouselComponent implements OnInit {
 
   ngOnInit(): void {
     this.countImgNumber();
-    this.movieList$ = this.movieRequestService.request(API.GET, `/movie/${this.searchApi}`)
-      .pipe(map(res => [...res.results]));
+    this.movieList$ = this.movieRequestService.request<any>(API.GET, `/movie/${this.searchApi}`)
+      .pipe(map(res => res.results));
   }
 
   countImgNumber(): void {

@@ -68,7 +68,7 @@
         <ul class="d-flex m-0 align-items-center">
           <!-- 電影 start -->
           <li class="px-2 touched">
-            <a [routerLink]="ROUTING_PATH.SPECIFIC_TYPE">進階搜尋</a>
+            <a [routerLink]="ROUTING_PATH.SPECIFIC_TYPE">Advanced search</a>
           </li>
         </ul>
       </div>
@@ -76,7 +76,7 @@
       <div class="col-4 ml-auto pr-3">
         <ul class="d-flex m-0 align-items-center justify-content-end">
           <li *ngIf="!authSvc.isLogin()" class="px-2 touched">
-            <a [routerLink]="ROUTING_PATH.LOGIN">登入</a>
+            <a [routerLink]="ROUTING_PATH.LOGIN">Login</a>
           </li>
           <li *ngIf="authSvc.isLogin()">
             <a *ngIf="sharedService.UserDeviceSubject === DEVICE.PAD" class="pr-2 need-hover" nz-dropdown
@@ -134,27 +134,27 @@
   <footer class="footer p-4">
     <nav class="container-xl mx-auto row">
       <div class="col">
-        <h5>關於我們</h5>
+        <h5>THE BASICS</h5>
         <ul>
-          <li><a>關於電影清單</a></li>
-          <li><a>聯絡我們</a></li>
+          <li><a>About Us</a></li>
+          <li><a>Contact Us</a></li>
           <li class="text-nowrap">
             <a href="https://www.flaticon.com/authors/iconixar" title="iconixar">Icons made by Flaticon</a>
           </li>
         </ul>
       </div>
       <div class="col">
-        <h5>參與我們</h5>
+        <h5>GET INVOLVED</h5>
         <ul>
-          <li><a>貢獻指南</a></li>
-          <li><a>新增電影</a></li>
+          <li><a>Contribution</a></li>
+          <li><a>Add New Movie</a></li>
         </ul>
       </div>
       <div class="col">
-        <h5>社群</h5>
+        <h5>COMMUNITY</h5>
         <ul>
-          <li><a>指南</a></li>
-          <li><a>討論</a></li>
+          <li><a>Guidelines</a></li>
+          <li><a>Discussions</a></li>
         </ul>
       </div>
     </nav>

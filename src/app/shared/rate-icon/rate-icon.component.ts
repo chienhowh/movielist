@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-rate-icon',
   templateUrl: './rate-icon.component.html',
-  styleUrls: ['./rate-icon.component.scss']
+  styleUrls: ['./rate-icon.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RateIconComponent implements OnInit {
   // 分數
@@ -11,14 +12,16 @@ export class RateIconComponent implements OnInit {
 
   // 儀表板長度
   circleRate: number;
+  userScore: number;
   // 儀表板顏色
   circleColor: string;
   constructor() { }
 
   ngOnInit(): void {
     this.circleRate = +this.rate;
-    if (+this.rate >= 7) { this.circleColor = 'green'; }
-    else if (+this.rate >= 4) { this.circleColor = 'orange'; }
+    this.userScore = Math.floor(+this.rate * 10);
+    if (+this.rate >= 70) { this.circleColor = 'green'; }
+    else if (+this.rate >= 40) { this.circleColor = 'orange'; }
     else { this.circleColor = 'red'; }
   }
 

@@ -1,19 +1,14 @@
-<svg viewBox="0 0 36 36" class="circular-chart" [ngClass]="circleColor">
-  <path
-    class="circle-bg"
-    d="M18 2.0845
+<div class="positon-relative">
+  <svg viewBox="0 0 36 36" class="circular-chart" [ngClass]="circleColor">
+    <path class="circle-bg" d="M18 2.0845
       a 15.9155 15.9155 0 0 1 0 31.831
-      a 15.9155 15.9155 0 0 1 0 -31.831"
-  />
-  <path
-    class="circle"
-    [attr.pathLength]="10"
-    [attr.stroke-dasharray]="circleRate"
-    d="M18 2.0845
+      a 15.9155 15.9155 0 0 1 0 -31.831" />
+    <path class="circle" [attr.pathLength]="10" [attr.stroke-dasharray]="circleRate" d="M18 2.0845
       a 15.9155 15.9155 0 0 1 0 31.831
-      a 15.9155 15.9155 0 0 1 0 -31.831"
-  />
-  <text x="18" y="22.35" class="percentage">
-    {{ rate | number: "1.1" }}
-  </text>
-</svg>
+      a 15.9155 15.9155 0 0 1 0 -31.831" />
+    <text x="18" y="22.35" class="percentage">
+      {{ userScore }}
+    </text>
+  </svg>
+  <span>%</span>
+</div>

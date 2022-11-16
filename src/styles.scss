@@ -25,9 +25,7 @@ p {
   margin: 0;
 }
 
-.text-white {
-  color: white;
-}
+
 /* mobile view start */
 .mobile-center {
   @media (max-width: 767px) {
@@ -143,4 +141,8 @@ mat-paginator .mat-paginator-container {
 //icon 調整
 .anticon {
   vertical-align: unset;
+}
+
+.text-black{
+  color:black
 }

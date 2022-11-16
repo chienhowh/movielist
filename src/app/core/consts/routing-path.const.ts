@@ -13,7 +13,9 @@ export const ROUTING_PATH = {
   /** 待播 or 已看清單 */
   EITHER_WATCH: 'eitherwatch',
   LOGIN: 'login',
-  SIGNUP: 'signup'
+  SIGNUP: 'signup',
+  MOVIE: 'movie',
+  GENRE:'genre'
 }
 
 

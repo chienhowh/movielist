@@ -18,16 +18,11 @@ export class HomepageComponent implements OnInit {
     private router: Router
   ) { }
   ngOnInit(): void {
-    this.getGenreList();
   }
 
 
 
-  getGenreList(): void {
-    this.genreSvc.getGenres().subscribe(res => {
-      localStorage.setItem(LOCALSTORAGE_KEY.GENRES, JSON.stringify(res));
-    });
-  }
+
 
   searchMovie(event?): void {
     if (!this.searchText.trim()) { return; }
