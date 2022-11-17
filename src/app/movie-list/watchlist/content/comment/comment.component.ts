@@ -5,7 +5,7 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
 
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { verifyForm } from '../../../../core/funcs/verify-form';
+import { verifyFormValid } from '../../../../core/funcs/verify-form';
 import { IWatchedMovie } from '../../shared/watchlist';
 import { map, take, takeUntil } from 'rxjs/operators';
 @Component({
@@ -48,7 +48,7 @@ export class CommentComponent implements OnInit {
    * @id
    */
   submitForm(): void {
-    if (verifyForm(this.validateForm)) { return; }
+    if (!verifyFormValid(this.validateForm)) { return; }
     const value = this.validateForm.value;
     value.id = this.movie.id;
     value.isWatched = true;

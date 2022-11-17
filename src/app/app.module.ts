@@ -61,7 +61,7 @@ const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, Me
   providers: [
     { provide: NZ_I18N, useValue: zh_TW },
   ],
-  entryComponents: [MovieDetailComponent],
+  entryComponents: [],
   bootstrap: [AppComponent],
 
 })

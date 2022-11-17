@@ -1,7 +1,7 @@
 import { AddCustomlistModalComponent } from './add-customlist-modal/add-customlist-modal.component';
 import { ROUTING_PATH } from 'src/app/core/consts/routing-path.const';
 import { logging } from 'protractor';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { UserLoginService } from './../../../core/services/user-login.service';
 import { ListHandleService } from './../../../core/services/list-handle.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -53,7 +53,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     private nzModal: NzModalService,
     private listHandleSvc: ListHandleService,
     private loginSvc: UserLoginService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
@@ -102,6 +103,10 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   }
 
   showAddCustomlistModal() {
+    if (!this.loginSvc.isLogin()) {
+      this.nzMsgSvc.error('Please login!');
+      return;
+    }
     this.nzModal.create({
       nzContent: AddCustomlistModalComponent,
       nzFooter: null,
@@ -112,7 +117,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
   handleAdd(type: ListType): void {
     if (!this.loginSvc.isLogin()) {
-      this.nzMsgSvc.error('請先登入!');
+      this.nzMsgSvc.error('Please login!');
       return;
     }
     const sendData = {
@@ -191,5 +196,9 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   }
 
 
+  showListAddingPage() {
+    // this.nzModalRef.close();
 
+    this.router.navigate(['/', ROUTING_PATH.HOME, ROUTING_PATH.SEARCH]);
+  }
 }

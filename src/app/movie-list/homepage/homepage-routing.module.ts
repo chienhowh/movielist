@@ -7,8 +7,8 @@ import { NgModule } from '@angular/core';
 import { ROUTING_PATH } from '../../core/consts/routing-path.const';
 const routes: Routes = [
   { path: '', component: HomepageComponent },
-  { path: 'search', component: SearchResultComponent },
-  { path: ROUTING_PATH.LIST_ADDING, component: ListAddingComponent }
+  { path: ROUTING_PATH.SEARCH, component: SearchResultComponent },
+  { path: ROUTING_PATH.LIST_ADDING, component: ListAddingComponent },
 ];
 
 @NgModule({

@@ -1,3 +1,4 @@
+import { ROUTING_PATH } from './../../core/consts/routing-path.const';
 import { GenresService } from './../../core/services/genres.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
@@ -26,7 +27,7 @@ export class HomepageComponent implements OnInit {
 
   searchMovie(event?): void {
     if (!this.searchText.trim()) { return; }
-    this.router.navigate(['home', 'search'], { state: { query: this.searchText } });
+    this.router.navigate([ROUTING_PATH.HOME, ROUTING_PATH.SEARCH], { state: { query: this.searchText } });
   }
 
   onSwiper(swiper): void {

@@ -1,28 +1,23 @@
-<h6 class="text-center font-weight-bold mb-3">建立新清單</h6>
-<form nz-form [formGroup]="validateForm">
-  <nz-form-item>
-    <nz-form-label>名稱</nz-form-label>
-    <nz-form-control nzErrorTip="請輸入清單名稱!">
-      <input
-        type="text"
-        nz-input
-        formControlName="subject"
-        placeholder="清單名稱"
-      />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label>描述</nz-form-label>
-    <nz-form-control>
-      <textarea rows="3" nz-input formControlName="desc"></textarea>
-    </nz-form-control>
-  </nz-form-item>
-</form>
-<div class="text-center">
-  <button nz-button nzType="primary" class="mr-3" (click)="submitForm()">
-    確認
-  </button>
-  <button nz-button nzType="primary" nzGhost (click)="modalRef.close()">
-    取消
-  </button>
+<div class="container-xl">
+  <h2 class="text-center font-weight-bolder my-2">Create New List</h2>
+  <form nz-form [formGroup]="validateForm" nzLayout="vertical">
+    <nz-form-item>
+      <nz-form-label>Name</nz-form-label>
+      <nz-form-control nzErrorTip="List name required!">
+        <input type="text" nz-input formControlName="subject" placeholder="type your list name" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>Description</nz-form-label>
+      <nz-form-control nzErrorTip="Description required!">
+        <textarea rows="3" nz-input formControlName="desc"
+          placeholder="Make some description...">type some description</textarea>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <div>
+    <button nz-button nzType="primary" class="mr-3" (click)="submitForm()">
+      Continue
+    </button>
+  </div>
 </div>

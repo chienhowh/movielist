@@ -1,3 +1,5 @@
+import { NzModalRef } from 'ng-zorro-antd/modal';
+import { ROUTING_PATH } from 'src/app/core/consts/routing-path.const';
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { from, Subject } from 'rxjs';
 import { map, mergeMap, takeUntil, tap, toArray } from 'rxjs/operators';
@@ -5,6 +7,7 @@ import { ICustomList, IMovieInfo } from 'src/app/core/interfaces/movie.interface
 import { ListHandleService } from 'src/app/core/services/list-handle.service';
 import * as firebase from 'firebase';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-customlist-modal',
@@ -13,12 +16,15 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class AddCustomlistModalComponent implements OnInit, OnDestroy {
   @Input() movie?: IMovieInfo;
+  ROUTING_PATH = ROUTING_PATH;
   ngUnsubscribe$ = new Subject();
   /** 客制清單 */
   customList: ICustomList[] = [];
   constructor(
     private listHandleSvc: ListHandleService,
-    private nzMsgSvc: NzMessageService
+    private nzMsgSvc: NzMessageService,
+    private router: Router,
+    private nzModalRef: NzModalRef
   ) { }
 
   ngOnInit(): void {
@@ -77,6 +83,10 @@ export class AddCustomlistModalComponent implements OnInit, OnDestroy {
     });
   }
 
+  showListAddingPage() {
+    this.nzModalRef.close();
+    this.router.navigate([ROUTING_PATH.HOME, ROUTING_PATH.LIST_ADDING]);
+  }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe$.next();
