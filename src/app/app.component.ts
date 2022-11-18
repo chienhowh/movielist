@@ -19,13 +19,9 @@ import { User, AuthService } from './movie-list/auth/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  get ROUTING_PATH(): typeof ROUTING_PATH {
-    return ROUTING_PATH;
-  }
+  ROUTING_PATH = ROUTING_PATH
+  API = API;
 
-  get API(): typeof API {
-    return API;
-  }
   title = 'movielist';
   userInfo: User;
 

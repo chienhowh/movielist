@@ -13,13 +13,8 @@ import { map, tap } from 'rxjs/operators';
 })
 export class PersonComponent implements OnInit {
   @ViewChild('biography') biography: ElementRef;
-  get ROUTING_PATH() {
-    return ROUTING_PATH;
-
-  }
-  get API_POSTER() {
-    return API_POSTER;
-  }
+  ROUTING_PATH = ROUTING_PATH;
+  API_POSTER = API_POSTER;
   age?: number;
   personID?: string;
   person?: IPerson;
@@ -59,11 +54,11 @@ export class PersonComponent implements OnInit {
   setBiographyTruncate() {
     const height = this.biography.nativeElement.offsetHeight
     if (height > 220) {
-      this.renderer.addClass(this.biography.nativeElement,'truncate');
+      this.renderer.addClass(this.biography.nativeElement, 'truncate');
     }
   }
 
-  readmore(){
-    this.renderer.removeClass(this.biography.nativeElement,'truncate');
+  readmore() {
+    this.renderer.removeClass(this.biography.nativeElement, 'truncate');
   }
 }

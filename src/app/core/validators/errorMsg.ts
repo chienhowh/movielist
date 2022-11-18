@@ -16,7 +16,7 @@ export function getFormErrorStr(form: FormGroup, key: string, customMsg?: string
   }
 
   if (errors?.email) {
-    msg = '*此為無效的email';
+    msg = 'Invalid';
   }
   if (errors?.minlength) {
     msg = '*密碼長度至少為六個字';

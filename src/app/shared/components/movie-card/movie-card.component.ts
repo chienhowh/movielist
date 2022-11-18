@@ -11,9 +11,8 @@ import { ROUTING_PATH } from 'src/app/core/consts/routing-path.const';
 export class MovieCardComponent implements OnInit {
   @Input() movie: IMovieInfo;
   @Output() refreshList = new EventEmitter();
-  get ROUTING_PATH() {
-    return ROUTING_PATH;
-  }
+  ROUTING_PATH = ROUTING_PATH;
+
   // 海報網址
   constructor(
   ) { }

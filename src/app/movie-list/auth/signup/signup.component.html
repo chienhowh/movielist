@@ -1,42 +1,43 @@
-<form
-  nz-form
-  [nzLayout]="'vertical'"
-  [formGroup]="validateForm"
-  class="login-form"
-  (ngSubmit)="submitForm()"
->
-  <h4 class="text-">註冊帳戶</h4>
-  <p>請填寫完下列資料後即可完成註冊流程。</p>
-  <nz-form-item>
-    <nz-form-label nzRequired>信箱</nz-form-label>
-    <nz-form-control [nzErrorTip]="errorMsg(validateForm, 'email')">
-      <input
-        type="text"
-        nz-input
-        formControlName="email"
-        nzSize="large"
-        placeholder="email"
-      />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label nzRequired>密碼</nz-form-label>
-    <nz-form-control [nzErrorTip]="errorMsg(validateForm, 'password')">
-      <input
-        type="password"
-        nz-input
-        formControlName="password"
-        nzSize="large"
-        placeholder="Password"
-      />
-    </nz-form-control>
-  </nz-form-item>
-
-  <button
-    nz-button
-    class="login-form-button login-form-margin"
-    [nzType]="'primary'"
-  >
-    註冊
-  </button>
-</form>
+<div class="container-xl">
+  <div class="my-3">
+    <h4 class="mb-0">Sign up for an account</h4>
+    <p>Signing up for an account is free and easy.</p>
+    <p class="my-2">
+      <nz-alert nzType="info"
+        nzMessage="This is a just demo web. Please don't register with your commonly used account!">
+      </nz-alert>
+    </p>
+  </div>
+  <form nz-form [nzLayout]="'vertical'" [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label nzRequired>Email</nz-form-label>
+      <nz-form-control [nzErrorTip]="'Please input your email!'">
+        <input type="text" nz-input formControlName="email" nzSize="large" placeholder="Email" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>Password</nz-form-label>
+      <nz-form-control [nzErrorTip]="pwdErrorTpl">
+        <input type="password" nz-input formControlName="password" nzSize="large" placeholder="Password" />
+        <ng-template #pwdErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">Please input your password!</ng-container>
+          <ng-container *ngIf="control.hasError('minlength')">6 characters minimum!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>Password Confirm</nz-form-label>
+      <nz-form-control [nzErrorTip]="pwdConfirmErrorTpl">
+        <input type="password" nz-input formControlName="passwordConfirm" nzSize="large"
+          placeholder="Password Confirm" />
+        <ng-template #pwdConfirmErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">Please input your confirm password!</ng-container>
+          <ng-container *ngIf="control.hasError('notmatch')">Password isn't match!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">
+      Sign Up
+    </button>
+  </form>
+</div>

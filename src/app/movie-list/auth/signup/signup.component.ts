@@ -1,11 +1,12 @@
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { getFormErrorStr } from '../../../core/validators/errorMsg';
 import { ROUTING_PATH } from 'src/app/core/consts/routing-path.const';
-;
+import { verifyFormValid } from '../../../core/funcs/verify-form';
+
 
 @Component({
   selector: 'app-signup',
@@ -25,28 +26,28 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      passwordConfirm: ['', [Validators.required, this.passwordConfirmValidators('password')]]
     });
   }
 
   submitForm(): void {
-    if (this.validateForm.valid) {
-      this.authSvc.signup(this.validateForm.value).subscribe(
-        res => {
-          this.nzMessageSvc.success('註冊成功，立即開始吧!');
-          this.router.navigate([ROUTING_PATH.LOGIN]
-          );
-        }
-        ,
-        err => this.nzMessageSvc.error('invalid password'));
-    } else {
-      Object.values(this.validateForm.controls).forEach(control => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
-        }
-      });
-    }
+    if (!verifyFormValid(this.validateForm)) { return; }
+    this.authSvc.signup(this.validateForm.value).subscribe(
+      res => {
+        this.nzMessageSvc.success(`Successfully sign up, let's get started!`);
+        this.router.navigate([ROUTING_PATH.LOGIN]
+        );
+      }
+      ,
+      err => this.nzMessageSvc.error('invalid password'));
   }
 
+  passwordConfirmValidators(matchTo: string): ValidatorFn {
+    return (c: AbstractControl): ValidationErrors | null => {
+      if (!c.parent) { return null }
+      return c.value == 0 || c.parent.controls[matchTo].value === c.value ?
+        null : { notmatch: true }
+    }
+  }
 }
