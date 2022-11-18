@@ -22,11 +22,11 @@ export class DetailService {
    * 取得電影明細
    */
   getMovieDetail(id: number, params?: Params) {
-    return this.requestService.request<IMovieInfo>(API.GET, `${API.MOVIE}/${id}`, params);
+    return this.requestService.get<IMovieInfo>( `${API.MOVIE}/${id}`, params);
   }
 
   getRecommandtions(id: number) {
-    return this.requestService.request<IResponse>(API.GET, `${API.MOVIE}/${id}${API.RECOMMENDATIONS}`).pipe(map(res => res.results));
+    return this.requestService.get<IResponse>( `${API.MOVIE}/${id}${API.RECOMMENDATIONS}`).pipe(map(res => res.results));
   }
 
   // DB start

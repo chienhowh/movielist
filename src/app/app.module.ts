@@ -1,7 +1,7 @@
 
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
-import { MovieDetailComponent } from './movie-list/homepage/movie-detail/movie-detail.component';
+import { PersonComponent } from './person/person.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -40,6 +40,7 @@ const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, Me
     AppComponent,
     LoginComponent,
     SignupComponent,
+    PersonComponent
   ],
   imports: [
     BrowserModule,

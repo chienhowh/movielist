@@ -15,8 +15,9 @@ export const ROUTING_PATH = {
   LOGIN: 'login',
   SIGNUP: 'signup',
   MOVIE: 'movie',
-  GENRE:'genre',
-  SEARCH:'search'
+  GENRE: 'genre',
+  SEARCH: 'search',
+  PERSON: 'person'
 }
 
 

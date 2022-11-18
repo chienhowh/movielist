@@ -1,5 +1,4 @@
 <ng-container *ngIf="movie">
-  <div><button (click)="showListAddingPage()">showListAddingPage</button></div>
   <div class="header-wrapper position-relative overflow-hidden p-5">
     <img class="header-bg" [src]="posterBg" alt='' />
     <div class="header-content row">
@@ -58,7 +57,9 @@
             <p>{{movie.overview}}</p>
             <ol class="crew flex-wrap mt-4">
               <li *ngFor="let crew of movie.credits.crew" class="col-4 m pr-4">
-                <p><a class="font-weight-bolder text-white hover-white"> {{crew.name}}</a></p>
+                <p><a class="font-weight-bolder text-white hover-white"
+                    [routerLink]="['/',ROUTING_PATH.PERSON,crew.id]">
+                    {{crew.name}}</a></p>
                 <p>{{crew.job}}</p>
               </li>
             </ol>
@@ -79,12 +80,13 @@
           <ol class="people scroller">
             <ng-container *ngFor="let cast of movie.credits.cast;index as i">
               <li class="card" *ngIf="i<7">
-                <a>
+                <a [routerLink]="['/',ROUTING_PATH.PERSON,cast.id]">
                   <img loading="lazy" src="{{API_POSTER.GET_PERSON_1X+cast.profile_path}}"
                     srcset="{{API_POSTER.GET_PERSON_1X+cast.profile_path}} 1x, {{API_POSTER.GET_PERSON_2X+cast.profile_path}} 2x"
                     [alt]="cast.name">
                 </a>
-                <p><a class="font-weight-bolder text-black hover-black">{{cast.name}}</a></p>
+                <p><a class="font-weight-bolder text-black hover-black"
+                    [routerLink]="['/',ROUTING_PATH.PERSON,cast.id]">{{cast.name}}</a></p>
                 <p class="character">{{cast.character}}</p>
               </li>
             </ng-container>
@@ -92,27 +94,30 @@
           <div class="style_wrapper"></div>
         </div>
       </section>
-      <section class="panel">
-        <h3>Recommendations</h3>
-        <div class="position-relative">
-          <ol class="recommendations scroller">
+      <ng-container *ngIf="recommendations$|async as recommendations">
+        <section class="panel">
+          <h3>Recommendations</h3>
+          <div class="position-relative" *ngIf="recommendations.length>0;else emptyRecommendation">
+            <ol class="recommendations scroller">
+              <ng-container *ngFor="let remcommend of recommendations;index as i">
+                <li>
+                  <a [routerLink]="['/',ROUTING_PATH.MOVIE,remcommend.id]">
+                    <img loading="lazy" src="{{API_POSTER.GET_RECOMMEND_1X+remcommend.backdrop_path}}"
+                      srcset="{{API_POSTER.GET_RECOMMEND_1X+remcommend.backdrop_path}} 1x, {{API_POSTER.GET_RECOMMEND_2X+remcommend.backdrop_path}} 2x"
+                      [alt]="remcommend.title">
+                  </a>
+                  <p class="d-flex justify-content-between"><a [routerLink]="['/',ROUTING_PATH.MOVIE,remcommend.id]"
+                      class="font-weight-bolder text-black hover-black">{{remcommend.title}}</a><span>{{remcommend.vote_average}}%</span>
+                  </p>
+                </li>
+              </ng-container>
+            </ol>
+            <div class="style_wrapper"></div>
+          </div>
+        </section>
+        <ng-template #emptyRecommendation>We don't have recommendations for you.</ng-template>
+      </ng-container>
 
-            <ng-container *ngFor="let remcommend of recommendations$|async;index as i">
-              <li>
-                <a>
-                  <img loading="lazy" src="{{API_POSTER.GET_RECOMMEND_1X+remcommend.backdrop_path}}"
-                    srcset="{{API_POSTER.GET_RECOMMEND_1X+remcommend.backdrop_path}} 1x, {{API_POSTER.GET_RECOMMEND_2X+remcommend.backdrop_path}} 2x"
-                    [alt]="remcommend.title">
-                </a>
-                <p class="d-flex justify-content-between"><a
-                    class="font-weight-bolder text-black hover-black">{{remcommend.title}}</a><span>{{remcommend.vote_average}}%</span>
-                </p>
-              </li>
-            </ng-container>
-          </ol>
-          <div class="style_wrapper"></div>
-        </div>
-      </section>
     </div>
     <div class="content_side">
       <section>

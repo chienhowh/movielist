@@ -1,5 +1,4 @@
 import { ROUTING_PATH } from './../../core/consts/routing-path.const';
-import { GenresService } from './../../core/services/genres.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { MovieRequestService } from 'src/app/core/services/movie-request.service';
@@ -15,7 +14,6 @@ export class HomepageComponent implements OnInit {
   searchText = '';
   constructor(
     private movieRequestService: MovieRequestService,
-    private genreSvc: GenresService,
     private router: Router
   ) { }
   ngOnInit(): void {

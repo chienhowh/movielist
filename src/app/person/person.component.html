@@ -1,0 +1,71 @@
+<div class="container-xl pt-3" *ngIf="person">
+  <div class="row justify-content-between">
+    <div class="col-auto person_info">
+      <div class="img_box">
+        <img loading="lazy" class="rounded" [src]="poster1x" [alt]="person.name">
+      </div>
+      <div>
+        <h5 class="font-weight-bolder personal_Info">Personal Info</h5>
+        <section>
+          <p>
+            <strong>Known For</strong>
+            {{person.known_for_department}}
+          </p>
+          <!-- <p>
+            <strong>Known Credits</strong>
+            {{person.movie_credits.cast.length+person.movie_credits.crew.length}}
+          </p> -->
+          <p>
+            <strong>Gender</strong>
+            <ng-container *ngIf="person.gender==1">Female</ng-container>
+            <ng-container *ngIf="person.gender==2">Male</ng-container>
+          </p>
+          <p>
+            <strong>Birthday</strong>
+            {{person.birthday}}<span *ngIf="age&&person.birthday" class="ml-2">({{age}} years old)</span>
+          </p>
+          <p>
+            <strong>Place of Birth</strong>
+            {{person.place_of_birth}}
+          </p>
+          <p>
+            <strong>Also Known As</strong>
+          </p>
+          <ul>
+            <li *ngFor="let name of person.also_known_as">{{name}}</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+    <div class="col-12 col-md-8 person_movie">
+      <h3 class="font-weight-bolder">{{person.name}}</h3>
+      <section class="mb-4 position-relative">
+        <h5 class="font-weight-bolder">Biography</h5>
+        <ng-container *ngIf="person.biography;else emptyBio">
+          <p class="biography" #biography>{{person.biography}}
+            <a class="read_more" (click)="readmore()">Read More</a>
+          </p>
+        </ng-container>
+        <ng-template #emptyBio>
+          <p> We don't have a biography for {{person.name}}.</p>
+        </ng-template>
+      </section>
+      <section class="mb-4" *ngIf="person.movie_credits.cast.length>0">
+        <h5 class="font-weight-bolder">Known For</h5>
+        <ol class="movie scroller">
+          <ng-container *ngFor="let movie of person.movie_credits.cast">
+            <li class="card">
+              <a [routerLink]="['/',ROUTING_PATH.MOVIE,movie.id]">
+                <img loading="lazy" src="{{API_POSTER.GET_PERSON_1X+movie.poster_path}}"
+                  srcset="{{API_POSTER.GET_PERSON_1X+movie.poster_path}} 1x, {{API_POSTER.GET_PERSON_2X+movie.poster_path}} 2x"
+                  [alt]="movie.title">
+              </a>
+              <p><a class="font-weight-bolder text-black hover-black text-center"
+                  [routerLink]="['/',ROUTING_PATH.MOVIE,movie.id]">{{movie.title}}</a></p>
+            </li>
+          </ng-container>
+        </ol>
+      </section>
+    </div>
+  </div>
+</div>

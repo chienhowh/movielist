@@ -21,7 +21,7 @@ export const API = {
   TOP_RATED: '/movie/top_rated',
   NOW_PLAYING: '/movie/now_playing',
   RECOMMENDATIONS: '/recommendations',
-
+  PERSON: '/person',
   // DB start
   WATCHLIST: '/watchlist',
   FAVORITE: '/favorite',

@@ -12,7 +12,7 @@ import { ListType } from './../../../core/enums/list-type.enum';
 import { MessageService } from './../../../core/services/message.service';
 import { DetailService } from './../shared/detail.service';
 import { API, API_POSTER } from '../../../core/consts/global-constants.const';
-import { ICustomList, IMovieInfo, IRecommendation } from './../../../core/interfaces/movie.interface';
+import { ICustomList, IMovieInfo, IPerson, IRecommendation } from './../../../core/interfaces/movie.interface';
 import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { tify } from 'chinese-conv';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -54,19 +54,21 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     private listHandleSvc: ListHandleService,
     private loginSvc: UserLoginService,
     private route: ActivatedRoute,
-    private router: Router
   ) {
   }
 
   ngOnInit(): void {
-    this.movieId = +this.route.snapshot.paramMap.get('id');
-    this.getDetailById(this.movieId);
-    this.getRecommendations(this.movieId);
-    this.isLogin = this.loginSvc.isLogin();
-    if (this.loginSvc.isLogin()) {
-      this.getFavorite();
-      this.getWatchListById();
-    }
+    this.route.paramMap.pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
+      this.movieId = +res.get('id');
+      this.getDetailById(this.movieId);
+      this.getRecommendations(this.movieId);
+      this.isLogin = this.loginSvc.isLogin();
+      if (this.loginSvc.isLogin()) {
+        this.getFavorite();
+        this.getWatchListById();
+      }
+    })
+
   }
 
   addItem(): void {
@@ -85,8 +87,6 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
       // find specific crew
       map(res => ({ ...res, credits: { cast: res.credits.cast, crew: res.credits.crew.filter(c => c.job == 'Director' || c.job == 'Characters' || c.job == 'Writer') } }))
     ).subscribe((res) => {
-      console.log('res', res);
-
       this.movie = res;
       this.poster1x = `${API.POSTER}w300_and_h450_bestv2/${res.poster_path}`;
       this.poster2x = `${API.POSTER}w600_and_h900_bestv2/${res.poster_path}`;
@@ -193,12 +193,5 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.unsubscribe();
-  }
-
-
-  showListAddingPage() {
-    // this.nzModalRef.close();
-
-    this.router.navigate(['/', ROUTING_PATH.HOME, ROUTING_PATH.SEARCH]);
   }
 }

@@ -20,26 +20,46 @@ export interface IMovieInfo {
   production_countries: { iso_3166_1: string, name: string }[]
 }
 
+export interface IPerson {
+  adult: boolean;
+  also_known_as: string[];
+  biography: string;
+  birthday: string;
+  deathday: string;
+  gender: number;
+  homepage: string;
+  id: number;
+  imdb_id: string;
+  known_for_department: string;
+  name: string;
+  place_of_birth: string;
+  popularity: number;
+  profile_path: string;
+  movie_credits: { cast: IMovieInfo[], crew: IMovieInfo[] }
+}
+
+
+
 export interface ICast {
   adult: boolean;
   cast_id: number;
   character: string;
-  credit_id: string;
   gender: number;
-  id: number;
   known_for_department: string;
-  name: string;
   order: number;
-  original_name: string;
   popularity: number;
+  credit_id: string;
+  id: number;
+  name: string
+  original_name: string;
   profile_path: string;
 }
 
 export interface ICrew {
-  credit_id: string;
   department: string;
-  id: number;
   job: string;
+  credit_id: string;
+  id: number;
   name: string
   original_name: string;
   profile_path: string;

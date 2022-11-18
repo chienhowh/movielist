@@ -29,6 +29,11 @@ export class MovieRequestService {
     return this.http.get<T>(environment.DEFAULT_IP + url, { params: qureyParams }).pipe(catchError(this.handleError));
   }
 
+  get<T>(url: string, params?: Params) {
+    const qureyParams = { api_key: API.KEY, ...params };
+    return this.http.get<T>(environment.DEFAULT_IP + url, { params: qureyParams }).pipe(catchError(this.handleError));
+  }
+
   /**
    * call database
    * @param querys 搜索條件
