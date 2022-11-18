@@ -32,12 +32,7 @@ export const API = {
 };
 
 export enum API_POSTER {
-  GET_POSTER = 'https://image.tmdb.org/t/p/w220_and_h330_face',
   GET_POSTER_BG = 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces',
-  GET_PERSON_1X = 'https://image.tmdb.org/t/p/w138_and_h175_face/',
-  GET_PERSON_2X = 'https://image.tmdb.org/t/p/w276_and_h350_face/',
-  GET_RECOMMEND_1X = 'https://image.tmdb.org/t/p/w250_and_h141_face/',
-  GET_RECOMMEND_2X = 'https://image.tmdb.org/t/p/w500_and_h282_face/'
 }
 
 

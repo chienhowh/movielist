@@ -55,10 +55,6 @@ export class MovieRequestService {
     }
   }
 
-  /** 拿海報 */
-  requestPoster(posterPath: string, width = '200'): Observable<any> {
-    return this.http.get(`${API_POSTER.GET_POSTER}/w${width}/${posterPath}`);
-  }
 
   // 為了debug用
   handleError = (error: HttpErrorResponse) => {

@@ -56,9 +56,7 @@
           <ng-container *ngFor="let movie of person.movie_credits.cast">
             <li class="card">
               <a [routerLink]="['/',ROUTING_PATH.MOVIE,movie.id]">
-                <img loading="lazy" src="{{API_POSTER.GET_PERSON_1X+movie.poster_path}}"
-                  srcset="{{API_POSTER.GET_PERSON_1X+movie.poster_path}} 1x, {{API_POSTER.GET_PERSON_2X+movie.poster_path}} 2x"
-                  [alt]="movie.title">
+                <img loading="lazy" appBackgroundImg [posterPath]="movie.poster_path" [alt]="movie.title">
               </a>
               <p><a class="font-weight-bolder text-black hover-black text-center"
                   [routerLink]="['/',ROUTING_PATH.MOVIE,movie.id]">{{movie.title}}</a></p>

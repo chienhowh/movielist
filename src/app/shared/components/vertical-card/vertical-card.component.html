@@ -1,6 +1,7 @@
 <div class="carousel-cell" (click)="onWatchDetail(movie)">
   <div class="img-box position-relative">
-    <img src="{{ API_POSTER.GET_POSTER + movie.poster_path }}" alt="" />
+    <img appBackgroundImg loading="lazy" [posterPath]="movie.poster_path" [imgWidth]="220" [imgHeight]="330"
+      [alt]="movie.title" />
   </div>
   <div class="info-box position-relative">
     <div class="rate-box">

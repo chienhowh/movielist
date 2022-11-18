@@ -1,26 +1,18 @@
 <div class="card-box">
-  <div class="d-flex" (click)="onWatchDetail(movie)">
+  <div class="d-flex">
     <div class="img-box">
-      <img
-        (error)="imgError($event)"
-        src="{{ API_POSTER.GET_POSTER + movie.poster_path }}"
-        alt=""
-      />
+      <img appBackgroundImg loading="lazy" [posterPath]="movie.poster_path" [imgWidth]="94" [imgHeight]="141"
+        [alt]="movie.title" />
     </div>
-    <div class="overview-box p-3">
-      <div class="row align-items-center">
-        <div class="col-auto">
-          <div class="rate-box">
-            <app-rate-icon [rate]="movie.vote_average"></app-rate-icon>
-          </div>
-        </div>
-        <div class="col pl-0">
-          <h6>{{ movie.title }}</h6>
-          <p class="mb-2 fc-light">{{ movie.release_date }}</p>
-        </div>
+    <div class="detail">
+      <div>
+        <h6>
+          <a [routerLink]="['/',ROUTING_PATH.MOVIE,movie.id]"> {{ movie.title }}</a>
+        </h6>
+        <p class="mb-2 fc-light">{{ movie.release_date|date :'mediumDate'}}</p>
       </div>
-      <div #overview class="overview">
-        {{ movie.overview ? movie.overview : "尚無介紹" }}
+      <div class="overview">
+        {{ movie.overview ? movie.overview : "Not have overview yet." }}
       </div>
     </div>
   </div>

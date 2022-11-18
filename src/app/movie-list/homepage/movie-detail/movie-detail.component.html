@@ -81,9 +81,7 @@
             <ng-container *ngFor="let cast of movie.credits.cast;index as i">
               <li class="card" *ngIf="i<7">
                 <a [routerLink]="['/',ROUTING_PATH.PERSON,cast.id]">
-                  <img loading="lazy" src="{{API_POSTER.GET_PERSON_1X+cast.profile_path}}"
-                    srcset="{{API_POSTER.GET_PERSON_1X+cast.profile_path}} 1x, {{API_POSTER.GET_PERSON_2X+cast.profile_path}} 2x"
-                    [alt]="cast.name">
+                  <img loading="lazy" appBackgroundImg [posterPath]="cast.profile_path" [name]="cast.name">
                 </a>
                 <p><a class="font-weight-bolder text-black hover-black"
                     [routerLink]="['/',ROUTING_PATH.PERSON,cast.id]">{{cast.name}}</a></p>
@@ -102,9 +100,8 @@
               <ng-container *ngFor="let remcommend of recommendations;index as i">
                 <li>
                   <a [routerLink]="['/',ROUTING_PATH.MOVIE,remcommend.id]">
-                    <img loading="lazy" src="{{API_POSTER.GET_RECOMMEND_1X+remcommend.backdrop_path}}"
-                      srcset="{{API_POSTER.GET_RECOMMEND_1X+remcommend.backdrop_path}} 1x, {{API_POSTER.GET_RECOMMEND_2X+remcommend.backdrop_path}} 2x"
-                      [alt]="remcommend.title">
+                    <img loading="lazy" appBackgroundImg [posterPath]="remcommend.backdrop_path" [imgWidth]="250"
+                      [imgHeight]="141" [alt]="remcommend.title">
                   </a>
                   <p class="d-flex justify-content-between"><a [routerLink]="['/',ROUTING_PATH.MOVIE,remcommend.id]"
                       class="font-weight-bolder text-black hover-black">{{remcommend.title}}</a><span>{{remcommend.vote_average}}%</span>
