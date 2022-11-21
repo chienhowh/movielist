@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EitherWatchComponent } from './content/either-watch/either-watch.component';
 import { MovieInfoComponent } from './content/either-watch/movie-info/movie-info.component';
 import { FavoriteListComponent } from './content/favorite-list/favorite-list.component';
+import { CustomListPageComponent } from './content/custom-list-page/custom-list-page.component';
+import { CustomListInfoComponent } from './content/custom-list-page/custom-list-info/custom-list-info.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { FavoriteListComponent } from './content/favorite-list/favorite-list.com
     CommentComponent,
     EitherWatchComponent,
     MovieInfoComponent,
-    FavoriteListComponent
+    FavoriteListComponent,
+    CustomListPageComponent,
+    CustomListInfoComponent
   ],
   imports: [
     CommonModule,

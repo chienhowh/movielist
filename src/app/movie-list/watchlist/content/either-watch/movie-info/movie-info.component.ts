@@ -1,3 +1,4 @@
+import { CustomlistService } from './../../../../../core/services/customlist.service';
 import { Subject } from 'rxjs';
 import { ListHandleService } from './../../../../../core/services/list-handle.service';
 import { MessageService } from './../../../../../core/services/message.service';
@@ -34,7 +35,8 @@ export class MovieInfoComponent implements OnInit, OnDestroy {
     private listHandleSvc: ListHandleService,
     private msgSvc: MessageService,
     private nzMsgSvc: NzMessageService,
-    private loginSvc: UserLoginService
+    private loginSvc: UserLoginService,
+    private customListSvc:CustomlistService
   ) { }
 
   ngOnInit(): void {
@@ -75,7 +77,7 @@ export class MovieInfoComponent implements OnInit, OnDestroy {
 
   /** 取得所有客制清單 */
   getCustomList(): void {
-    this.listHandleSvc.getCustomlist().pipe(takeUntil(this.ngUnsubscribe)).subscribe((res) => this.customList = res);
+    this.customListSvc.getCustomlist().pipe(takeUntil(this.ngUnsubscribe)).subscribe((res) => this.customList = res);
   }
 
   /** 加到客製清單 */
@@ -87,7 +89,7 @@ export class MovieInfoComponent implements OnInit, OnDestroy {
       id: this.movie.id.toString(),
       isWatched: false
     };
-    this.listHandleSvc.addToSpecList(listInfo.id, sendData).then(() => {
+    this.customListSvc.addToCustomeList(listInfo.id, sendData).then(() => {
       this.nzMsgSvc.success(`已加入${listInfo.subject}`);
     });
   }

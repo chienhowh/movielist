@@ -1,3 +1,4 @@
+import { CustomlistService } from './../../../core/services/customlist.service';
 import { ROUTING_PATH } from './../../../core/consts/routing-path.const';
 import { Router } from '@angular/router';
 import { ListHandleService } from './../../../core/services/list-handle.service';
@@ -15,9 +16,9 @@ export class ListAddingComponent implements OnInit {
   validateForm: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private listHandleSvc: ListHandleService,
     private nzMsgSvc: NzMessageService,
-    private router: Router
+    private router: Router,
+    private customeListSvc:CustomlistService
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +37,7 @@ export class ListAddingComponent implements OnInit {
   submitForm(): void {
     if (!verifyFormValid(this.validateForm)) { return; }
     const requestBody = this.validateForm.value;
-    this.listHandleSvc.newCustomList(requestBody).then(() => {
+    this.customeListSvc.newCustomList(requestBody).then(() => {
       this.nzMsgSvc.success(`Create "${requestBody.subject}"`);
       this.router.navigate([ROUTING_PATH.HOME]);
     });

@@ -1,3 +1,4 @@
+import { CustomlistService } from './../../../../core/services/customlist.service';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { ROUTING_PATH } from 'src/app/core/consts/routing-path.const';
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
@@ -24,7 +25,8 @@ export class AddCustomlistModalComponent implements OnInit, OnDestroy {
     private listHandleSvc: ListHandleService,
     private nzMsgSvc: NzMessageService,
     private router: Router,
-    private nzModalRef: NzModalRef
+    private nzModalRef: NzModalRef,
+    private customlistSvc: CustomlistService
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +35,7 @@ export class AddCustomlistModalComponent implements OnInit, OnDestroy {
 
   /** 取得所有客制清單 */
   getCustomList(): void {
-    this.listHandleSvc.getCustomlist().pipe(
+    this.customlistSvc.getCustomlist().pipe(
       takeUntil(this.ngUnsubscribe$),
       tap(r => console.log(r)))
       .subscribe((lists) => {
@@ -42,15 +44,18 @@ export class AddCustomlistModalComponent implements OnInit, OnDestroy {
             return this.inCustomList(li, li.id, this.movie.id.toString());
           }),
           toArray()
-        ).subscribe(res =>
+        ).subscribe(res => {
           this.customList = res as any
-        );
+          console.log('resss', res)
+        });
       });
   }
 
   /** 電影是否在客制清單裡 */
   inCustomList(list: ICustomList, listId: string, movieId: string) {
-    return this.listHandleSvc.getCustomlistById(listId, movieId).pipe(map(r => ({ ...list, inList: r ? true : false })));
+    return this.customlistSvc.getCustomlistMovieDeatailById(listId, movieId).pipe(
+      tap(res => console.log('all customlist::', res)),
+      map(r => ({ ...list, inList: r ? true : false })));
   }
 
   toggleCustom(item: ICustomList) {
@@ -70,14 +75,14 @@ export class AddCustomlistModalComponent implements OnInit, OnDestroy {
       id: this.movie.id.toString(),
       isWatched: false
     };
-    this.listHandleSvc.addToSpecList(listInfo.id, sendData).then(() => {
+    this.customlistSvc.addToCustomeList(listInfo.id, sendData).then(() => {
       this.getCustomList();
       this.nzMsgSvc.success(`已加入${listInfo.subject}`);
     });
   }
 
   deleteFromCustom(list: ICustomList) {
-    this.listHandleSvc.removeFromSpecList(list.id, this.movie.id.toString()).then(() => {
+    this.customlistSvc.removeFromCustomList(list.id, this.movie.id.toString()).then(() => {
       this.getCustomList();
       this.nzMsgSvc.success(`已移出${list.subject}`);
     });

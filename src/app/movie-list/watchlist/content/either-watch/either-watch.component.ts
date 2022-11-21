@@ -1,17 +1,12 @@
 import { ListHandleService } from './../../../../core/services/list-handle.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NzModalService } from 'ng-zorro-antd/modal';
-import { Subject, from, Observable, iif, EMPTY } from 'rxjs';
-import { takeUntil, concatMap, filter, tap, map, mergeMap } from 'rxjs/operators';
+import { Subject, from, Observable, } from 'rxjs';
+import { takeUntil, mergeMap } from 'rxjs/operators';
 import { API_POSTER, API } from 'src/app/core/consts/global-constants.const';
-import { EitherWatch, ListType } from 'src/app/core/enums/list-type.enum';
+import { EitherWatch } from 'src/app/core/enums/list-type.enum';
 import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
 import { MovieRequestService } from 'src/app/core/services/movie-request.service';
-import { WatchlistService } from 'src/app/core/services/watchlist.service';
-import { DetailService } from 'src/app/movie-list/homepage/shared/detail.service';
-import { IWatchedMovie } from '../../shared/watchlist';
-import { CommentComponent } from '../comment/comment.component';
 
 @Component({
   selector: 'app-either-watch',

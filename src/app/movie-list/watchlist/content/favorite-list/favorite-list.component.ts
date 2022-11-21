@@ -1,7 +1,7 @@
+import { CustomlistService } from './../../../../core/services/customlist.service';
 import { ListHandleService } from './../../../../core/services/list-handle.service';
 import { ActivatedRoute } from '@angular/router';
 import { MovieRequestService } from 'src/app/core/services/movie-request.service';
-import { WatchlistService } from 'src/app/core/services/watchlist.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
 import { from, Observable, Subject } from 'rxjs';
@@ -26,7 +26,8 @@ export class FavoriteListComponent implements OnInit, OnDestroy {
   constructor(
     private mvReqSvc: MovieRequestService,
     private route: ActivatedRoute,
-    private listHandleSvc: ListHandleService
+    private listHandleSvc: ListHandleService,
+    private customListSvc: CustomlistService
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +35,7 @@ export class FavoriteListComponent implements OnInit, OnDestroy {
       this.customId = res.id;
       // 拿自訂清單by id
       if (this.customId) {
-        this.listHandleSvc.getSpecList(this.customId).pipe(takeUntil(this.ngUnsubscribe)).subscribe(lists => {
+        this.customListSvc.getCustomListById(this.customId).pipe(takeUntil(this.ngUnsubscribe)).subscribe(lists => {
           this.fsList = lists;
           this.getWatchList();
         });

@@ -1,3 +1,4 @@
+import { CustomlistService } from './core/services/customlist.service';
 import { NavigationStart, Router } from '@angular/router';
 import { ListHandleService } from './core/services/list-handle.service';
 import { API, COMMON } from 'src/app/core/consts/global-constants.const';
@@ -19,11 +20,16 @@ import { User, AuthService } from './movie-list/auth/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  ROUTING_PATH = ROUTING_PATH
+  ROUTING_PATH = ROUTING_PATH;
   API = API;
 
   title = 'movielist';
   userInfo: User;
+  userDropdown = [
+    { subject: 'Customlists', routerLink: ROUTING_PATH.CUSTOM_LIST },
+    { subject: 'Watchlist', routerLink: '' },
+    { subject: 'Favorite', routerLink: ROUTING_PATH.FAVORITE_LIST },
+  ];
 
   collectionDropList: IDropDown[] = [
     { name: '待播清單', type: EitherWatch.NOTWATCHED },
@@ -36,7 +42,7 @@ export class AppComponent implements OnInit {
   constructor(
     public sharedService: SharedService,
     public authSvc: AuthService,
-    private listHandleSvc: ListHandleService,
+    private customListSvc: CustomlistService,
     private router: Router
   ) {
   }
@@ -58,12 +64,11 @@ export class AppComponent implements OnInit {
 
   logout(): void {
     this.authSvc.logout();
-    this.customDropList = [];
     this.router.navigate(['home']);
   }
 
   getCustomList(): void {
-    this.listHandleSvc.getCustomlist().pipe(take(1)).subscribe((res) => this.customDropList = res);
+    this.customListSvc.getCustomlist().pipe(take(1)).subscribe((res) => this.customDropList = res);
   }
 
   initUserDevice(size: number): void {
