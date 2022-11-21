@@ -17,8 +17,8 @@ export class MessageService {
    */
   handleAddAction(type: string, added: boolean): void {
     added ?
-      this.nzMsgSvc.success(`已加入${type}`) :
-      this.nzMsgSvc.warning(`已移出${type}`);
+      this.nzMsgSvc.success(`Add to ${type}`) :
+      this.nzMsgSvc.warning(`Remove from ${type}`);
   }
 
 

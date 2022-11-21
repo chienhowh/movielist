@@ -89,7 +89,7 @@ export class MovieInfoComponent implements OnInit, OnDestroy {
       id: this.movie.id.toString(),
       isWatched: false
     };
-    this.customListSvc.addToCustomeList(listInfo.id, sendData).then(() => {
+    this.customListSvc.addToCustomeList(listInfo.id, sendData).subscribe(() => {
       this.nzMsgSvc.success(`已加入${listInfo.subject}`);
     });
   }

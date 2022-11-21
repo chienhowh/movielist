@@ -37,7 +37,7 @@ export class ListAddingComponent implements OnInit {
   submitForm(): void {
     if (!verifyFormValid(this.validateForm)) { return; }
     const requestBody = this.validateForm.value;
-    this.customeListSvc.newCustomList(requestBody).then(() => {
+    this.customeListSvc.newCustomList(requestBody).subscribe(() => {
       this.nzMsgSvc.success(`Create "${requestBody.subject}"`);
       this.router.navigate([ROUTING_PATH.HOME]);
     });

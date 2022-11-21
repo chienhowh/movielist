@@ -130,12 +130,19 @@ export class MovieRequestService {
       })
     ));
   }
-  async fsPost(collectionName: string, params?: any, id?: string): Promise<void> {
+
+  fsGetByID(collectionName: string, id: any) {
+    const uid = sessionStorage.getItem(COMMON.UID);
+    return this.fireStore.collection('users').doc(uid).collection(collectionName).doc(id).get().pipe(map(res => res.data()));
+  }
+
+
+  fsPost(collectionName: string, params?: any, id?: string) {
     const uid = sessionStorage.getItem(COMMON.UID);
     if (id) {
-      this.fireStore.collection('users').doc(uid).collection(collectionName).doc(`${params.id}`).set(params);
+      return from(this.fireStore.collection('users').doc(uid).collection(collectionName).doc(`${params.id}`).set(params, { merge: true }));
     } else {
-      this.fireStore.collection('users').doc(uid).collection(collectionName).doc().set(params);
+      return from(this.fireStore.collection('users').doc(uid).collection(collectionName).doc().set(params));
     }
   }
   async fsDelete(collectionName: string, id: string): Promise<void> {

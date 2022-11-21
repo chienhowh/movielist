@@ -23,7 +23,7 @@ export class CustomlistService {
 
 
   /** 新增客製清單 */
-  newCustomList(params: any): Promise<void> {
+  newCustomList(params: any) {
     return this.movieRequestSvc.fsPost(FIRE_STORE_COLLECTIONS.CUSTOMLIST, params);
   }
 
@@ -32,7 +32,7 @@ export class CustomlistService {
   * @param listId 清單的id
   * @param params 電影資料
   */
-  async addToCustomeList(listId: string, params: any): Promise<void> {
+  addToCustomeList(listId: string, params: any) {
     const collection = `${FIRE_STORE_COLLECTIONS.CUSTOMLIST}/${listId}/${FIRE_STORE_COLLECTIONS.MOVIES}`;
     return this.movieRequestSvc.fsPost(collection, params, params.id);
   }

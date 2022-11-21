@@ -75,7 +75,7 @@ export class AddCustomlistModalComponent implements OnInit, OnDestroy {
       id: this.movie.id.toString(),
       isWatched: false
     };
-    this.customlistSvc.addToCustomeList(listInfo.id, sendData).then(() => {
+    this.customlistSvc.addToCustomeList(listInfo.id, sendData).subscribe(() => {
       this.getCustomList();
       this.nzMsgSvc.success(`已加入${listInfo.subject}`);
     });

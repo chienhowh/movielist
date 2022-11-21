@@ -38,16 +38,16 @@
             <li>
               <button nz-button nzType="primary" nzSize="large" nzShape="circle" nz-popover
                 [nzPopoverContent]="favoriteListTemplate" nzPopoverPlacement="bottom"
-                (click)="handleAdd(ListType.FAVORITE)">
+                (click)="updateMovieDetail(ListType.FAVORITE)">
                 <i nz-icon nzType="heart" [nzTheme]="isFavorite ? 'fill' : 'outline'"
                   [ngClass]="{ 'add-favorite': isFavorite }"></i>
               </button>
             </li>
             <li> <button nz-button nzType="primary" nzSize="large" nzShape="circle" nz-popover
                 [nzPopoverContent]="watchListTemplate" nzPopoverPlacement="bottom"
-                (click)="handleAdd(ListType.WATCHLIST)">
-                <i nz-icon nzType="book" [nzTheme]="inWatchlist ? 'fill' : 'outline'"
-                  [ngClass]="{ 'add-watchlist': inWatchlist }"></i>
+                (click)="updateMovieDetail(ListType.WATCHLIST)">
+                <i nz-icon nzType="book" [nzTheme]="isWatchList ? 'fill' : 'outline'"
+                  [ngClass]="{ 'add-watchlist': isWatchList }"></i>
               </button>
             </li>
           </ul>
