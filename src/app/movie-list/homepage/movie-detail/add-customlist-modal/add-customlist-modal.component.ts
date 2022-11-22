@@ -1,7 +1,8 @@
+import { BaseComponent } from './../../../../shared/components/base/base.component';
 import { CustomlistService } from './../../../../core/services/customlist.service';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { ROUTING_PATH } from 'src/app/core/consts/routing-path.const';
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { from, Subject } from 'rxjs';
 import { map, mergeMap, takeUntil, tap, toArray } from 'rxjs/operators';
 import { ICustomList, IMovieInfo } from 'src/app/core/interfaces/movie.interface';
@@ -15,10 +16,9 @@ import { Router } from '@angular/router';
   templateUrl: './add-customlist-modal.component.html',
   styleUrls: ['./add-customlist-modal.component.scss']
 })
-export class AddCustomlistModalComponent implements OnInit, OnDestroy {
+export class AddCustomlistModalComponent extends BaseComponent implements OnInit {
   @Input() movie?: IMovieInfo;
   ROUTING_PATH = ROUTING_PATH;
-  ngUnsubscribe$ = new Subject();
   /** 客制清單 */
   customList: ICustomList[] = [];
   constructor(
@@ -27,7 +27,9 @@ export class AddCustomlistModalComponent implements OnInit, OnDestroy {
     private router: Router,
     private nzModalRef: NzModalRef,
     private customlistSvc: CustomlistService
-  ) { }
+  ) {
+    super()
+  }
 
   ngOnInit(): void {
     this.getCustomList();
@@ -36,7 +38,7 @@ export class AddCustomlistModalComponent implements OnInit, OnDestroy {
   /** 取得所有客制清單 */
   getCustomList(): void {
     this.customlistSvc.getCustomlist().pipe(
-      takeUntil(this.ngUnsubscribe$),
+      takeUntil(this.destroyed$),
       tap(r => console.log(r)))
       .subscribe((lists) => {
         from(lists).pipe(
@@ -92,10 +94,4 @@ export class AddCustomlistModalComponent implements OnInit, OnDestroy {
     this.nzModalRef.close();
     this.router.navigate([ROUTING_PATH.HOME, ROUTING_PATH.LIST_ADDING]);
   }
-
-  ngOnDestroy(): void {
-    this.ngUnsubscribe$.next();
-    this.ngUnsubscribe$.unsubscribe();
-  }
-
 }

@@ -1,5 +1,6 @@
+import { BaseComponent } from './../../../../shared/components/base/base.component';
 import { ListHandleService } from './../../../../core/services/list-handle.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, from, Observable, } from 'rxjs';
 import { takeUntil, mergeMap } from 'rxjs/operators';
@@ -13,7 +14,7 @@ import { MovieRequestService } from 'src/app/core/services/movie-request.service
   templateUrl: './either-watch.component.html',
   styleUrls: ['./either-watch.component.scss']
 })
-export class EitherWatchComponent implements OnInit, OnDestroy {
+export class EitherWatchComponent extends BaseComponent implements OnInit {
 
   API_POSTER = API_POSTER;
   /** 清單 api */
@@ -22,29 +23,27 @@ export class EitherWatchComponent implements OnInit, OnDestroy {
   isWatched: EitherWatch;
   EitherWatch = EitherWatch;
   displayList: IMovieInfo[] = [];
-  unsubscribe = new Subject();
   constructor(
     private mvReqSvc: MovieRequestService,
     private route: ActivatedRoute,
     private listHandleSvc: ListHandleService
-  ) { }
+  ) {
+    super()
+  }
 
   ngOnInit(): void {
-    this.route.queryParams.pipe(takeUntil(this.unsubscribe)).subscribe(res => {
+    this.route.queryParams.pipe(takeUntil(this.destroyed$)).subscribe(res => {
       this.name = res.name;
       this.isWatched = res.type;
       this.getWatchList();
     });
   }
 
-  ngOnDestroy(): void {
-    this.unsubscribe.next();
-    this.unsubscribe.unsubscribe();
-  }
+
 
   getWatchList(): void {
     this.listHandleSvc.getFromWatchList().pipe(
-      takeUntil(this.unsubscribe)
+      takeUntil(this.destroyed$)
     ).subscribe(res => {
       this.displayList = [];
       const movies = res.filter(m => {

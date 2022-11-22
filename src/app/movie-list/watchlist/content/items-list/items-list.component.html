@@ -1,1 +1,55 @@
-<p>items-list works!</p>
+<div class="card-box">
+  <div class="d-flex">
+    <div class="img-box">
+      <img appBackgroundImg loading="lazy" [posterPath]="movie.poster_path" [type]="'bestv2'" [imgWidth]="150"
+        [imgHeight]="225" [alt]="movie.title" />
+    </div>
+    <div class="detail">
+      <div class="row">
+        <div class="col-auto">
+          <app-rate-icon [rate]="movie.vote_average"></app-rate-icon>
+        </div>
+        <div class="col">
+          <h5>
+            <a [routerLink]="['/',ROUTING_PATH.MOVIE,movie.id]"> {{ movie.title }}</a>
+          </h5>
+          <p class="mb-2 fc-light">{{ movie.release_date|date :'mediumDate'}}</p>
+        </div>
+      </div>
+      <div class="overview">
+        {{ movie.overview ? movie.overview : "Not have overview yet." }}
+      </div>
+      <div>
+        <ul class="actions d-flex align-items-center my-3">
+          <li><button nz-button nz-popover [nzPopoverContent]="customListTemplate" nzPopoverPlacement="bottom"
+              nzType="primary" nzSize="large" nzShape="circle" (click)="showAddCustomlistModal()">
+              <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
+            </button>
+          </li>
+          <li>
+            <button nz-button nzType="primary" nzSize="large" nzShape="circle" nz-popover
+              [nzPopoverContent]="favoriteListTemplate" nzPopoverPlacement="bottom">
+              <i nz-icon nzType="heart"></i>
+            </button>
+          </li>
+          <li> <button nz-button nzType="primary" nzSize="large" nzShape="circle" nz-popover
+              [nzPopoverContent]="watchListTemplate" nzPopoverPlacement="bottom">
+              <i nz-icon nzType="book"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #customListTemplate>
+  <p> {{isLogin?'Add to list':'Login to create and edit custom lists'}}</p>
+</ng-template>
+<ng-template #favoriteListTemplate>
+  <p> {{isLogin?'Mark as favorite':'Login to add this movie to your favorite list'}}</p>
+</ng-template>
+<ng-template #watchListTemplate>
+  <p> {{isLogin?'Add to your watchlist':'Login to add this movie to your watch list'}}</p>
+</ng-template>

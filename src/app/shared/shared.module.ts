@@ -24,12 +24,14 @@ import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { VerticalCardComponent } from './components/vertical-card/vertical-card.component';
 import { BackgroundImgDirective } from './directives/background-img.directive';
+import { BaseComponent } from './components/base/base.component';
 @NgModule({
   declarations: [
     RateIconComponent,
     MovieCardComponent,
     VerticalCardComponent,
-    BackgroundImgDirective
+    BackgroundImgDirective,
+    BaseComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +60,8 @@ import { BackgroundImgDirective } from './directives/background-img.directive';
     NzAlertModule,
     MovieCardComponent,
     VerticalCardComponent,
-    BackgroundImgDirective
+    BackgroundImgDirective,
+    BaseComponent
   ]
 })
 export class SharedModule { }

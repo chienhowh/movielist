@@ -1,3 +1,4 @@
+import { BaseComponent } from './../../../shared/components/base/base.component';
 import { MovieDetailService } from './../../../core/services/movie-detail.service';
 import { AddCustomlistModalComponent } from './add-customlist-modal/add-customlist-modal.component';
 import { ROUTING_PATH } from 'src/app/core/consts/routing-path.const';
@@ -13,7 +14,7 @@ import { MessageService } from './../../../core/services/message.service';
 import { DetailService } from './../shared/detail.service';
 import { API, API_POSTER } from '../../../core/consts/global-constants.const';
 import { ICustomList, IMovieInfo, IRecommendation } from './../../../core/interfaces/movie.interface';
-import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { tify } from 'chinese-conv';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { map, takeUntil } from 'rxjs/operators';
@@ -25,7 +26,7 @@ import * as firebase from 'firebase';
   templateUrl: './movie-detail.component.html',
   styleUrls: ['./movie-detail.component.scss']
 })
-export class MovieDetailComponent implements OnInit, OnDestroy {
+export class MovieDetailComponent extends BaseComponent implements OnInit {
   @ViewChild('header') header: ElementRef;
   ROUTING_PATH = ROUTING_PATH;
   API_POSTER = API_POSTER;
@@ -45,7 +46,6 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
   /** 客制清單 */
   customList: ICustomList[] = [];
-  ngUnsubscribe = new Subject();
   constructor(
     private detailService: DetailService,
     private nzMsgSvc: NzMessageService,
@@ -55,16 +55,17 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private movieDetailSvc: MovieDetailService
   ) {
+    super()
   }
 
   ngOnInit(): void {
-    this.route.paramMap.pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
+    this.route.paramMap.pipe(takeUntil(this.destroyed$)).subscribe(res => {
       this.movieId = +res.get('id');
       this.getDetailById(this.movieId);
       this.getRecommendations(this.movieId);
       this.isLogin = this.loginSvc.isLogin();
       if (this.loginSvc.isLogin() && this.movieId) {
-        this.getFBMovieDetail(this.movieId);
+        this.getFBMovieDetailById(this.movieId);
       }
     })
 
@@ -84,8 +85,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  getFBMovieDetail(id: number) {
-    this.movieDetailSvc.getFBMovieDetail(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
+  getFBMovieDetailById(id: number) {
+    this.movieDetailSvc.getFBMovieDetailById(id).pipe(takeUntil(this.destroyed$)).subscribe(res => {
       this.isFavorite = res?.isFavorite;
       this.isWatchList = res?.isWatchList;
     });
@@ -116,7 +117,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     }
     this.movieDetailSvc.addToFBMovie(params, this.movieId).subscribe(() => {
       this.msgSvc.handleAddAction(listName, action);
-      this.getFBMovieDetail(this.movieId);
+      this.getFBMovieDetailById(this.movieId);
     });
   }
 
@@ -138,10 +139,5 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
       nzComponentParams: { movie: this.movie },
       nzBodyStyle: { padding: '24px' },
     })
-  }
-
-  ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.unsubscribe();
   }
 }

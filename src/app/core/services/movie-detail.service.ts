@@ -15,7 +15,11 @@ export class MovieDetailService {
     return this.movieRequestSvc.fsPost(FIRE_STORE_COLLECTIONS.MOVIES, params, id.toString());
   }
 
-  getFBMovieDetail(id: number) {
+  getFBMovieDetailById(id: number) {
     return this.movieRequestSvc.fsGetByID(FIRE_STORE_COLLECTIONS.MOVIES, id.toString());
+  }
+
+  getFBMoviesDetail() {
+    return this.movieRequestSvc.fsGet(FIRE_STORE_COLLECTIONS.MOVIES);
   }
 }

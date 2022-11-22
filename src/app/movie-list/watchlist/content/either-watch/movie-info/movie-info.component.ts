@@ -1,8 +1,9 @@
+import { BaseComponent } from './../../../../../shared/components/base/base.component';
 import { CustomlistService } from './../../../../../core/services/customlist.service';
 import { Subject } from 'rxjs';
 import { ListHandleService } from './../../../../../core/services/list-handle.service';
 import { MessageService } from './../../../../../core/services/message.service';
-import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { API_POSTER } from 'src/app/core/consts/global-constants.const';
 import { EitherWatch } from 'src/app/core/enums/list-type.enum';
@@ -19,7 +20,7 @@ import { UserLoginService } from 'src/app/core/services/user-login.service';
   templateUrl: './movie-info.component.html',
   styleUrls: ['./movie-info.component.scss']
 })
-export class MovieInfoComponent implements OnInit, OnDestroy {
+export class MovieInfoComponent extends BaseComponent implements OnInit {
   @Input() movie: IMovieInfo;
   /** 已看 || 未看 */
   @Input() isWatched: EitherWatch;
@@ -29,7 +30,6 @@ export class MovieInfoComponent implements OnInit, OnDestroy {
   /** 客制清單 */
   customList: ICustomList[] = [];
   customListName: ICustomList;
-  ngUnsubscribe = new Subject();
   constructor(
     private modalSvc: NzModalService,
     private listHandleSvc: ListHandleService,
@@ -37,7 +37,9 @@ export class MovieInfoComponent implements OnInit, OnDestroy {
     private nzMsgSvc: NzMessageService,
     private loginSvc: UserLoginService,
     private customListSvc:CustomlistService
-  ) { }
+  ) {
+    super()
+   }
 
   ngOnInit(): void {
     if (this.loginSvc.isLogin()) {
@@ -45,14 +47,11 @@ export class MovieInfoComponent implements OnInit, OnDestroy {
       this.getCustomList();
     }
   }
-  ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.unsubscribe();
-  }
+
 
   getFavorite(): void {
     this.listHandleSvc.getFromFavorite(this.movie.id)
-      .pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => this.isFavorite = res ? true : false);
+      .pipe(takeUntil(this.destroyed$)).subscribe(res => this.isFavorite = res ? true : false);
   }
 
   /**
@@ -77,7 +76,7 @@ export class MovieInfoComponent implements OnInit, OnDestroy {
 
   /** 取得所有客制清單 */
   getCustomList(): void {
-    this.customListSvc.getCustomlist().pipe(takeUntil(this.ngUnsubscribe)).subscribe((res) => this.customList = res);
+    this.customListSvc.getCustomlist().pipe(takeUntil(this.destroyed$)).subscribe((res) => this.customList = res);
   }
 
   /** 加到客製清單 */

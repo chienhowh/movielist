@@ -1,0 +1,33 @@
+.card-box {
+  overflow: hidden;
+  height: 200px;
+  border: 1px solid #aaa;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.img-box {
+  padding: 0;
+  height: 200px;
+  min-width: 133px;
+  width: 133px;
+  overflow: hidden;
+}
+
+.detail {
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.overview {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+ul.actions>li {
+  margin-right: 20px;
+}

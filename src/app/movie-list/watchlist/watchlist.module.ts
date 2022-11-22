@@ -1,3 +1,4 @@
+import { ItemsListComponent } from './content/items-list/items-list.component';
 import { SharedModule } from './../../shared/shared.module';
 import { WatchlistComponent } from './watchlist.component';
 import { NgModule } from '@angular/core';
@@ -19,7 +20,8 @@ import { CustomListInfoComponent } from './content/custom-list-page/custom-list-
     MovieInfoComponent,
     FavoriteListComponent,
     CustomListPageComponent,
-    CustomListInfoComponent
+    CustomListInfoComponent,
+    ItemsListComponent
   ],
   imports: [
     CommonModule,

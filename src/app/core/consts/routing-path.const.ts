@@ -9,7 +9,8 @@ export const ROUTING_PATH = {
   /** 電影類別 */
   SPECIFIC_TYPE: 'specific-type',
   /** 我的最愛 */
-  FAVORITE_LIST: 'favoritelist',
+  FAVORITE: 'favorite',
+  WATCH: 'watch',
   /** 待播 or 已看清單 */
   EITHER_WATCH: 'eitherwatch',
   LOGIN: 'login',
@@ -17,7 +18,8 @@ export const ROUTING_PATH = {
   MOVIE: 'movie',
   GENRE: 'genre',
   SEARCH: 'search',
-  PERSON: 'person'
+  PERSON: 'person',
+  LIST: 'list'
 }
 
 

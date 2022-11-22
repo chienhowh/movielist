@@ -41,7 +41,7 @@
                       <a [routerLink]="
                           ROUTING_PATH.WATCHLIST +
                           '/' +
-                          ROUTING_PATH.FAVORITE_LIST
+                          ROUTING_PATH.FAVORITE
                         " [queryParams]="{
                           id: item.id,
                           endpoint: API.ADDLIST
@@ -87,17 +87,6 @@
                 <li *ngFor="let d of userDropdown" nz-menu-item [routerLink]="[ROUTING_PATH.WATCHLIST,d.routerLink]">
                   {{d.subject}}
                 </li>
-                <!-- <li nz-menu-item *ngFor="let item of collectionDropList">
-                  <p [routerLink]="
-                      ROUTING_PATH.WATCHLIST + '/' + ROUTING_PATH.EITHER_WATCH
-                    " [queryParams]="{
-                      name: item.name,
-                      endpoint: item.endpoint,
-                      type: item.type
-                    }">
-                    {{ item.name }}
-                  </p>
-                </li> -->
                 <li nz-menu-item (click)="logout()">登出</li>
               </ul>
             </nz-dropdown-menu>

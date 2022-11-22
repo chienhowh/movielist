@@ -2,7 +2,6 @@ import { CustomListInfoComponent } from './content/custom-list-page/custom-list-
 import { CustomListPageComponent } from './content/custom-list-page/custom-list-page.component';
 import { UserlistGuard } from './../../core/guard/userlist.guard';
 import { FavoriteListComponent } from './content/favorite-list/favorite-list.component';
-import { ItemsListComponent } from './content/items-list/items-list.component';
 import { ROUTING_PATH } from './../../core/consts/routing-path.const';
 import { EitherWatchComponent } from './content/either-watch/either-watch.component';
 import { WatchlistComponent } from './watchlist.component';
@@ -17,7 +16,11 @@ const routes: Routes = [
     canActivate: [UserlistGuard]
   },
   {
-    path: ROUTING_PATH.FAVORITE_LIST, component: FavoriteListComponent,
+    path: ROUTING_PATH.FAVORITE, component: FavoriteListComponent,
+    canActivate: [UserlistGuard]
+  },
+  {
+    path: ROUTING_PATH.WATCH, component: FavoriteListComponent,
     canActivate: [UserlistGuard]
   },
   { path: '', component: WatchlistComponent },

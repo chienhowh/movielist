@@ -27,8 +27,8 @@ export class AppComponent implements OnInit {
   userInfo: User;
   userDropdown = [
     { subject: 'Customlists', routerLink: ROUTING_PATH.CUSTOM_LIST },
-    { subject: 'Watchlist', routerLink: '' },
-    { subject: 'Favorite', routerLink: ROUTING_PATH.FAVORITE_LIST },
+    { subject: 'Watchlist', routerLink: ROUTING_PATH.WATCH },
+    { subject: 'Favorite', routerLink: ROUTING_PATH.FAVORITE },
   ];
 
   collectionDropList: IDropDown[] = [
