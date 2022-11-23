@@ -1,5 +1,5 @@
 import { BaseComponent } from './../../../../shared/components/base/base.component';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Params } from '@angular/router';
 import * as firebase from 'firebase';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -20,12 +20,15 @@ import { AddCustomlistModalComponent } from 'src/app/movie-list/homepage/movie-d
 })
 export class ItemsListComponent extends BaseComponent implements OnInit {
   @Input() movie: IMovieInfo;
+  @Input() listType: string; // watch or favorite
+  @Output() refreshList = new EventEmitter<boolean>();
   ROUTING_PATH = ROUTING_PATH;
 
   /** 在待播清單 */
   isWatchList = false;
   isFavorite = false;
   isLogin = false;
+  ListType = ListType;
   constructor(
     private nzModal: NzModalService,
     private loginSvc: UserLoginService,
@@ -48,10 +51,12 @@ export class ItemsListComponent extends BaseComponent implements OnInit {
     this.movieDetailSvc.getFBMovieDetailById(id).pipe(takeUntil(this.destroyed$)).subscribe(res => {
       this.isFavorite = res?.isFavorite;
       this.isWatchList = res?.isWatchList;
+      console.log('from item list');
+
     });
   }
 
-  updateMovieDetail(type: ListType) {
+  updateMovieDetail(type: ListType | 'delete') {
     if (!this.loginSvc.isLogin()) {
       this.nzMsgSvc.error('Please login!');
       return;
@@ -62,6 +67,10 @@ export class ItemsListComponent extends BaseComponent implements OnInit {
       id: this.movie.id,
       isWatched: false
     };
+    if (type === 'delete') {
+      this.deleteFromList(this.listType);
+      return;
+    }
     let listName = '';
     let action = true;
     if (type === ListType.FAVORITE) {
@@ -77,6 +86,28 @@ export class ItemsListComponent extends BaseComponent implements OnInit {
     this.movieDetailSvc.addToFBMovie(params, this.movie.id).subscribe(() => {
       this.msgSvc.handleAddAction(listName, action);
       this.getFBMovieDetailById(this.movie.id);
+    });
+  }
+
+  deleteFromList(listType: string) {
+    const params: Params = {
+      timestamp: firebase.default.firestore.FieldValue.serverTimestamp(),
+      title: this.movie.title,
+      id: this.movie.id,
+      isWatched: false
+    };
+    let listName = '';
+    if (listType === 'favorite') {
+      params.isFavorite = false;
+      listName = 'favorite';
+    }
+    if (listType === 'watch') {
+      params.isWatchList = false;
+      listName = 'watchlist';
+    }
+    this.movieDetailSvc.addToFBMovie(params, this.movie.id).subscribe(() => {
+      this.msgSvc.handleAddAction(listName, false);
+      this.refreshList.emit(true);
     });
   }
 

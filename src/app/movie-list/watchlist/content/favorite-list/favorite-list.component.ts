@@ -53,11 +53,18 @@ export class FavoriteListComponent extends BaseComponent implements OnInit {
         return true;
       })),
     ).subscribe((res: any) => {
+      console.log('fromfavorite');
+
       // TODO: 優化這邊的rxjs
       res.forEach(element => {
         this.searchMovieById(element.id).subscribe(info => this.displayList.push(info))
       });
     })
+  }
+
+  refreshList() {
+    this.displayList = [];
+    this.getFBMovies(this.listType);
   }
 
   /**

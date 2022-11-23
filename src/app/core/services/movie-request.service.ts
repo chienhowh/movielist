@@ -128,12 +128,12 @@ export class MovieRequestService {
         const id = a.payload.doc.id;
         return { id, ...data };
       })
-    ));
+    ),take(1));
   }
 
   fsGetByID(collectionName: string, id: any) {
     const uid = sessionStorage.getItem(COMMON.UID);
-    return this.fireStore.collection('users').doc(uid).collection(collectionName).doc(id).get().pipe(map(res => res.data()));
+    return this.fireStore.collection('users').doc(uid).collection(collectionName).doc(id).get().pipe(map(res => res.data()),take(1));
   }
 
 

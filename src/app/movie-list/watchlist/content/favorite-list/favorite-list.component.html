@@ -2,8 +2,8 @@
   <h4 class="font-weight-bold subject">{{ title }}</h4>
   <div class="row ">
     <ng-container *ngFor="let movie of displayList">
-      <div class="col-12 my-3 col-xl-6">
-        <app-items-list [movie]="movie"></app-items-list>
+      <div class="col-12 my-3">
+        <app-items-list [movie]="movie" [listType]="listType" (refreshList)="refreshList()"></app-items-list>
       </div>
     </ng-container>
   </div>

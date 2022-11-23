@@ -10,7 +10,7 @@
           <app-rate-icon [rate]="movie.vote_average"></app-rate-icon>
         </div>
         <div class="col">
-          <h5>
+          <h5 class="m-0">
             <a [routerLink]="['/',ROUTING_PATH.MOVIE,movie.id]"> {{ movie.title }}</a>
           </h5>
           <p class="mb-2 fc-light">{{ movie.release_date|date :'mediumDate'}}</p>
@@ -20,22 +20,35 @@
         {{ movie.overview ? movie.overview : "Not have overview yet." }}
       </div>
       <div>
-        <ul class="actions d-flex align-items-center my-3">
+        <ul class="actions d-flex align-items-center m-0">
           <li><button nz-button nz-popover [nzPopoverContent]="customListTemplate" nzPopoverPlacement="bottom"
-              nzType="primary" nzSize="large" nzShape="circle" (click)="showAddCustomlistModal()">
+              nzType="primary" nzShape="circle" (click)="showAddCustomlistModal()">
               <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
             </button>
+            <span class="ml-2">Add to list</span>
           </li>
-          <li>
-            <button nz-button nzType="primary" nzSize="large" nzShape="circle" nz-popover
-              [nzPopoverContent]="favoriteListTemplate" nzPopoverPlacement="bottom">
-              <i nz-icon nzType="heart"></i>
+          <li *ngIf="listType==='watch'">
+            <button nz-button nzType="primary" nzShape="circle" nz-popover [nzPopoverContent]="favoriteListTemplate"
+              nzPopoverPlacement="bottom" (click)="updateMovieDetail(ListType.FAVORITE)">
+              <i nz-icon nzType="heart" [nzTheme]="isFavorite ? 'fill' : 'outline'"
+                [ngClass]="{ 'add-favorite': isFavorite }"></i>
             </button>
+            <span class="ml-2">Favorite</span>
           </li>
-          <li> <button nz-button nzType="primary" nzSize="large" nzShape="circle" nz-popover
-              [nzPopoverContent]="watchListTemplate" nzPopoverPlacement="bottom">
-              <i nz-icon nzType="book"></i>
+          <li *ngIf="listType==='favorite'">
+            <button nz-button nzType="primary" nzShape="circle" nz-popover [nzPopoverContent]="watchListTemplate"
+              nzPopoverPlacement="bottom" (click)="updateMovieDetail(ListType.WATCHLIST)">
+              <i nz-icon nzType="book" [nzTheme]="isWatchList ? 'fill' : 'outline'"
+                [ngClass]="{ 'add-watchlist': isWatchList }"></i>
             </button>
+            <span class="ml-2">Watchlist</span>
+          </li>
+          <li> <button nz-button nzType="primary" nzShape="circle" nz-popover [nzPopoverContent]="removeTemplate"
+              nzPopoverPlacement="bottom" (click)="updateMovieDetail('delete')">
+              <i nz-icon nzType="close">
+              </i>
+            </button>
+            <span class="ml-2">Remove</span>
           </li>
         </ul>
       </div>
@@ -52,4 +65,7 @@
 </ng-template>
 <ng-template #watchListTemplate>
   <p> {{isLogin?'Add to your watchlist':'Login to add this movie to your watch list'}}</p>
+</ng-template>
+<ng-template #removeTemplate>
+  <p>Remove from your {{listType==='watch'?'watchlist':'favorite'}}</p>
 </ng-template>
