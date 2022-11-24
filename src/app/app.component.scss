@@ -34,9 +34,6 @@
   }
 }
 
-.mobile {
-  display: none;
-}
 
 .symbol {
   padding: 0 10px;
@@ -45,35 +42,6 @@
 
   span {
     font-weight: bold;
-  }
-}
-
-@media screen and (max-width: 575px) {
-  .mobile {
-    display: flex;
-    align-items: center;
-    padding: 0 8px;
-
-    a {
-      color: black;
-    }
-  }
-
-  .laptop {
-    display: none !important;
-  }
-
-  .symbol {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .logo {
-    position: relative;
-    left: -15px;
-    margin: 0 auto;
   }
 }
 

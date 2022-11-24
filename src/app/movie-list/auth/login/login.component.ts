@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       (user: User) => {
         console.log(user);
         sessionStorage.setItem(COMMON.UID, user.localId);
-        sessionStorage.setItem(COMMON.USER, JSON.stringify(user));
+        sessionStorage.setItem(COMMON.USER, JSON.stringify({ ...user, username: user.email.split('@')[0] }));
         this.router.navigate([ROUTING_PATH.HOME]);
       },
       err => this.nzMsgSvc.error(err));

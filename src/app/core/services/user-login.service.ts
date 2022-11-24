@@ -1,6 +1,4 @@
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { COMMON } from '../consts/global-constants.const';
 
 @Injectable({
@@ -8,13 +6,9 @@ import { COMMON } from '../consts/global-constants.const';
 })
 export class UserLoginService {
   constructor(
-    private afAuth: AngularFireAuth,
-    private nzMsgSvc: NzMessageService
   ) { }
 
   isLogin(): boolean {
-    console.log('from userlogin');
-
     return !!sessionStorage.getItem(COMMON.UID);
   }
 }

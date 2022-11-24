@@ -31,10 +31,6 @@ export class AppComponent implements OnInit {
     { subject: 'Favorite', routerLink: ROUTING_PATH.FAVORITE },
   ];
 
-  collectionDropList: IDropDown[] = [
-    { name: '待播清單', type: EitherWatch.NOTWATCHED },
-    { name: '已經觀看', type: EitherWatch.BEENWATCHED },
-  ];
   items: Observable<any[]>;
   customDropList: ICustomList[] = [];
   DEVICE = DEVICE;
@@ -52,7 +48,6 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(res => {
       if (res instanceof NavigationStart && res.url === '/home') {
         this.userInfo = JSON.parse(sessionStorage.getItem(COMMON.USER));
-        console.log(this.userInfo);
         if (this.userInfo) {
           this.getCustomList();
         }

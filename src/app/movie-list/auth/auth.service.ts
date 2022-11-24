@@ -42,7 +42,7 @@ export class AuthService {
     sessionStorage.removeItem(COMMON.UID);
     sessionStorage.removeItem(COMMON.USER);
     this.router.navigate([ROUTING_PATH.HOME]);
-    this.nzMsgSvc.success(`已登出!`);
+    this.nzMsgSvc.success(`Logout successfully!`);
   }
 
 
