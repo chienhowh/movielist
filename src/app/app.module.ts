@@ -1,3 +1,5 @@
+import { AuthService } from './movie-list/auth/auth.service';
+import { UserLoginService } from 'src/app/core/services/user-login.service';
 
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
@@ -61,6 +63,7 @@ const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, Me
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_TW },
+    { provide: UserLoginService, useExisting: AuthService }
   ],
   entryComponents: [],
   bootstrap: [AppComponent],
