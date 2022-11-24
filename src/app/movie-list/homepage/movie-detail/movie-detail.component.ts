@@ -2,10 +2,8 @@ import { BaseComponent } from './../../../shared/components/base/base.component'
 import { MovieDetailService } from './../../../core/services/movie-detail.service';
 import { AddCustomlistModalComponent } from './add-customlist-modal/add-customlist-modal.component';
 import { ROUTING_PATH } from 'src/app/core/consts/routing-path.const';
-import { logging } from 'protractor';
-import { ActivatedRoute, Route, Router, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { UserLoginService } from './../../../core/services/user-login.service';
-import { ListHandleService } from './../../../core/services/list-handle.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ViewChild } from '@angular/core'
 import { Observable } from 'rxjs';

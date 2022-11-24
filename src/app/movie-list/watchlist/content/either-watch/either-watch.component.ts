@@ -1,9 +1,8 @@
 import { BaseComponent } from './../../../../shared/components/base/base.component';
-import { ListHandleService } from './../../../../core/services/list-handle.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject, from, Observable, } from 'rxjs';
-import { takeUntil, mergeMap } from 'rxjs/operators';
+import { Observable, } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { API_POSTER, API } from 'src/app/core/consts/global-constants.const';
 import { EitherWatch } from 'src/app/core/enums/list-type.enum';
 import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
@@ -25,8 +24,7 @@ export class EitherWatchComponent extends BaseComponent implements OnInit {
   displayList: IMovieInfo[] = [];
   constructor(
     private mvReqSvc: MovieRequestService,
-    private route: ActivatedRoute,
-    private listHandleSvc: ListHandleService
+    private route: ActivatedRoute
   ) {
     super()
   }
@@ -42,18 +40,18 @@ export class EitherWatchComponent extends BaseComponent implements OnInit {
 
 
   getWatchList(): void {
-    this.listHandleSvc.getFromWatchList().pipe(
-      takeUntil(this.destroyed$)
-    ).subscribe(res => {
-      this.displayList = [];
-      const movies = res.filter(m => {
-        if (this.isWatched === EitherWatch.BEENWATCHED) { return m.isWatched; }
-        else { return !m.isWatched; }
-      });
-      from(movies).pipe(mergeMap((mv: any) => this.searchMovieById(mv.id))).subscribe(info =>
-        this.displayList.push(info)
-      );
-    });
+    // this.listHandleSvc.getFromWatchList().pipe(
+    //   takeUntil(this.destroyed$)
+    // ).subscribe(res => {
+    //   this.displayList = [];
+    //   const movies = res.filter(m => {
+    //     if (this.isWatched === EitherWatch.BEENWATCHED) { return m.isWatched; }
+    //     else { return !m.isWatched; }
+    //   });
+    //   from(movies).pipe(mergeMap((mv: any) => this.searchMovieById(mv.id))).subscribe(info =>
+    //     this.displayList.push(info)
+    //   );
+    // });
   }
 
   /**

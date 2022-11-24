@@ -1,14 +1,11 @@
 import { CustomlistService } from './core/services/customlist.service';
 import { NavigationStart, Router } from '@angular/router';
-import { ListHandleService } from './core/services/list-handle.service';
 import { API, COMMON } from 'src/app/core/consts/global-constants.const';
 
 import { DEVICE } from './core/consts/device.const';
 import { SharedService } from './shared/shared.service';
 import { Component, OnInit } from '@angular/core';
-import { IDropDown } from './core/interfaces/utilities';
 import { ROUTING_PATH } from './core/consts/routing-path.const';
-import { EitherWatch } from './core/enums/list-type.enum';
 import { Observable } from 'rxjs';
 import { ICustomList } from './core/interfaces/movie.interface';
 import { take } from 'rxjs/operators';

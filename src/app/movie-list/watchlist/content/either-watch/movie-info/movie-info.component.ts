@@ -1,7 +1,5 @@
 import { BaseComponent } from './../../../../../shared/components/base/base.component';
 import { CustomlistService } from './../../../../../core/services/customlist.service';
-import { Subject } from 'rxjs';
-import { ListHandleService } from './../../../../../core/services/list-handle.service';
 import { MessageService } from './../../../../../core/services/message.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -32,7 +30,6 @@ export class MovieInfoComponent extends BaseComponent implements OnInit {
   customListName: ICustomList;
   constructor(
     private modalSvc: NzModalService,
-    private listHandleSvc: ListHandleService,
     private msgSvc: MessageService,
     private nzMsgSvc: NzMessageService,
     private loginSvc: UserLoginService,
@@ -50,8 +47,8 @@ export class MovieInfoComponent extends BaseComponent implements OnInit {
 
 
   getFavorite(): void {
-    this.listHandleSvc.getFromFavorite(this.movie.id)
-      .pipe(takeUntil(this.destroyed$)).subscribe(res => this.isFavorite = res ? true : false);
+    // this.listHandleSvc.getFromFavorite(this.movie.id)
+    //   .pipe(takeUntil(this.destroyed$)).subscribe(res => this.isFavorite = res ? true : false);
   }
 
   /**
@@ -112,26 +109,25 @@ export class MovieInfoComponent extends BaseComponent implements OnInit {
    * 加到最愛
    */
   handleAdd(): void {
-    const sendData = {
-      timestamp: firebase.default.firestore.FieldValue.serverTimestamp(),
-      title: this.movie.title,
-      id: this.movie.id,
-      isWatched: false
-    };
-    if (this.isFavorite) {
-      this.listHandleSvc.removeFavorite(this.movie.id);
-      this.isFavorite = false;
-      this.msgSvc.handleAddAction('我的最愛', this.isFavorite);
-    } else {
-      this.listHandleSvc.addToFavorite(sendData);
-      this.isFavorite = true;
-      this.msgSvc.handleAddAction('我的最愛', this.isFavorite);
-    }
+    // const sendData = {
+    //   timestamp: firebase.default.firestore.FieldValue.serverTimestamp(),
+    //   title: this.movie.title,
+    //   id: this.movie.id,
+    //   isWatched: false
+    // };
+    // if (this.isFavorite) {
+    //   this.listHandleSvc.removeFavorite(this.movie.id);
+    //   this.isFavorite = false;
+    //   this.msgSvc.handleAddAction('我的最愛', this.isFavorite);
+    // } else {
+    //   this.listHandleSvc.addToFavorite(sendData);
+    //   this.isFavorite = true;
+    //   this.msgSvc.handleAddAction('我的最愛', this.isFavorite);
+    // }
 
   }
 
   removeFromWatchList(movie: IMovieInfo): void {
-    this.listHandleSvc.removeFromWatchList(movie.id);
-    this.msgSvc.handleAddAction('待播清單', false);
+
   }
 }

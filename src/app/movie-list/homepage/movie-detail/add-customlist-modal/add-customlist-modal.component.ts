@@ -6,7 +6,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { from, Subject } from 'rxjs';
 import { map, mergeMap, takeUntil, tap, toArray } from 'rxjs/operators';
 import { ICustomList, IMovieInfo } from 'src/app/core/interfaces/movie.interface';
-import { ListHandleService } from 'src/app/core/services/list-handle.service';
 import * as firebase from 'firebase';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Router } from '@angular/router';
@@ -22,7 +21,6 @@ export class AddCustomlistModalComponent extends BaseComponent implements OnInit
   /** 客制清單 */
   customList: ICustomList[] = [];
   constructor(
-    private listHandleSvc: ListHandleService,
     private nzMsgSvc: NzMessageService,
     private router: Router,
     private nzModalRef: NzModalRef,

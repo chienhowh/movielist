@@ -1,10 +1,8 @@
-import { MovieDetailService } from 'src/app/core/services/movie-detail.service';
 import { CustomlistService } from './../../../../core/services/customlist.service';
 import { Observable } from 'rxjs';
-import { IMovieInfo, ICustomList } from 'src/app/core/interfaces/movie.interface';
+import { ICustomList } from 'src/app/core/interfaces/movie.interface';
 import { ROUTING_PATH } from 'src/app/core/consts/routing-path.const';
 import { Component, OnInit } from '@angular/core';
-import { ListHandleService } from 'src/app/core/services/list-handle.service';
 
 @Component({
   selector: 'app-custom-list-page',

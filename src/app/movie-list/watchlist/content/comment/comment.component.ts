@@ -1,13 +1,10 @@
-import { ListHandleService } from './../../../../core/services/list-handle.service';
 import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
 import { EitherWatch } from 'src/app/core/enums/list-type.enum';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { verifyFormValid } from '../../../../core/funcs/verify-form';
 import { IWatchedMovie } from '../../shared/watchlist';
-import { map, take, takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -26,21 +23,20 @@ export class CommentComponent implements OnInit {
   movieFb: IWatchedMovie;
   constructor(
     private fb: FormBuilder,
-    private listHandleSvc: ListHandleService,
     public modalRef: NzModalRef,
   ) { }
 
   ngOnInit(): void {
-    console.log('isWatched :: ', this.isWatched);
-    this.listHandleSvc.getFromWatchListById(this.movie.id).pipe(
-      take(1),
-      map(mv => ({ ...mv, watchedDate: mv.watchedDate.seconds * 1000 }))
-    ).subscribe(res => {
-      if (this.isWatched === EitherWatch.BEENWATCHED) {
-        this.validateForm.patchValue(res);
-        this.validateForm.disable();
-      }
-    });
+    // console.log('isWatched :: ', this.isWatched);
+    // this.listHandleSvc.getFromWatchListById(this.movie.id).pipe(
+    //   take(1),
+    //   map(mv => ({ ...mv, watchedDate: mv.watchedDate.seconds * 1000 }))
+    // ).subscribe(res => {
+    //   if (this.isWatched === EitherWatch.BEENWATCHED) {
+    //     this.validateForm.patchValue(res);
+    //     this.validateForm.disable();
+    //   }
+    // });
   }
 
   /**
@@ -48,11 +44,11 @@ export class CommentComponent implements OnInit {
    * @id
    */
   submitForm(): void {
-    if (!verifyFormValid(this.validateForm)) { return; }
-    const value = this.validateForm.value;
-    value.id = this.movie.id;
-    value.isWatched = true;
-    this.listHandleSvc.addCommentToWatchList(value);
-    this.modalRef.close();
+    // if (!verifyFormValid(this.validateForm)) { return; }
+    // const value = this.validateForm.value;
+    // value.id = this.movie.id;
+    // value.isWatched = true;
+    // this.listHandleSvc.addCommentToWatchList(value);
+    // this.modalRef.close();
   }
 }

@@ -1,12 +1,10 @@
 import { CustomlistService } from './../../../core/services/customlist.service';
 import { ROUTING_PATH } from './../../../core/consts/routing-path.const';
 import { Router } from '@angular/router';
-import { ListHandleService } from './../../../core/services/list-handle.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { verifyFormValid } from '../../../core/funcs/verify-form';
-import { v4 as uuidv4 } from 'uuid';
 @Component({
   selector: 'app-list-adding',
   templateUrl: './list-adding.component.html',
