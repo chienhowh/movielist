@@ -1,0 +1,26 @@
+@import '../../../../../../custom-design.scss';
+
+.header {
+  background-color: rgba(184, 142, 101, 0.5);
+  color: white;
+  margin-bottom: 16px;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.button {
+  background-color: $primary-color;
+  padding: 8px;
+  border-radius: 8px;
+  a {
+    font-size: 1.2em;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: block;
+  }
+}

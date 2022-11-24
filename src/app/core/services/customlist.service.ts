@@ -4,6 +4,7 @@ import { API, COMMON, FIRE_STORE_COLLECTIONS } from '../consts/global-constants.
 import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
 import { MovieRequestService } from './movie-request.service';
 import { ICustomList } from '../interfaces/movie.interface';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -43,11 +44,19 @@ export class CustomlistService {
   }
 
   /** 取得客製表單所有電影 */
-  getCustomListById(listId: string): Observable<DocumentData[]> {
+  getCustomlistMovies(customlistID: string) {
     const uid = sessionStorage.getItem(COMMON.UID);
-    return this.fireStore.collection('users').doc(uid)
-      .collection(FIRE_STORE_COLLECTIONS.CUSTOMLIST)
-      .doc(listId).collection(FIRE_STORE_COLLECTIONS.MOVIES).valueChanges();
+    const collectionName = `users/${uid}/${FIRE_STORE_COLLECTIONS.CUSTOMLIST}/${customlistID}/${FIRE_STORE_COLLECTIONS.MOVIES}`
+    return this.fireStore.collection(collectionName).snapshotChanges().pipe(map((actions: DocumentData[]) =>
+      actions.map(a => a.payload.doc.data())
+    ), take(1));
+  }
+
+  /** 取得客製表單標題，簡介 */
+  getCustomlistInfo(customlistID: string) {
+    const uid = sessionStorage.getItem(COMMON.UID);
+    const collectionName = `users/${uid}/${FIRE_STORE_COLLECTIONS.CUSTOMLIST}`
+    return this.fireStore.collection(collectionName).doc(customlistID).get().pipe(map(res => res.data()), take(1));
   }
 
   /** 取得客製表單單筆電影 */

@@ -8,18 +8,15 @@ import { UserLoginService } from './../../../core/services/user-login.service';
 import { ListHandleService } from './../../../core/services/list-handle.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ViewChild } from '@angular/core'
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ListType } from './../../../core/enums/list-type.enum';
 import { MessageService } from './../../../core/services/message.service';
 import { DetailService } from './../shared/detail.service';
 import { API, API_POSTER } from '../../../core/consts/global-constants.const';
 import { ICustomList, IMovieInfo, IRecommendation } from './../../../core/interfaces/movie.interface';
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { tify } from 'chinese-conv';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { map, takeUntil } from 'rxjs/operators';
-import { IWatchedMovie } from '../../watchlist/shared/watchlist';
-import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 @Component({
   selector: 'app-movie-detail',
@@ -73,7 +70,7 @@ export class MovieDetailComponent extends BaseComponent implements OnInit {
 
   getDetailById(id: number): void {
     const params = { append_to_response: 'credits,keywords' }
-    this.detailService.getMovieDetail(id, params).pipe(
+    this.movieDetailSvc.getMovieDetail(id, params).pipe(
       // find specific crew
       map(res => ({ ...res, credits: { cast: res.credits.cast, crew: res.credits.crew.filter(c => c.job == 'Director' || c.job == 'Characters' || c.job == 'Writer') } }))
     ).subscribe((res) => {

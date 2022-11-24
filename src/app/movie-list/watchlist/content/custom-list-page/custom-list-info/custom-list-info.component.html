@@ -1,1 +1,22 @@
-<p>custom-list-info works!</p>
+<div class="header">
+  <div class="container-xl" *ngIf="listInfo">
+    <header class="py-3">
+      <h4 class="font-weight-bolder mb-0 text-white">
+        {{listInfo.subject}}
+      </h4>
+      {{listInfo.desc}}
+    </header>
+  </div>
+</div>
+<div class="container-xl">
+  <ul nz-row [nzGutter]="[16, 24]">
+    <li *ngFor="let movie of displayList" nz-col>
+      <app-custome-card [movieId]="movie.id"></app-custome-card>
+    </li>
+  </ul>
+</div>
+<div class="footer">
+  <div class="button">
+    <a [routerLink]="['/',ROUTING_PATH.HOME,ROUTING_PATH.LIST_ADDING]">create new list</a>
+  </div>
+</div>

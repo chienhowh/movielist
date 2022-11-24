@@ -1,0 +1,29 @@
+<div *ngIf="movieFromTMDB" class="wrapper">
+  <div class="img_box">
+    <a>
+      <img loading="lazy" appBackgroundImg [posterPath]="movieFromTMDB.backdrop_path" [imgWidth]="185" [imgHeight]="278"
+        [alt]="movieFromTMDB.title">
+    </a>
+  </div>
+  <div class="p-2">
+    <ul class="d-flex align-items-center justify-content-end">
+      <i nz-icon nzType="heart" (click)="updateMovieDetail(ListType.FAVORITE)"
+        [nzTheme]="isFavorite ? 'fill' : 'outline'" [ngClass]="{ 'add-favorite': isFavorite }"></i>
+
+      <i nz-icon nzType="book" (click)="updateMovieDetail(ListType.WATCHLIST)"
+        [nzTheme]="isWatchList ? 'fill' : 'outline'" [ngClass]="{ 'add-watchlist': isWatchList  }"></i>
+
+      <span> {{movieFromTMDB.vote_average*10|number:'1.0-0'}}%</span>
+    </ul>
+  </div>
+</div>
+
+<ng-template #customListTemplate>
+  <p> {{isLogin?'Add to list':'Login to create and edit custom lists'}}</p>
+</ng-template>
+<ng-template #favoriteListTemplate>
+  <p> {{isLogin?'Mark as favorite':'Login to add this movie to your favorite list'}}</p>
+</ng-template>
+<ng-template #watchListTemplate>
+  <p> {{isLogin?'Add to your watchlist':'Login to add this movie to your watch list'}}</p>
+</ng-template>

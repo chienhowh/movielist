@@ -1,6 +1,18 @@
-.list_item li{
+.list_item {
   border: 1px solid black;
   padding: 8px;
   margin-bottom: 8px;
   border-radius: 8px;
+  height: 120px;
+
+  >a {
+    font-weight: 16px;
+  }
+
+  >p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
 }

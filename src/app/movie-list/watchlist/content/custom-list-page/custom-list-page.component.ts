@@ -1,3 +1,4 @@
+import { MovieDetailService } from 'src/app/core/services/movie-detail.service';
 import { CustomlistService } from './../../../../core/services/customlist.service';
 import { Observable } from 'rxjs';
 import { IMovieInfo, ICustomList } from 'src/app/core/interfaces/movie.interface';
@@ -14,7 +15,6 @@ export class CustomListPageComponent implements OnInit {
   ROUTING_PATH = ROUTING_PATH;
   customList$?: Observable<ICustomList[]>;
   constructor(
-    private listHandleSvc: ListHandleService,
     private customlistSvc: CustomlistService
   ) { }
 

@@ -11,6 +11,7 @@ import { MovieInfoComponent } from './content/either-watch/movie-info/movie-info
 import { FavoriteListComponent } from './content/favorite-list/favorite-list.component';
 import { CustomListPageComponent } from './content/custom-list-page/custom-list-page.component';
 import { CustomListInfoComponent } from './content/custom-list-page/custom-list-info/custom-list-info.component';
+import { CustomeCardComponent } from './content/custom-list-page/custome-card/custome-card.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CustomListInfoComponent } from './content/custom-list-page/custom-list-
     FavoriteListComponent,
     CustomListPageComponent,
     CustomListInfoComponent,
-    ItemsListComponent
+    ItemsListComponent,
+    CustomeCardComponent
   ],
   imports: [
     CommonModule,

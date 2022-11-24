@@ -4,13 +4,13 @@
     <button nz-button nzType="primary"><a [routerLink]="['/',ROUTING_PATH.HOME,ROUTING_PATH.LIST_ADDING]"> Create
         List</a></button>
   </div>
-  <div class="list_item">
-    <ul>
-      <li *ngFor="let c of customList$|async">
+  <div nz-row [nzGutter]="16">
+    <div *ngFor="let c of customList$|async" nz-col [nzXs]="12" [nzSm]="8" [nzMd]="6" [nzLg]="4">
+      <div class="list_item">
         <a class="font-weight-bolder"
           [routerLink]="['/',ROUTING_PATH.WATCHLIST,ROUTING_PATH.CUSTOM_LIST,c.id]">{{c.subject}}</a>
         <p>{{c.desc}}</p>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </div>

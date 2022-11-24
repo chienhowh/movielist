@@ -1,0 +1,19 @@
+@import '../../../../../../custom-design.scss';
+
+.wrapper {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  overflow: hidden;
+  background-color: $primary-color;
+}
+
+.img_box a {
+  width: 185px;
+  min-width: 185px;
+  height: 278px;
+}
+
+ul>i {
+  margin-right: 8px;
+  cursor: pointer;
+}
