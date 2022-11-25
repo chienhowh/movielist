@@ -24,7 +24,7 @@ export const ROUTING_PATH = {
 
 
 
-export const LOCALSTORAGE_KEY = {
+export const SESSIONSTORAGE_KEY = {
   GENRES: 'genres'
 }
 

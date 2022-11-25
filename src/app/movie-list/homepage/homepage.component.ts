@@ -3,7 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { MovieRequestService } from 'src/app/core/services/movie-request.service';
 import { API } from '../../core/consts/global-constants.const';
-import { LOCALSTORAGE_KEY } from 'src/app/core/consts/routing-path.const';
+import { SESSIONSTORAGE_KEY } from 'src/app/core/consts/routing-path.const';
 
 @Component({
   selector: 'app-homepage',

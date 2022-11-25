@@ -1,15 +1,10 @@
 import { DEVICE } from './../../core/consts/device.const';
 import { SharedService } from './../../shared/shared.service';
-import { IResponse, IGenre } from './../../core/interfaces/movie.interface';
+import { IResponse } from './../../core/interfaces/movie.interface';
 import { MovieRequestService } from './../../core/services/movie-request.service';
-import { FormBuilder } from '@angular/forms';
-import { filter, map } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
-import { Component, ElementRef, HostListener, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { IMovieInfo } from 'src/app/core/interfaces/movie.interface';
 import { API } from 'src/app/core/consts/global-constants.const';
-import { LOCALSTORAGE_KEY } from 'src/app/core/consts/routing-path.const';
-import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-specific-type',

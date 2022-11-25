@@ -1,5 +1,4 @@
-<!-- for carousell -->
-<div class="carousel-cell" (click)="onWatchDetail(movie)">
+<div (click)="onWatchDetail(movie)" class="wrapper">
   <div class="img-box position-relative">
     <img appBackgroundImg loading="lazy" [posterPath]="movie.poster_path" [imgWidth]="220" [imgHeight]="330"
       [alt]="movie.title" />

@@ -1,9 +1,7 @@
 import { MovieRequestService } from './../../../core/services/movie-request.service';
 import { Component, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
-
 import { API, API_POSTER } from '../../../core/consts/global-constants.const';
-import { IMovieInfo, IResponse } from '../../../core/interfaces/movie.interface';
-import { MovieDetailComponent } from '../movie-detail/movie-detail.component';
+import { IMovieInfo } from '../../../core/interfaces/movie.interface';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
@@ -49,10 +47,10 @@ export class CarouselComponent implements OnInit {
   countImgNumber(): void {
     const width = window.innerWidth;
     if (width >= 1200) {
-      // this.imgNumber = Math.floor((width - 74) / 140); // 扣掉兩邊跟圖片之間padding
+      // this.imgNumber = Math.floor((width - 74) / 150); // 扣掉兩邊跟圖片之間padding
       this.imgNumber = 7;
     } else {
-      this.imgNumber = Math.floor((width - 14) / 140);
+      this.imgNumber = Math.floor((width - 14) / 150);
     }
   }
 

@@ -1,14 +1,9 @@
 <div class="container-xl">
   <div class="row specific-box" #specific>
     <div class="col-12 col-md-3">
-      <app-laptop-fileter
-        *ngIf="device === DEVICE.PAD"
-        (searchMovie)="searchMovieHandler($event)"
-      ></app-laptop-fileter>
-      <app-mobile-filter
-        *ngIf="device === DEVICE.MOBILE"
-        (searchMovie)="searchMovieHandler($event)"
-      ></app-mobile-filter>
+      <app-laptop-fileter *ngIf="device === DEVICE.PAD" (searchMovie)="searchMovieHandler($event)"></app-laptop-fileter>
+      <app-mobile-filter *ngIf="device === DEVICE.MOBILE" (searchMovie)="searchMovieHandler($event)">
+      </app-mobile-filter>
     </div>
     <!-- 搜索結果 start -->
     <div class="col-12 col-md-9">
@@ -16,35 +11,26 @@
         <ng-container *ngIf="displayList.length !== 0; else loading">
           <div class="row">
             <ng-container *ngFor="let movie of displayList">
-              <ng-container *ngIf="device === DEVICE.PAD">
-                <div class="my-3 col-cus">
+              <div *ngIf="device === DEVICE.PAD" class="col-4 col-lg-3 d-flex justify-content-center">
+                <div class="my-3 pad_movie_wrapper">
                   <app-vertical-card [movie]="movie"></app-vertical-card>
                 </div>
-              </ng-container>
-              <ng-container *ngIf="device === DEVICE.MOBILE">
-                <div class="my-3 col-12">
-                  <app-movie-card [movie]="movie"></app-movie-card>
-                </div>
-              </ng-container>
+              </div>
+              <div *ngIf="device === DEVICE.MOBILE" class="my-3 col-12">
+                <app-movie-card [movie]="movie"></app-movie-card>
+              </div>
             </ng-container>
           </div>
         </ng-container>
         <ng-template #loading>
           <div class="loading-box">
-            {{ searchFilter ? "查無資料" : "趕緊開始吧!" }}
-          </div></ng-template
-        >
+            {{ searchFilter ? "No match movies" : "Let's start!" }}
+          </div>
+        </ng-template>
       </div>
-      <button
-        nz-button
-        nzType="primary"
-        [nzSize]="'large'"
-        nzShape="round"
-        class="w-100"
-        *ngIf="!isScrollMore && displayList.length !== 0"
-        (click)="onSubmit(currentPage + 1)"
-      >
-        載入更多
+      <button nz-button nzType="primary" [nzSize]="'large'" nzShape="round" class="w-100"
+        *ngIf="!isScrollMore && displayList.length !== 0" (click)="onSubmit(currentPage + 1)">
+        Load More
       </button>
       <!-- <button
         nz-button

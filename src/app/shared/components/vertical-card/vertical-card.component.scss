@@ -1,20 +1,17 @@
-.rate-box {
-  position: absolute;
-  top: -20px;
-  left: 8px;
+.wrapper {
+  width: 150px;
 }
 
 .img-box {
   cursor: pointer;
   display: flex;
   justify-content: center;
+  height: 225px;
+  width: 150px;
+
 }
 
 img {
-  display: block;
-  height: 200px;
-  aspect-ratio: 133 / 200;
-  object-fit: cover;
   border-radius: 10px;
 }
 
@@ -29,6 +26,7 @@ img {
   border-radius: 50%;
   background-color: rgba(190, 190, 184, 0.6);
   cursor: pointer;
+
   &:hover {
     background-color: rgb(1, 180, 229);
   }
@@ -43,4 +41,11 @@ img {
 i {
   vertical-align: middle !important;
 }
+
 // options end
+
+.rate-box {
+  position: absolute;
+  top: -20px;
+  left: 20px;
+}
