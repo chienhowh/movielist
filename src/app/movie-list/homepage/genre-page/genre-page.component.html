@@ -1,0 +1,16 @@
+<div class="container-xl">
+  <ng-container *ngIf="displayList.length !== 0; else noData">
+    <div class="row">
+      <ng-container *ngFor="let movie of displayList">
+        <div class="col-12 col-lg-6 my-3">
+          <app-movie-card [movie]="movie"></app-movie-card>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+  <nz-pagination [nzPageIndex]="page.pageIndex" [nzTotal]="page.totalPages" (nzPageIndexChange)="getGenreMovies($event)"></nz-pagination>
+</div>
+<!-- no data -->
+<ng-template #noData>
+  <div class="text-center py-3">Movies not found</div>
+</ng-template>

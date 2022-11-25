@@ -42,7 +42,8 @@ const icons: IconDefinition[] = [AccountBookOutline, HeartFill, HeartOutline, Me
     AppComponent,
     LoginComponent,
     SignupComponent,
-    PersonComponent
+    PersonComponent,
+
   ],
   imports: [
     BrowserModule,

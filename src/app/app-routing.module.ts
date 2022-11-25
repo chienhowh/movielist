@@ -7,12 +7,14 @@ import { SignupComponent } from './movie-list/auth/signup/signup.component';
 import { LoginComponent } from './movie-list/auth/login/login.component';
 import { MovieDetailComponent } from './movie-list/homepage/movie-detail/movie-detail.component';
 import { PersonComponent } from './person/person.component';
+import { GenrePageComponent } from './movie-list/homepage/genre-page/genre-page.component';
 
 const routes: Routes = [
   { path: ROUTING_PATH.SIGNUP, component: SignupComponent },
   { path: ROUTING_PATH.LOGIN, component: LoginComponent },
   { path: `${ROUTING_PATH.MOVIE}/:id`, component: MovieDetailComponent },
   { path: `${ROUTING_PATH.PERSON}/:id`, component: PersonComponent },
+  { path: `${ROUTING_PATH.GENRE}/:genre/:genreId`, component: GenrePageComponent },
   {
     path: ROUTING_PATH.WATCHLIST, loadChildren: () => import('./movie-list/watchlist/watchlist.module').then(m => m.WatchlistModule),
     canActivate: [UserlistGuard]

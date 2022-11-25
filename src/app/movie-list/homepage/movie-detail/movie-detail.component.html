@@ -4,7 +4,8 @@
     <div class="header-content row">
       <!-- poster start -->
       <div class="col-auto">
-        <img [src]="poster1x" srcset="{{poster1x}} 1x, {{poster2x}} 2x" (error)="imgError($event)" />
+        <img loading="lazy" width="350" height="450" appBackgroundImg [posterPath]="movie.poster_path" [imgWidth]="300" [imgHeight]="450"
+          [type]="'bestv2'" [alt]="movie.name" />
       </div>
       <!-- info start -->
       <div class="col">
@@ -16,7 +17,8 @@
               <span>{{movie.release_date|date:'shortDate'}}({{movie.production_countries[0]?.iso_3166_1}})</span>
               <span>
                 <ng-container *ngFor="let genre of movie.genres;last as last ">
-                  <a [routerLink]="[ROUTING_PATH.GENRE,genre.id]" class="text-white hover-white">{{genre.name}}</a>
+                  <a [routerLink]="['/',ROUTING_PATH.GENRE,genre.name,genre.id]"
+                    class="text-white hover-white">{{genre.name}}</a>
                   <span class="pr-2" *ngIf="!last">,</span>
                 </ng-container>
               </span>

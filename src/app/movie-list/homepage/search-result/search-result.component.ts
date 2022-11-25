@@ -1,15 +1,10 @@
-import { NzModalService } from 'ng-zorro-antd/modal';
-import { API_POSTER } from '../../../core/consts/global-constants.const';
 import { IMovieInfo, IResponse } from './../../../core/interfaces/movie.interface';
-
 import { MovieRequestService } from './../../../core/services/movie-request.service';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { API } from '../../../core/consts/global-constants.const';
 import { Paging } from '../../../model/paging';
-import { MovieDetailComponent } from '../movie-detail/movie-detail.component';
-import { from, Observable } from 'rxjs';
-import { concatAll, concatMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 
 
@@ -47,7 +42,7 @@ export class SearchResultComponent implements OnInit {
   searchQuery(): void {
     if (!this.query.trim()) { return; }
     const sendData = { query: this.query.trim(), page: this.page.pageIndex };
-    this.movieRequestService.request(API.GET, API.SEARCH_MOVIE, sendData).subscribe((res: IResponse) => {
+    this.movieRequestService.get<IResponse>(API.SEARCH_MOVIE, sendData).subscribe(res => {
       this.page.totalResults = res.total_results;
       this.displayList = res.results;
 

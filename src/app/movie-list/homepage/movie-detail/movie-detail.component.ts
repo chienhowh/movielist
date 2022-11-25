@@ -29,8 +29,6 @@ export class MovieDetailComponent extends BaseComponent implements OnInit {
   movie: IMovieInfo;
   recommendations$?: Observable<IRecommendation[]>;
   isLogin = false;
-  poster1x = '';
-  poster2x = '';
   posterBg = '';
   runtime = '';
   /** 清單類別 */
@@ -73,8 +71,6 @@ export class MovieDetailComponent extends BaseComponent implements OnInit {
       map(res => ({ ...res, credits: { cast: res.credits.cast, crew: res.credits.crew.filter(c => c.job == 'Director' || c.job == 'Characters' || c.job == 'Writer') } }))
     ).subscribe((res) => {
       this.movie = res;
-      this.poster1x = `${API.POSTER}w300_and_h450_bestv2/${res.poster_path}`;
-      this.poster2x = `${API.POSTER}w600_and_h900_bestv2/${res.poster_path}`;
       this.posterBg = API_POSTER.GET_POSTER_BG + res.backdrop_path;
       this.runtime = `${Math.floor(res.runtime / 60)}h ${res.runtime % 60}m`
     });

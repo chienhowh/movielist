@@ -22,6 +22,7 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { VerticalCardComponent } from './components/vertical-card/vertical-card.component';
 import { BackgroundImgDirective } from './directives/background-img.directive';
 import { BaseComponent } from './components/base/base.component';
@@ -58,6 +59,7 @@ import { BaseComponent } from './components/base/base.component';
     NzBackTopModule,
     NzPopoverModule,
     NzAlertModule,
+    NzPaginationModule,
     MovieCardComponent,
     VerticalCardComponent,
     BackgroundImgDirective,
