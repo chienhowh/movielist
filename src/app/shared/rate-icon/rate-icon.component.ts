@@ -20,8 +20,8 @@ export class RateIconComponent implements OnInit {
   ngOnInit(): void {
     this.circleRate = +this.rate;
     this.userScore = Math.floor(+this.rate * 10);
-    if (+this.rate >= 70) { this.circleColor = 'green'; }
-    else if (+this.rate >= 40) { this.circleColor = 'orange'; }
+    if (+this.userScore >= 70) { this.circleColor = 'green'; }
+    else if (+this.userScore >= 40) { this.circleColor = 'orange'; }
     else { this.circleColor = 'red'; }
   }
 

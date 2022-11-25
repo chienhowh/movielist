@@ -27,7 +27,11 @@ $stroke-color: "green" $color-green,"red" $color-red, "orange" $color-orange;
   }
 }
 
-.percentage {
+.text-score {
   fill: $color-gray;
   text-anchor: middle;
+}
+
+.text-percentage{
+  font-size: 10px;
 }
