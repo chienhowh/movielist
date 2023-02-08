@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RateIconComponent } from './rate-icon.component';
 
@@ -6,7 +6,7 @@ describe('RateIconComponent', () => {
   let component: RateIconComponent;
   let fixture: ComponentFixture<RateIconComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RateIconComponent ]
     })

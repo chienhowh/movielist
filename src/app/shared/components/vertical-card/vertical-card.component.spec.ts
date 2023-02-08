@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { VerticalCardComponent } from './vertical-card.component';
 
@@ -6,7 +6,7 @@ describe('VerticalCardComponent', () => {
   let component: VerticalCardComponent;
   let fixture: ComponentFixture<VerticalCardComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ VerticalCardComponent ]
     })

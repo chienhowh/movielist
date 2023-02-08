@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { EitherWatchComponent } from './either-watch.component';
 
@@ -6,7 +6,7 @@ describe('EitherWatchComponent', () => {
   let component: EitherWatchComponent;
   let fixture: ComponentFixture<EitherWatchComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ EitherWatchComponent ]
     })
