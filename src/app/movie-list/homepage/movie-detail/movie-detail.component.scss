@@ -52,7 +52,7 @@ h3 {
 }
 
 .content_main {
-  width: calc(100vw - 60px - 300px);
+  // width: calc(100vw - 60px - 300px);
   padding-right: 30px;
 
   .panel:first-of-type {
@@ -140,8 +140,8 @@ ol.recommendations li {
 }
 
 .content_side {
-  width: 260px;
-  min-width: 260px;
+  // width: 260px;
+  // min-width: 260px;
   margin-top: 8px;
 
   strong {

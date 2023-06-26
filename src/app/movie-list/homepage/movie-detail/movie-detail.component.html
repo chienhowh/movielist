@@ -4,8 +4,8 @@
     <div class="header-content row">
       <!-- poster start -->
       <div class="col-auto">
-        <img loading="lazy" width="350" height="450" appBackgroundImg [posterPath]="movie.poster_path" [imgWidth]="300" [imgHeight]="450"
-          [type]="'bestv2'" [alt]="movie.name" />
+        <img loading="lazy" width="350" height="450" appBackgroundImg [posterPath]="movie.poster_path" [imgWidth]="300"
+          [imgHeight]="450" [type]="'bestv2'" [alt]="movie.name" />
       </div>
       <!-- info start -->
       <div class="col">
@@ -73,9 +73,9 @@
   </div>
   <div>
   </div>
-  <div class="container-xl d-flex flex-nowrap">
+  <div class="row no-gutters p-3">
     <!-- cast start -->
-    <div class="content_main">
+    <div class="content_main col-12 col-xl-10">
       <section class="panel">
         <h3>Cast</h3>
         <div class="position-relative">
@@ -118,12 +118,12 @@
       </ng-container>
 
     </div>
-    <div class="content_side">
-      <section>
-        <p><strong>Status</strong>{{movie.status}}</p>
-        <p><strong>Original Language</strong>{{movie.original_language|uppercase}}</p>
-        <p><strong>Budge</strong>{{movie.budget|currency:'':'symbol':'0.0-0'}}</p>
-        <p><strong>Revenue</strong>{{movie.revenue|currency :'':'symbol':'0.0-0'}}</p>
+    <div class="content_side col-12 col-xl-2">
+      <section class="row no-gutters">
+        <p class="col col-xl-12"><strong>Status</strong>{{movie.status}}</p>
+        <p class="col col-xl-12"><strong>Original Language</strong>{{movie.original_language|uppercase}}</p>
+        <p class="col col-xl-12"><strong>Budge</strong>{{movie.budget|currency:'':'symbol':'0.0-0'}}</p>
+        <p class="col col-xl-12"><strong>Revenue</strong>{{movie.revenue|currency :'':'symbol':'0.0-0'}}</p>
       </section>
     </div>
   </div>
